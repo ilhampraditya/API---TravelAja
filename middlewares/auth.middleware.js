@@ -1,5 +1,5 @@
 const jwt = require("jsonwebtoken");
-const { JWT_SECRET } = process.env;
+const { JWT_SECRET_KEY } = process.env;
 
 module.exports = {
     restrict: (req, res, next) => {
@@ -13,7 +13,7 @@ module.exports = {
         }
 
         let token = authorization.split(" ")[1];
-        jwt.verify(token, JWT_SECRET, (err, user) => {
+        jwt.verify(token, JWT_SECRET_KEY, (err, user) => {
             if (err) {
                 return res.status(403).json({
                     status: false,
@@ -22,8 +22,10 @@ module.exports = {
                 });
             }
             delete user.iat;
+            delete user.exp;
             req.user = user;
         });
         next();
     },
+
 };
