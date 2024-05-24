@@ -4,8 +4,8 @@ Content-Type: application/json
 
 {
   "name": "user2",
-  "email": "fhndkajxqhewe@mynanaimohomes.com",
-  "no_telp": "08212162176767",
+  "email": "pradityailham04@gmail.com",
+  "no_telp": "082121",
   "password": "password123"
 }
 
@@ -19,11 +19,11 @@ Content-Type: application/json
 
 ### Verify OTP
 POST http://localhost:3000/api/v1/verify-otp
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTMsImVtYWlsIjoiZmhuZGthanhxaGV3ZUBteW5hbmFpbW9ob21lcy5jb20iLCJpYXQiOjE3MTY1NDc1NzcsImV4cCI6MTcxNjYzMzk3N30.LMZXo_7jTt5hiuiakPAQdfrRZBWurC1u3aD7ZtQG9EM
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiZW1haWwiOiJwcmFkaXR5YWlsaGFtMDRAZ21haWwuY29tIiwiaWF0IjoxNzE2NTU1MjEwLCJleHAiOjE3MTY2NDE2MTB9.zaAjC27v1W5mxxiwpTCUsFL9KGleyJ3X5hz5dV2pj-g
 Content-Type: application/json
 
 {
-  "otp": 278769
+  "otp": 157295
 }
 
 ### get all user
@@ -34,13 +34,13 @@ POST http://localhost:3000/api/v1/login
 Content-Type: application/json
 
 {
-  "emailOrNoTelp": "fhndkajxqhewe@mynanaimohomes.com",
+  "emailOrNoTelp": "pradityailham04@gmail.com",
   "password": "password123"
 }
 
 ### auth / login dengan token 
 GET  http://localhost:3000/api/v1/auth
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NCwiZW1haWwiOiJmaG5ka2FqeHFoZXdlQG15bmFuYWltb2hvbWVzLmNvbSIsImlhdCI6MTcxNjU0NzExOSwiZXhwIjoxNzE2NjMzNTE5fQ.HOcwmepGOGOZU_OJOBCbYUIIo1xbRw4S7oRrK7qY-g8
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiZW1haWwiOiJwcmFkaXR5YWlsaGFtMDRAZ21haWwuY29tIiwiaWF0IjoxNzE2NTU4Mzg3LCJleHAiOjE3MTY2NDQ3ODd9.Uo4_ZxlG8MQpdmYWRavMzJi2BRK3qACEQBbkF9bxUi4
 
 ### Login User with No. Telp
 POST http://localhost:3000/api/v1/login
@@ -71,7 +71,8 @@ Content-Type: application/json
 
 ### GET PROFILE
 GET http://localhost:3000/api/v1/profile
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTMsImVtYWlsIjoiZmhuZGthanhxaGV3ZUBteW5hbmFpbW9ob21lcy5jb20iLCJpYXQiOjE3MTY1NDc2MjcsImV4cCI6MTcxNjYzNDAyN30.cjbeCR4A-Cq4Tmg3gCpg_Fsucbq4xufgmrLy-3LQCAA
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiZW1haWwiOiJwcmFkaXR5YWlsaGFtMDRAZ21haWwuY29tIiwiaWF0IjoxNzE2NTU4Mzg3LCJleHAiOjE3MTY2NDQ3ODd9.Uo4_ZxlG8MQpdmYWRavMzJi2BRK3qACEQBbkF9bxUi4
+
 
 ### UPDATE USER BY ID
 POST http://localhost:3000/api/v1/updateprofile
