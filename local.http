@@ -4,7 +4,7 @@ Content-Type: application/json
 
 {
   "name": "user2",
-  "email": "fhndkajxqhewe@mynanaimohomes.com",
+  "email": "kevinyohanesteen@gmail.com",
   "no_telp": "08212162176767",
   "password": "password123"
 }
@@ -14,7 +14,7 @@ POST http://localhost:3000/api/v1/renew-otp
 Content-Type: application/json
 
 {
-  "email": "xhdpdvzpptyfeu@miteon.com"
+  "email": "kevinyohanesteen@gmail.com"
 }
 
 ### Verify OTP
@@ -23,7 +23,7 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTMsImVtYWlsI
 Content-Type: application/json
 
 {
-  "otp": 278769
+  "otp": 290335
 }
 
 ### get all user
@@ -34,7 +34,7 @@ POST http://localhost:3000/api/v1/login
 Content-Type: application/json
 
 {
-  "emailOrNoTelp": "fhndkajxqhewe@mynanaimohomes.com",
+  "emailOrNoTelp": "kevinyohanesteen@gmail.com",
   "password": "password123"
 }
 
