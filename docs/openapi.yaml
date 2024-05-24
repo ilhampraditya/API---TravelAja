@@ -1,0 +1,379 @@
+openapi: 3.0.0
+info:
+  title: TravelAja API
+  description: API untuk layanan TravelAja
+  version: 1.0.0
+servers:
+  - url: http://localhost:3000/api/v1
+paths:
+  /register:
+    post:
+      summary: Register user baru
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                id:
+                  type: string
+                  example: "1"
+                name:
+                  type: string
+                  example: "kevin1"
+                email:
+                  type: string
+                  example: "TravelAja@gmail.com"
+                no_telp:
+                  type: string
+                  example: "0811111122"
+                password:
+                  type: string
+                  example: "password123"
+                created_at:
+                  type: string
+                  example: "24 Mei 2024"
+                updated_at:
+                  type: string
+                  example: "24 Mei 2024"
+      responses:
+        '201':
+          description: User berhasil terdaftar
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                    example: true
+                  message:
+                    type: string
+                    example: "User telah berhasil terdaftar. Silakan periksa email Anda untuk OTP."
+                  data:
+                    type: object
+                    properties:
+                      verifId:
+                        type: string
+                        example: "6246da90f1cf901dc90d9081e15d6ab5"
+                      verifEmail:
+                        type: string
+                        example: "TravelAja@gmail.com"
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                    example: false
+                  message:
+                    type: string
+                    example: "Nama, email, no_telp, dan password dibutuhkan!"
+                  data:
+                    type: string
+                    example: null
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                    example: false
+                  message:
+                    type: string
+                    example: "Email telah digunakan!"
+                  data:
+                    type: string
+                    example: null
+
+  /renew-otp:
+    post:
+      summary: Memperbarui OTP
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                  example: "TravelAja@gmail.com"
+      responses:
+        '200':
+          description: OTP berhasil diperbarui
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                    example: true
+                  message:
+                    type: string
+                    example: "OTP telah berhasil diperbarui. Silakan periksa email Anda untuk OTP yang baru."
+                  data:
+                    type: object
+                    properties:
+                      newEmailToken:
+                        type: string
+                        example: "6246da90f1cf901dc90d9081e15d6ab5"
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                    example: false
+                  message:
+                    type: string
+                    example: "Token verifikasi tidak valid"
+                  data:
+                    type: string
+                    example: null
+
+  /verify-otp/{verification}:
+    post:
+      summary: Memverifikasi OTP
+      parameters:
+        - in: path
+          name: verification
+          required: true
+          schema:
+            type: string
+          description: Token verifikasi email
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                otp:
+                  type: string
+                  example: "114687"
+      responses:
+        '200':
+          description: User berhasil diverifikasi
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                    example: true
+                  message:
+                    type: string
+                    example: "User berhasil diverifikasi"
+                  data:
+                    type: object
+                    properties:
+                      token:
+                        type: string
+                        example: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NSwiZW1haWwiOiJhcGhzMTJAZ21haWwuY29tIiwiaWF0IjoxNzE2Mzk4NTQ4LCJleHAiOjE3MTY0ODQ5NDh9.RWhn7PfFE25eqyUcBmQxPCa1kJELChTcgDj3_CBRMdU"
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                    example: false
+                  message:
+                    type: string
+                    example: "OTP dan verification diperlukan!"
+                  data:
+                    type: string
+                    example: null
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                    example: false
+                  message:
+                    type: string
+                    example: "Parameter verifikasi tidak valid"
+                  data:
+                    type: string
+                    example: null
+
+  /login:
+    post:
+      summary: Login user
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                emailOrNoTelp:
+                  type: string
+                  example: "TravelAja@gmail.com"
+                password:
+                  type: string
+                  example: "password123"
+      responses:
+        '200':
+          description: Login successful
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                    example: true
+                  message:
+                    type: string
+                    example: "Login successful"
+                  data:
+                    type: object
+                    properties:
+                      id:
+                        type: string
+                        example: "1"
+                      email:
+                        type: string
+                        example: "TravelAja@gmail.com"
+                      token:
+                        type: string
+                        example: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NSwiZW1haWwiOiJhcGhzMTJAZ21haWwuY29tIiwiaWF0IjoxNzE2Mzk4NTQ4LCJleHAiOjE3MTY0ODQ5NDh9.RWhn7PfFE25eqyUcBmQxPCa1kJELChTcgDj3_CBRMdU"
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                    example: false
+                  message:
+                    type: string
+                    example: "Email atau No. Telp dan kata sandi diperlukan!"
+                  data:
+                    type: string
+                    example: null
+
+  /index:
+    get:
+      summary: Mendapatkan semua user
+      responses:
+        '200':
+          description: Data pengguna berhasil diambil
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                    example: true
+                  message:
+                    type: string
+                    example: "Data pengguna berhasil diambil"
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: string
+                          example: "1"
+                        name:
+                          type: string
+                          example: "kevin1"
+                        email:
+                          type: string
+                          example: "TravelAja@gmail.com"
+                        no_telp:
+                          type: string
+                          example: "0811111122"
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                    example: false
+                  message:
+                    type: string
+                    example: "Terjadi kesalahan saat mengambil data pengguna"
+                  data:
+                    type: string
+                    example: null
+
+  /auth:
+    get:
+      summary: Autentikasi user
+      security:
+        - bearerAuth: []
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                    example: true
+                  message:
+                    type: string
+                    example: "OK"
+                  data:
+                    type: object
+                    properties:
+                      id:
+                        type: string
+                        example: "1"
+                      email:
+                        type: string
+                        example: "TravelAja@gmail.com"
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                    example: false
+                  message:
+                    type: string
+                    example: "Unauthorized"
+                  data:
+                    type: string
+                    example: null
+
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
