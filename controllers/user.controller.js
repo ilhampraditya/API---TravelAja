@@ -5,7 +5,7 @@ const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
 const crypto = require("crypto");
 const { JWT_SECRET_KEY } = process.env;
-const {formatdate} = require('../libs/formatdate')
+const { formatdate } = require('../libs/formatdate')
 const nodemailer = require("../libs/nodemailer");
 const { getHTML, sendMail } = require("../libs/nodemailer");
 const { generateOTP } = require("../libs/otpGenerator");
@@ -45,7 +45,6 @@ module.exports = {
             const encryptedPassword = await bcrypt.hash(password, 10);
             const otp = generateOTP();
             const otpExpiration = new Date(Date.now() + 5 * 60 * 1000);
-            const emailToken = crypto.randomBytes(16).toString("hex");
 
             const user = await prisma.user.create({
                 data: {
@@ -55,7 +54,6 @@ module.exports = {
                     password: encryptedPassword,
                     otp,
                     otpExpiration,
-                    email_token: emailToken,
                     role: "user",
                     isVerified: false,
                     created_at: formatdate(new Date()),
@@ -69,72 +67,13 @@ module.exports = {
 
             await sendMail(user.email, subject, emailContent);
 
+            const token = jwt.sign({ id: user.id, email: user.email }, JWT_SECRET_KEY, { expiresIn: '1d' });
+
             return res.status(201).json({
                 status: true,
                 message:
                     "User telah berhasil terdaftar. Silakan periksa email Anda untuk OTP.",
-                data: { verifId: emailToken, verifEmail: user.email },
-            });
-        } catch (error) {
-            next(error);
-        }
-    },
-
-    verifyOtpGet: async (req, res, next) => {
-        try {
-            const { verification } = req.params;
-
-            if (!verification) {
-                return res.status(400).json({
-                    status: false,
-                    message: "Token verifikasi diperlukan!",
-                    data: null,
-                });
-            }
-
-            const user = await prisma.user.findFirst({
-                where: {
-                    email_token: verification,
-                },
-            });
-
-            if (!user) {
-                return res.status(500).json({
-                    status: false,
-                    message: "Token verifikasi tidak valid",
-                    data: null,
-                });
-            }
-
-            if (new Date() > new Date(user.otpExpiration)) {
-                return res.status(401).json({
-                    status: false,
-                    message: "OTP telah kedaluwarsa!",
-                    data: null,
-                });
-            }
-
-            await prisma.user.update({
-                where: { id: user.id },
-                data: {
-                    isVerified: true,
-                    otp: null,
-                    otpExpiration: null,
-                    email_token: null,
-                    updated_at: formatdate(new Date()),
-                },
-            });
-
-            const token = jwt.sign(
-                { id: user.id, email: user.email },
-                JWT_SECRET_KEY,
-                { expiresIn: "1d" }
-            );
-
-            return res.status(200).json({
-                status: true,
-                message: "User berhasil diverifikasi",
-                data: { token },
+                data: { token: token },
             });
         } catch (error) {
             next(error);
@@ -143,12 +82,11 @@ module.exports = {
 
     renewOTP: async (req, res, next) => {
         try {
-            const { verification } = req.params;
             const { email } = req.body;
 
             // Cari pengguna berdasarkan token verifikasi
             const user = await prisma.user.findFirst({
-                where: { email_token: verification },
+                where: { email },
             });
 
             // Jika pengguna tidak ditemukan
@@ -187,7 +125,6 @@ module.exports = {
             await prisma.user.update({
                 where: { id: user.id },
                 data: {
-                    email_token: newEmailToken,
                     otp: otp,
                     otpExpiration: new Date(Date.now() + 5 * 60 * 1000), // Sesuaikan dengan kebutuhan Anda
                     updated_at: formatdate(new Date()),
@@ -204,7 +141,7 @@ module.exports = {
                 status: true,
                 message:
                     "OTP telah berhasil diperbarui. Silakan periksa email Anda untuk OTP yang baru.",
-                data: { newEmailToken },
+                data: null,
             });
         } catch (error) {
             next(error);
@@ -213,32 +150,25 @@ module.exports = {
 
     verifyOtp: async (req, res, next) => {
         try {
+            const { id } = req.user
             const { otp } = req.body;
-            const { verification } = req.params;
 
-            if (!otp || !verification) {
+
+            if (!otp) {
                 return res.status(400).json({
                     status: false,
-                    message: "OTP dan verification diperlukan!",
+                    message: "OTP diperlukan!",
                     data: null,
                 });
             }
 
-            const user = await prisma.user.findFirst({
-                where: {
-                    email_token: verification,
-                },
+            const user = await prisma.user.findUnique({
+                where: { id }
             });
 
-            if (!user) {
-                return res.status(500).json({
-                    status: false,
-                    message: "Parameter verifikasi tidak valid",
-                    data: null,
-                });
-            }
+            console.log(user)
 
-            if (user.otp !== otp || new Date() > new Date(user.otpExpiration)) {
+            if (user.otp !== otp) {
                 return res.status(401).json({
                     status: false,
                     message: "OTP tidak valid atau telah kedaluwarsa!",
@@ -252,21 +182,15 @@ module.exports = {
                     isVerified: true,
                     otp: null,
                     otpExpiration: null,
-                    email_token: null,
                     updated_at: formatdate(new Date()),
                 },
             });
 
-            const token = jwt.sign(
-                { id: user.id, email: user.email },
-                JWT_SECRET_KEY,
-                { expiresIn: "1d" }
-            );
 
             return res.status(200).json({
                 status: true,
                 message: "User berhasil diverifikasi",
-                data: { token },
+                data: null,
             });
         } catch (error) {
             next(error);
@@ -310,6 +234,29 @@ module.exports = {
                     data: null,
                 });
             }
+
+
+
+            if (!user.isVerified) {
+                const user = await prisma.user.findFirst({
+                    where: {
+                        OR: [
+                            { email: emailOrNoTelp },
+                            { no_telp: emailOrNoTelp }
+                        ]
+                    }
+                })
+
+                const deleteUser = await prisma.user.delete({ where: { id: user.id } })
+
+                return res.status(400).json({
+                    status: false,
+                    message: "Akun Belum terverifikasi, silahkan register ulang!",
+                    data: null,
+                });
+            }
+
+
 
             delete user.password;
             const token = jwt.sign({ id: user.id, email: user.email }, JWT_SECRET_KEY, { expiresIn: '1d' });
@@ -408,7 +355,7 @@ module.exports = {
 
     resetPassword: async (req, res, next) => {
         try {
-            let { token } = req.query;
+            let { id } = req.user;
             let { password, confirmPassword } = req.body;
 
             if (!password || !confirmPassword) {
@@ -430,57 +377,129 @@ module.exports = {
             }
 
 
-            jwt.verify(token, JWT_SECRET_KEY, async (err, decoded) => {
-                if (err) {
-                    return res.status(400).json({
-                        status: false,
-                        message: "Bad request",
-                        err: err.message,
-                        data: null,
-                    });
-                }
 
-                const user = await prisma.user.findUnique({
-                    where: { email: decoded.email },
-                    select: { password: true }
-                });
-
-                if (!user) {
-                    return res.status(404).json({
-                        status: false,
-                        message: "User not found",
-                        data: null,
-                    });
-                }
-                const isSamePassword = await bcrypt.compare(password, user.password);
-                if (isSamePassword) {
-                    return res.status(400).json({
-                        status: false,
-                        message: "New password cannot be the same as the old password!",
-                        data: null,
-                    });
-                }
-
-                let encryptedPassword = await bcrypt.hash(password, 10);
-                const updateUser = await prisma.user.update({
-                    where: { email: decoded.email },
-                    data: { password: encryptedPassword },
-                    select: { id: true, email: true, password:true },
-                });
-
-
-                res.status(200).json({
-                    status: true,
-                    message: "Reset user password successfully!",
-                    data: updateUser,
-                });
+            const user = await prisma.user.findUnique({
+                where: { email: req.user.email },
+                select: { password: true }
             });
+
+            if (!user) {
+                return res.status(404).json({
+                    status: false,
+                    message: "User not found",
+                    data: null,
+                });
+            }
+            const isSamePassword = await bcrypt.compare(password, user.password);
+            if (isSamePassword) {
+                return res.status(400).json({
+                    status: false,
+                    message: "New password cannot be the same as the old password!",
+                    data: null,
+                });
+            }
+
+            let encryptedPassword = await bcrypt.hash(password, 10);
+            const updateUser = await prisma.user.update({
+                where: { email: req.user.email },
+                data: { password: encryptedPassword },
+                select: { id: true, email: true, password: true },
+            });
+
+
+            res.status(200).json({
+                status: true,
+                message: "Reset user password successfully!",
+                data: updateUser,
+            });
+
         } catch (err) {
             next(err);
         }
     },
 
-   
+    getuserbyid: async (req, res, next) => {
+        try {
+            let { id } = req.user
+            id = Number(id)
+            const user = await prisma.user.findUnique({ where: { id } });
 
-    
+            if (!user) {
+                return res.status(400).json({
+                    status: false,
+                    message: "User tidak ditemukan!",
+                    data: null,
+                });
+            }
+
+            return res.status(200).json({
+                status: true,
+                message: "User data retrieved successfully",
+                data: user,
+            });
+
+        } catch (error) {
+            next(error);
+        }
+    },
+
+    updateuserbyid: async (req, res, next) => {
+        try {
+            let { id } = req.user
+            let { name, no_telp, password } = req.body
+            id = Number(id)
+            const user = await prisma.user.findUnique({ where: { id } });
+
+            if (!user) {
+                return res.status(400).json({
+                    status: false,
+                    message: "User tidak ditemukan!",
+                    data: null,
+                });
+            }
+
+            if (!name || !no_telp) {
+                return res.status(400).json({
+                    status: false,
+                    message: "nama & no_telp dibutuhkan!",
+                    data: null,
+                });
+            }
+
+            const noTelpExist = await prisma.user.findUnique({ where: { no_telp } });
+            if (noTelpExist) {
+                return res.status(401).json({
+                    status: false,
+                    message: "No. Telp telah digunakan!",
+                    data: null,
+                });
+            }
+
+            const isSamePassword = await bcrypt.compare(password, user.password);
+            if (isSamePassword) {
+                return res.status(400).json({
+                    status: false,
+                    message: "New password cannot be the same as the old password!",
+                    data: null,
+                });
+            }
+
+            let encryptedPassword = await bcrypt.hash(password, 10);
+
+            const updatedUser = await prisma.user.update({ where: { id }, data: { name, no_telp, password: encryptedPassword } })
+
+            return res.status(200).json({
+                status: true,
+                message: "User profile berhasil diupdate!",
+                data: updatedUser,
+            });
+
+        } catch (error) {
+            next(error);
+        }
+    },
+
+
+
+
 };
