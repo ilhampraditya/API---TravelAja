@@ -7,6 +7,16 @@ const prisma = new PrismaClient();
 module.exports = {
     uploadAvatar: async (req, res, next) => {
         try {
+
+            if (!req.file) {
+                return res.status(400).json({
+                    status: false,
+                    message: "file tidak ada!",
+                    data: null,
+                });
+            }
+
+
             let strFile = req.file.buffer.toString('base64')
 
             let { url } = await imagekit.upload({
@@ -14,11 +24,11 @@ module.exports = {
                 file: strFile
             })
 
-            res.json({
+            res.status(200).json({
                 status: true,
-                message: 'OK',
-                data: url
-            })
+                message: "file berhasil diunggah!",
+                data: { avatar_url: url },
+            });
         }
         catch (err) {
             next(err)
