@@ -3,9 +3,9 @@ POST http://localhost:3000/api/v1/register
 Content-Type: application/json
 
 {
-  "name": "user2",
-  "email": "pradityailham04@gmail.com",
-  "no_telp": "082121",
+  "name": "ilham",
+  "email": "21082010211@student.upnjatim.ac.id",
+  "no_telp": "08212162",
   "password": "password123"
 }
 
@@ -14,16 +14,16 @@ POST http://localhost:3000/api/v1/renew-otp
 Content-Type: application/json
 
 {
-  "email": "xhdpdvzpptyfeu@miteon.com"
+  "email": "kevinyohanesteen@gmail.com"
 }
 
 ### Verify OTP
 POST http://localhost:3000/api/v1/verify-otp
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiZW1haWwiOiJwcmFkaXR5YWlsaGFtMDRAZ21haWwuY29tIiwiaWF0IjoxNzE2NTU1MjEwLCJleHAiOjE3MTY2NDE2MTB9.zaAjC27v1W5mxxiwpTCUsFL9KGleyJ3X5hz5dV2pj-g
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6OCwiZW1haWwiOiIyMTA4MjAxMDIxMUBzdHVkZW50LnVwbmphdGltLmFjLmlkIiwiaWF0IjoxNzE2NTY0OTAyLCJleHAiOjE3MTY2NTEzMDJ9.vsaY2b5N9s4LBN4NWFPn72VfpIWJLvBCGCmLzjBJfLg
 Content-Type: application/json
 
 {
-  "otp": 157295
+  "otp": 163458
 }
 
 ### get all user
@@ -34,13 +34,13 @@ POST http://localhost:3000/api/v1/login
 Content-Type: application/json
 
 {
-  "emailOrNoTelp": "pradityailham04@gmail.com",
+  "emailOrNoTelp": "21082010211@student.upnjatim.ac.id",
   "password": "password123"
 }
 
 ### auth / login dengan token 
 GET  http://localhost:3000/api/v1/auth
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiZW1haWwiOiJwcmFkaXR5YWlsaGFtMDRAZ21haWwuY29tIiwiaWF0IjoxNzE2NTU4Mzg3LCJleHAiOjE3MTY2NDQ3ODd9.Uo4_ZxlG8MQpdmYWRavMzJi2BRK3qACEQBbkF9bxUi4
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6OCwiZW1haWwiOiIyMTA4MjAxMDIxMUBzdHVkZW50LnVwbmphdGltLmFjLmlkIiwiaWF0IjoxNzE2NTY0OTczLCJleHAiOjE3MTY2NTEzNzN9.8qpZPVoo-9UuxXPFpqetyXT3D8QcM24vmU0WoJg9imE
 
 ### Login User with No. Telp
 POST http://localhost:3000/api/v1/login
@@ -56,12 +56,12 @@ POST http://localhost:3000/api/v1/forgot-password
 Content-Type: application/json
 
 {
-    "email": "fhndkajxqhewe@mynanaimohomes.com"
+    "email": "21082010211@student.upnjatim.ac.id"
 }
 
 ###
 POST http://localhost:3000/api/v1/reset-password
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImZobmRrYWp4cWhld2VAbXluYW5haW1vaG9tZXMuY29tIiwiaWF0IjoxNzE2NTQ3MjAyfQ.O8exyYT4JfdU8hK9_tjbqXKkvCOtMlS19PR-txLK62E
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6OCwiZW1haWwiOiIyMTA4MjAxMDIxMUBzdHVkZW50LnVwbmphdGltLmFjLmlkIiwiaWF0IjoxNzE2NTY0OTczLCJleHAiOjE3MTY2NTEzNzN9.8qpZPVoo-9UuxXPFpqetyXT3D8QcM24vmU0WoJg9imE
 Content-Type: application/json
 
 {
@@ -71,16 +71,16 @@ Content-Type: application/json
 
 ### GET PROFILE
 GET http://localhost:3000/api/v1/profile
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiZW1haWwiOiJwcmFkaXR5YWlsaGFtMDRAZ21haWwuY29tIiwiaWF0IjoxNzE2NTU4Mzg3LCJleHAiOjE3MTY2NDQ3ODd9.Uo4_ZxlG8MQpdmYWRavMzJi2BRK3qACEQBbkF9bxUi4
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6OCwiZW1haWwiOiIyMTA4MjAxMDIxMUBzdHVkZW50LnVwbmphdGltLmFjLmlkIiwiaWF0IjoxNzE2NTY0OTczLCJleHAiOjE3MTY2NTEzNzN9.8qpZPVoo-9UuxXPFpqetyXT3D8QcM24vmU0WoJg9imE
 
 
 ### UPDATE USER BY ID
 POST http://localhost:3000/api/v1/updateprofile
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZW1haWwiOiJnYW50aW5hbWFAZ21haWwuY29tIiwiaWF0IjoxNzE2NTMzNDc5LCJleHAiOjE3MTY2MTk4Nzl9.Mm8LHzRefvIa_dm4VwjvncZ4dR3DGM54amRqn9LyeBM
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6OCwiZW1haWwiOiIyMTA4MjAxMDIxMUBzdHVkZW50LnVwbmphdGltLmFjLmlkIiwiaWF0IjoxNzE2NTY0OTczLCJleHAiOjE3MTY2NTEzNzN9.8qpZPVoo-9UuxXPFpqetyXT3D8QcM24vmU0WoJg9imE
 Content-Type: application/json
 
 {
-  "name": "tes123",
-  "no_telp": "0976273227372323",
-  "password": "password1234"
+  "name": "ilham praditya",
+  "no_telp": "097627345670",
+  "password": "password12345"
 }

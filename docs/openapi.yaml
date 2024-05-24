@@ -5,6 +5,7 @@ info:
   version: 1.0.0
 servers:
   - url: http://localhost:3000/api/v1
+  - url: https://expressjs-develop.up.railway.app/
 paths:
   /register:
     post:
@@ -31,14 +32,8 @@ paths:
                 password:
                   type: string
                   example: "password123"
-                created_at:
-                  type: string
-                  example: "24 Mei 2024"
-                updated_at:
-                  type: string
-                  example: "24 Mei 2024"
       responses:
-        '201':
+        "201":
           description: User berhasil terdaftar
           content:
             application/json:
@@ -60,7 +55,7 @@ paths:
                       verifEmail:
                         type: string
                         example: "TravelAja@gmail.com"
-        '400':
+        "400":
           description: Bad Request
           content:
             application/json:
@@ -76,7 +71,7 @@ paths:
                   data:
                     type: string
                     example: null
-        '401':
+        "401":
           description: Unauthorized
           content:
             application/json:
@@ -88,7 +83,7 @@ paths:
                     example: false
                   message:
                     type: string
-                    example: "Email telah digunakan!"
+                    example: "Email dan No. Telp telah digunakan!"
                   data:
                     type: string
                     example: null
@@ -107,7 +102,7 @@ paths:
                   type: string
                   example: "TravelAja@gmail.com"
       responses:
-        '200':
+        "200":
           description: OTP berhasil diperbarui
           content:
             application/json:
@@ -126,8 +121,40 @@ paths:
                       newEmailToken:
                         type: string
                         example: "6246da90f1cf901dc90d9081e15d6ab5"
-        '400':
+        "400":
           description: Bad Request
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                    example: false
+                  message:
+                    type: string
+                    example: "Pengguna sudah diverifikasi dan tidak dapat memperbarui OTP"
+                  data:
+                    type: string
+                    example: null
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                    example: false
+                  message:
+                    type: string
+                    example: "Email tidak cocok dengan pengguna yang terdaftar"
+                  data:
+                    type: string
+                    example: null
+        '404':
+          description: Not Found
           content:
             application/json:
               schema:
@@ -143,7 +170,7 @@ paths:
                     type: string
                     example: null
 
-  /verify-otp/{verification}:
+  /verify-otp:
     post:
       summary: Memverifikasi OTP
       parameters:
@@ -164,7 +191,7 @@ paths:
                   type: string
                   example: "114687"
       responses:
-        '200':
+        "200":
           description: User berhasil diverifikasi
           content:
             application/json:
@@ -182,9 +209,9 @@ paths:
                     properties:
                       token:
                         type: string
-                        example: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NSwiZW1haWwiOiJhcGhzMTJAZ21haWwuY29tIiwiaWF0IjoxNzE2Mzk4NTQ4LCJleHAiOjE3MTY0ODQ5NDh9.RWhn7PfFE25eqyUcBmQxPCa1kJELChTcgDj3_CBRMdU"
+                        example: null
         '400':
-          description: Bad Request
+          description: Bad Request 
           content:
             application/json:
               schema:
@@ -195,11 +222,27 @@ paths:
                     example: false
                   message:
                     type: string
-                    example: "OTP dan verification diperlukan!"
+                    example: "OTP diperlukan!"
                   data:
                     type: string
                     example: null
-        '500':
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                    example: false
+                  message:
+                    type: string
+                    example: "OTP tidak valid atau telah kedaluwarsa!"
+                  data:
+                    type: string
+                    example: null
+        "500":
           description: Internal Server Error
           content:
             application/json:
@@ -234,7 +277,7 @@ paths:
                   example: "password123"
       responses:
         '200':
-          description: Login successful
+          description: Login berhasil
           content:
             application/json:
               schema:
@@ -245,7 +288,7 @@ paths:
                     example: true
                   message:
                     type: string
-                    example: "Login successful"
+                    example: "Login berhasil"
                   data:
                     type: object
                     properties:
@@ -258,7 +301,7 @@ paths:
                       token:
                         type: string
                         example: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NSwiZW1haWwiOiJhcGhzMTJAZ21haWwuY29tIiwiaWF0IjoxNzE2Mzk4NTQ4LCJleHAiOjE3MTY0ODQ5NDh9.RWhn7PfFE25eqyUcBmQxPCa1kJELChTcgDj3_CBRMdU"
-        '400':
+        "400":
           description: Bad Request
           content:
             application/json:
@@ -274,12 +317,59 @@ paths:
                   data:
                     type: string
                     example: null
-
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                    example: false
+                  message:
+                    type: string
+                    example: "OTP tidak valid atau telah kedaluwarsa!"
+                  data:
+                    type: string
+                    example: null
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                    example: false
+                  message:
+                    type: string
+                    example: "Akun Belum terverifikasi, silahkan register ulang!"
+                  data:
+                    type: string
+                    example: null
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                    example: false
+                  message:
+                    type: string
+                    example: "Email tidak valid atau tidak. telp atau kata sandi!"
+                  data:
+                    type: string
+                    example: null
   /index:
     get:
       summary: Mendapatkan semua user
       responses:
-        '200':
+        "200":
           description: Data pengguna berhasil diambil
           content:
             application/json:
@@ -309,7 +399,7 @@ paths:
                         no_telp:
                           type: string
                           example: "0811111122"
-        '500':
+        "500":
           description: Internal Server Error
           content:
             application/json:
@@ -332,7 +422,7 @@ paths:
       security:
         - bearerAuth: []
       responses:
-        '200':
+        "200":
           description: OK
           content:
             application/json:
@@ -354,7 +444,7 @@ paths:
                       email:
                         type: string
                         example: "TravelAja@gmail.com"
-        '401':
+        "401":
           description: Unauthorized
           content:
             application/json:
@@ -367,6 +457,207 @@ paths:
                   message:
                     type: string
                     example: "Unauthorized"
+                  data:
+                    type: string
+                    example: null
+
+  /profile:
+    get:
+      summary: mengambil profile
+      security:
+        - bearerAuth: []
+      responses:
+        "200":
+          description: User data retrieved successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                    example: true
+                  message:
+                    type: string
+                    example: "User data retrieved successfully"
+                  data:
+                    type: object
+                    properties:
+                      id:
+                        type: string
+                        example: "1"
+                      name:
+                        type: string
+                        example: "tesss"
+                      no_telp:
+                        type: string
+                        example: "0811111122"
+                      avatar_url:
+                        type: string
+                        example: "https://ik.imagekit.io/travelaja/contoh.png"
+        "400":
+          description: User tidak ditemukan!
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                    example: false
+                  message:
+                    type: string
+                    example: "User tidak ditemukan!"
+                  data:
+                    type: string
+                    example: null
+
+  /updateprofile:
+    post:
+      summary: mengupdate profile termasuk password
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  example: "kevin1"
+                no_telp:
+                  type: string
+                  example: "0811111122"
+                password:
+                  type: string
+                  example: "password123"
+      responses:
+        "200":
+          description: User profile berhasil diupdate!
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                    example: true
+                  message:
+                    type: string
+                    example: "User profile berhasil diupdate!"
+                  data:
+                    type: object
+                    properties:
+                      id:
+                        type: string
+                        example: "1"
+                      name:
+                        type: string
+                        example: "tesss"
+                      no_telp:
+                        type: string
+                        example: "0811111122"
+                      avatar_url:
+                        type: string
+                        example: "https://ik.imagekit.io/travelaja/contoh.png"
+        "401":
+          description: User tidak ditemukan!
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                    example: false
+                  message:
+                    type: string
+                    example: "User tidak ditemukan!"
+                  data:
+                    type: string
+                    example: null
+        "422":
+          description: field nama, no_telp dan password dibutuhkan!
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                    example: false
+                  message:
+                    type: string
+                    example: "field nama, no_telp dan password dibutuhkan!"
+                  data:
+                    type: string
+                    example: null
+        "400":
+          description: No. Telp telah digunakan!
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                    example: false
+                  message:
+                    type: string
+                    example: "No. Telp telah digunakan!"
+                  data:
+                    type: string
+                    example: null
+  /uploadavatar:
+    post:
+      summary: mengupload avatar
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                file:
+                  type: string
+                  format: binary
+      responses:
+        "200":
+          description: file berhasil diunggah!
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                    example: true
+                  message:
+                    type: string
+                    example: "file berhasil diunggah!"
+                  data:
+                    type: object
+                    properties:
+                      avatar_url:
+                        type: string
+                        example: "https://ik.imagekit.io/travelaja/contoh.png"
+        "400":
+          description: file tidak ada!
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                    example: false
+                  message:
+                    type: string
+                    example: "file tidak ada!"
                   data:
                     type: string
                     example: null

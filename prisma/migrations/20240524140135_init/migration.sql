@@ -6,7 +6,6 @@ CREATE TABLE "users" (
     "no_telp" TEXT NOT NULL,
     "password" TEXT NOT NULL,
     "otp" INTEGER,
-    "email_token" TEXT,
     "otpExpiration" TIMESTAMP(3),
     "isVerified" BOOLEAN NOT NULL DEFAULT false,
     "role" TEXT NOT NULL DEFAULT 'user',
