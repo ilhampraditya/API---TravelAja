@@ -435,7 +435,7 @@ module.exports = {
             return res.status(200).json({
                 status: true,
                 message: "User data retrieved successfully",
-                data: user,
+                data: { id: user.id, name: user.name, no_telp: user.no_telp, avatar_url: user.avatar_url },
             });
 
         } catch (error) {
@@ -451,38 +451,38 @@ module.exports = {
             const user = await prisma.user.findUnique({ where: { id } });
 
             if (!user) {
-                return res.status(400).json({
+                return res.status(401).json({
                     status: false,
                     message: "User tidak ditemukan!",
                     data: null,
                 });
             }
 
-            if (!name || !no_telp) {
-                return res.status(400).json({
+            if (!name || !no_telp || !password) {
+                return res.status(422).json({
                     status: false,
-                    message: "nama & no_telp dibutuhkan!",
+                    message: "field nama, no_telp dan password dibutuhkan!",
                     data: null,
                 });
             }
 
             const noTelpExist = await prisma.user.findUnique({ where: { no_telp } });
             if (noTelpExist) {
-                return res.status(401).json({
+                return res.status(400).json({
                     status: false,
                     message: "No. Telp telah digunakan!",
                     data: null,
                 });
             }
 
-            const isSamePassword = await bcrypt.compare(password, user.password);
-            if (isSamePassword) {
-                return res.status(400).json({
-                    status: false,
-                    message: "New password cannot be the same as the old password!",
-                    data: null,
-                });
-            }
+            // const isSamePassword = await bcrypt.compare(password, user.password);
+            // if (isSamePassword) {
+            //     return res.status(400).json({
+            //         status: false,
+            //         message: "New password cannot be the same as the old password!",
+            //         data: null,
+            //     });
+            // }
 
             let encryptedPassword = await bcrypt.hash(password, 10);
 
@@ -491,7 +491,7 @@ module.exports = {
             return res.status(200).json({
                 status: true,
                 message: "User profile berhasil diupdate!",
-                data: updatedUser,
+                data: { id: updatedUser.id, name: updatedUser.name, no_telp: updatedUser.no_telp, avatar_url: updatedUser.avatar_url },
             });
 
         } catch (error) {
