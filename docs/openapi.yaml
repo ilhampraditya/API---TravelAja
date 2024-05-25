@@ -10,6 +10,8 @@ paths:
   /register:
     post:
       summary: Register user baru
+      tags:
+        - Auth
       requestBody:
         required: true
         content:
@@ -91,6 +93,8 @@ paths:
   /renew-otp:
     post:
       summary: Memperbarui OTP
+      tags:
+        - Auth
       requestBody:
         required: true
         content:
@@ -173,6 +177,8 @@ paths:
   /verify-otp:
     post:
       summary: Memverifikasi OTP
+      tags:
+        - Auth
       parameters:
         - in: path
           name: verification
@@ -262,6 +268,8 @@ paths:
   /login:
     post:
       summary: Login user
+      tags:
+        - Auth
       requestBody:
         required: true
         content:
@@ -367,7 +375,10 @@ paths:
                     example: null
   /index:
     get:
+    
       summary: Mendapatkan semua user
+      tags:
+        - Auth
       responses:
         "200":
           description: Data pengguna berhasil diambil
@@ -419,6 +430,8 @@ paths:
   /auth:
     get:
       summary: Autentikasi user
+      tags:
+        - Auth
       security:
         - bearerAuth: []
       responses:
@@ -464,6 +477,8 @@ paths:
   /profile:
     get:
       summary: mengambil profile
+      tags:
+        - Profile
       security:
         - bearerAuth: []
       responses:
@@ -515,6 +530,8 @@ paths:
   /updateprofile:
     post:
       summary: mengupdate profile termasuk password
+      tags:
+        - Profile
       security:
         - bearerAuth: []
       requestBody:
@@ -613,6 +630,8 @@ paths:
   /uploadavatar:
     post:
       summary: mengupload avatar
+      tags:
+        - Profile
       security:
         - bearerAuth: []
       requestBody:

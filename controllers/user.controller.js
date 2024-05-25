@@ -11,74 +11,79 @@ const { getHTML, sendMail } = require("../libs/nodemailer");
 const { generateOTP } = require("../libs/otpGenerator");
 
 module.exports = {
-    register: async (req, res, next) => {
-        try {
-            const { name, email, no_telp, password } = req.body;
+  register: async (req, res, next) => {
+    try {
+      const { name, email, no_telp, password } = req.body;
 
-            if (!name || !email || !no_telp || !password) {
-                return res.status(400).json({
-                    status: false,
-                    message: "Nama, email, no_telp, dan password dibutuhkan!",
-                    data: null,
-                });
-            }
+      if (!name || !email || !no_telp || !password) {
+        return res.status(400).json({
+          status: false,
+          message: "Nama, email, no_telp, dan password dibutuhkan!",
+          data: null,
+        });
+      }
 
-            const emailExist = await prisma.user.findUnique({ where: { email } });
-            if (emailExist) {
-                return res.status(401).json({
-                    status: false,
-                    message: "Email telah digunakan!",
-                    data: null,
-                });
-            }
+      const userExist = await prisma.user.findUnique({
+        where: { email, no_telp },
+      });
+      if (userExist) {
+        return res.status(401).json({
+          status: false,
+          message: "Email dan No. Telp telah digunakan!",
+          data: null,
+        });
+      }
 
-            const noTelpExist = await prisma.user.findUnique({ where: { no_telp } });
-            if (noTelpExist) {
-                return res.status(401).json({
-                    status: false,
-                    message: "No. Telp telah digunakan!",
-                    data: null,
-                });
-            }
+      const noTelpExist = await prisma.user.findUnique({ where: { no_telp } });
+      if (noTelpExist) {
+        return res.status(401).json({
+          status: false,
+          message: "Email dan No. Telp telah digunakan!",
+          data: null,
+        });
+      }
 
-            const encryptedPassword = await bcrypt.hash(password, 10);
-            const otp = generateOTP();
-            const otpExpiration = new Date(Date.now() + 5 * 60 * 1000);
+      const encryptedPassword = await bcrypt.hash(password, 10);
+      const otp = generateOTP();
+      const otpExpiration = new Date(Date.now() + 5 * 60 * 1000);
 
-            const user = await prisma.user.create({
-                data: {
-                    name,
-                    email,
-                    no_telp,
-                    password: encryptedPassword,
-                    otp,
-                    otpExpiration,
-                    role: "user",
-                    isVerified: false,
-                    created_at: formatdate(new Date()),
-                    updated_at: formatdate(new Date()),
-                },
-            });
+      const user = await prisma.user.create({
+        data: {
+          name,
+          email,
+          no_telp,
+          password: encryptedPassword,
+          otp,
+          otpExpiration,
+          role: "user",
+          isVerified: false,
+          created_at: formatdate(new Date()),
+          updated_at: formatdate(new Date()),
+        },
+      });
 
-            const subject = "Verifikasi OTP";
+      const subject = "Verifikasi OTP";
 
-            const emailContent = await getHTML("otp-email.ejs", { otp });
+      const emailContent = await getHTML("otp-email.ejs", { otp });
 
-            await sendMail(user.email, subject, emailContent);
+      await sendMail(user.email, subject, emailContent);
 
-            const token = jwt.sign({ id: user.id, email: user.email }, JWT_SECRET_KEY, { expiresIn: '1d' });
+      const token = jwt.sign(
+        { id: user.id, email: user.email },
+        JWT_SECRET_KEY,
+        { expiresIn: "1d" }
+      );
 
-            return res.status(201).json({
-                status: true,
-                message:
-                    "User telah berhasil terdaftar. Silakan periksa email Anda untuk OTP.",
-                data: { token: token },
-            });
-        } catch (error) {
-            next(error);
-        }
-    },
-
+      return res.status(201).json({
+        status: true,
+        message:
+          "User telah berhasil terdaftar. Silakan periksa email Anda untuk OTP.",
+        data: { token: token },
+      });
+    } catch (error) {
+      next(error);
+    }
+  },
   renewOTP: async (req, res, next) => {
     try {
       const { email } = req.body;
@@ -94,6 +99,7 @@ module.exports = {
           status: false,
           message: "Token verifikasi tidak valid",
           data: null,
+
         });
       }
 
@@ -200,7 +206,7 @@ module.exports = {
       if (!emailOrNoTelp || !password) {
         return res.status(400).json({
           status: false,
-          message: "Email atau No.Telp dan kata sandi diperlukan!",
+          message: "Email atau No. Telp dan kata sandi diperlukan!",
           data: null,
         });
       }
@@ -214,7 +220,7 @@ module.exports = {
       if (!user) {
         return res.status(404).json({
           status: false,
-          message: "Email tidak valid !",
+          message: "Email tidak valid atau tidak. telp atau kata sandi!",
           data: null,
         });
       }
@@ -296,29 +302,51 @@ module.exports = {
           status: false,
           message: "Email not found",
         });
+     
+      // Jika pengguna sudah diverifikasi
+      if (user.isVerified) {
+        return res.status(400).json({
+          status: false,
+          message:
+            "Pengguna sudah diverifikasi dan tidak dapat memperbarui OTP",
+          data: null,
+        });
       }
 
-      const token = jwt.sign({ email: findUser.email }, JWT_SECRET_KEY);
+      // Validasi email yang diberikan harus sesuai dengan email pengguna
+      if (user.email !== email) {
+        return res.status(403).json({
+          status: false,
+          message: "Email tidak cocok dengan pengguna yang terdaftar",
+          data: null,
+        });
+      }
 
-      const html = await nodemailer.getHTML("email-reset-password.ejs", {
-        name: findUser.name,
-        url: `${req.protocol}://${req.get(
-          "host"
-        )}/api/v1/reset-password?token=${token}`,
+      // Generate OTP baru
+      const otp = generateOTP();
+
+      // Perbarui OTP dan waktu kedaluwarsa
+      await prisma.user.update({
+        where: { id: user.id },
+        data: {
+          otp: otp,
+          otpExpiration: new Date(Date.now() + 5 * 60 * 1000), // Sesuaikan dengan kebutuhan Anda
+          updated_at: formatdate(new Date()),
+        },
       });
 
-      try {
-        await nodemailer.sendMail(email, "Email Forget Password", html);
-        return res.status(200).json({
-          status: true,
-          message: "Success Send Email Forget Password",
-        });
-      } catch (error) {
-        return res.status(500).json({
-          status: false,
-          message: "Failed to send email",
-        });
-      }
+      const subject = "Verifikasi OTP Baru";
+      const emailContent = await getHTML("otp-email.ejs", { otp });
+
+      // Kirim email verifikasi
+      await sendMail(user.email, subject, emailContent);
+
+      return res.status(200).json({
+        status: true,
+        message:
+          "OTP telah berhasil diperbarui. Silakan periksa email Anda untuk OTP yang baru.",
+        data: null,
+      });
     } catch (error) {
       next(error);
     }
@@ -484,4 +512,5 @@ module.exports = {
       next(error);
     }
   },
+
 };

@@ -3,9 +3,10 @@ POST http://localhost:3000/api/v1/register
 Content-Type: application/json
 
 {
-  "name": "ilham",
-  "email": "21082010211@student.upnjatim.ac.id",
-  "no_telp": "08212162",
+
+  "name": "user2",
+  "email": "kevinyohanesteen@gmail.com",
+  "no_telp": "08212162176767",
   "password": "password123"
 }
 
@@ -23,7 +24,8 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6OCwiZW1haWwiO
 Content-Type: application/json
 
 {
-  "otp": 163458
+
+  "otp": 290335
 }
 
 ### get all user
@@ -34,7 +36,8 @@ POST http://localhost:3000/api/v1/login
 Content-Type: application/json
 
 {
-  "emailOrNoTelp": "21082010211@student.upnjatim.ac.id",
+
+  "emailOrNoTelp": "kevinyohanesteen@gmail.com",
   "password": "password123"
 }
 

@@ -3,9 +3,10 @@ POST https://expressjs-develop.up.railway.app/api/v1/register
 Content-Type: application/json
 
 {
-  "name": "ilham",
-  "email": "21082010205@student.upnjatim.ac.id",
-  "no_telp": "0821216217",
+
+  "name": "user2",
+  "email": "kevinyohanesteen@mynanaimohomes.com",
+  "no_telp": "08212162176767",
   "password": "password123"
 }
 
