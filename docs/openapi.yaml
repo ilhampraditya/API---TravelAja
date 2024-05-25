@@ -5,7 +5,7 @@ info:
   version: 1.0.0
 servers:
   - url: http://localhost:3000/api/v1
-  - url: https://expressjs-develop.up.railway.app/
+  - url: expressjs-development-e2c9.up.railway.app
 paths:
   /register:
     post:
