@@ -84,7 +84,6 @@ module.exports = {
       next(error);
     }
   },
-
   renewOTP: async (req, res, next) => {
     try {
       const { email } = req.body;
@@ -100,6 +99,7 @@ module.exports = {
           status: false,
           message: "Token verifikasi tidak valid",
           data: null,
+
         });
       }
 
@@ -302,29 +302,51 @@ module.exports = {
           status: false,
           message: "Email not found",
         });
+     
+      // Jika pengguna sudah diverifikasi
+      if (user.isVerified) {
+        return res.status(400).json({
+          status: false,
+          message:
+            "Pengguna sudah diverifikasi dan tidak dapat memperbarui OTP",
+          data: null,
+        });
       }
 
-      const token = jwt.sign({ email: findUser.email }, JWT_SECRET_KEY);
+      // Validasi email yang diberikan harus sesuai dengan email pengguna
+      if (user.email !== email) {
+        return res.status(403).json({
+          status: false,
+          message: "Email tidak cocok dengan pengguna yang terdaftar",
+          data: null,
+        });
+      }
 
-      const html = await nodemailer.getHTML("email-reset-password.ejs", {
-        name: findUser.name,
-        url: `${req.protocol}://${req.get(
-          "host"
-        )}/api/v1/reset-password?token=${token}`,
+      // Generate OTP baru
+      const otp = generateOTP();
+
+      // Perbarui OTP dan waktu kedaluwarsa
+      await prisma.user.update({
+        where: { id: user.id },
+        data: {
+          otp: otp,
+          otpExpiration: new Date(Date.now() + 5 * 60 * 1000), // Sesuaikan dengan kebutuhan Anda
+          updated_at: formatdate(new Date()),
+        },
       });
 
-      try {
-        await nodemailer.sendMail(email, "Email Forget Password", html);
-        return res.status(200).json({
-          status: true,
-          message: "Success Send Email Forget Password",
-        });
-      } catch (error) {
-        return res.status(500).json({
-          status: false,
-          message: "Failed to send email",
-        });
-      }
+      const subject = "Verifikasi OTP Baru";
+      const emailContent = await getHTML("otp-email.ejs", { otp });
+
+      // Kirim email verifikasi
+      await sendMail(user.email, subject, emailContent);
+
+      return res.status(200).json({
+        status: true,
+        message:
+          "OTP telah berhasil diperbarui. Silakan periksa email Anda untuk OTP yang baru.",
+        data: null,
+      });
     } catch (error) {
       next(error);
     }
@@ -490,8 +512,5 @@ module.exports = {
       next(error);
     }
   },
-};
-
 
 };
-

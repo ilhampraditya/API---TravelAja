@@ -3,6 +3,7 @@ POST https://expressjs-develop.up.railway.app/api/v1/register
 Content-Type: application/json
 
 {
+
   "name": "user2",
   "email": "kevinyohanesteen@mynanaimohomes.com",
   "no_telp": "08212162176767",
