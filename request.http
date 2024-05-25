@@ -4,13 +4,13 @@ Content-Type: application/json
 
 {
   "name": "ilham",
-  "email": "pradityailham25@gmail.com",
-  "no_telp": "0821216217",
+  "email": "xfsctqgcdx@nespressopixie.com",
+  "no_telp": "0821216229",
   "password": "password123"
 }
 
 ### Renew OTP
-POST expressjs-development-e2c9.up.railway.app/api/v1/renew-otp
+POST https://expressjs-develop.up.railway.app/api/v1/renew-otp
 Content-Type: application/json
 
 {
@@ -18,19 +18,19 @@ Content-Type: application/json
 }
 
 ### Verify OTP
-POST expressjs-development-e2c9.up.railway.app/api/v1/verify-otp
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NCwiZW1haWwiOiJmaG5ka2FqeHFoZXdlQG15bmFuYWltb2hvbWVzLmNvbSIsImlhdCI6MTcxNjU0NzA3MCwiZXhwIjoxNzE2NjMzNDcwfQ.5lAp0JCCXuPaJSFoq8BBXb017E4LLCjb_PRXMETE7sI
+POST https://expressjs-develop.up.railway.app/api/v1/verify-otp
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NiwiZW1haWwiOiJtcXNheGFjcEBtdWF0b2MuY29tIiwiaWF0IjoxNzE2NjY2NjMzLCJleHAiOjE3MTY3NTMwMzN9.W3NoC1hAUqzrvw5qBK_caziJRhcY2TEkKsLO5MsMQm4
 Content-Type: application/json
 
 {
-  "otp": 287412
+  "otp": 196717
 }
 
 ### get all user
-GET expressjs-development-e2c9.up.railway.app/api/v1/all-user
+GET https://expressjs-develop.up.railway.app/api/v1/all-user
 
 ### Login User with Email
-POST expressjs-development-e2c9.up.railway.app/api/v1/login
+POST https://expressjs-develop.up.railway.app/api/v1/login
 Content-Type: application/json
 
 {
@@ -39,11 +39,11 @@ Content-Type: application/json
 }
 
 ### auth / login dengan token 
-GET  expressjs-development-e2c9.up.railway.app/api/v1/auth
+GET  https://expressjs-develop.up.railway.app/api/v1/auth
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NCwiZW1haWwiOiJmaG5ka2FqeHFoZXdlQG15bmFuYWltb2hvbWVzLmNvbSIsImlhdCI6MTcxNjU0NzExOSwiZXhwIjoxNzE2NjMzNTE5fQ.HOcwmepGOGOZU_OJOBCbYUIIo1xbRw4S7oRrK7qY-g8
 
 ### Login User with No. Telp
-POST expressjs-development-e2c9.up.railway.app/api/v1/login
+POST https://expressjs-develop.up.railway.app/api/v1/login
 Content-Type: application/json
 
 {
@@ -52,7 +52,7 @@ Content-Type: application/json
 }
 
 ###
-POST expressjs-development-e2c9.up.railway.app/api/v1/forgot-password
+POST https://expressjs-develop.up.railway.app/api/v1/forgot-password
 Content-Type: application/json
 
 {
@@ -60,7 +60,7 @@ Content-Type: application/json
 }
 
 ###
-POST expressjs-development-e2c9.up.railway.app/api/v1/reset-password
+POST https://expressjs-develop.up.railway.app/api/v1/reset-password
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImZobmRrYWp4cWhld2VAbXluYW5haW1vaG9tZXMuY29tIiwiaWF0IjoxNzE2NTQ3MjAyfQ.O8exyYT4JfdU8hK9_tjbqXKkvCOtMlS19PR-txLK62E
 Content-Type: application/json
 
@@ -70,11 +70,11 @@ Content-Type: application/json
 }
 
 ### GET PROFILE
-GET expressjs-development-e2c9.up.railway.app/api/v1/profile
+GET https://expressjs-develop.up.railway.app/api/v1/profile
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NCwiZW1haWwiOiJmaG5ka2FqeHFoZXdlQG15bmFuYWltb2hvbWVzLmNvbSIsImlhdCI6MTcxNjU0NzY4MCwiZXhwIjoxNzE2NjM0MDgwfQ.HYGn2U68NHhClHf839339Eq7BLyhSnyVKKY9Rwc7SH8
 
 ### UPDATE USER BY ID
-POST expressjs-development-e2c9.up.railway.app/api/v1/updateprofile
+POST https://expressjs-develop.up.railway.app/api/v1/updateprofile
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NCwiZW1haWwiOiJmaG5ka2FqeHFoZXdlQG15bmFuYWltb2hvbWVzLmNvbSIsImlhdCI6MTcxNjU0NzY4MCwiZXhwIjoxNzE2NjM0MDgwfQ.HYGn2U68NHhClHf839339Eq7BLyhSnyVKKY9Rwc7SH8
 Content-Type: application/json
 

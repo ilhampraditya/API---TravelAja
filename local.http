@@ -4,8 +4,8 @@ Content-Type: application/json
 
 {
   "name": "ilham",
-  "email": "pradityailham25@gmail.com",
-  "no_telp": "08212162",
+  "email": "nvhofancld@miteon.com",
+  "no_telp": "082121629",
   "password": "password123"
 }
 
@@ -19,11 +19,11 @@ Content-Type: application/json
 
 ### Verify OTP
 POST http://localhost:3000/api/v1/verify-otp
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6OCwiZW1haWwiOiIyMTA4MjAxMDIxMUBzdHVkZW50LnVwbmphdGltLmFjLmlkIiwiaWF0IjoxNzE2NTY0OTAyLCJleHAiOjE3MTY2NTEzMDJ9.vsaY2b5N9s4LBN4NWFPn72VfpIWJLvBCGCmLzjBJfLg
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MywiZW1haWwiOiJudmhvZmFuY2xkQG1pdGVvbi5jb20iLCJpYXQiOjE3MTY2NjUzMzgsImV4cCI6MTcxNjc1MTczOH0.ECOlYqAw6rz_m__gWIABXi8XbIOweiw-tcghHHoPZNU
 Content-Type: application/json
 
 {
-  "otp": 163458
+  "otp": 927983
 }
 
 ### get all user
