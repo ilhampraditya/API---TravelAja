@@ -4,8 +4,8 @@ Content-Type: application/json
 
 {
   "name": "ilham",
-  "email": "pradityailham25@gmail.com",
-  "no_telp": "0821216217",
+  "email": "xfsctqgcdx@nespressopixie.com",
+  "no_telp": "0821216229",
   "password": "password123"
 }
 
@@ -18,12 +18,12 @@ Content-Type: application/json
 }
 
 ### Verify OTP
-POST expressjs-development-e2c9.up.railway.app/api/v1/verify-otp
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NCwiZW1haWwiOiJmaG5ka2FqeHFoZXdlQG15bmFuYWltb2hvbWVzLmNvbSIsImlhdCI6MTcxNjU0NzA3MCwiZXhwIjoxNzE2NjMzNDcwfQ.5lAp0JCCXuPaJSFoq8BBXb017E4LLCjb_PRXMETE7sI
+POST https://expressjs-develop.up.railway.app/api/v1/verify-otp
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NiwiZW1haWwiOiJtcXNheGFjcEBtdWF0b2MuY29tIiwiaWF0IjoxNzE2NjY2NjMzLCJleHAiOjE3MTY3NTMwMzN9.W3NoC1hAUqzrvw5qBK_caziJRhcY2TEkKsLO5MsMQm4
 Content-Type: application/json
 
 {
-  "otp": 287412
+  "otp": 196717
 }
 
 ### get all user

@@ -5,11 +5,11 @@ info:
   version: 1.0.0
 servers:
   - url: http://localhost:3000/api/v1
-  - url: expressjs-development-e2c9.up.railway.app
+  - url: https://expressjs-develop.up.railway.app/api/v1
 paths:
   /register:
     post:
-      summary: Register user baru
+      summary: Register User baru
       tags:
         - Auth
       requestBody:
@@ -19,9 +19,6 @@ paths:
             schema:
               type: object
               properties:
-                id:
-                  type: string
-                  example: "1"
                 name:
                   type: string
                   example: "kevin1"
@@ -51,12 +48,9 @@ paths:
                   data:
                     type: object
                     properties:
-                      verifId:
+                      token:
                         type: string
-                        example: "6246da90f1cf901dc90d9081e15d6ab5"
-                      verifEmail:
-                        type: string
-                        example: "TravelAja@gmail.com"
+                        example: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NiwiZW1haWwiOiJtcXNheGFjcEBtdWF0b2MuY29tIiwiaWF0IjoxNzE2NjY2NjMzLCJleHAiOjE3MTY3NTMwMzN9.W3NoC1hAUqzrvw5qBK_caziJRhcY2TEkKsLO5MsMQm4"
         "400":
           description: Bad Request
           content:
@@ -120,11 +114,8 @@ paths:
                     type: string
                     example: "OTP telah berhasil diperbarui. Silakan periksa email Anda untuk OTP yang baru."
                   data:
-                    type: object
-                    properties:
-                      newEmailToken:
-                        type: string
-                        example: "6246da90f1cf901dc90d9081e15d6ab5"
+                    type: string
+                    example: null
         "400":
           description: Bad Request
           content:
