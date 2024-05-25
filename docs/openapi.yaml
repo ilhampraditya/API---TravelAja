@@ -9,7 +9,7 @@ servers:
 paths:
   /register:
     post:
-      summary: Register user baru
+      summary: Register User baru
       tags:
         - Auth
       requestBody:
