@@ -292,8 +292,11 @@ paths:
                     type: object
                     properties:
                       id:
+                        type: integer
+                        example: 1
+                      name:
                         type: string
-                        example: "1"
+                        example: "Ilham"
                       email:
                         type: string
                         example: "TravelAja@gmail.com"
@@ -328,7 +331,7 @@ paths:
                     example: false
                   message:
                     type: string
-                    example: "OTP tidak valid atau telah kedaluwarsa!"
+                    example: "Password tidak valid!"
                   data:
                     type: string
                     example: null
@@ -360,7 +363,7 @@ paths:
                     example: false
                   message:
                     type: string
-                    example: "Email tidak valid atau tidak. telp atau kata sandi!"
+                    example: "Email atau nomor telepon tidak valid!"
                   data:
                     type: string
                     example: null
@@ -464,7 +467,141 @@ paths:
                   data:
                     type: string
                     example: null
+  /forgot-password:
+    post:
+      summary: lupa password
+      tags:
+        - "Auth"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                  example: "TravelAja@gmail.com"
+                password:
+                  type: string
+                  example: "password123"
+      responses:
+        "200":  
+          description: Sukses kirim tautan ke email
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                    example: true
+                  message:
+                    type: string
+                    example: "Sukses kirim Email Forget Password"
+        "404":  
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                    example: false
+                  message:
+                    type: string
+                    example: "Email tidek ditemukan"
+        "500":  
+          description: Internal Server Eror
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                    example: false
+                  message:
+                    type: string
+                    example: "gagal mengirim email"
 
+  /reset-password:
+    post:
+      summary: reset password
+      tags:
+        - "Auth"
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                password:
+                  type: string
+                  example: "Password123"
+                confirmPassword:
+                  type: string
+                  example: "Password123"
+      responses:
+        "200":  
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                    example: true
+                  message:
+                    type: string
+                    example: "Berhasil mengatur ulang password pengguna!" 
+                  data:
+                    type: object
+                    properties:
+                      id:
+                        type: integer
+                        example: 1
+                      email:
+                        type: string
+                        example: "TravelAja@gmail.com"
+                      password:
+                        type: string
+                        example: password123
+        "404":  
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                    example: false
+                  message:
+                    type: string
+                    example: "Pengguna tidak ditemukan"
+                  data:
+                    example: null
+        "400":  
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                    example: false
+                  message:
+                    type: string
+                    example: "Password dan Konfirmasi password harus diisi"
+                  data:
+                    example: null
   /profile:
     get:
       summary: mengambil profile
