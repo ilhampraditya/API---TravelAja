@@ -170,13 +170,8 @@ paths:
       summary: Memverifikasi OTP
       tags:
         - Auth
-      parameters:
-        - in: path
-          name: verification
-          required: true
-          schema:
-            type: string
-          description: Token verifikasi email
+      security:
+        - bearerAuth: []
       requestBody:
         required: true
         content:
@@ -185,8 +180,8 @@ paths:
               type: object
               properties:
                 otp:
-                  type: string
-                  example: "114687"
+                  type: integer
+                  example: 114687
       responses:
         "200":
           description: User berhasil diverifikasi
