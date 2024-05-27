@@ -25,7 +25,11 @@ module.exports = {
             }
 
             const emailExist = await prisma.user.findUnique({ where: { email } });
-            if (emailExist) {
+
+            if (emailExist && !emailExist.isVerified) {
+                const deleteUser = await prisma.user.delete({ where: { id: emailExist.id } })
+
+            } else if (emailExist) {
                 return res.status(401).json({
                     status: false,
                     message: "Email telah digunakan!",
@@ -34,7 +38,11 @@ module.exports = {
             }
 
             const noTelpExist = await prisma.user.findUnique({ where: { no_telp } });
-            if (noTelpExist) {
+
+            if (noTelpExist && !noTelpExist.isVerified) {
+                const deleteUser = await prisma.user.delete({ where: { id: noTelpExist.id } })
+
+            } else if (noTelpExist) {
                 return res.status(401).json({
                     status: false,
                     message: "No. Telp telah digunakan!",

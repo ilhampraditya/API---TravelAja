@@ -132,7 +132,7 @@ paths:
                   data:
                     type: string
                     example: null
-        '403':
+        "403":
           description: Forbidden
           content:
             application/json:
@@ -148,7 +148,7 @@ paths:
                   data:
                     type: string
                     example: null
-        '404':
+        "404":
           description: Not Found
           content:
             application/json:
@@ -202,8 +202,8 @@ paths:
                       token:
                         type: string
                         example: null
-        '400':
-          description: Bad Request 
+        "400":
+          description: Bad Request
           content:
             application/json:
               schema:
@@ -218,7 +218,7 @@ paths:
                   data:
                     type: string
                     example: null
-        '401':
+        "401":
           description: Unauthorized
           content:
             application/json:
@@ -270,7 +270,7 @@ paths:
                   type: string
                   example: "password123"
       responses:
-        '200':
+        "200":
           description: Login berhasil
           content:
             application/json:
@@ -314,7 +314,7 @@ paths:
                   data:
                     type: string
                     example: null
-        '401':
+        "401":
           description: Unauthorized
           content:
             application/json:
@@ -330,7 +330,7 @@ paths:
                   data:
                     type: string
                     example: null
-        '403':
+        "403":
           description: Forbidden
           content:
             application/json:
@@ -346,7 +346,7 @@ paths:
                   data:
                     type: string
                     example: null
-        '404':
+        "404":
           description: Not Found
           content:
             application/json:
@@ -364,7 +364,6 @@ paths:
                     example: null
   /index:
     get:
-    
       summary: Mendapatkan semua user
       tags:
         - Auth
