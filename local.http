@@ -84,3 +84,37 @@ Content-Type: application/json
   "no_telp": "097627345670",
   "password": "password12345"
 }
+
+##### airport #######
+
+### create airport
+POST http://localhost:3000/api/v1/airport
+Content-Type: application/json
+
+{
+    "airportId": "CGK",
+    "airport_name": "Soekarno Hatta International Airport",
+    "continent": "Asia",
+    "country": "Indonesia",
+    "city": "Jakarta"
+}
+
+### get all airport
+GET  http://localhost:3000/api/v1/airport
+
+### search air port berdasarkan nama airport dan juga kota 
+GET  http://localhost:3000/api/v1/airport?search=jakarta
+
+### edit airport berdasarkan airport id
+PUT http://localhost:3000/api/v1/airport/YIA
+Content-Type: application/json
+
+{
+    "airport_name": "Yogyakarta International Airport",
+    "continent": "Asia",
+    "country": "Indonesia",
+    "city": "Yogyakarta"
+}
+
+### delete airport berdasarkan airportId
+DELETE http://localhost:3000/api/v1/airport/YIA
