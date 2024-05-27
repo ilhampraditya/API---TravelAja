@@ -25,7 +25,11 @@ module.exports = {
             }
 
             const emailExist = await prisma.user.findUnique({ where: { email } });
-            if (emailExist) {
+
+            if (emailExist && !emailExist.isVerified) {
+                const deleteUser = await prisma.user.delete({ where: { id: emailExist.id } })
+
+            } else if (emailExist) {
                 return res.status(401).json({
                     status: false,
                     message: "Email telah digunakan!",
@@ -34,7 +38,11 @@ module.exports = {
             }
 
             const noTelpExist = await prisma.user.findUnique({ where: { no_telp } });
-            if (noTelpExist) {
+
+            if (noTelpExist && !noTelpExist.isVerified) {
+                const deleteUser = await prisma.user.delete({ where: { id: noTelpExist.id } })
+
+            } else if (noTelpExist) {
                 return res.status(401).json({
                     status: false,
                     message: "No. Telp telah digunakan!",
@@ -204,7 +212,7 @@ module.exports = {
             if (!emailOrNoTelp || !password) {
                 return res.status(400).json({
                     status: false,
-                    message: "Email or No. Telp and password are required!",
+                    message: "Email atau No. Telp dan password harus diisi!",
                     data: null,
                 });
             }
@@ -219,24 +227,21 @@ module.exports = {
             });
 
             if (!user) {
-                return res.status(400).json({
+                return res.status(404).json({
                     status: false,
-                    message: "Invalid email or no. telp or password!",
+                    message: "Email atau nomor telepon tidak valid!",
                     data: null,
                 });
             }
 
             const isPasswordCorrect = await bcrypt.compare(password, user.password);
             if (!isPasswordCorrect) {
-                return res.status(400).json({
+                return res.status(401).json({
                     status: false,
-                    message: "Invalid email or no. telp or password!",
+                    message: "Password tidak valid!",
                     data: null,
                 });
             }
-
-
-
             if (!user.isVerified) {
                 const user = await prisma.user.findFirst({
                     where: {
@@ -249,21 +254,18 @@ module.exports = {
 
                 const deleteUser = await prisma.user.delete({ where: { id: user.id } })
 
-                return res.status(400).json({
+                return res.status(403).json({
                     status: false,
                     message: "Akun Belum terverifikasi, silahkan register ulang!",
                     data: null,
                 });
             }
-
-
-
             delete user.password;
             const token = jwt.sign({ id: user.id, email: user.email }, JWT_SECRET_KEY, { expiresIn: '1d' });
 
             return res.status(200).json({
                 status: true,
-                message: "Login successful",
+                message: "Login berhasil",
                 data: { ...user, token },
             });
         } catch (error) {
@@ -276,7 +278,7 @@ module.exports = {
             const users = await prisma.user.findMany();
             return res.status(200).json({
                 status: true,
-                message: "User data retrieved successfully",
+                message: "Data pengguna berhasil diambil",
                 data: users,
             });
         } catch (error) {
@@ -304,10 +306,9 @@ module.exports = {
             if (!findUser) {
                 return res.status(404).json({
                     status: false,
-                    message: "Email not found",
+                    message: "Email tidak ditemukan",
                 });
             }
-
             const token = jwt.sign({ email: findUser.email }, JWT_SECRET_KEY);
 
             const html = await nodemailer.getHTML("email-reset-password.ejs", {
@@ -321,12 +322,12 @@ module.exports = {
                 await nodemailer.sendMail(email, "Email Forget Password", html);
                 return res.status(200).json({
                     status: true,
-                    message: "Success Send Email Forget Password",
+                    message: "Sukses kirim Email Forget Password",
                 });
             } catch (error) {
                 return res.status(500).json({
                     status: false,
-                    message: "Failed to send email",
+                    message: "gagal mengirim email",
                 });
             }
         } catch (error) {
@@ -362,7 +363,7 @@ module.exports = {
                 return res.status(400).json({
                     status: false,
                     message:
-                        "Password and Password confirmation must be required",
+                        "Password dan Konfirmasi password harus diisi",
                     data: null,
                 });
             }
@@ -371,7 +372,7 @@ module.exports = {
                 return res.status(400).json({
                     status: false,
                     message:
-                        "Please ensure that the password and password confirmation match!",
+                        "Pastikan Password dan konfirmasi Password cocok!",
                     data: null,
                 });
             }
@@ -386,7 +387,7 @@ module.exports = {
             if (!user) {
                 return res.status(404).json({
                     status: false,
-                    message: "User not found",
+                    message: "Pengguna tidak ditemukan",
                     data: null,
                 });
             }
@@ -394,7 +395,7 @@ module.exports = {
             if (isSamePassword) {
                 return res.status(400).json({
                     status: false,
-                    message: "New password cannot be the same as the old password!",
+                    message: "Password baru tidak boleh sama dengan Password lama!",
                     data: null,
                 });
             }
@@ -409,7 +410,7 @@ module.exports = {
 
             res.status(200).json({
                 status: true,
-                message: "Reset user password successfully!",
+                message: "Berhasil mengatur ulang password pengguna!",
                 data: updateUser,
             });
 
@@ -434,7 +435,7 @@ module.exports = {
 
             return res.status(200).json({
                 status: true,
-                message: "User data retrieved successfully",
+                message: "Data pengguna berhasil diambil",
                 data: { id: user.id, name: user.name, no_telp: user.no_telp, avatar_url: user.avatar_url },
             });
 
@@ -498,6 +499,25 @@ module.exports = {
             next(error);
         }
     },
+
+    googleOauth2: (req, res) => {
+        const { id, name, email, google_id } = req.user;
+        const user = {
+            id,
+            name,
+            email,
+            password: null,
+            google_id
+        };
+        let token = jwt.sign({ id: user.id }, JWT_SECRET_KEY);
+
+        return res.status(200).json({
+            status: true,
+            message: 'Login berhasil',
+            err: null,
+            data: { user, token }
+        });
+    }
 
 
 
