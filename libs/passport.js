@@ -22,7 +22,7 @@ pasport.use(new GoogleStrategy({
                     name: profile.displayName,
                     email: profile.emails[0].value,
                     google_id: profile.id,
-                    no_telp: '', 
+                    no_telp: null, 
                     password: '', 
                     created_at: new Date().toISOString(),
                     updated_at: new Date().toISOString() 
