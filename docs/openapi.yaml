@@ -602,6 +602,57 @@ paths:
                     example: "Password dan Konfirmasi password harus diisi"
                   data:
                     example: null
+
+  /google:
+    get:
+      tags:
+        - Auth
+      summary: Login/register with google
+      description: Creates a new user with the provided information.
+      responses:
+        "200":
+          description: Successful user creation
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                    example: true
+                  message:
+                    type: string
+                    example: "Login berhasil"
+                  err:
+                    type: string
+                    nullable: true
+                    example: null
+                  data:
+                    type: object
+                    properties:
+                      user:
+                        type: object
+                        properties:
+                          id:
+                            type: integer
+                            example: 1
+                          name:
+                            type: string
+                            example: "TravelAja"
+                          email:
+                            type: string
+                            example: "TravelAja@gmail.com"
+                          password:
+                            type: string
+                            nullable: true
+                            example: null
+                          google_id:
+                            type: string
+                            example: "10113939153987jkxbcd8282"
+                      token:
+                        type: string
+                        example: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NSwiZW1haWwiOiJhcGhzMTJAZ21haWwuY29tIiwiaWF0IjoxNzE2Mzk4NTQ4LCJleHAiOjE3MTY0ODQ5NDh9.RWhn7PfFE25eqyUhhjBmQxPCa1kJELChTcgDj3_CBRMdU"
+                
   /profile:
     get:
       summary: mengambil profile
@@ -815,3 +866,14 @@ components:
       type: http
       scheme: bearer
       bearerFormat: JWT
+  schemas:
+    BasicResponse:
+      title: BasicResponse
+      type: object
+      properties:
+        status:
+          type: boolean
+          example: true
+        message:
+          type: string
+          example: "success"

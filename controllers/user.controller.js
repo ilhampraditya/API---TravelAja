@@ -492,6 +492,25 @@ module.exports = {
         }
     },
 
+    googleOauth2: (req, res) => {
+        const { id, name, email, google_id } = req.user;
+        const user = {
+            id,
+            name,
+            email,
+            password: null,
+            google_id
+        };
+        let token = jwt.sign({ id: user.id }, JWT_SECRET_KEY);
+
+        return res.status(200).json({
+            status: true,
+            message: 'Login berhasil',
+            err: null,
+            data: { user, token }
+        });
+    }
+
 
 
 

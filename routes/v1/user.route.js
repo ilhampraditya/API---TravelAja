@@ -1,8 +1,9 @@
 const router = require("express").Router();
 const { image } = require('../../libs/multer');
-const { register, login, auth, forgotPassword, resetPassword, getAllUsers, renewOTP, verifyOtp, verifyResetToken, getuserbyid, updateuserbyid } = require('../../controllers/user.controller');
+const { register, login, auth, forgotPassword, resetPassword, getAllUsers, renewOTP, verifyOtp, verifyResetToken, getuserbyid, updateuserbyid , googleOauth2} = require('../../controllers/user.controller');
 const { restrict } = require("../../middlewares/auth.middleware");
 const { uploadAvatar } = require("../../controllers/media.controllers");
+const passport = require('../../libs/passport');
 
 
 
@@ -21,6 +22,16 @@ router.post('/forgot-password', forgotPassword)
 router.post('/reset-password', restrict, resetPassword)
 router.get('/reset-password', verifyResetToken)
 
+router.get('/google',
+    passport.authenticate('google', { scope: ['profile', 'email'] })
+);
+router.get('/google/callback',
+    passport.authenticate('google', {
+        failureRedirect: '/api/v1/google',
+        session: false
+    }),
+    googleOauth2
+);
 
 
 module.exports = router
