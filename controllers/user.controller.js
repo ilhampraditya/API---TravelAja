@@ -57,8 +57,8 @@ module.exports = {
           otpExpiration,
           role: "user",
           isVerified: false,
-          created_at: formatdate(new Date()),
-          updated_at: formatdate(new Date()),
+          created_at: new Date(),
+          updated_at: new Date(),
         },
       });
 
@@ -235,13 +235,7 @@ module.exports = {
       }
 
       if (!user.isVerified) {
-        const user = await prisma.user.findFirst({
-          where: {
-            OR: [{ email: emailOrNoTelp }, { no_telp: emailOrNoTelp }],
-          },
-        });
-
-        const deleteUser = await prisma.user.delete({ where: { id: user.id } });
+        await prisma.user.delete({ where: { id: user.id } });
 
         return res.status(403).json({
           status: false,
@@ -465,14 +459,14 @@ module.exports = {
         });
       }
 
-      const isSamePassword = await bcrypt.compare(password, user.password);
-      if (isSamePassword) {
-        return res.status(400).json({
-          status: false,
-          message: "New password cannot be the same as the old password!",
-          data: null,
-        });
-      }
+      // const isSamePassword = await bcrypt.compare(password, user.password);
+      // if (isSamePassword) {
+      //   return res.status(400).json({
+      //     status: false,
+      //     message: "New password cannot be the same as the old password!",
+      //     data: null,
+      //   });
+      // }
 
       let encryptedPassword = await bcrypt.hash(password, 10);
 
@@ -491,7 +485,4 @@ module.exports = {
     }
   },
 };
-
-
-};
-
+//

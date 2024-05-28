@@ -4,8 +4,6 @@ const { register, login, auth, forgotPassword, resetPassword, getAllUsers, renew
 const { restrict } = require("../../middlewares/auth.middleware");
 const { uploadAvatar } = require("../../controllers/media.controllers");
 
-
-
 router.post('/register', register)
 router.post('/login', login)
 router.get('/all-user', getAllUsers)
@@ -20,7 +18,5 @@ router.post("/verify-otp", restrict, verifyOtp);
 router.post('/forgot-password', forgotPassword)
 router.post('/reset-password', restrict, resetPassword)
 router.get('/reset-password', verifyResetToken)
-
-
 
 module.exports = router

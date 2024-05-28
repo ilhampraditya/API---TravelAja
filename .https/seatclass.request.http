@@ -1,0 +1,15 @@
+GET http://localhost:3000/api/v1/seatclasses
+
+### GET Seat Class by ID
+
+GET http://localhost:3000/api/v1/seatclasses/1
+
+### CREATE New Seat Class
+POST http://localhost:3000/api/v1/seatclasses
+Content-Type: application/json
+
+{
+  "seat_class_code": "J2",
+  "seat_class_name": "Bussiness Class2"
+}
+

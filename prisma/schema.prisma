@@ -1,9 +1,3 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
-// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
-// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
-
 generator client {
   provider = "prisma-client-js"
 }
@@ -25,8 +19,61 @@ model User {
   role          String    @default("user")
   google_id     String?
   avatar_url    String?
-  created_at    String
-  updated_at    String
+  created_at    DateTime  @default(now())
+  updated_at    DateTime  @updatedAt
 
   @@map("users")
+}
+
+model Airlines {
+  airline_id             Int        @id @default(autoincrement())
+  airline_name           String
+  baggage                String
+  cabin_baggage          String
+  flights                Flights[]
+  SeatClass              SeatClass? @relation(fields: [seatClassSeat_class_id], references: [seat_class_id])
+  seatClassSeat_class_id Int?
+
+  @@map("airlines")
+}
+
+model SeatClass {
+  seat_class_id   Int        @id @default(autoincrement())
+  seat_class_code String
+  seat_class_name String
+
+  airlines        Airlines[]
+
+  @@map("seatclass")
+}
+
+model Airport {
+  id                     Int       @id @default(autoincrement())
+  
+  airport_name           String
+  continent              String
+  country                String
+  city                   String
+  departure_flights      Flights[] @relation("DepartureAirport")
+  destination_flights    Flights[] @relation("DestinationAirport")
+
+  @@map("airports")
+}
+
+model Flights {
+  flight_id              Int      @id @default(autoincrement())
+  flight_code            String
+  price                  Float
+  date                   DateTime
+  departure_time         DateTime
+  arrival_time           DateTime
+  status                 String // e.g., 'scheduled', 'cancelled', 'completed'
+  origin_airport_id      Int
+  destination_airport_id Int
+  airline_id             Int
+  airlines                Airlines @relation(fields: [airline_id], references: [airline_id])
+  departure_airport      Airport  @relation("DepartureAirport", fields: [origin_airport_id], references: [id])
+  destination_airport    Airport  @relation("DestinationAirport", fields: [destination_airport_id], references: [id])
+
+  @@map("flights")
 }

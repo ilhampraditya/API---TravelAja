@@ -3,9 +3,9 @@ POST http://localhost:3000/api/v1/register
 Content-Type: application/json
 
 {
-  "name": "user2",
-  "email": "kevinyohanesteen@gmail.com",
-  "no_telp": "08212162176767",
+  "name": "user21",
+  "email": "kevinyohanesteen11@gmail.com",
+  "no_telp": "0821216217676711",
   "password": "password123"
 }
 
@@ -34,7 +34,7 @@ POST http://localhost:3000/api/v1/login
 Content-Type: application/json
 
 {
-  "emailOrNoTelp": "kevinyohanesteen@gmail.com",
+  "emailOrNoTelp": "kevinyohanesteen11@gmail.com",
   "password": "password123"
 }
 

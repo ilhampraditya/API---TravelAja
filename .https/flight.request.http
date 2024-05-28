@@ -1,0 +1,22 @@
+### Get all flights
+GET http://localhost:3000/api/v1/flights
+
+### Get flight by ID
+GET http://localhost:3000/api/v1/flights/1
+
+### //'scheduled', 'cancelled', 'completed'
+### Create a new flight
+POST http://localhost:3000/api/v1/flights
+Content-Type: application/json
+
+{
+  "flight_code": "G1123",
+  "price": 1000000.00,
+  "date" : "2024-05-10T00:00:00Z",
+  "departure_time": "2024-05-01T10:00:00Z",
+  "arrival_time": "2024-05-01T12:00:00Z",
+  "status": "scheduled", 
+  "origin_airport_id": 1,
+  "destination_airport_id": 2,
+  "airline_id": 1
+}

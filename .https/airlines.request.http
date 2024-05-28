@@ -1,0 +1,15 @@
+GET http://localhost:3000/api/v1/airlines
+
+###
+GET http://localhost:3000/api/v1/airlines/1
+
+###
+POST http://localhost:3000/api/v1/airlines
+Content-Type: application/json
+
+{
+  "airline_name": "Batik Air",
+  "baggage": "30",
+  "cabin_baggage": "7",
+  "seat_class_id": 1
+}

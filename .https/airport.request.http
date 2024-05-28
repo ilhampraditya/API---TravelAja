@@ -1,0 +1,17 @@
+### Get all airport
+GET http://localhost:3000/api/v1/airport
+
+### Get airport by ID
+GET http://localhost:3000/api/v1/airport/1
+
+### Create a new airport
+POST http://localhost:3000/api/v1/airport
+Content-Type: application/json
+
+{
+  "airport_name": "Ngurah Rai International Airport",
+  "continent": "Asia",
+  "country": "Indonesia",
+  "city": "Bali"
+}
+

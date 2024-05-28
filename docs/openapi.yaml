@@ -5,7 +5,7 @@ info:
   version: 1.0.0
 servers:
   - url: http://localhost:3000/api/v1
-  - url: https://expressjs-develop.up.railway.app/
+  - url: https://expressjs-develop.up.railway.app/api/v1
 paths:
   /register:
     post:
@@ -51,12 +51,9 @@ paths:
                   data:
                     type: object
                     properties:
-                      verifId:
+                      token:
                         type: string
-                        example: "6246da90f1cf901dc90d9081e15d6ab5"
-                      verifEmail:
-                        type: string
-                        example: "TravelAja@gmail.com"
+                        example: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NCwiZW1haWwiOiJmaG5ka2FqeHFoZXdlQG15bmFuYWltb2hvbWVzLmNvbSIsImlhdCI6MTcxNjU0NzA3MCwiZXhwIjoxNzE2NjMzNDcwfQ.5lAp0JCCXuPaJSFoq8BBXb017E4LLCjb_PRXMETE7sI"
         "400":
           description: Bad Request
           content:
@@ -120,11 +117,8 @@ paths:
                     type: string
                     example: "OTP telah berhasil diperbarui. Silakan periksa email Anda untuk OTP yang baru."
                   data:
-                    type: object
-                    properties:
-                      newEmailToken:
-                        type: string
-                        example: "6246da90f1cf901dc90d9081e15d6ab5"
+                    type: string
+                    example: null
         "400":
           description: Bad Request
           content:
@@ -179,13 +173,8 @@ paths:
       summary: Memverifikasi OTP
       tags:
         - Auth
-      parameters:
-        - in: path
-          name: verification
-          required: true
-          schema:
-            type: string
-          description: Token verifikasi email
+      security:
+        - bearerAuth: []
       requestBody:
         required: true
         content:
@@ -194,8 +183,8 @@ paths:
               type: object
               properties:
                 otp:
-                  type: string
-                  example: "114687"
+                  type: integer
+                  example: 114687
       responses:
         "200":
           description: User berhasil diverifikasi
@@ -270,6 +259,8 @@ paths:
       summary: Login user
       tags:
         - Auth
+      security:
+        - bearerAuth: []
       requestBody:
         required: true
         content:
