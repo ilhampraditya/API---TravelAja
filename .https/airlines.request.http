@@ -11,5 +11,5 @@ Content-Type: application/json
   "airline_name": "Batik Air",
   "baggage": "30",
   "cabin_baggage": "7",
-  "seat_class_id": 1
+  "seat_class_id": 2
 }

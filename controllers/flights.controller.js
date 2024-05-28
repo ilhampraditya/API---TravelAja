@@ -7,8 +7,8 @@ module.exports = {
       const flights = await prisma.flights.findMany({
         include: {
           airlines: true,
-          departure_airport: true,
-          destination_airport: true,
+          arrival_airport_code: true,
+          destination_airport_code: true,
         },
       });
 
@@ -29,8 +29,8 @@ module.exports = {
         where: { flight_id: id },
         include: {
           airlines: true,
-          departure_airport: true,
-          destination_airport: true,
+          arrival_airport_code: true,
+          destination_airport_code: true,
         },
       });
 
@@ -60,12 +60,42 @@ module.exports = {
       departure_time,
       arrival_time,
       status,
-      origin_airport_id,
+      arrival_airport_id,
       destination_airport_id,
       airline_id,
     } = req.body;
 
     try {
+      // Periksa apakah airline_id ada di tabel airlines
+      const airlineExists = await prisma.airlines.findUnique({
+        where: { airline_id: airline_id },
+      });
+
+      if (!airlineExists) {
+        return res.status(400).send({
+          status: false,
+          message: "Airline tidak ditemukan",
+          data: null,
+        });
+      }
+
+      // Periksa apakah arrival_airport_id dan destination_airport_id ada di tabel airports
+      const arrivalAirportExists = await prisma.airport.findUnique({
+        where: { id: arrival_airport_id },
+      });
+
+      const destinationAirportExists = await prisma.airport.findUnique({
+        where: { id: destination_airport_id },
+      });
+
+      if (!arrivalAirportExists || !destinationAirportExists) {
+        return res.status(400).send({
+          status: false,
+          message: "Salah satu atau kedua bandara tidak ditemukan",
+          data: null,
+        });
+      }
+
       const flight = await prisma.flights.create({
         data: {
           flight_code,
@@ -74,10 +104,9 @@ module.exports = {
           departure_time,
           arrival_time,
           status,
-          origin_airport_id,
+          arrival_airport_id,
           destination_airport_id,
           airline_id,
-          
         },
       });
 

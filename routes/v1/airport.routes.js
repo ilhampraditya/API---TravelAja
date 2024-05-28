@@ -1,8 +1,12 @@
 const router = require("express").Router();
-const airportController = require('../../controllers/airports.controllers');
+const{createAirport, getAllAirports, editAirportById, deleteAirport, getAirportById} = require('../../controllers/airport.controller')
 
-router.get('/airport', airportController.getAllAirports);
-router.get('/airport/:id', airportController.getAirportById);
-router.post('/airport', airportController.createAirport);
 
-module.exports = router;
+router.post('/airport', createAirport);
+router.get('/airport', getAllAirports);
+router.get('/airport/:airportId', getAirportById);
+router.put('/airport/:airportId', editAirportById);
+router.delete('/airport/:airportId', deleteAirport);
+
+
+module.exports = router

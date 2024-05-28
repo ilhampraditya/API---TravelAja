@@ -3,7 +3,7 @@ CREATE TABLE "users" (
     "id" SERIAL NOT NULL,
     "name" TEXT,
     "email" TEXT NOT NULL,
-    "no_telp" TEXT NOT NULL,
+    "no_telp" TEXT,
     "password" TEXT NOT NULL,
     "otp" INTEGER,
     "otpExpiration" TIMESTAMP(3),
@@ -15,6 +15,17 @@ CREATE TABLE "users" (
     "updated_at" TIMESTAMP(3) NOT NULL,
 
     CONSTRAINT "users_pkey" PRIMARY KEY ("id")
+);
+
+-- CreateTable
+CREATE TABLE "airports" (
+    "id" TEXT NOT NULL,
+    "airport_name" TEXT NOT NULL,
+    "continent" TEXT NOT NULL,
+    "country" TEXT NOT NULL,
+    "city" TEXT NOT NULL,
+
+    CONSTRAINT "airports_pkey" PRIMARY KEY ("id")
 );
 
 -- CreateTable
@@ -38,17 +49,6 @@ CREATE TABLE "seatclass" (
 );
 
 -- CreateTable
-CREATE TABLE "airports" (
-    "id" SERIAL NOT NULL,
-    "airport_name" TEXT NOT NULL,
-    "continent" TEXT NOT NULL,
-    "country" TEXT NOT NULL,
-    "city" TEXT NOT NULL,
-
-    CONSTRAINT "airports_pkey" PRIMARY KEY ("id")
-);
-
--- CreateTable
 CREATE TABLE "flights" (
     "flight_id" SERIAL NOT NULL,
     "flight_code" TEXT NOT NULL,
@@ -57,8 +57,8 @@ CREATE TABLE "flights" (
     "departure_time" TIMESTAMP(3) NOT NULL,
     "arrival_time" TIMESTAMP(3) NOT NULL,
     "status" TEXT NOT NULL,
-    "origin_airport_id" INTEGER NOT NULL,
-    "destination_airport_id" INTEGER NOT NULL,
+    "arrival_airport_id" TEXT NOT NULL,
+    "destination_airport_id" TEXT NOT NULL,
     "airline_id" INTEGER NOT NULL,
 
     CONSTRAINT "flights_pkey" PRIMARY KEY ("flight_id")
@@ -77,7 +77,7 @@ ALTER TABLE "airlines" ADD CONSTRAINT "airlines_seatClassSeat_class_id_fkey" FOR
 ALTER TABLE "flights" ADD CONSTRAINT "flights_airline_id_fkey" FOREIGN KEY ("airline_id") REFERENCES "airlines"("airline_id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "flights" ADD CONSTRAINT "flights_origin_airport_id_fkey" FOREIGN KEY ("origin_airport_id") REFERENCES "airports"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+ALTER TABLE "flights" ADD CONSTRAINT "flights_arrival_airport_id_fkey" FOREIGN KEY ("arrival_airport_id") REFERENCES "airports"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "flights" ADD CONSTRAINT "flights_destination_airport_id_fkey" FOREIGN KEY ("destination_airport_id") REFERENCES "airports"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
