@@ -1,0 +1,12 @@
+GET http://localhost:3000/api/v1/promotion
+
+
+###
+POST http://localhost:3000/api/v1/promotion
+Content-Type: application/json
+
+{
+  "discount": 20,
+  "startDate": "2024-06-01T14:00:00.000Z",
+  "endDate": "2024-06-02T14:00:00.000Z"
+}

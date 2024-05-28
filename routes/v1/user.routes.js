@@ -1,6 +1,6 @@
 const router = require("express").Router();
 const { image } = require('../../libs/multer');
-const { register, login, auth, forgotPassword, resetPassword, getAllUsers, renewOTP, verifyOtp, verifyResetToken, getuserbyid, updateuserbyid , googleOauth2} = require('../../controllers/user.controller');
+const { register, login, auth, forgotPassword, resetPassword, getAllUsers, renewOTP, verifyOtp, verifyResetToken, getuserbyid, updateuserbyid, googleOauth2 } = require('../../controllers/user.controller');
 const { restrict } = require("../../middlewares/auth.middleware");
 const { uploadAvatar } = require("../../controllers/media.controllers");
 const passport = require('../../libs/passport');
@@ -11,7 +11,7 @@ router.get('/all-user', getAllUsers)
 router.get('/auth', restrict, auth)
 router.get('/profile', restrict, getuserbyid)
 router.post('/updateprofile', restrict, updateuserbyid)
-router.post('/uploadavatar', image.single('file'), uploadAvatar)
+router.post('/uploadavatar', restrict, image.single('file'), uploadAvatar)
 
 router.post("/renew-otp", renewOTP);
 router.post("/verify-otp", restrict, verifyOtp);

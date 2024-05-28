@@ -10,7 +10,7 @@ module.exports = {
         message: "Data kelas kursi berhasil diambil",
         data: seatClasses,
       });
-    } catch(error) {
+    } catch (error) {
       next(error);
     }
   },
@@ -18,12 +18,12 @@ module.exports = {
   getSeatClassById: async (req, res, next) => {
     const id = Number(req.params.id);
     try {
-      const seatClass = await prisma.seatClass.findUnique({ 
+      const seatClass = await prisma.seatClass.findUnique({
         where: { seat_class_id: id }
       });
 
       if (!seatClass) {
-        return res.status(404).send({ 
+        return res.status(404).send({
           status: false,
           message: 'Kelas kursi tidak ditemukan',
           data: null,
@@ -40,12 +40,12 @@ module.exports = {
   },
 
   createSeatClass: async (req, res, next) => {
-    const { seat_class_name, seat_class_code } = req.body;
+    const { seat_class_type, seat_number } = req.body;
     try {
       const seatClass = await prisma.seatClass.create({
         data: {
-          seat_class_code,
-          seat_class_name,
+          seat_class_type,
+          seat_number,
         },
       });
       return res.status(201).send({

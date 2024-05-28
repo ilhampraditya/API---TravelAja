@@ -7,7 +7,7 @@ const prisma = new PrismaClient();
 module.exports = {
     uploadAvatar: async (req, res, next) => {
         try {
-
+            let { id } = req.user
             if (!req.file) {
                 return res.status(400).json({
                     status: false,
@@ -24,10 +24,12 @@ module.exports = {
                 file: strFile
             })
 
+            const user = await prisma.user.update({ where: { id }, data: { avatar_url: url } })
+
             res.status(200).json({
                 status: true,
                 message: "file berhasil diunggah!",
-                data: { avatar_url: url },
+                data: user.avatar_url,
             });
         }
         catch (err) {
