@@ -59,10 +59,9 @@ module.exports = {
       date,
       departure_time,
       arrival_time,
-      status,
+      airline_id,
       arrival_airport_id,
       destination_airport_id,
-      airline_id,
     } = req.body;
 
     try {
@@ -103,7 +102,6 @@ module.exports = {
           date,
           departure_time,
           arrival_time,
-          status,
           arrival_airport_id,
           destination_airport_id,
           airline_id,
