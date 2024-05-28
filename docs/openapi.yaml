@@ -480,7 +480,7 @@ paths:
                   type: string
                   example: "password123"
       responses:
-        "200":
+        "200":  
           description: Sukses kirim tautan ke email
           content:
             application/json:
@@ -493,7 +493,7 @@ paths:
                   message:
                     type: string
                     example: "Sukses kirim Email Forget Password"
-        "404":
+        "404":  
           description: Not Found
           content:
             application/json:
@@ -506,7 +506,7 @@ paths:
                   message:
                     type: string
                     example: "Email tidek ditemukan"
-        "500":
+        "500":  
           description: Internal Server Eror
           content:
             application/json:
@@ -541,7 +541,7 @@ paths:
                   type: string
                   example: "Password123"
       responses:
-        "200":
+        "200":  
           description: OK
           content:
             application/json:
@@ -553,7 +553,7 @@ paths:
                     example: true
                   message:
                     type: string
-                    example: "Berhasil mengatur ulang password pengguna!"
+                    example: "Berhasil mengatur ulang password pengguna!" 
                   data:
                     type: object
                     properties:
@@ -566,7 +566,7 @@ paths:
                       password:
                         type: string
                         example: password123
-        "404":
+        "404":  
           description: Not Found
           content:
             application/json:
@@ -581,7 +581,7 @@ paths:
                     example: "Pengguna tidak ditemukan"
                   data:
                     example: null
-        "400":
+        "400":  
           description: Bad Request
           content:
             application/json:
@@ -646,7 +646,7 @@ paths:
                       token:
                         type: string
                         example: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NSwiZW1haWwiOiJhcGhzMTJAZ21haWwuY29tIiwiaWF0IjoxNzE2Mzk4NTQ4LCJleHAiOjE3MTY0ODQ5NDh9.RWhn7PfFE25eqyUhhjBmQxPCa1kJELChTcgDj3_CBRMdU"
-
+                
   /profile:
     get:
       summary: mengambil profile
@@ -871,3 +871,4 @@ components:
         message:
           type: string
           example: "success"
+          

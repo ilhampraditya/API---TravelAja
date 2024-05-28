@@ -1,42 +1,77 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
-// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
-// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
-
 generator client {
-    provider = "prisma-client-js"
+  provider = "prisma-client-js"
 }
 
 datasource db {
-    provider = "postgresql"
-    url      = env("DATABASE_URL")
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
 }
 
 model User {
-    id            Int       @id @default(autoincrement())
-    name          String?
-    email         String    @unique
-    no_telp       String    @unique
-    password      String
-    otp           Int?
-    otpExpiration DateTime?
-    isVerified    Boolean   @default(false)
-    role          String    @default("user")
-    google_id     String?
-    avatar_url    String?
-    created_at    String
-    updated_at    String
+  id            Int       @id @default(autoincrement())
+  name          String?
+  email         String    @unique
+  no_telp       String?   @unique
+  password      String
+  otp           Int?
+  otpExpiration DateTime?
+  isVerified    Boolean   @default(false)
+  role          String    @default("user")
+  google_id     String?
+  avatar_url    String?
+  created_at    DateTime  @default(now())
+  updated_at    DateTime  @updatedAt
 
-    @@map("users")
+  @@map("users")
 }
 
 model Airport {
-    id           String @id
-    airport_name String
-    continent    String
-    country      String
-    city         String
+  id                  String    @id
+  airport_name        String
+  continent           String
+  country             String
+  city                String
+  arrival_flights     Flights[] @relation("arrival_airport")
+  destination_flights   Flights[] @relation("destination_airport")
 
-    @@map("airports")
+  @@map("airports")
+}
+
+model Airlines {
+  airline_id             Int        @id @default(autoincrement())
+  airline_name           String
+  baggage                String
+  cabin_baggage          String
+  flights                Flights[]
+  SeatClass              SeatClass? @relation(fields: [seatClassSeat_class_id], references: [seat_class_id])
+  seatClassSeat_class_id Int?
+
+  @@map("airlines")
+}
+
+model SeatClass {
+  seat_class_id   Int        @id @default(autoincrement())
+  seat_class_code String
+  seat_class_name String
+  airlines        Airlines[]
+
+  @@map("seatclass")
+}
+
+model Flights {
+  flight_id                  Int       @id @default(autoincrement())
+  flight_code                String
+  price                      Float
+  date                       DateTime
+  departure_time             DateTime
+  arrival_time               DateTime
+  status                     String
+  arrival_airport_id          String
+  destination_airport_id     String
+  airline_id                 Int
+  airlines                   Airlines  @relation(fields: [airline_id], references: [airline_id])
+  arrival_airport_code       Airport   @relation("arrival_airport", fields: [arrival_airport_id], references: [id])
+  destination_airport_code     Airport   @relation("destination_airport", fields: [destination_airport_id], references: [id])
+
+  @@map("flights")
 }

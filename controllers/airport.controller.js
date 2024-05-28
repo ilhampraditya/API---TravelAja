@@ -6,7 +6,7 @@ module.exports = {
     createAirport: async (req, res, next) => {
         try {
             const { airportId, airport_name, continent, country, city } = req.body;
-
+    
             if (!airportId || !airport_name || !continent || !country || !city) {
                 return res.status(400).json({
                     status: false,
@@ -14,7 +14,22 @@ module.exports = {
                     data: null,
                 });
             }
-
+    
+            // Periksa apakah airportId sudah ada
+            const existingAirport = await prisma.airport.findUnique({
+                where: {
+                    id: airportId,
+                },
+            });
+    
+            if (existingAirport) {
+                return res.status(409).json({
+                    status: false,
+                    message: "Airport dengan ID ini sudah ada",
+                    data: null,
+                });
+            }
+    
             let newAirport = await prisma.airport.create({
                 data: {
                     id: airportId,
@@ -24,7 +39,7 @@ module.exports = {
                     city,
                 },
             });
-
+    
             res.status(201).json({
                 status: true,
                 message: "Pembuatan bandara berhasil",
@@ -42,6 +57,7 @@ module.exports = {
             next(err);
         }
     },
+    
 
     getAllAirports: async (req, res, next) => {
         try {
@@ -64,6 +80,32 @@ module.exports = {
                 status: true,
                 message: "Berhasil menampilkan semua bandara",
                 data: airports,
+            });
+        } catch (err) {
+            next(err);
+        }
+    },
+
+    getAirportById: async (req, res, next) => {
+        try {
+            const { airportId } = req.params;
+
+            const airport = await prisma.airport.findUnique({
+                where: { id: airportId },
+            });
+
+            if (!airport) {
+                return res.status(404).json({
+                    status: false,
+                    message: "Bandara tidak ditemukan",
+                    data: null,
+                });
+            }
+
+            res.status(200).json({
+                status: true,
+                message: "Berhasil menampilkan bandara",
+                data: airport,
             });
         } catch (err) {
             next(err);

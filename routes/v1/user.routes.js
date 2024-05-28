@@ -5,8 +5,6 @@ const { restrict } = require("../../middlewares/auth.middleware");
 const { uploadAvatar } = require("../../controllers/media.controllers");
 const passport = require('../../libs/passport');
 
-
-
 router.post('/register', register)
 router.post('/login', login)
 router.get('/all-user', getAllUsers)
