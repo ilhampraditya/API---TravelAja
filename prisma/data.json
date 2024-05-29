@@ -1,0 +1,592 @@
+{
+    "users": [
+      {
+        "name": "Ahmad Fauzi",
+        "email": "ahmad.fauzi@example.com",
+        "no_telp": "081234567890",
+        "password": "password123",
+        "otp": null,
+        "otpExpiration": null,
+        "isVerified": true,
+        "role": "user",
+        "google_id": null,
+        "avatar_url": null
+      },
+      {
+        "name": "Rina Sari",
+        "email": "rina.sari@example.com",
+        "no_telp": "089876543210",
+        "password": "password123",
+        "otp": null,
+        "otpExpiration": null,
+        "isVerified": true,
+        "role": "admin",
+        "google_id": null,
+        "avatar_url": null
+      }
+    ],
+    "airports": [
+      {
+        "id": "CGK",
+        "airport_name": "Soekarno-Hatta International Airport",
+        "continent": "Asia",
+        "country": "Indonesia",
+        "city": "Jakarta"
+      },
+      {
+        "id": "DPS",
+        "airport_name": "Ngurah Rai International Airport",
+        "continent": "Asia",
+        "country": "Indonesia",
+        "city": "Denpasar"
+      },
+      {
+        "id": "SUB",
+        "airport_name": "Juanda International Airport",
+        "continent": "Asia",
+        "country": "Indonesia",
+        "city": "Surabaya"
+      },
+      {
+        "id": "JOG",
+        "airport_name": "Adisutjipto International Airport",
+        "continent": "Asia",
+        "country": "Indonesia",
+        "city": "Yogyakarta"
+      },
+      {
+        "id": "UPG",
+        "airport_name": "Sultan Hasanuddin International Airport",
+        "continent": "Asia",
+        "country": "Indonesia",
+        "city": "Makassar"
+      },
+      {
+        "id": "KNO",
+        "airport_name": "Kualanamu International Airport",
+        "continent": "Asia",
+        "country": "Indonesia",
+        "city": "Medan"
+      },
+      {
+        "id": "BDO",
+        "airport_name": "Husein Sastranegara International Airport",
+        "continent": "Asia",
+        "country": "Indonesia",
+        "city": "Bandung"
+      },
+      {
+        "id": "BPN",
+        "airport_name": "Sultan Aji Muhammad Sulaiman Airport",
+        "continent": "Asia",
+        "country": "Indonesia",
+        "city": "Balikpapan"
+      },
+      {
+        "id": "SRG",
+        "airport_name": "Achmad Yani International Airport",
+        "continent": "Asia",
+        "country": "Indonesia",
+        "city": "Semarang"
+      },
+      {
+        "id": "PKU",
+        "airport_name": "Sultan Syarif Kasim II International Airport",
+        "continent": "Asia",
+        "country": "Indonesia",
+        "city": "Pekanbaru"
+      },
+      {
+        "id": "BTH",
+        "airport_name": "Hang Nadim International Airport",
+        "continent": "Asia",
+        "country": "Indonesia",
+        "city": "Batam"
+      },
+      {
+        "id": "PDG",
+        "airport_name": "Minangkabau International Airport",
+        "continent": "Asia",
+        "country": "Indonesia",
+        "city": "Padang"
+      },
+      {
+        "id": "BKS",
+        "airport_name": "Fatmawati Soekarno Airport",
+        "continent": "Asia",
+        "country": "Indonesia",
+        "city": "Bengkulu"
+      },
+      {
+        "id": "PLM",
+        "airport_name": "Sultan Mahmud Badaruddin II Airport",
+        "continent": "Asia",
+        "country": "Indonesia",
+        "city": "Palembang"
+      },
+      {
+        "id": "SOC",
+        "airport_name": "Adi Soemarmo International Airport",
+        "continent": "Asia",
+        "country": "Indonesia",
+        "city": "Solo"
+      },
+      {
+        "id": "AMI",
+        "airport_name": "Lombok International Airport",
+        "continent": "Asia",
+        "country": "Indonesia",
+        "city": "Mataram"
+      },
+      {
+        "id": "MDC",
+        "airport_name": "Sam Ratulangi International Airport",
+        "continent": "Asia",
+        "country": "Indonesia",
+        "city": "Manado"
+      },
+      {
+        "id": "TKG",
+        "airport_name": "Radin Inten II Airport",
+        "continent": "Asia",
+        "country": "Indonesia",
+        "city": "Bandar Lampung"
+      },
+      {
+        "id": "PNK",
+        "airport_name": "Supadio International Airport",
+        "continent": "Asia",
+        "country": "Indonesia",
+        "city": "Palu"
+      },
+      {
+        "id": "PLW",
+        "airport_name": "Mutiara SIS Aljufri",
+        "continent": "Asia",
+        "country": "Indonesia",
+        "city": "Bandung"
+      }
+    ],
+    "seatClasses": [
+      {
+        "seat_class_id": 1,
+        "seat_class_code": "E",
+        "seat_class_type": "Economy"
+      },
+      {
+        "seat_class_id": 2,
+        "seat_class_code": "B",
+        "seat_class_type": "Business"
+      },
+      {
+        "seat_class_id": 3,
+        "seat_class_code": "F",
+        "seat_class_type": "First"
+      },
+      {
+        "seat_class_id": 4,
+        "seat_class_code": "P",
+        "seat_class_type": "Premium Economy"
+      },
+      {
+        "seat_class_id": 5,
+        "seat_class_code": "C",
+        "seat_class_type": "Comfort"
+      },
+      {
+        "seat_class_id": 6,
+        "seat_class_code": "S",
+        "seat_class_type": "Super Economy"
+      },
+      {
+        "seat_class_id": 7,
+        "seat_class_code": "D",
+        "seat_class_type": "Deluxe"
+      }
+    ],
+    "airlines": [
+      {
+        "airline_id": 1,
+        "airline_name": "Garuda Indonesia",
+        "baggage": "20 kg",
+        "cabin_baggage": "7 kg",
+        "seat_class_id": 1
+      },
+      {
+        "airline_id": 2,
+        "airline_name": "Lion Air",
+        "baggage": "15 kg",
+        "cabin_baggage": "7 kg",
+        "seat_class_id": 2
+      },
+      {
+        "airline_id": 3,
+        "airline_name": "Sriwijaya Air",
+        "baggage": "20 kg",
+        "cabin_baggage": "7 kg",
+        "seat_class_id": 3
+      },
+      {
+        "airline_id": 4,
+        "airline_name": "Citilink",
+        "baggage": "20 kg",
+        "cabin_baggage": "7 kg",
+        "seat_class_id": 1
+      },
+      {
+        "airline_id": 5,
+        "airline_name": "AirAsia",
+        "baggage": "15 kg",
+        "cabin_baggage": "7 kg",
+        "seat_class_id": 2
+      },
+      {
+        "airline_id": 6,
+        "airline_name": "Batik Air",
+        "baggage": "20 kg",
+        "cabin_baggage": "7 kg",
+        "seat_class_id": 3
+      },
+      {
+        "airline_id": 7,
+        "airline_name": "Wings Air",
+        "baggage": "10 kg",
+        "cabin_baggage": "7 kg",
+        "seat_class_id": 1
+      },
+      {
+        "airline_id": 8,
+        "airline_name": "NAM Air",
+        "baggage": "15 kg",
+        "cabin_baggage": "7 kg",
+        "seat_class_id": 2
+      },
+      {
+        "airline_id": 9,
+        "airline_name": "Trigana Air",
+        "baggage": "10 kg",
+        "cabin_baggage": "5 kg",
+        "seat_class_id": 3
+      },
+      {
+        "airline_id": 10,
+        "airline_name": "Kalstar Aviation",
+        "baggage": "15 kg",
+        "cabin_baggage": "5 kg",
+        "seat_class_id": 1
+      },
+      {
+        "airline_id": 11,
+        "airline_name": "Susi Air",
+        "baggage": "10 kg",
+        "cabin_baggage": "5 kg",
+        "seat_class_id": 2
+      },
+      {
+        "airline_id": 12,
+        "airline_name": "Merpati Nusantara",
+        "baggage": "15 kg",
+        "cabin_baggage": "5 kg",
+        "seat_class_id": 3
+      },
+      {
+        "airline_id": 13,
+        "airline_name": "Express Air",
+        "baggage": "10 kg",
+        "cabin_baggage": "5 kg",
+        "seat_class_id": 1
+      },
+      {
+        "airline_id": 14,
+        "airline_name": "Citilink",
+        "baggage": "20 kg",
+        "cabin_baggage": "7 kg",
+        "seat_class_id": 2
+      },
+      {
+        "airline_id": 15,
+        "airline_name": "Lion Air",
+        "baggage": "15 kg",
+        "cabin_baggage": "7 kg",
+        "seat_class_id": 3
+      },
+      {
+        "airline_id": 16,
+        "airline_name": "Garuda Indonesia",
+        "baggage": "20 kg",
+        "cabin_baggage": "7 kg",
+        "seat_class_id": 1
+      },
+      {
+        "airline_id": 17,
+        "airline_name": "Sriwijaya Air",
+        "baggage": "20 kg",
+        "cabin_baggage": "7 kg",
+        "seat_class_id": 2
+      },
+      {
+        "airline_id": 18,
+        "airline_name": "Batik Air",
+        "baggage": "20 kg",
+        "cabin_baggage": "7 kg",
+        "seat_class_id": 3
+      },
+      {
+        "airline_id": 19,
+        "airline_name": "AirAsia",
+        "baggage": "15 kg",
+        "cabin_baggage": "7 kg",
+        "seat_class_id": 1
+      },
+      {
+        "airline_id": 20,
+        "airline_name": "Wings Air",
+        "baggage": "10 kg",
+        "cabin_baggage": "7 kg",
+        "seat_class_id": 2
+      }
+    ],
+    "flights": [
+      {
+        "flight_id": 1,
+        "flight_code": "GA100",
+        "price": 1000000.00,
+        "date": "2024-06-01T00:00:00.000Z",
+        "departure_time": "2024-06-01T08:00:00.000Z",
+        "arrival_time": "2024-06-01T10:00:00.000Z",
+        "status": "Scheduled",
+        "arrival_airport_id": "CGK",
+        "destination_airport_id": "DPS",
+        "airline_id": 1
+      },
+      {
+        "flight_id": 2,
+        "flight_code": "JT200",
+        "price": 800000.00,
+        "date": "2024-06-02T00:00:00.000Z",
+        "departure_time": "2024-06-02T09:00:00.000Z",
+        "arrival_time": "2024-06-02T11:00:00.000Z",
+        "status": "Scheduled",
+        "arrival_airport_id": "DPS",
+        "destination_airport_id": "CGK",
+        "airline_id": 2
+      },
+      {
+        "flight_id": 3,
+        "flight_code": "SJ300",
+        "price": 750000.00,
+        "date": "2024-06-03T00:00:00.000Z",
+        "departure_time": "2024-06-03T10:00:00.000Z",
+        "arrival_time": "2024-06-03T12:00:00.000Z",
+        "status": "Scheduled",
+        "arrival_airport_id": "SUB",
+        "destination_airport_id": "CGK",
+        "airline_id": 3
+      },
+      {
+        "flight_id": 4,
+        "flight_code": "QZ400",
+        "price": 700000.00,
+        "date": "2024-06-04T00:00:00.000Z",
+        "departure_time": "2024-06-04T11:00:00.000Z",
+        "arrival_time": "2024-06-04T13:00:00.000Z",
+        "status": "Scheduled",
+        "arrival_airport_id": "JOG",
+        "destination_airport_id": "CGK",
+        "airline_id": 4
+      },
+      {
+        "flight_id": 5,
+        "flight_code": "ID500",
+        "price": 850000.00,
+        "date": "2024-06-05T00:00:00.000Z",
+        "departure_time": "2024-06-05T12:00:00.000Z",
+        "arrival_time": "2024-06-05T14:00:00.000Z",
+        "status": "Scheduled",
+        "arrival_airport_id": "UPG",
+        "destination_airport_id": "CGK",
+        "airline_id": 5
+      },
+      {
+        "flight_id": 6,
+        "flight_code": "GA600",
+        "price": 950000.00,
+        "date": "2024-06-06T00:00:00.000Z",
+        "departure_time": "2024-06-06T13:00:00.000Z",
+        "arrival_time": "2024-06-06T15:00:00.000Z",
+        "status": "Scheduled",
+        "arrival_airport_id": "KNO",
+        "destination_airport_id": "CGK",
+        "airline_id": 6
+      },
+      {
+        "flight_id": 7,
+        "flight_code": "JT700",
+        "price": 600000.00,
+        "date": "2024-06-07T00:00:00.000Z",
+        "departure_time": "2024-06-07T14:00:00.000Z",
+        "arrival_time": "2024-06-07T16:00:00.000Z",
+        "status": "Scheduled",
+        "arrival_airport_id": "BDO",
+        "destination_airport_id": "CGK",
+        "airline_id": 7
+      },
+      {
+        "flight_id": 8,
+        "flight_code": "QG800",
+        "price": 900000.00,
+        "date": "2024-06-08T00:00:00.000Z",
+        "departure_time": "2024-06-08T15:00:00.000Z",
+        "arrival_time": "2024-06-08T17:00:00.000Z",
+        "status": "Scheduled",
+        "arrival_airport_id": "BPN",
+        "destination_airport_id": "BKS",
+        "airline_id": 8
+      },
+      {
+        "flight_id": 9,
+        "flight_code": "SJ900",
+        "price": 950000.00,
+        "date": "2024-06-09T00:00:00.000Z",
+        "departure_time": "2024-06-09T16:00:00.000Z",
+        "arrival_time": "2024-06-09T18:00:00.000Z",
+        "status": "Scheduled",
+        "arrival_airport_id": "SRG",
+        "destination_airport_id": "CGK",
+        "airline_id": 9
+      },
+      {
+        "flight_id": 10,
+        "flight_code": "ID1000",
+        "price": 650000.00,
+        "date": "2024-06-10T00:00:00.000Z",
+        "departure_time": "2024-06-10T17:00:00.000Z",
+        "arrival_time": "2024-06-10T19:00:00.000Z",
+        "status": "Scheduled",
+        "arrival_airport_id": "PKU",
+        "destination_airport_id": "CGK",
+        "airline_id": 10
+      },
+      {
+        "flight_id": 11,
+        "flight_code": "QZ1100",
+        "price": 700000.00,
+        "date": "2024-06-11T00:00:00.000Z",
+        "departure_time": "2024-06-11T18:00:00.000Z",
+        "arrival_time": "2024-06-11T20:00:00.000Z",
+        "status": "Scheduled",
+        "arrival_airport_id": "BTH",
+        "destination_airport_id": "CGK",
+        "airline_id": 11
+      },
+      {
+        "flight_id": 12,
+        "flight_code": "GA1200",
+        "price": 800000.00,
+        "date": "2024-06-12T00:00:00.000Z",
+        "departure_time": "2024-06-12T19:00:00.000Z",
+        "arrival_time": "2024-06-12T21:00:00.000Z",
+        "status": "Scheduled",
+        "arrival_airport_id": "PDG",
+        "destination_airport_id": "CGK",
+        "airline_id": 12
+      },
+      {
+        "flight_id": 13,
+        "flight_code": "JT1300",
+        "price": 850000.00,
+        "date": "2024-06-13T00:00:00.000Z",
+        "departure_time": "2024-06-13T20:00:00.000Z",
+        "arrival_time": "2024-06-13T22:00:00.000Z",
+        "status": "Scheduled",
+        "arrival_airport_id": "PLM",
+        "destination_airport_id": "CGK",
+        "airline_id": 13
+      },
+      {
+        "flight_id": 14,
+        "flight_code": "ID1400",
+        "price": 750000.00,
+        "date": "2024-06-14T00:00:00.000Z",
+        "departure_time": "2024-06-14T21:00:00.000Z",
+        "arrival_time": "2024-06-14T23:00:00.000Z",
+        "status": "Scheduled",
+        "arrival_airport_id": "SOC",
+        "destination_airport_id": "CGK",
+        "airline_id": 14
+      },
+      {
+        "flight_id": 15,
+        "flight_code": "QG1500",
+        "price": 800000.00,
+        "date": "2024-06-15T00:00:00.000Z",
+        "departure_time": "2024-06-15T22:00:00.000Z",
+        "arrival_time": "2024-06-16T00:00:00.000Z",
+        "status": "Scheduled",
+        "arrival_airport_id": "AMI",
+        "destination_airport_id": "CGK",
+        "airline_id": 15
+      },
+      {
+        "flight_id": 16,
+        "flight_code": "SJ1600",
+        "price": 700000.00,
+        "date": "2024-06-16T00:00:00.000Z",
+        "departure_time": "2024-06-16T23:00:00.000Z",
+        "arrival_time": "2024-06-17T01:00:00.000Z",
+        "status": "Scheduled",
+        "arrival_airport_id": "MDC",
+        "destination_airport_id": "CGK",
+        "airline_id": 16
+      },
+      {
+        "flight_id": 17,
+        "flight_code": "GA1700",
+        "price": 900000.00,
+        "date": "2024-06-17T00:00:00.000Z",
+        "departure_time": "2024-06-17T06:00:00.000Z",
+        "arrival_time": "2024-06-17T08:00:00.000Z",
+        "status": "Scheduled",
+        "arrival_airport_id": "TKG",
+        "destination_airport_id": "CGK",
+        "airline_id": 17
+      },
+      {
+        "flight_id": 18,
+        "flight_code": "JT1800",
+        "price": 850000.00,
+        "date": "2024-06-18T00:00:00.000Z",
+        "departure_time": "2024-06-18T07:00:00.000Z",
+        "arrival_time": "2024-06-18T09:00:00.000Z",
+        "status": "Scheduled",
+        "arrival_airport_id": "PNK",
+        "destination_airport_id": "CGK",
+        "airline_id": 18
+      },
+      {
+        "flight_id": 19,
+        "flight_code": "ID1900",
+        "price": 950000.00,
+        "date": "2024-06-19T00:00:00.000Z",
+        "departure_time": "2024-06-19T08:00:00.000Z",
+        "arrival_time": "2024-06-19T10:00:00.000Z",
+        "status": "Scheduled",
+        "arrival_airport_id": "SUB",
+        "destination_airport_id": "DPS",
+        "airline_id": 19
+      },
+      {
+        "flight_id": 20,
+        "flight_code": "GA2000",
+        "price": 1000000.00,
+        "date": "2024-06-20T00:00:00.000Z",
+        "departure_time": "2024-06-20T09:00:00.000Z",
+        "arrival_time": "2024-06-20T11:00:00.000Z",
+        "status": "Scheduled",
+        "arrival_airport_id": "JOG",
+        "destination_airport_id": "DPS",
+        "airline_id": 20
+      }
+    ]
+  }
+  

@@ -12,7 +12,7 @@ module.exports = {
         },
       });
 
-      return res.status(200).send({
+      return res.status(200).json({
         status: true,
         message: "Data penerbangan berhasil diambil",
         data: flights,
@@ -35,14 +35,14 @@ module.exports = {
       });
 
       if (!flight) {
-        return res.status(404).send({
+        return res.status(404).json({
           status: false,
           message: "Penerbangan tidak ditemukan",
           data: null,
         });
       }
 
-      res.status(200).send({
+      res.status(200).json({
         status: true,
         message: "Data penerbangan berhasil diambil",
         data: flight,
@@ -72,7 +72,7 @@ module.exports = {
       });
 
       if (!airlineExists) {
-        return res.status(400).send({
+        return res.status(400).json({
           status: false,
           message: "Airline tidak ditemukan",
           data: null,
@@ -89,7 +89,7 @@ module.exports = {
       });
 
       if (!arrivalAirportExists || !destinationAirportExists) {
-        return res.status(400).send({
+        return res.status(400).json({
           status: false,
           message: "Salah satu atau kedua bandara tidak ditemukan",
           data: null,
@@ -110,7 +110,7 @@ module.exports = {
         },
       });
 
-      return res.status(201).send({
+      return res.status(201).json({
         status: true,
         message: "Penerbangan berhasil dibuat",
         data: flight,

@@ -34,7 +34,7 @@ CREATE TABLE "airlines" (
     "airline_name" TEXT NOT NULL,
     "baggage" TEXT NOT NULL,
     "cabin_baggage" TEXT NOT NULL,
-    "seatClassSeat_class_id" INTEGER,
+    "seat_class_id" INTEGER,
 
     CONSTRAINT "airlines_pkey" PRIMARY KEY ("airline_id")
 );
@@ -43,7 +43,7 @@ CREATE TABLE "airlines" (
 CREATE TABLE "seatclass" (
     "seat_class_id" SERIAL NOT NULL,
     "seat_class_code" TEXT NOT NULL,
-    "seat_class_name" TEXT NOT NULL,
+    "seat_class_type" TEXT NOT NULL,
 
     CONSTRAINT "seatclass_pkey" PRIMARY KEY ("seat_class_id")
 );
@@ -71,7 +71,7 @@ CREATE UNIQUE INDEX "users_email_key" ON "users"("email");
 CREATE UNIQUE INDEX "users_no_telp_key" ON "users"("no_telp");
 
 -- AddForeignKey
-ALTER TABLE "airlines" ADD CONSTRAINT "airlines_seatClassSeat_class_id_fkey" FOREIGN KEY ("seatClassSeat_class_id") REFERENCES "seatclass"("seat_class_id") ON DELETE SET NULL ON UPDATE CASCADE;
+ALTER TABLE "airlines" ADD CONSTRAINT "airlines_seat_class_id_fkey" FOREIGN KEY ("seat_class_id") REFERENCES "seatclass"("seat_class_id") ON DELETE SET NULL ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "flights" ADD CONSTRAINT "flights_airline_id_fkey" FOREIGN KEY ("airline_id") REFERENCES "airlines"("airline_id") ON DELETE RESTRICT ON UPDATE CASCADE;

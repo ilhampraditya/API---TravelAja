@@ -8,7 +8,7 @@ module.exports = {
       const airlines = await prisma.airlines.findMany({
         include: { SeatClass: true },
       });
-      return res.status(200).send({
+      return res.status(200).json({
         status: true,
         message: "Data maskapai penerbangan berhasil diambil",
         data: airlines,
@@ -27,13 +27,13 @@ module.exports = {
       });
 
       if (!airline) {
-        return res.status(404).send({
+        return res.status(404).json({
           status: false,
           message: "Maskapai penerbangan tidak ditemukan",
           data: null,
         });
       }
-      res.status(200).send({
+      res.status(200).json({
         status: true,
         message: "Data maskapai penerbangan berhasil diambil",
         data: airline,
@@ -57,7 +57,7 @@ module.exports = {
       });
 
       if (!existingSeatClass) {
-        return res.status(400).send({
+        return res.status(400).json({
           status: false,
           message: "Seat class with the provided ID does not exist",
           data: null,
@@ -75,7 +75,7 @@ module.exports = {
         },
       });
 
-      return res.status(201).send({
+      return res.status(201).json({
         status: true,
         message: "Maskapai penerbangan berhasil dibuat",
         data: airline,

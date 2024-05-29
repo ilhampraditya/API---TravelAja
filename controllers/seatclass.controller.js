@@ -5,7 +5,7 @@ module.exports = {
   getAllSeatClasses: async (req, res, next) => {
     try {
       const seatClasses = await prisma.seatClass.findMany();
-      return res.status(200).send({
+      return res.status(200).json({
         status: true,
         message: "Data kelas kursi berhasil diambil",
         data: seatClasses,
@@ -23,13 +23,13 @@ module.exports = {
       });
 
       if (!seatClass) {
-        return res.status(404).send({ 
+        return res.status(404).json({ 
           status: false,
           message: 'Kelas kursi tidak ditemukan',
           data: null,
         });
       }
-      res.status(200).send({
+      res.status(200).json({
         status: true,
         message: "Data kelas kursi berhasil diambil",
         data: seatClass,
@@ -48,7 +48,7 @@ module.exports = {
           seat_class_name,
         },
       });
-      return res.status(201).send({
+      return res.status(201).json({
         status: true,
         message: "Kelas kursi berhasil dibuat",
         data: seatClass,
