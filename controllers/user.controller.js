@@ -73,7 +73,11 @@ module.exports = {
 
             await sendMail(user.email, subject, emailContent);
 
-            const token = jwt.sign({ id: user.id, email: user.email }, JWT_SECRET_KEY, { expiresIn: '1d' });
+            const token = jwt.sign({ 
+                id: user.id, email: user.email 
+            }, JWT_SECRET_KEY, { 
+                expiresIn: '1d' 
+            });
 
             return res.status(201).json({
                 status: true,

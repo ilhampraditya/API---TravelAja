@@ -1,10 +1,10 @@
 generator client {
-    provider = "prisma-client-js"
+  provider = "prisma-client-js"
 }
 
 datasource db {
-    provider = "postgresql"
-    url      = env("DATABASE_URL")
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
 }
 
 model User {
@@ -20,7 +20,7 @@ model User {
   google_id     String?
   avatar_url    String?
 
-    @@map("users")
+  @@map("users")
 }
 
 model Airport {
@@ -32,7 +32,7 @@ model Airport {
   arrival_flights     Flights[] @relation("arrival_airport")
   destination_flights Flights[] @relation("destination_airport")
 
-    @@map("airports")
+  @@map("airports")
 }
 
 model Airlines {
@@ -44,7 +44,7 @@ model Airlines {
   SeatClass     SeatClass? @relation(fields: [Seat_class_id], references: [seat_class_id])
   Seat_class_id Int?
 
-    @@map("airlines")
+  @@map("airlines")
 }
 
 model SeatClass {
@@ -53,25 +53,25 @@ model SeatClass {
   seat_number     Int
   airlines        Airlines[]
 
-    @@map("seatclass")
+  @@map("seatclass")
 }
 
 model Flights {
-  flight_code              String     @id
-  price                    Float
-  date                     DateTime
-  departure_time           DateTime
-  arrival_time             DateTime
-  airline_id               String
-  arrival_airport_id       String
-  destination_airport_id   String
-  promotion_id             Int?
-  promotion                Promotion? @relation(fields: [promotion_id], references: [promotion_id])
-  airlines                 Airlines   @relation(fields: [airline_id], references: [airline_id])
-  arrival_airport   Airport    @relation("arrival_airport", fields: [arrival_airport_id], references: [id])
-  destination_airport Airport    @relation("destination_airport", fields: [destination_airport_id], references: [id])
+  flight_code            String     @id
+  price                  Float
+  date                   DateTime
+  departure_time         DateTime
+  arrival_time           DateTime
+  airline_id             String
+  arrival_airport_id     String
+  destination_airport_id String
+  promotion_id           Int?
+  promotion              Promotion? @relation(fields: [promotion_id], references: [promotion_id])
+  airlines               Airlines   @relation(fields: [airline_id], references: [airline_id])
+  arrival_airport        Airport    @relation("arrival_airport", fields: [arrival_airport_id], references: [id])
+  destination_airport    Airport    @relation("destination_airport", fields: [destination_airport_id], references: [id])
 
-    @@map("flights")
+  @@map("flights")
 }
 
 model Promotion {

@@ -13,7 +13,7 @@ module.exports = {
         },
       });
 
-      return res.status(200).send({
+      return res.status(200).json({
         status: true,
         message: "Data penerbangan berhasil diambil",
         data: flights,
@@ -24,10 +24,10 @@ module.exports = {
   },
 
   getFlightById: async (req, res, next) => {
-    const id = Number(req.params.id);
+    const id = req.params.id;
     try {
       const flight = await prisma.flights.findUnique({
-        where: { flight_id: id },
+        where: { flight_code: id },
         include: {
           airlines: true,
           arrival_airport: true,
@@ -37,14 +37,14 @@ module.exports = {
       });
 
       if (!flight) {
-        return res.status(404).send({
+        return res.status(404).json({
           status: false,
           message: "Penerbangan tidak ditemukan",
           data: null,
         });
       }
 
-      res.status(200).send({
+      res.status(200).json({
         status: true,
         message: "Data penerbangan berhasil diambil",
         data: flight,
@@ -68,20 +68,19 @@ module.exports = {
     } = req.body;
 
     try {
-      // Periksa apakah airline_id ada di tabel airlines
+
       const airlineExists = await prisma.airlines.findUnique({
         where: { airline_id: airline_id },
       });
 
       if (!airlineExists) {
-        return res.status(400).send({
+        return res.status(400).json({
           status: false,
           message: "Airline tidak ditemukan",
           data: null,
         });
       }
 
-      // Periksa apakah arrival_airport_id dan destination_airport_id ada di tabel airports
       const arrivalAirportExists = await prisma.airport.findUnique({
         where: { id: arrival_airport_id },
       });
@@ -91,7 +90,7 @@ module.exports = {
       });
 
       if (!arrivalAirportExists || !destinationAirportExists) {
-        return res.status(400).send({
+        return res.status(400).json({
           status: false,
           message: "Salah satu atau kedua bandara tidak ditemukan",
           data: null,
@@ -112,7 +111,7 @@ module.exports = {
         },
       });
 
-      return res.status(201).send({
+      return res.status(201).json({
         status: true,
         message: "Penerbangan berhasil dibuat",
         data: flight,
