@@ -9,6 +9,7 @@ module.exports = {
           airlines: true,
           arrival_airport: true,
           destination_airport: true,
+          promotion: true,
         },
       });
 
@@ -23,14 +24,15 @@ module.exports = {
   },
 
   getFlightById: async (req, res, next) => {
-    const id = Number(req.params.id);
+    const id = req.params.id;
     try {
       const flight = await prisma.flights.findUnique({
-        where: { flight_id: id },
+        where: { flight_code: id },
         include: {
           airlines: true,
           arrival_airport: true,
           destination_airport: true,
+          promotion: true,
         },
       });
 
@@ -62,6 +64,7 @@ module.exports = {
       airline_id,
       arrival_airport_id,
       destination_airport_id,
+      promotion_id
     } = req.body;
 
     try {
@@ -104,6 +107,7 @@ module.exports = {
           arrival_airport_id,
           destination_airport_id,
           airline_id,
+          promotion_id
         },
       });
 

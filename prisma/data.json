@@ -1,4 +1,11 @@
 {
+  "promotion": [
+    {
+        "discount": 10,
+        "startDate": "2024-06-01T00:00:00Z",
+        "endDate": "2024-06-30T23:59:59Z"
+    }
+],
     "users": [
         {
             "name": "John Doe",
@@ -266,7 +273,8 @@
           "arrival_time": "2024-06-01T10:00:00Z",
           "airline_id": "GA",
           "arrival_airport_id": "DPS",
-          "destination_airport_id": "CGK"
+          "destination_airport_id": "CGK",
+          "promotion_id": 1
         },
         {
           "flight_code": "SJ456",
@@ -276,7 +284,8 @@
           "arrival_time": "2024-06-02T12:00:00Z",
           "airline_id": "SJ",
           "arrival_airport_id": "CGK",
-          "destination_airport_id": "DPS"
+          "destination_airport_id": "DPS",
+          "promotion_id": 1
         },
         {
           "flight_code": "JT789",
@@ -438,12 +447,5 @@
           "arrival_airport_id": "JOG",
           "destination_airport_id": "CGK"
         }
-      ],
-    "promotion": [
-        {
-            "discount": 10,
-            "startDate": "2024-06-01T00:00:00Z",
-            "endDate": "2024-06-30T23:59:59Z"
-        }
-    ]
+      ]
 }

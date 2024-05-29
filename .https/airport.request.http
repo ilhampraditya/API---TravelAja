@@ -8,6 +8,14 @@ GET http://localhost:3000/api/v1/airport/CGK
 POST http://localhost:3000/api/v1/airport
 Content-Type: application/json
 
+# {
+#     "airportId": "LOP",
+#     "airport_name": "Lombok Praya International Airport",
+#     "continent": "Asia",
+#     "country": "Indonesia",
+#     "city": "Lombok"
+# }
+
 {
     "airportId": "CGK",
     "airport_name": "Soekarno Hatta International Airport",
@@ -16,13 +24,6 @@ Content-Type: application/json
     "city": "Jakarta"
 }
 
-# {
-#     "airportId": "LOP",
-#     "airport_name": "Lombok Praya International Airport",
-#     "continent": "Asia",
-#     "country": "Indonesia",
-#     "city": "Lombok"
-# }
 ### edit airport berdasarkan airport id
 PUT http://localhost:3000/api/v1/airport/YIA
 Content-Type: application/json

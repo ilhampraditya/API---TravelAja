@@ -3,7 +3,7 @@ GET http://localhost:3000/api/v1/flights
 Content-Type: application/json
 
 ### Get Flight By ID
-GET http://localhost:3000/api/v1/flights/2
+GET http://localhost:3000/api/v1/flights/1
 Content-Type: application/json
 
 ### Create Flight
@@ -11,7 +11,7 @@ POST http://localhost:3000/api/v1/flights
 Content-Type: application/json
 
 {
-  "flight_code": "GA123TEST",
+  "flight_code": "GA123TEST123",
   "price": 1500000.00,
   "date": "2024-06-01T10:00:00.000Z",
   "departure_time": "2024-06-01T14:00:00.000Z",
