@@ -1,0 +1,38 @@
+### Get all airport
+GET http://localhost:3000/api/v1/airport
+
+### Get airport by ID
+GET http://localhost:3000/api/v1/airport/CGK
+
+### Create a new airport
+POST http://localhost:3000/api/v1/airport
+Content-Type: application/json
+
+# {
+#     "airportId": "CGK",
+#     "airport_name": "Soekarno Hatta International Airport",
+#     "continent": "Asia",
+#     "country": "Indonesia",
+#     "city": "Jakarta"
+# }
+
+{
+    "airportId": "LOP",
+    "airport_name": "Lombok Praya International Airport",
+    "continent": "Asia",
+    "country": "Indonesia",
+    "city": "Lombok"
+}
+### edit airport berdasarkan airport id
+PUT http://localhost:3000/api/v1/airport/YIA
+Content-Type: application/json
+
+{
+    "airport_name": "Yogyakarta International Airport",
+    "continent": "Asia",
+    "country": "Indonesia",
+    "city": "Yogyakarta"
+}
+
+### delete airport berdasarkan airportId
+DELETE http://localhost:3000/api/v1/airport/YIA

@@ -1,18 +1,19 @@
-const pasport = require('passport');
-const GoogleStrategy = require('passport-google-oauth20').Strategy;
-const { PrismaClient } = require('@prisma/client');
-const passport = require('passport');
+const pasport = require("passport");
+const GoogleStrategy = require("passport-google-oauth20").Strategy;
+const { PrismaClient } = require("@prisma/client");
+const passport = require("passport");
 const prisma = new PrismaClient();
 
-const { GOOGLE_CLIENT_ID,
-    GOOGLE_CLIENT_SECRET,
-    GOOGLE_CALLBACK_URL } = process.env;
+const { GOOGLE_CLIENT_ID, GOOGLE_CLIENT_SECRET, GOOGLE_CALLBACK_URL } =
+  process.env;
 
-pasport.use(new GoogleStrategy({
-    clientID: GOOGLE_CLIENT_ID,
-    clientSecret: GOOGLE_CLIENT_SECRET,
-    callbackURL: GOOGLE_CALLBACK_URL
-},
+pasport.use(
+  new GoogleStrategy(
+    {
+      clientID: GOOGLE_CLIENT_ID,
+      clientSecret: GOOGLE_CLIENT_SECRET,
+      callbackURL: GOOGLE_CALLBACK_URL,
+    },
     async function (accessToken, refreshToken, profile, done) {
         try {
             let user = await prisma.user.upsert({
@@ -34,6 +35,7 @@ pasport.use(new GoogleStrategy({
             done(err, null);
         }
     }
-));
+  )
+);
 
 module.exports = passport;

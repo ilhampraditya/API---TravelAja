@@ -64,8 +64,8 @@ module.exports = {
                     otpExpiration,
                     role: "user",
                     isVerified: false,
-                    created_at: formatdate(new Date()),
-                    updated_at: formatdate(new Date()),
+                    created_at: new Date(),
+                    updated_at: new Date(),
                 },
             });
 
@@ -518,8 +518,5 @@ module.exports = {
             data: { user, token }
         });
     }
-
-
-
 
 };

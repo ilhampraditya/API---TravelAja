@@ -1,0 +1,23 @@
+### Get All Flights
+GET http://localhost:3000/api/v1/flights
+Content-Type: application/json
+
+### Get Flight By ID
+GET http://localhost:3000/api/v1/flights/2
+Content-Type: application/json
+
+### Create Flight
+POST http://localhost:3000/api/v1/flights
+Content-Type: application/json
+
+{
+  "flight_code": "GA123",
+  "price": 150.00,
+  "date": "2024-06-01T10:00:00.000Z",
+  "departure_time": "2024-06-01T14:00:00.000Z",
+  "arrival_time": "2024-06-01T18:00:00.000Z",
+  "status": "Scheduled",
+  "arrival_airport_id": "DPS",
+  "destination_airport_id": "LOP",
+  "airline_id": 1
+}
