@@ -1,10 +1,11 @@
 const express = require("express");
 const router = express.Router();
-const User = require("../v1/user.routes");
-const Airline = require("../v1/airlines.routes");
-const SeatClass = require("../v1/seatclass.routes");
-const flight = require("../v1/flights.routes");
+const User = require("./user.routes");
+const Airline = require("./airlines.routes");
+const SeatClass = require("./seatclass.routes");
+const flight = require("./flights.routes");
 const Airport = require("./airport.routes");
+const Promotion = require("./promotion.route")
 const swaggerUI = require("swagger-ui-express");
 const YAML = require("yaml");
 const fs = require("fs");
@@ -17,7 +18,7 @@ const file = fs.readFileSync(swagger_path, "utf-8");
 const swaggerDocument = YAML.parse(file);
 router.use("/api/v1/api-docs", swaggerUI.serve, swaggerUI.setup(swaggerDocument));
 
-router.use("/api/v1", User, Airline, SeatClass, flight, Airport);
+router.use("/api/v1", User, Airline, SeatClass, flight, Airport, Promotion);
 
 
 module.exports = router

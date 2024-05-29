@@ -63,9 +63,7 @@ module.exports = {
                     otp,
                     otpExpiration,
                     role: "user",
-                    isVerified: false,
-                    created_at: new Date(),
-                    updated_at: new Date(),
+                    isVerified: false
                 },
             });
 
@@ -189,8 +187,7 @@ module.exports = {
                 data: {
                     isVerified: true,
                     otp: null,
-                    otpExpiration: null,
-                    updated_at: formatdate(new Date()),
+                    otpExpiration: null
                 },
             });
 

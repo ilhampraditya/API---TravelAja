@@ -9,8 +9,8 @@ POST http://localhost:3000/api/v1/seatclasses
 Content-Type: application/json
 
 {
-    "seat_class_code":"B",
-    "seat_class_name":"Business"
+  "seat_class_type": "Economy",
+  "seat_number": 1
 }
 
 

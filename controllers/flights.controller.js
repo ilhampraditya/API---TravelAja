@@ -7,8 +7,9 @@ module.exports = {
       const flights = await prisma.flights.findMany({
         include: {
           airlines: true,
-          arrival_airport_code: true,
-          destination_airport_code: true,
+          arrival_airport: true,
+          destination_airport: true,
+          promotion: true,
         },
       });
 
@@ -29,8 +30,9 @@ module.exports = {
         where: { flight_id: id },
         include: {
           airlines: true,
-          arrival_airport_code: true,
-          destination_airport_code: true,
+          arrival_airport: true,
+          destination_airport: true,
+          promotion: true,
         },
       });
 
@@ -59,10 +61,10 @@ module.exports = {
       date,
       departure_time,
       arrival_time,
-      status,
+      airline_id,
       arrival_airport_id,
       destination_airport_id,
-      airline_id,
+      promotion_id
     } = req.body;
 
     try {
@@ -103,10 +105,10 @@ module.exports = {
           date,
           departure_time,
           arrival_time,
-          status,
           arrival_airport_id,
           destination_airport_id,
           airline_id,
+          promotion_id
         },
       });
 

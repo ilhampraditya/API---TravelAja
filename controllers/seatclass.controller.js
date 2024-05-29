@@ -8,8 +8,8 @@ module.exports = {
         const searchConditions = search
             ? {
                 OR: [
-                    { seat_class_ty: { contains: search, mode: "insensitive" } },
-                    { seat_class_code: { contains: search, mode: "insensitive" } }
+                    { seat_class_type: { contains: search, mode: "insensitive" } },
+                    { seat_number: { contains: search, mode: "insensitive" } }
                 ]
             }
             : {};
@@ -22,20 +22,18 @@ module.exports = {
         message: "Data kelas kursi berhasil diambil",
         data: seatClass,
       });
-    } catch(error) {
+    } catch (error) {
       next(error);
     }
   },
 
-  
-
   createSeatClass: async (req, res, next) => {
-    const { seat_class_code, seat_class_name } = req.body;
+    const { seat_class_type, seat_number } = req.body;
     try {
       const seatClass = await prisma.seatClass.create({
         data: {
-          seat_class_code,
-          seat_class_name,
+          seat_class_type,
+          seat_number,
         },
       });
       return res.status(201).send({
