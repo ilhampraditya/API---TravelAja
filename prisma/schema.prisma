@@ -19,8 +19,6 @@ model User {
   role          String    @default("user")
   google_id     String?
   avatar_url    String?
-  created_at    DateTime  @default(now())
-  updated_at    DateTime  @updatedAt
 
   @@map("users")
 }
@@ -38,40 +36,50 @@ model Airport {
 }
 
 model Airlines {
-  airline_id             Int        @id @default(autoincrement())
-  airline_name           String
-  baggage                String
-  cabin_baggage          String
-  flights                Flights[]
-  SeatClass              SeatClass? @relation(fields: [seat_class_id], references: [seat_class_id])
-  seat_class_id Int?
+  airline_id    String     @id
+  airline_name  String
+  baggage       String
+  cabin_baggage String
+  flights       Flights[]
+  SeatClass     SeatClass? @relation(fields: [Seat_class_id], references: [seat_class_id])
+  Seat_class_id Int?
 
   @@map("airlines")
 }
 
 model SeatClass {
   seat_class_id   Int        @id @default(autoincrement())
-  seat_class_code String
   seat_class_type String
+  seat_number     Int
   airlines        Airlines[]
 
   @@map("seatclass")
 }
 
 model Flights {
-  flight_id                Int      @id @default(autoincrement())
-  flight_code              String
-  price                    Float
-  date                     DateTime
-  departure_time           DateTime
-  arrival_time             DateTime
-  status                   String
-  arrival_airport_id       String
-  destination_airport_id   String
-  airline_id               Int
-  airlines                 Airlines @relation(fields: [airline_id], references: [airline_id])
-  arrival_airport_code     Airport  @relation("arrival_airport", fields: [arrival_airport_id], references: [id])
-  destination_airport_code Airport  @relation("destination_airport", fields: [destination_airport_id], references: [id])
+  flight_code            String     @id
+  price                  Float
+  date                   DateTime
+  departure_time         DateTime
+  arrival_time           DateTime
+  airline_id             String
+  arrival_airport_id     String
+  destination_airport_id String
+  promotion_id           Int?
+  promotion              Promotion? @relation(fields: [promotion_id], references: [promotion_id])
+  airlines               Airlines   @relation(fields: [airline_id], references: [airline_id])
+  arrival_airport        Airport    @relation("arrival_airport", fields: [arrival_airport_id], references: [id])
+  destination_airport    Airport    @relation("destination_airport", fields: [destination_airport_id], references: [id])
 
   @@map("flights")
+}
+
+model Promotion {
+  promotion_id Int       @id @default(autoincrement())
+  discount     Int
+  startDate    DateTime
+  endDate      DateTime
+  flights      Flights[]
+
+  @@map("promotions")
 }

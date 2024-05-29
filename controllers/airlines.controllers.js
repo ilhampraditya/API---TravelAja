@@ -18,46 +18,22 @@ module.exports = {
     }
   },
 
-  getAirlineById: async (req, res, next) => {
-    const id = Number(req.params.id);
-    try {
-      const airline = await prisma.airlines.findUnique({
-        where: { airline_id: id },
-        include: { SeatClass: true },
-      });
-
-      if (!airline) {
-        return res.status(404).json({
-          status: false,
-          message: "Maskapai penerbangan tidak ditemukan",
-          data: null,
-        });
-      }
-      res.status(200).json({
-        status: true,
-        message: "Data maskapai penerbangan berhasil diambil",
-        data: airline,
-      });
-    } catch (error) {
-      next(error);
-    }
-  },
 
   createAirline: async (req, res, next) => {
-    const { 
-      airline_name, 
-      baggage, 
-      cabin_baggage, 
+    const { airline_id,
+      airline_name,
+      baggage,
+      cabin_baggage,
       seat_class_id
     } = req.body;
 
     try {
       const existingSeatClass = await prisma.seatClass.findUnique({
-        where: { seat_class_id: seat_class_id},
+        where: { seat_class_id: seat_class_id },
       });
 
       if (!existingSeatClass) {
-        return res.status(400).json({
+        return res.status(400).send({
           status: false,
           message: "Seat class with the provided ID does not exist",
           data: null,
@@ -66,11 +42,12 @@ module.exports = {
 
       const airline = await prisma.airlines.create({
         data: {
+          airline_id,
           airline_name,
           baggage,
           cabin_baggage,
           SeatClass: {
-            connect: { seat_class_id: seat_class_id},
+            connect: { seat_class_id: seat_class_id },
           },
         },
       });

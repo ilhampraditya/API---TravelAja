@@ -63,9 +63,7 @@ module.exports = {
                     otp,
                     otpExpiration,
                     role: "user",
-                    isVerified: false,
-                    created_at: new Date(),
-                    updated_at: new Date(),
+                    isVerified: false
                 },
             });
 
@@ -75,7 +73,11 @@ module.exports = {
 
             await sendMail(user.email, subject, emailContent);
 
-            const token = jwt.sign({ id: user.id, email: user.email }, JWT_SECRET_KEY, { expiresIn: '1d' });
+            const token = jwt.sign({ 
+                id: user.id, email: user.email 
+            }, JWT_SECRET_KEY, { 
+                expiresIn: '1d' 
+            });
 
             return res.status(201).json({
                 status: true,
@@ -189,8 +191,7 @@ module.exports = {
                 data: {
                     isVerified: true,
                     otp: null,
-                    otpExpiration: null,
-                    updated_at: formatdate(new Date()),
+                    otpExpiration: null
                 },
             });
 

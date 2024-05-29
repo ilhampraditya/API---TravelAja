@@ -8,8 +8,9 @@ POST http://localhost:3000/api/v1/airlines
 Content-Type: application/json
 
 {
-  "airline_name": "Batik Air",
+  "airline_id": "QG",
+  "airline_name": "Citilink",
   "baggage": "30",
   "cabin_baggage": "7",
-  "seat_class_id": 2
+  "seat_class_id": 1
 }
