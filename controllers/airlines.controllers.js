@@ -8,7 +8,7 @@ module.exports = {
       const airlines = await prisma.airlines.findMany({
         include: { SeatClass: true },
       });
-      return res.status(200).send({
+      return res.status(200).json({
         status: true,
         message: "Data maskapai penerbangan berhasil diambil",
         data: airlines,
@@ -52,7 +52,7 @@ module.exports = {
         },
       });
 
-      return res.status(201).send({
+      return res.status(201).json({
         status: true,
         message: "Maskapai penerbangan berhasil dibuat",
         data: airline,

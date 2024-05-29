@@ -1,9 +1,12 @@
-const express = require('express');
+const express = require("express");
 const router = express.Router();
-const seatClassController = require('../../controllers/seatclass.controller');
 
-router.get('/seatclasses/', seatClassController.getAllSeatClasses);
+const {
+  getAllSeatClasses,
+  createSeatClass,
+} = require("../../controllers/seatclass.controller");
 
-router.post('/seatclasses', seatClassController.createSeatClass);
+router.get("/seatclasses", getAllSeatClasses);
+router.post("/seatclasses", createSeatClass);
 
 module.exports = router;

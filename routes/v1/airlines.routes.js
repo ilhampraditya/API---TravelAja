@@ -1,7 +1,10 @@
 const router = require("express").Router();
-const airlinesController = require('../../controllers/airlines.controllers');
+const {
+  getAllAirlines,
+  createAirline,
+} = require("../../controllers/airlines.controllers");
 
-router.get('/airlines', airlinesController.getAllAirlines);
-router.post('/airlines', airlinesController.createAirline);
+router.get("/airlines", getAllAirlines);
+router.post("/airlines", createAirline);
 
 module.exports = router;

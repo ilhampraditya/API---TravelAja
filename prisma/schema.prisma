@@ -57,19 +57,19 @@ model SeatClass {
 }
 
 model Flights {
-  flight_code              String     @id
-  price                    Float
-  date                     DateTime
-  departure_time           DateTime
-  arrival_time             DateTime
-  airline_id               String
-  arrival_airport_id       String
-  destination_airport_id   String
-  promotion_id             Int?
-  promotion                Promotion? @relation(fields: [promotion_id], references: [promotion_id])
-  airlines                 Airlines   @relation(fields: [airline_id], references: [airline_id])
-  arrival_airport   Airport    @relation("arrival_airport", fields: [arrival_airport_id], references: [id])
-  destination_airport Airport    @relation("destination_airport", fields: [destination_airport_id], references: [id])
+  flight_code            String     @id
+  price                  Float
+  date                   DateTime
+  departure_time         DateTime
+  arrival_time           DateTime
+  airline_id             String
+  arrival_airport_id     String
+  destination_airport_id String
+  promotion_id           Int?
+  promotion              Promotion? @relation(fields: [promotion_id], references: [promotion_id])
+  airlines               Airlines   @relation(fields: [airline_id], references: [airline_id])
+  arrival_airport        Airport    @relation("arrival_airport", fields: [arrival_airport_id], references: [id])
+  destination_airport    Airport    @relation("destination_airport", fields: [destination_airport_id], references: [id])
 
     @@map("flights")
 }
