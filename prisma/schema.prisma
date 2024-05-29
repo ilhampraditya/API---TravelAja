@@ -49,7 +49,6 @@ model Airlines {
 
 model SeatClass {
   seat_class_id   Int        @id @default(autoincrement())
-  
   seat_class_type String
   seat_number     Int
   airlines        Airlines[]
