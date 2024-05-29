@@ -11,13 +11,12 @@ POST http://localhost:3000/api/v1/flights
 Content-Type: application/json
 
 {
-  "flight_code": "GA123TEST123",
-  "price": 1500000.00,
+  "flight_id": "GA1437093",
+  "price": 1000000.00,
   "date": "2024-06-01T10:00:00.000Z",
   "departure_time": "2024-06-01T14:00:00.000Z",
   "arrival_time": "2024-06-01T18:00:00.000Z",
-  "airline_id": "BA",
+  "airline_id": "QG",
   "arrival_airport_id": "CGK",
-  "destination_airport_id": "HLP",
-  "promotion_id": 1
+  "destination_airport_id": "LOP"
 }
