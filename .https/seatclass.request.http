@@ -2,14 +2,18 @@ GET http://localhost:3000/api/v1/seatclasses
 
 ### GET Seat Class by ID
 
-GET http://localhost:3000/api/v1/seatclasses/1
+GET http://localhost:3000/api/v1/seatclasses?search=Eco
 
 ### CREATE New Seat Class
 POST http://localhost:3000/api/v1/seatclasses
 Content-Type: application/json
 
 {
-  "seat_class_type": "First",
+  "seat_class_type": "Economy",
   "seat_number": 1
 }
 
+
+
+
+ 
