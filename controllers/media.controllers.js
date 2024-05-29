@@ -7,7 +7,7 @@ const prisma = new PrismaClient();
 module.exports = {
     uploadAvatar: async (req, res, next) => {
         try {
-            let { id } = req.user
+            let { user_id } = req.user
             if (!req.file) {
                 return res.status(400).json({
                     status: false,
@@ -16,7 +16,6 @@ module.exports = {
                 });
             }
 
-
             let strFile = req.file.buffer.toString('base64')
 
             let { url } = await imagekit.upload({
@@ -24,7 +23,7 @@ module.exports = {
                 file: strFile
             })
 
-            const user = await prisma.user.update({ where: { id }, data: { avatar_url: url } })
+            const user = await prisma.user.update({ where: { user_id }, data: { avatar_url: url } })
 
             res.status(200).json({
                 status: true,

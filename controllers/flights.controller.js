@@ -56,7 +56,7 @@ module.exports = {
 
   createFlight: async (req, res, next) => {
     const {
-      flight_code,
+      flight_id,
       price,
       date,
       departure_time,
@@ -81,6 +81,16 @@ module.exports = {
         });
       }
 
+      const flightExist = await prisma.flights.findUnique({ where: { flight_id } })
+
+      if (flightExist) {
+        return res.status(400).json({
+          status: false,
+          message: "Kode penerbangan sudah ada, silahkan coba yang lain!",
+          data: null,
+        });
+      }
+
       const arrivalAirportExists = await prisma.airport.findUnique({
         where: { id: arrival_airport_id },
       });
@@ -97,25 +107,61 @@ module.exports = {
         });
       }
 
-      const flight = await prisma.flights.create({
-        data: {
-          flight_code,
-          price,
-          date,
-          departure_time,
-          arrival_time,
-          arrival_airport_id,
-          destination_airport_id,
-          airline_id,
-          promotion_id
-        },
-      });
+      if (arrival_airport_id == destination_airport_id) {
+        return res.status(400).json({
+          status: false,
+          message: "Bandara awal dan tujuan tidak boleh sama",
+          data: null,
+        });
+      }
 
-      return res.status(201).json({
-        status: true,
-        message: "Penerbangan berhasil dibuat",
-        data: flight,
-      });
+
+
+
+      if (promotion_id) {
+        const promotion = await prisma.promotion.findUnique({ where: { promotion_id } })
+        const flight = await prisma.flights.create({
+          data: {
+            flight_id,
+            price,
+            total_price: (price - (price * (promotion.discount / 100))),
+            date,
+            departure_time,
+            arrival_time,
+            arrival_airport_id,
+            destination_airport_id,
+            airline_id,
+            promotion_id
+          },
+        });
+
+        return res.status(201).json({
+          status: true,
+          message: "Penerbangan berhasil dibuat",
+          data: flight,
+        });
+
+      } else {
+        const flight = await prisma.flights.create({
+          data: {
+            flight_id,
+            price,
+            total_price: price,
+            date,
+            departure_time,
+            arrival_time,
+            arrival_airport_id,
+            destination_airport_id,
+            airline_id
+          },
+        });
+
+        return res.status(201).json({
+          status: true,
+          message: "Penerbangan berhasil dibuat",
+          data: flight,
+        });
+      }
     } catch (error) {
       next(error);
     }

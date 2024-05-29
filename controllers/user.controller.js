@@ -73,10 +73,10 @@ module.exports = {
 
             await sendMail(user.email, subject, emailContent);
 
-            const token = jwt.sign({ 
-                id: user.id, email: user.email 
-            }, JWT_SECRET_KEY, { 
-                expiresIn: '1d' 
+            const token = jwt.sign({
+                user_id: user.user_id, email: user.email
+            }, JWT_SECRET_KEY, {
+                expiresIn: '1d'
             });
 
             return res.status(201).json({
@@ -133,12 +133,11 @@ module.exports = {
 
             // Perbarui OTP dan waktu kedaluwarsa
             await prisma.user.update({
-                where: { id: user.id },
+                where: { user_id: user.user_id },
                 data: {
                     otp: otp,
-                    otpExpiration: new Date(Date.now() + 5 * 60 * 1000), // Sesuaikan dengan kebutuhan Anda
-                    updated_at: formatdate(new Date()),
-                },
+                    otpExpiration: new Date(Date.now() + 5 * 60 * 1000) // Sesuaikan dengan kebutuhan Anda
+                }
             });
 
             const subject = "Verifikasi OTP Baru";
@@ -160,7 +159,7 @@ module.exports = {
 
     verifyOtp: async (req, res, next) => {
         try {
-            const { id } = req.user
+            const { user_id } = req.user
             const { otp } = req.body;
 
 
@@ -173,7 +172,7 @@ module.exports = {
             }
 
             const user = await prisma.user.findUnique({
-                where: { id }
+                where: { user_id }
             });
 
             console.log(user)
@@ -187,7 +186,7 @@ module.exports = {
             }
 
             await prisma.user.update({
-                where: { id: user.id },
+                where: { user_id: user.user_id },
                 data: {
                     isVerified: true,
                     otp: null,
@@ -253,7 +252,7 @@ module.exports = {
                     }
                 })
 
-                const deleteUser = await prisma.user.delete({ where: { id: user.id } })
+                const deleteUser = await prisma.user.delete({ where: { user_id: user.user_id } })
 
                 return res.status(403).json({
                     status: false,
@@ -262,7 +261,7 @@ module.exports = {
                 });
             }
             delete user.password;
-            const token = jwt.sign({ id: user.id, email: user.email }, JWT_SECRET_KEY, { expiresIn: '1d' });
+            const token = jwt.sign({ user_id: user.user_id, email: user.email }, JWT_SECRET_KEY, { expiresIn: '1d' });
 
             return res.status(200).json({
                 status: true,
@@ -357,7 +356,7 @@ module.exports = {
 
     resetPassword: async (req, res, next) => {
         try {
-            let { id } = req.user;
+            let { user_id } = req.user;
             let { password, confirmPassword } = req.body;
 
             if (!password || !confirmPassword) {
@@ -405,7 +404,7 @@ module.exports = {
             const updateUser = await prisma.user.update({
                 where: { email: req.user.email },
                 data: { password: encryptedPassword },
-                select: { id: true, email: true, password: true },
+                select: { user_id: true, email: true, password: true },
             });
 
 
@@ -422,9 +421,9 @@ module.exports = {
 
     getuserbyid: async (req, res, next) => {
         try {
-            let { id } = req.user
-            id = Number(id)
-            const user = await prisma.user.findUnique({ where: { id } });
+            let { user_id } = req.user
+            user_id = Number(user_id)
+            const user = await prisma.user.findUnique({ where: { user_id } });
 
             if (!user) {
                 return res.status(400).json({
@@ -437,7 +436,7 @@ module.exports = {
             return res.status(200).json({
                 status: true,
                 message: "Data pengguna berhasil diambil",
-                data: { id: user.id, name: user.name, no_telp: user.no_telp, avatar_url: user.avatar_url },
+                data: { user_id: user.user_id, name: user.name, email: user.email, no_telp: user.no_telp, avatar_url: user.avatar_url },
             });
 
         } catch (error) {
@@ -447,10 +446,10 @@ module.exports = {
 
     updateuserbyid: async (req, res, next) => {
         try {
-            let { id } = req.user
-            let { name, no_telp, password } = req.body
-            id = Number(id)
-            const user = await prisma.user.findUnique({ where: { id } });
+            let { user_id } = req.user
+            let { name, no_telp } = req.body
+            user_id = Number(user_id)
+            const user = await prisma.user.findUnique({ where: { user_id } });
 
             if (!user) {
                 return res.status(401).json({
@@ -460,10 +459,10 @@ module.exports = {
                 });
             }
 
-            if (!name || !no_telp || !password) {
+            if (!name || !no_telp) {
                 return res.status(422).json({
                     status: false,
-                    message: "field nama, no_telp dan password dibutuhkan!",
+                    message: "field nama dan no_telp dibutuhkan!",
                     data: null,
                 });
             }
@@ -486,14 +485,12 @@ module.exports = {
             //     });
             // }
 
-            let encryptedPassword = await bcrypt.hash(password, 10);
-
-            const updatedUser = await prisma.user.update({ where: { id }, data: { name, no_telp, password: encryptedPassword } })
+            const updatedUser = await prisma.user.update({ where: { user_id }, data: { name, no_telp } })
 
             return res.status(200).json({
                 status: true,
                 message: "User profile berhasil diupdate!",
-                data: { id: updatedUser.id, name: updatedUser.name, no_telp: updatedUser.no_telp, avatar_url: updatedUser.avatar_url },
+                data: { user_id: updatedUser.user_id, name: updatedUser.name, no_telp: updatedUser.no_telp, avatar_url: updatedUser.avatar_url },
             });
 
         } catch (error) {
@@ -502,15 +499,15 @@ module.exports = {
     },
 
     googleOauth2: (req, res) => {
-        const { id, name, email, google_id } = req.user;
+        const { user_id, name, email, google_id } = req.user;
         const user = {
-            id,
+            user_id,
             name,
             email,
             password: null,
             google_id
         };
-        let token = jwt.sign({ id: user.id }, JWT_SECRET_KEY);
+        let token = jwt.sign({ user_id: user.user_id }, JWT_SECRET_KEY);
 
         return res.status(200).json({
             status: true,
