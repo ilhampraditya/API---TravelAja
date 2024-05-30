@@ -4,8 +4,8 @@ Content-Type: application/json
 
 {
   "name": "ilham",
-  "email": "kqdytn@mynanaimohomes.com",
-  "no_telp": "08217216229",
+  "email": "epjdqjqe@maxamba.com",
+  "no_telp": "082172146229",
   "password": "password123"
 }
 
@@ -34,8 +34,8 @@ POST http://localhost:3000/api/v1/login
 Content-Type: application/json
 
 {
-  "emailOrNoTelp": "kqdytn@mynanaimohomes.com",
-  "password": "password123"
+  "emailOrNoTelp": "travelajaaa@gmail.com",
+  "password": "DMmey1kA"
 }
 
 ### auth / login dengan token 
