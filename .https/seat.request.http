@@ -1,0 +1,13 @@
+### GET ALL BY SEAT CLASS ID
+
+GET http://localhost:3000/api/v1/seat/1
+
+### CREATE SEAT
+
+POST http://localhost:3000/api/v1/seat
+Content-Type: application/json
+
+{
+    "seat_number": 1,
+    "seat_class_id": 3
+}

@@ -52,7 +52,7 @@ CREATE TABLE "seatclass" (
     "seat_class_id" SERIAL NOT NULL,
     "seat_class_type" TEXT NOT NULL,
     "seat_amount" INTEGER NOT NULL,
-    "airlines_id" TEXT NOT NULL,
+    "airline_id" TEXT NOT NULL,
 
     CONSTRAINT "seatclass_pkey" PRIMARY KEY ("seat_class_id")
 );
@@ -152,7 +152,7 @@ CREATE UNIQUE INDEX "payments_card_number_key" ON "payments"("card_number");
 ALTER TABLE "seats" ADD CONSTRAINT "seats_seat_class_id_fkey" FOREIGN KEY ("seat_class_id") REFERENCES "seatclass"("seat_class_id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "seatclass" ADD CONSTRAINT "seatclass_airlines_id_fkey" FOREIGN KEY ("airlines_id") REFERENCES "airlines"("airline_id") ON DELETE RESTRICT ON UPDATE CASCADE;
+ALTER TABLE "seatclass" ADD CONSTRAINT "seatclass_airline_id_fkey" FOREIGN KEY ("airline_id") REFERENCES "airlines"("airline_id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "flights" ADD CONSTRAINT "flights_promotion_id_fkey" FOREIGN KEY ("promotion_id") REFERENCES "promotions"("promotion_id") ON DELETE SET NULL ON UPDATE CASCADE;
