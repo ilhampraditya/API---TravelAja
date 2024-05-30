@@ -9,6 +9,7 @@ const { formatdate } = require('../libs/formatdate')
 const nodemailer = require("../libs/nodemailer");
 const { getHTML, sendMail } = require("../libs/nodemailer");
 const { generateOTP } = require("../libs/otpGenerator");
+const { generateRandomString } = require("../libs/passGenerator")
 
 
 module.exports = {
@@ -129,7 +130,6 @@ module.exports = {
 
             // Generate OTP baru
             const otp = generateOTP();
-            const newEmailToken = crypto.randomBytes(16).toString("hex");
 
             // Perbarui OTP dan waktu kedaluwarsa
             await prisma.user.update({
@@ -498,22 +498,37 @@ module.exports = {
         }
     },
 
-    googleOauth2: (req, res) => {
-        const { user_id, name, email, google_id } = req.user;
-        const user = {
-            user_id,
-            name,
-            email,
-            password: null,
-            google_id
-        };
+    googleOauth2: async (req, res) => {
+        const user = req.user;
         let token = jwt.sign({ user_id: user.user_id }, JWT_SECRET_KEY);
+
+
+        const userExist = await prisma.user.findUnique({ where: { user_id: user.user_id } })
+        if (userExist && !userExist.password) {
+            const password = generateRandomString();
+            const encryptedPassword = await bcrypt.hash(password, 10);
+            const updatedUser = await prisma.user.update({ where: { user_id: user.user_id }, data: { password: encryptedPassword } })
+
+            const subject = "Kredensial Akun TravelAja";
+            const emailContent = await getHTML("random-password.ejs", { email: updatedUser.email, password });
+            await sendMail(updatedUser.email, subject, emailContent);
+
+            return res.status(200).json({
+                status: true,
+                message: 'Login berhasil dan periksa email anda untuk kredensial login',
+                err: null,
+                data: { token }
+            });
+
+        }
+
+
 
         return res.status(200).json({
             status: true,
             message: 'Login berhasil',
             err: null,
-            data: { user, token }
+            data: { token }
         });
     }
 

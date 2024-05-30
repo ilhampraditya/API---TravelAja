@@ -6,6 +6,8 @@ const Airlines = require("../v1/airlines.routes");
 const Flight = require("../v1/flights.routes");
 const Promotion = require("../v1/promotion.routes");
 const Seatclass = require("../v1/seatclass.routes");
+const Seat = require("../v1/seat.routes")
+const Payment = require("../v1/payment.routes")
 
 const swaggerUI = require("swagger-ui-express");
 const YAML = require("yaml");
@@ -23,6 +25,6 @@ router.use(
   swaggerUI.setup(swaggerDocument)
 );
 
-router.use("/api/v1", User, Airport, Airlines, Flight, Promotion, Seatclass);
+router.use("/api/v1", User, Airport, Airlines, Flight, Promotion, Seatclass, Seat, Payment);
 
 module.exports = router;
