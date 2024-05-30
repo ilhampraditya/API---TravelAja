@@ -9,10 +9,10 @@ async function main() {
   await prisma.seatClass.createMany({ data: data.seatClasses });
   await prisma.airlines.createMany({ data: data.airlines });
   await prisma.flights.createMany({ data: data.flights });
-  
+
 
   for (const user of data.users) {
-    const hashedPassword = await bcrypt.hash(user.password, 10); 
+    const hashedPassword = await bcrypt.hash(user.password, 10);
     await prisma.user.create({
       data: {
         ...user,

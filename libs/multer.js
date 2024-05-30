@@ -1,5 +1,7 @@
 const multer = require('multer');
+const sharp = require('sharp');
 const path = require('path');
+const fs = require('fs');
 
 const filename = (req, file, callback) => {
     let fileName = Date.now() + path.extname(file.originalname);
@@ -24,7 +26,10 @@ const generateFileFilter = (mimetypes) => {
             callback(err, false);
         }
     };
+
 };
+
+
 
 module.exports = {
     imageStorage: multer({

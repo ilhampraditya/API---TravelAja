@@ -4,8 +4,8 @@ Content-Type: application/json
 
 {
   "name": "ilham",
-  "email": "nvhofancld@miteon.com",
-  "no_telp": "082121629",
+  "email": "kqdytn@mynanaimohomes.com",
+  "no_telp": "08217216229",
   "password": "password123"
 }
 
@@ -14,16 +14,16 @@ POST http://localhost:3000/api/v1/renew-otp
 Content-Type: application/json
 
 {
-  "email": "kevinyohanesteen@gmail.com"
+  "email": "kqdytn@mynanaimohomes.com"
 }
 
 ### Verify OTP
 POST http://localhost:3000/api/v1/verify-otp
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MywiZW1haWwiOiJudmhvZmFuY2xkQG1pdGVvbi5jb20iLCJpYXQiOjE3MTY2NjUzMzgsImV4cCI6MTcxNjc1MTczOH0.ECOlYqAw6rz_m__gWIABXi8XbIOweiw-tcghHHoPZNU
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoyLCJlbWFpbCI6ImtxZHl0bkBteW5hbmFpbW9ob21lcy5jb20iLCJpYXQiOjE3MTcwMTM1OTUsImV4cCI6MTcxNzA5OTk5NX0.fIkM7xAuF86Rvb69xR9adK4rj5ZdeDHf4O2LSK7MPqU
 Content-Type: application/json
 
 {
-  "otp": 927983
+  "otp": 844366
 }
 
 ### get all user
@@ -34,21 +34,21 @@ POST http://localhost:3000/api/v1/login
 Content-Type: application/json
 
 {
-  "emailOrNoTelp": "21082010211@student.upnjatim.ac.id",
+  "emailOrNoTelp": "kqdytn@mynanaimohomes.com",
   "password": "password123"
 }
 
 ### auth / login dengan token 
 GET  http://localhost:3000/api/v1/auth
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6OCwiZW1haWwiOiIyMTA4MjAxMDIxMUBzdHVkZW50LnVwbmphdGltLmFjLmlkIiwiaWF0IjoxNzE2NTY0OTczLCJleHAiOjE3MTY2NTEzNzN9.8qpZPVoo-9UuxXPFpqetyXT3D8QcM24vmU0WoJg9imE
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoyLCJlbWFpbCI6ImtxZHl0bkBteW5hbmFpbW9ob21lcy5jb20iLCJpYXQiOjE3MTcwMTQxMjksImV4cCI6MTcxNzEwMDUyOX0.O9MwGPsiM31UNYTnZeIxp2Y5b4cuqidIzGonlivAUac
 
 ### Login User with No. Telp
 POST http://localhost:3000/api/v1/login
 Content-Type: application/json
 
 {
-  "emailOrNoTelp": "08212162176767",
-  "password": "password123"
+  "emailOrNoTelp": "08217216229",
+  "password": "newPassword1234"
 }
 
 ###
@@ -56,12 +56,12 @@ POST http://localhost:3000/api/v1/forgot-password
 Content-Type: application/json
 
 {
-    "email": "21082010211@student.upnjatim.ac.id"
+    "email": "kqdytn@mynanaimohomes.com"
 }
 
 ###
 POST http://localhost:3000/api/v1/reset-password
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6OCwiZW1haWwiOiIyMTA4MjAxMDIxMUBzdHVkZW50LnVwbmphdGltLmFjLmlkIiwiaWF0IjoxNzE2NTY0OTczLCJleHAiOjE3MTY2NTEzNzN9.8qpZPVoo-9UuxXPFpqetyXT3D8QcM24vmU0WoJg9imE
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImtxZHl0bkBteW5hbmFpbW9ob21lcy5jb20iLCJpYXQiOjE3MTcwMTQxOTd9.v47PUU1iUpDkXhoAykf4isXxxct6KazIAxLvQtf2n-c
 Content-Type: application/json
 
 {
@@ -71,50 +71,15 @@ Content-Type: application/json
 
 ### GET PROFILE
 GET http://localhost:3000/api/v1/profile
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6OCwiZW1haWwiOiIyMTA4MjAxMDIxMUBzdHVkZW50LnVwbmphdGltLmFjLmlkIiwiaWF0IjoxNzE2NTY0OTczLCJleHAiOjE3MTY2NTEzNzN9.8qpZPVoo-9UuxXPFpqetyXT3D8QcM24vmU0WoJg9imE
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoyLCJlbWFpbCI6ImtxZHl0bkBteW5hbmFpbW9ob21lcy5jb20iLCJpYXQiOjE3MTcwMTQyODksImV4cCI6MTcxNzEwMDY4OX0.oT_JteCY2CrLpPShEPxndJoEEatGAa4T0Cg5Dg5jxiU
 
 
 ### UPDATE USER BY ID
 POST http://localhost:3000/api/v1/updateprofile
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6OCwiZW1haWwiOiIyMTA4MjAxMDIxMUBzdHVkZW50LnVwbmphdGltLmFjLmlkIiwiaWF0IjoxNzE2NTY0OTczLCJleHAiOjE3MTY2NTEzNzN9.8qpZPVoo-9UuxXPFpqetyXT3D8QcM24vmU0WoJg9imE
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoyLCJlbWFpbCI6ImtxZHl0bkBteW5hbmFpbW9ob21lcy5jb20iLCJpYXQiOjE3MTcwMTQyODksImV4cCI6MTcxNzEwMDY4OX0.oT_JteCY2CrLpPShEPxndJoEEatGAa4T0Cg5Dg5jxiU
 Content-Type: application/json
 
 {
   "name": "ilham praditya",
-  "no_telp": "097627345670",
-  "password": "password12345"
+  "no_telp": "0976273456700"
 }
-
-##### airport #######
-
-### create airport
-POST http://localhost:3000/api/v1/airport
-Content-Type: application/json
-
-{
-    "airportId": "CGK",
-    "airport_name": "Soekarno Hatta International Airport",
-    "continent": "Asia",
-    "country": "Indonesia",
-    "city": "Jakarta"
-}
-
-### get all airport
-GET  http://localhost:3000/api/v1/airport
-
-### search air port berdasarkan nama airport dan juga kota 
-GET  http://localhost:3000/api/v1/airport?search=jakarta
-
-### edit airport berdasarkan airport id
-PUT http://localhost:3000/api/v1/airport/YIA
-Content-Type: application/json
-
-{
-    "airport_name": "Yogyakarta International Airport",
-    "continent": "Asia",
-    "country": "Indonesia",
-    "city": "Yogyakarta"
-}
-
-### delete airport berdasarkan airportId
-DELETE http://localhost:3000/api/v1/airport/YIA

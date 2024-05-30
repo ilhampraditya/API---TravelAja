@@ -1,13 +1,14 @@
 // airlines.controller.js
+const sharp = require('sharp');
+const path = require('path')
+const imagekit = require('../libs/imagekit')
 const { PrismaClient } = require("@prisma/client");
 const prisma = new PrismaClient();
 
 module.exports = {
   getAllAirlines: async (req, res, next) => {
     try {
-      const airlines = await prisma.airlines.findMany({
-        include: { SeatClass: true },
-      });
+      const airlines = await prisma.airlines.findMany();
       return res.status(200).json({
         status: true,
         message: "Data maskapai penerbangan berhasil diambil",
@@ -20,25 +21,34 @@ module.exports = {
 
 
   createAirline: async (req, res, next) => {
-    const { airline_id,
+    let { airline_id,
       airline_name,
       baggage,
-      cabin_baggage,
-      seat_class_id
+      cabin_baggage
     } = req.body;
 
     try {
-      const existingSeatClass = await prisma.seatClass.findUnique({
-        where: { seat_class_id: seat_class_id },
-      });
 
-      if (!existingSeatClass) {
-        return res.status(400).send({
+      if (!req.file) {
+        return res.status(400).json({
           status: false,
-          message: "Seat class with the provided ID does not exist",
+          message: "file tidak ada!",
           data: null,
         });
       }
+
+      const resizedBuffer = await sharp(req.file.buffer)
+        .resize(300, 300)
+        .toFormat('jpeg')
+        .jpeg({ quality: 90 })
+        .toBuffer();
+
+      let strFile = resizedBuffer.toString('base64')
+
+      let { url } = await imagekit.upload({
+        fileName: Date.now() + path.extname(req.file.originalname),
+        file: strFile
+      })
 
       const airline = await prisma.airlines.create({
         data: {
@@ -46,10 +56,8 @@ module.exports = {
           airline_name,
           baggage,
           cabin_baggage,
-          SeatClass: {
-            connect: { seat_class_id: seat_class_id },
-          },
-        },
+          url_logo: url
+        }
       });
 
       return res.status(201).json({

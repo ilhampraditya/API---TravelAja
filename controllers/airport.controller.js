@@ -5,23 +5,23 @@ const prisma = new PrismaClient();
 module.exports = {
     createAirport: async (req, res, next) => {
         try {
-            const { airportId, airport_name, continent, country, city } = req.body;
-    
-            if (!airportId || !airport_name || !continent || !country || !city) {
+            const { airport_id, airport_name, continent, country, city } = req.body;
+
+            if (!airport_id || !airport_name || !continent || !country || !city) {
                 return res.status(400).json({
                     status: false,
-                    message: "Harap menyediakan airportId, nama bandara, benua, negara, dan kota",
+                    message: "Harap menyediakan airport_id, nama bandara, benua, negara, dan kota",
                     data: null,
                 });
             }
-    
+
             // Periksa apakah airportId sudah ada
             const existingAirport = await prisma.airport.findUnique({
                 where: {
-                    id: airportId,
+                    id: airport_id,
                 },
             });
-    
+
             if (existingAirport) {
                 return res.status(409).json({
                     status: false,
@@ -29,23 +29,23 @@ module.exports = {
                     data: null,
                 });
             }
-    
+
             let newAirport = await prisma.airport.create({
                 data: {
-                    id: airportId,
+                    id: airport_id,
                     airport_name,
                     continent,
                     country,
                     city,
                 },
             });
-    
+
             res.status(201).json({
                 status: true,
                 message: "Pembuatan bandara berhasil",
                 data: {
                     [newAirport.id]: {
-                        airportId: newAirport.id,
+                        airport_id: newAirport.id,
                         airport_name: newAirport.airport_name,
                         continent: newAirport.continent,
                         city: newAirport.city,
@@ -57,7 +57,7 @@ module.exports = {
             next(err);
         }
     },
-    
+
 
     getAllAirports: async (req, res, next) => {
         try {
@@ -88,10 +88,10 @@ module.exports = {
 
     getAirportById: async (req, res, next) => {
         try {
-            const { airportId } = req.params;
+            const { airport_id } = req.params;
 
             const airport = await prisma.airport.findUnique({
-                where: { id: airportId },
+                where: { id: airport_id },
             });
 
             if (!airport) {
@@ -152,7 +152,7 @@ module.exports = {
             res.status(200).json({
                 status: true,
                 message: "Pembaharuan bandara berhasil",
-               data: {
+                data: {
                     airportId: editedAirport.id,
                     airport_name: editedAirport.airport_name,
                     continent: editedAirport.continent,
@@ -167,11 +167,11 @@ module.exports = {
         }
     },
 
-    deleteAirport: async(req, res , next)=>{
+    deleteAirport: async (req, res, next) => {
         try {
-         const { airportId } = req.params;
+            const { airportId } = req.params;
             const airport = await prisma.airport.findUnique({
-                where: { id:(airportId) },
+                where: { id: (airportId) },
             });
             if (!airport) {
                 res.status(404).json({
