@@ -83,3 +83,6 @@ Content-Type: application/json
   "name": "ilham praditya",
   "no_telp": "0976273456700"
 }
+
+###
+GET http://localhost:3000/api/v1/google

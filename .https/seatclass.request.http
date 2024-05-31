@@ -10,7 +10,7 @@ Content-Type: application/json
 
 {
   "seat_class_type": "Economy",
-  "seat_number": 1
+  "seat_amount": 60
 }
 
 

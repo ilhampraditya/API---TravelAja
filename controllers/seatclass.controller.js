@@ -28,15 +28,28 @@ module.exports = {
   },
 
   createSeatClass: async (req, res, next) => {
-    const { seat_class_type, seat_number } = req.body;
+    const { seat_class_type, seat_amount, airlines_id } = req.body;
     try {
       const seatClass = await prisma.seatClass.create({
         data: {
           seat_class_type,
-          seat_number,
+          seat_amount,
+          airlines: { connect: { airline_id: airlines_id } },
         },
       });
-      return res.status(201).send({
+
+      const airlineExists = await prisma.airlines.findUnique({
+        where: { airline_id: airlines_id },
+      });
+      
+      if (!airlineExists) {
+        return res.status(404).send({
+          status: false,
+          message: "airlines_id tidak ditemukan",
+        });
+      }
+
+      return res.status(201).json({
         status: true,
         message: "Kelas kursi berhasil dibuat",
         data: seatClass,
