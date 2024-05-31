@@ -8,146 +8,146 @@ datasource db {
 }
 
 model User {
-  user_id       Int       @id @default(autoincrement())
-  name          String?
-  email         String    @unique
-  no_telp       String?   @unique
-  password      String
-  otp           Int?
-  otpExpiration DateTime?
-  isVerified    Boolean   @default(false)
-  role          String    @default("user")
-  google_id     String?
-  avatar_url    String?
-  booking       Booking[]
+    user_id       Int       @id @default(autoincrement())
+    name          String?
+    email         String    @unique
+    no_telp       String?   @unique
+    password      String?
+    otp           Int?
+    otpExpiration DateTime?
+    isVerified    Boolean   @default(false)
+    role          String    @default("user")
+    google_id     String?
+    avatar_url    String?
+    booking       Booking[]
 
     @@map("users")
 }
 
 model Airlines {
-  airline_id    String      @id
-  airline_name  String
-  baggage       String
-  cabin_baggage String
-  url_logo      String?
-  flights       Flights[]
-  seatclass     SeatClass[]
+    airline_id    String      @id
+    airline_name  String
+    baggage       String
+    cabin_baggage String
+    url_logo      String?
+    flights       Flights[]
+    seatclass     SeatClass[]
 
-  @@map("airlines")
+    @@map("airlines")
 }
 
 model Airport {
-  id                  String    @id
-  airport_name        String
-  continent           String
-  country             String
-  city                String
-  arrival_flights     Flights[] @relation("arrival_airport")
-  destination_flights Flights[] @relation("destination_airport")
+    id                  String    @id
+    airport_name        String
+    continent           String
+    country             String
+    city                String
+    arrival_flights     Flights[] @relation("arrival_airport")
+    destination_flights Flights[] @relation("destination_airport")
 
     @@map("airports")
 }
 
 model Seat {
-  seat_id       Int       @id @default(autoincrement())
-  seat_number   Int
-  isBooked      Boolean
-  seatClass     SeatClass @relation(fields: [seat_class_id], references: [seat_class_id])
-  seat_class_id Int
-  ticket        Ticket?
+    seat_id       Int       @id @default(autoincrement())
+    seat_number   Int
+    isBooked      Boolean   @default(false)
+    seatClass     SeatClass @relation(fields: [seat_class_id], references: [seat_class_id])
+    seat_class_id Int
+    ticket        Ticket?
 
-  @@map("seats")
+    @@map("seats")
 }
 
 model SeatClass {
-  seat_class_id   Int      @id @default(autoincrement())
-  seat_class_type String
-  seat_amount     Int
-  airlines        Airlines @relation(fields: [airlines_id], references: [airline_id])
-  airlines_id     String
-  seat            Seat[]
+    seat_class_id   Int      @id @default(autoincrement())
+    seat_class_type String
+    seat_amount     Int
+    airlines        Airlines @relation(fields: [airlines_id], references: [airline_id])
+    airlines_id     String
+    seat            Seat[]
 
     @@map("seatclass")
 }
 
 model Flights {
-  flight_id              String     @id
-  price                  Float
-  total_price            Float
-  date                   DateTime
-  departure_time         DateTime
-  arrival_time           DateTime
-  airline_id             String
-  arrival_airport_id     String
-  destination_airport_id String
-  promotion_id           Int?
-  promotion              Promotion? @relation(fields: [promotion_id], references: [promotion_id])
-  airlines               Airlines   @relation(fields: [airline_id], references: [airline_id])
-  arrival_airport        Airport    @relation("arrival_airport", fields: [arrival_airport_id], references: [id])
-  destination_airport    Airport    @relation("destination_airport", fields: [destination_airport_id], references: [id])
-  booking                Booking[]
+    flight_id              String     @id
+    price                  Float
+    total_price            Float
+    date                   DateTime
+    departure_time         DateTime
+    arrival_time           DateTime
+    airline_id             String
+    arrival_airport_id     String
+    destination_airport_id String
+    promotion_id           Int?
+    promotion              Promotion? @relation(fields: [promotion_id], references: [promotion_id])
+    airlines               Airlines   @relation(fields: [airline_id], references: [airline_id])
+    arrival_airport        Airport    @relation("arrival_airport", fields: [arrival_airport_id], references: [id])
+    destination_airport    Airport    @relation("destination_airport", fields: [destination_airport_id], references: [id])
+    booking                Booking[]
 
     @@map("flights")
 }
 
 model Promotion {
-  promotion_id Int       @id @default(autoincrement())
-  discount     Int
-  startDate    DateTime
-  endDate      DateTime
-  flights      Flights[]
+    promotion_id Int       @id @default(autoincrement())
+    discount     Int
+    startDate    DateTime
+    endDate      DateTime
+    flights      Flights[]
 
-  @@map("promotions")
+    @@map("promotions")
 }
 
 model Ticket {
-  ticket_id    String    @id
-  seat         Seat      @relation(fields: [seat_id], references: [seat_id])
-  seat_id      Int       @unique
-  passenger    Passenger @relation(fields: [passenger_id], references: [passenger_id])
-  passenger_id Int       @unique
+    ticket_id    String    @id
+    seat         Seat      @relation(fields: [seat_id], references: [seat_id])
+    seat_id      Int       @unique
+    passenger    Passenger @relation(fields: [passenger_id], references: [passenger_id])
+    passenger_id Int       @unique
 
-  @@map("tickets")
+    @@map("tickets")
 }
 
 model Passenger {
-  passenger_id    Int      @id @default(autoincrement())
-  fullname        String
-  passenger_type  String
-  born_date       DateTime
-  citizen         String
-  identity_number String
-  ticket          Ticket?
-  booking         Booking  @relation(fields: [booking_id], references: [booking_id])
-  booking_id      String
+    passenger_id    Int     @id @default(autoincrement())
+    fullname        String
+    passenger_type  String
+    born_date       String
+    citizen         String
+    identity_number String
+    ticket          Ticket?
+    booking         Booking @relation(fields: [booking_id], references: [booking_id])
+    booking_id      Int
 
-  @@map("passengers")
+    @@map("passengers")
 }
 
 model Booking {
-  booking_id   String      @id
-  booking_date DateTime
-  isPaid       Boolean
-  total_price  Float
-  passenger    Passenger[]
-  user         User        @relation(fields: [user_id], references: [user_id])
-  user_id      Int
-  payment      Payment     @relation(fields: [payment_id], references: [payment_id])
-  payment_id   Int
-  flight       Flights     @relation(fields: [flight_id], references: [flight_id])
-  flight_id    String
+    booking_id   Int         @id @default(autoincrement())
+    booking_code String      @unique
+    booking_date DateTime    @default(now())
+    isPaid       Boolean     @default(false)
+    passenger    Passenger[]
+    user         User        @relation(fields: [user_id], references: [user_id])
+    user_id      Int
+    payment      Payment?
+    flight       Flights     @relation(fields: [flight_id], references: [flight_id])
+    flight_id    String
 
-  @@map("bookings")
+    @@map("bookings")
 }
 
 model Payment {
-  payment_id     Int       @id @default(autoincrement())
-  payment_method String
-  no_telp        String?   @unique
-  card_number    String?   @unique
-  payment_date   DateTime
-  valid_until    DateTime
-  booking        Booking[]
+    payment_id     Int     @id @default(autoincrement())
+    payment_method String
+    no_telp        String? @unique
+    card_number    String? @unique
+    valid_until    String?
+    total_price    Float
+    booking        Booking @relation(fields: [booking_id], references: [booking_id])
+    booking_id     Int     @unique
 
-  @@map("payments")
+    @@map("payments")
 }

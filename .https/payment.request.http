@@ -1,0 +1,20 @@
+### CREATE PAYMENT EWALLET
+
+POST http://localhost:3000/api/v1/payment_wallet
+Content-Type: application/json
+
+{
+    "payment_method": "Dana",
+    "no_telp": "089090909090"
+}
+
+### CREATE PAYMENT BANK
+
+POST http://localhost:3000/api/v1/payment_bank
+Content-Type: application/json
+
+{
+    "payment_method": "BRI",
+    "card_number": "8274827428428742",
+    "valid_until": "12/25"
+}

@@ -3,9 +3,9 @@ POST http://localhost:3000/api/v1/register
 Content-Type: application/json
 
 {
-  "name": "ilham",
-  "email": "kqdytn@mynanaimohomes.com",
-  "no_telp": "08217216229",
+  "name": "akun2",
+  "email": "ggptruu@mynanaimohomes.com",
+  "no_telp": "082746700d8229",
   "password": "password123"
 }
 
@@ -19,11 +19,11 @@ Content-Type: application/json
 
 ### Verify OTP
 POST http://localhost:3000/api/v1/verify-otp
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoyLCJlbWFpbCI6ImtxZHl0bkBteW5hbmFpbW9ob21lcy5jb20iLCJpYXQiOjE3MTcwMTM1OTUsImV4cCI6MTcxNzA5OTk5NX0.fIkM7xAuF86Rvb69xR9adK4rj5ZdeDHf4O2LSK7MPqU
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjo3LCJlbWFpbCI6ImdncHRydXVAbXluYW5haW1vaG9tZXMuY29tIiwiaWF0IjoxNzE3MTc0NDE2LCJleHAiOjE3MTcyNjA4MTZ9.e348NDhzdhjYGyIXvfEhyp4-PyZHMMCMx8Pix1qLDfs
 Content-Type: application/json
 
 {
-  "otp": 844366
+  "otp": 755759
 }
 
 ### get all user
@@ -34,7 +34,7 @@ POST http://localhost:3000/api/v1/login
 Content-Type: application/json
 
 {
-  "emailOrNoTelp": "kqdytn@mynanaimohomes.com",
+  "emailOrNoTelp": "qhfuvidis@maxamba.com",
   "password": "password123"
 }
 
