@@ -36,10 +36,6 @@ module.exports = {
                 const newNumberPart = (numberPart + 1).toString().padStart(6, '0');
                 booking_code = `TVLAJA-${newNumberPart}`;
             }
-
-
-
-
             if (!flight_id) {
                 return res.status(400).json({
                     status: false,
@@ -56,7 +52,7 @@ module.exports = {
                     flight_id
                 },
             });
-            return res.status(201).send({
+            return res.status(201).json({
                 status: true,
                 message: "Pemesanan dibuat",
                 data: booking,

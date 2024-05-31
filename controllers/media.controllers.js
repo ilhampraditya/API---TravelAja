@@ -35,6 +35,37 @@ module.exports = {
             next(err)
         }
     },
+    uploadLogo: async (req, res, next) => {
+        try {
+            let { id } = req.user
+            if (!req.file) {
+                return res.status(400).json({
+                    status: false,
+                    message: "file tidak ada!",
+                    data: null,
+                });
+            }
+
+
+            let strFile = req.file.buffer.toString('base64')
+
+            let { url } = await imagekit.upload({
+                fileName: Date.now() + path.extname(req.file.originalname),
+                file: strFile
+            })
+
+            const user = await prisma.user.update({ where: { id }, data: { avatar_url: url } })
+
+            res.status(200).json({
+                status: true,
+                message: "file berhasil diunggah!",
+                data: user.avatar_url,
+            });
+        }
+        catch (err) {
+            next(err)
+        }
+    },
     generateQR: async (req, res, next) => {
         try {
             let { qr_data } = req.body
