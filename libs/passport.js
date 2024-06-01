@@ -15,25 +15,22 @@ pasport.use(
       callbackURL: GOOGLE_CALLBACK_URL,
     },
     async function (accessToken, refreshToken, profile, done) {
-        try {
-            let user = await prisma.user.upsert({
-                where: { email: profile.emails[0].value },
-                update: { google_id: profile.id },
-                create: {
-                    name: profile.displayName,
-                    email: profile.emails[0].value,
-                    google_id: profile.id,
-                    no_telp: null, 
-                    password: '', 
-                    created_at: new Date().toISOString(),
-                    updated_at: new Date().toISOString() 
-                }
-            });
+      try {
+        let user = await prisma.user.upsert({
+          where: { email: profile.emails[0].value },
+          update: { google_id: profile.id, isVerified: true },
+          create: {
+            name: profile.displayName,
+            email: profile.emails[0].value,
+            google_id: profile.id,
+            isVerified: true
+          }
+        });
 
-            done(null, user);
-        } catch (err) {
-            done(err, null);
-        }
+        done(null, user);
+      } catch (err) {
+        done(err, null);
+      }
     }
   )
 );

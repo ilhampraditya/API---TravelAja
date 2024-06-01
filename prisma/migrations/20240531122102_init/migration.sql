@@ -4,7 +4,7 @@ CREATE TABLE "users" (
     "name" TEXT,
     "email" TEXT NOT NULL,
     "no_telp" TEXT,
-    "password" TEXT NOT NULL,
+    "password" TEXT,
     "otp" INTEGER,
     "otpExpiration" TIMESTAMP(3),
     "isVerified" BOOLEAN NOT NULL DEFAULT false,
@@ -41,7 +41,7 @@ CREATE TABLE "airports" (
 CREATE TABLE "seats" (
     "seat_id" SERIAL NOT NULL,
     "seat_number" INTEGER NOT NULL,
-    "isBooked" BOOLEAN NOT NULL,
+    "isBooked" BOOLEAN NOT NULL DEFAULT false,
     "seat_class_id" INTEGER NOT NULL,
 
     CONSTRAINT "seats_pkey" PRIMARY KEY ("seat_id")
@@ -100,19 +100,18 @@ CREATE TABLE "passengers" (
     "born_date" TIMESTAMP(3) NOT NULL,
     "citizen" TEXT NOT NULL,
     "identity_number" TEXT NOT NULL,
-    "booking_id" TEXT NOT NULL,
+    "booking_id" INTEGER NOT NULL,
 
     CONSTRAINT "passengers_pkey" PRIMARY KEY ("passenger_id")
 );
 
 -- CreateTable
 CREATE TABLE "bookings" (
-    "booking_id" TEXT NOT NULL,
-    "booking_date" TIMESTAMP(3) NOT NULL,
-    "isPaid" BOOLEAN NOT NULL,
-    "total_price" DOUBLE PRECISION NOT NULL,
+    "booking_id" SERIAL NOT NULL,
+    "booking_code" TEXT NOT NULL,
+    "booking_date" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "isPaid" BOOLEAN NOT NULL DEFAULT false,
     "user_id" INTEGER NOT NULL,
-    "payment_id" INTEGER NOT NULL,
     "flight_id" TEXT NOT NULL,
 
     CONSTRAINT "bookings_pkey" PRIMARY KEY ("booking_id")
@@ -124,8 +123,9 @@ CREATE TABLE "payments" (
     "payment_method" TEXT NOT NULL,
     "no_telp" TEXT,
     "card_number" TEXT,
-    "payment_date" TIMESTAMP(3) NOT NULL,
-    "valid_until" TIMESTAMP(3) NOT NULL,
+    "valid_until" TEXT,
+    "total_price" DOUBLE PRECISION NOT NULL,
+    "booking_id" INTEGER NOT NULL,
 
     CONSTRAINT "payments_pkey" PRIMARY KEY ("payment_id")
 );
@@ -143,10 +143,16 @@ CREATE UNIQUE INDEX "tickets_seat_id_key" ON "tickets"("seat_id");
 CREATE UNIQUE INDEX "tickets_passenger_id_key" ON "tickets"("passenger_id");
 
 -- CreateIndex
+CREATE UNIQUE INDEX "bookings_booking_code_key" ON "bookings"("booking_code");
+
+-- CreateIndex
 CREATE UNIQUE INDEX "payments_no_telp_key" ON "payments"("no_telp");
 
 -- CreateIndex
 CREATE UNIQUE INDEX "payments_card_number_key" ON "payments"("card_number");
+
+-- CreateIndex
+CREATE UNIQUE INDEX "payments_booking_id_key" ON "payments"("booking_id");
 
 -- AddForeignKey
 ALTER TABLE "seats" ADD CONSTRAINT "seats_seat_class_id_fkey" FOREIGN KEY ("seat_class_id") REFERENCES "seatclass"("seat_class_id") ON DELETE RESTRICT ON UPDATE CASCADE;
@@ -179,7 +185,7 @@ ALTER TABLE "passengers" ADD CONSTRAINT "passengers_booking_id_fkey" FOREIGN KEY
 ALTER TABLE "bookings" ADD CONSTRAINT "bookings_user_id_fkey" FOREIGN KEY ("user_id") REFERENCES "users"("user_id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "bookings" ADD CONSTRAINT "bookings_payment_id_fkey" FOREIGN KEY ("payment_id") REFERENCES "payments"("payment_id") ON DELETE RESTRICT ON UPDATE CASCADE;
+ALTER TABLE "bookings" ADD CONSTRAINT "bookings_flight_id_fkey" FOREIGN KEY ("flight_id") REFERENCES "flights"("flight_id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "bookings" ADD CONSTRAINT "bookings_flight_id_fkey" FOREIGN KEY ("flight_id") REFERENCES "flights"("flight_id") ON DELETE RESTRICT ON UPDATE CASCADE;
+ALTER TABLE "payments" ADD CONSTRAINT "payments_booking_id_fkey" FOREIGN KEY ("booking_id") REFERENCES "bookings"("booking_id") ON DELETE RESTRICT ON UPDATE CASCADE;

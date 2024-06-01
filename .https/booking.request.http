@@ -1,0 +1,11 @@
+POST http://localhost:3000/api/v1/booking
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjo0LCJlbWFpbCI6InlmZnh6Z3h4QG11YXRvYy5jb20iLCJpYXQiOjE3MTcxNzI4MTcsImV4cCI6MTcxNzI1OTIxN30.M0MjvOMsghAo6hlpXIEPtgCiGV2U7uabeCcUOJc4j88 
+Content-Type: application/json
+
+{
+    "flight_id": "GA1437093"
+}
+
+###
+GET http://localhost:3000/api/v1/booking
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjo0LCJlbWFpbCI6InlmZnh6Z3h4QG11YXRvYy5jb20iLCJpYXQiOjE3MTcxNzIyOTQsImV4cCI6MTcxNzI1ODY5NH0.wRK7AzjDy1O_v08M_em8G3uJs1BE1I_vlkEvdDg6Q7w

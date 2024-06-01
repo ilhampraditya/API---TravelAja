@@ -12,7 +12,7 @@ model User {
   name          String?
   email         String    @unique
   no_telp       String?   @unique
-  password      String
+  password      String?
   otp           Int?
   otpExpiration DateTime?
   isVerified    Boolean   @default(false)
@@ -51,7 +51,7 @@ model Airport {
 model Seat {
   seat_id       Int       @id @default(autoincrement())
   seat_number   Int
-  isBooked      Boolean
+  isBooked      Boolean   @default(false)
   seatClass     SeatClass @relation(fields: [seat_class_id], references: [seat_class_id])
   seat_class_id Int
   ticket        Ticket?
@@ -119,21 +119,20 @@ model Passenger {
   identity_number String
   ticket          Ticket?
   booking         Booking  @relation(fields: [booking_id], references: [booking_id])
-  booking_id      String
+  booking_id      Int
 
   @@map("passengers")
 }
 
 model Booking {
-  booking_id   String      @id
-  booking_date DateTime
-  isPaid       Boolean
-  total_price  Float
+  booking_id   Int         @id @default(autoincrement())
+  booking_code String      @unique
+  booking_date DateTime    @default(now())
+  isPaid       Boolean     @default(false)
   passenger    Passenger[]
   user         User        @relation(fields: [user_id], references: [user_id])
   user_id      Int
-  payment      Payment     @relation(fields: [payment_id], references: [payment_id])
-  payment_id   Int
+  payment      Payment?
   flight       Flights     @relation(fields: [flight_id], references: [flight_id])
   flight_id    String
 
@@ -141,13 +140,14 @@ model Booking {
 }
 
 model Payment {
-  payment_id     Int       @id @default(autoincrement())
+  payment_id     Int     @id @default(autoincrement())
   payment_method String
-  no_telp        String?   @unique
-  card_number    String?   @unique
-  payment_date   DateTime
-  valid_until    DateTime
-  booking        Booking[]
+  no_telp        String? @unique
+  card_number    String? @unique
+  valid_until    String?
+  total_price    Float
+  booking        Booking @relation(fields: [booking_id], references: [booking_id])
+  booking_id     Int     @unique
 
   @@map("payments")
 }
