@@ -9,7 +9,7 @@ module.exports = {
         ? {
           OR: [
             { seat_class_type: { contains: search, mode: "insensitive" } },
-            { seat_number: { contains: search, mode: "insensitive" } }
+            // { seat_number: { contains: search, mode: "insensitive" } }
           ]
         }
         : {};
@@ -57,7 +57,19 @@ module.exports = {
           airlines_id
         },
       });
-      return res.status(201).send({
+
+      const airlineExists = await prisma.airlines.findUnique({
+        where: { airline_id: airlines_id },
+      });
+      
+      if (!airlineExists) {
+        return res.status(404).send({
+          status: false,
+          message: "airlines_id tidak ditemukan",
+        });
+      }
+
+      return res.status(201).json({
         status: true,
         message: "Kelas kursi berhasil dibuat",
         data: seatClass,

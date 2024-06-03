@@ -245,23 +245,23 @@
   "seatClasses": [
     {
       "seat_class_type": "Economy",
-      "seat_number": 200
+      "seat_amount": 60
     },
     {
       "seat_class_type": "Business",
-      "seat_number": 50
+      "seat_amount": 60
     },
     {
       "seat_class_type": "First Class",
-      "seat_number": 20
+      "seat_amount": 60
     },
     {
       "seat_class_type": "Premium Economy",
-      "seat_number": 30
+      "seat_amount": 60
     },
     {
       "seat_class_type": "Economy",
-      "seat_number": 150
+      "seat_amount": 60
     }
   ],
   "flights": [

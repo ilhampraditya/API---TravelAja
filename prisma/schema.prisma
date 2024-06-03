@@ -120,6 +120,7 @@ model Passenger {
     ticket          Ticket?
     booking         Booking @relation(fields: [booking_id], references: [booking_id])
     booking_id      Int
+    user_id         Int
 
     @@map("passengers")
 }
@@ -142,8 +143,8 @@ model Booking {
 model Payment {
     payment_id     Int     @id @default(autoincrement())
     payment_method String
-    no_telp        String? @unique
-    card_number    String? @unique
+    no_telp        String?
+    card_number    String? 
     valid_until    String?
     total_price    Float
     booking        Booking @relation(fields: [booking_id], references: [booking_id])

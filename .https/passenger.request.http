@@ -1,21 +1,21 @@
-### Create a new passenger
-POST http://localhost:3000/api/v1/passenger
-Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjo2LCJlbWFpbCI6Im9yd29hbXJAbWl0ZW9uLmNvbSIsImlhdCI6MTcxNzE3NDM1NCwiZXhwIjoxNzE3MjYwNzU0fQ.yAMKx-0DfffkPfyA0t2wrmq8l02Lx-QpK5eHsiF5qLA
-
-{
-    "fullname": "Mullet kerenn",
-    "passenger_type": "Dewasa",
-    "born_date": "31/12/1990",
-    "citizen": "USA",
-    "identity_number": "A12344dh65789",
-    "booking_id": 11
-}
-
-### Get all passengers
+### Get
 GET http://localhost:3000/api/v1/passenger
 
+### Create passenger
+POST http://localhost:3000/api/v1/passenger
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjo1LCJlbWFpbCI6IndleXdzdGxtaWFAbmVzcHJlc3NvcGl4aWUuY29tIiwiaWF0IjoxNzE3NDE1NjM1LCJleHAiOjE3MTc1MDIwMzV9.6-dyTsCUB7DFkQ0BOAgiiuh9dms9BYfpEoWTCLZvxCw
+Content-Type: application/json
 
-### Get all passenger by token
-GET http://localhost:3000/api/v1/passenger/token
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjo2LCJlbWFpbCI6Im9yd29hbXJAbWl0ZW9uLmNvbSIsImlhdCI6MTcxNzE3NDM1NCwiZXhwIjoxNzE3MjYwNzU0fQ.yAMKx-0DfffkPfyA0t2wrmq8l02Lx-QpK5eHsiF5qLA
+{
+  "fullname": "Rayeang 2",
+  "passenger_type": "adult",
+  "born_date": "1985-05-15",
+  "citizen": "USA",
+  "identity_number": "A123456789",
+  "booking_id": 23
+}
+
+### GETBYTOKEN
+GET http://localhost:3000/api/v1/passenger-token
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjo1LCJlbWFpbCI6IndleXdzdGxtaWFAbmVzcHJlc3NvcGl4aWUuY29tIiwiaWF0IjoxNzE3NDE1NjM1LCJleHAiOjE3MTc1MDIwMzV9.6-dyTsCUB7DFkQ0BOAgiiuh9dms9BYfpEoWTCLZvxCw
+
