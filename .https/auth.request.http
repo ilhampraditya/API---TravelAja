@@ -3,9 +3,9 @@ POST http://localhost:3000/api/v1/register
 Content-Type: application/json
 
 {
-  "name": "ilham",
-  "email": "epjdqjqe@maxamba.com",
-  "no_telp": "082172146229",
+  "name": "Raya",
+  "email": "weywstlmia@nespressopixie.com",
+  "no_telp": "08111111111",
   "password": "password123"
 }
 
@@ -19,11 +19,11 @@ Content-Type: application/json
 
 ### Verify OTP
 POST http://localhost:3000/api/v1/verify-otp
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoyLCJlbWFpbCI6ImtxZHl0bkBteW5hbmFpbW9ob21lcy5jb20iLCJpYXQiOjE3MTcwMTM1OTUsImV4cCI6MTcxNzA5OTk5NX0.fIkM7xAuF86Rvb69xR9adK4rj5ZdeDHf4O2LSK7MPqU
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjo1LCJlbWFpbCI6IndleXdzdGxtaWFAbmVzcHJlc3NvcGl4aWUuY29tIiwiaWF0IjoxNzE3NDE1NjM1LCJleHAiOjE3MTc1MDIwMzV9.6-dyTsCUB7DFkQ0BOAgiiuh9dms9BYfpEoWTCLZvxCw
 Content-Type: application/json
 
 {
-  "otp": 844366
+  "otp": 421332
 }
 
 ### get all user
@@ -34,8 +34,8 @@ POST http://localhost:3000/api/v1/login
 Content-Type: application/json
 
 {
-  "emailOrNoTelp": "travelajaaa@gmail.com",
-  "password": "DMmey1kA"
+  "emailOrNoTelp": "ihjltb@maxamba.com",
+  "password": "password123"
 }
 
 ### auth / login dengan token 

@@ -8,8 +8,8 @@ const Promotion = require("../v1/promotion.routes");
 const Seatclass = require("../v1/seatclass.routes");
 const Seat = require("../v1/seat.routes");
 const Payment = require("../v1/payment.routes");
-const passenger = require("../v1/passenger.routes");
-
+const Passenger = require("../v1/passenger.routes");
+const Booking = require("../v1/booking.routes");
 
 const swaggerUI = require("swagger-ui-express");
 const YAML = require("yaml");
@@ -37,7 +37,8 @@ router.use(
   Seatclass,
   Seat,
   Payment,
-  passenger,
+  Passenger,
+  Booking
 );
 
 module.exports = router;

@@ -9,7 +9,7 @@ module.exports = {
         ? {
           OR: [
             { seat_class_type: { contains: search, mode: "insensitive" } },
-            { seat_number: { contains: search, mode: "insensitive" } }
+            // { seat_number: { contains: search, mode: "insensitive" } }
           ]
         }
         : {};

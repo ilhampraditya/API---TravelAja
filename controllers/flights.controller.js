@@ -115,9 +115,6 @@ module.exports = {
         });
       }
 
-
-
-
       if (promotion_id) {
         const promotion = await prisma.promotion.findUnique({ where: { promotion_id } })
         const flight = await prisma.flights.create({

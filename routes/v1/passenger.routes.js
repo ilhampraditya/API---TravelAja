@@ -1,9 +1,14 @@
 const express = require("express");
-const { getAllPassenger, createPassenger } = require("../../controllers/passenger.controller");
+const {
+  createPassenger,
+  getAllPassenger,
+  getByToken,
+} = require("../../controllers/passenger.controllers");
 const { restrict } = require("../../middlewares/auth.middleware");
 const router = express.Router();
 
-router.get("/passenger", getAllPassenger);
 router.post("/passenger", restrict, createPassenger);
+router.get("/passenger", getAllPassenger);
+router.get("/passenger-token", restrict, getByToken);
 
 module.exports = router;
