@@ -60,12 +60,13 @@ model Seat {
 }
 
 model SeatClass {
-    seat_class_id   Int      @id @default(autoincrement())
+    seat_class_id   Int       @id @default(autoincrement())
     seat_class_type String
     seat_amount     Int
-    airlines        Airlines @relation(fields: [airlines_id], references: [airline_id])
+    airlines        Airlines  @relation(fields: [airlines_id], references: [airline_id])
     airlines_id     String
     seat            Seat[]
+    flight          Flights[]
 
     @@map("seatclass")
 }
@@ -74,13 +75,15 @@ model Flights {
     flight_id              String     @id
     price                  Float
     total_price            Float
-    date                   DateTime
+    date                   DateTime   @db.Date
     departure_time         DateTime
     arrival_time           DateTime
     airline_id             String
     arrival_airport_id     String
     destination_airport_id String
     promotion_id           Int?
+    seat_class_id          Int
+    seatclass              SeatClass  @relation(fields: [seat_class_id], references: [seat_class_id])
     promotion              Promotion? @relation(fields: [promotion_id], references: [promotion_id])
     airlines               Airlines   @relation(fields: [airline_id], references: [airline_id])
     arrival_airport        Airport    @relation("arrival_airport", fields: [arrival_airport_id], references: [id])
@@ -111,16 +114,15 @@ model Ticket {
 }
 
 model Passenger {
-    passenger_id    Int     @id @default(autoincrement())
+    passenger_id    Int      @id @default(autoincrement())
     fullname        String
     passenger_type  String
-    born_date       String
+    born_date       DateTime
     citizen         String
     identity_number String
     ticket          Ticket?
-    booking         Booking @relation(fields: [booking_id], references: [booking_id])
+    booking         Booking  @relation(fields: [booking_id], references: [booking_id])
     booking_id      Int
-    user_id         Int
 
     @@map("passengers")
 }
@@ -133,22 +135,23 @@ model Booking {
     passenger    Passenger[]
     user         User        @relation(fields: [user_id], references: [user_id])
     user_id      Int
-    payment      Payment?
     flight       Flights     @relation(fields: [flight_id], references: [flight_id])
     flight_id    String
+    payment      Payment?    @relation(fields: [payment_id], references: [payment_id])
+    payment_id   Int?        @unique
 
     @@map("bookings")
 }
 
 model Payment {
-    payment_id     Int     @id @default(autoincrement())
+    payment_id     Int      @id @default(autoincrement())
     payment_method String
     no_telp        String?
-    card_number    String? 
+    card_number    String?
     valid_until    String?
+    payment_date   DateTime @default(now())
     total_price    Float
-    booking        Booking @relation(fields: [booking_id], references: [booking_id])
-    booking_id     Int     @unique
+    booking        Booking?
 
     @@map("payments")
 }

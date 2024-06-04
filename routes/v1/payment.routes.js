@@ -9,6 +9,6 @@ const router = express.Router();
 
 router.post("/payment_wallet", restrict, createPaymentEwallet);
 router.post("/payment_bank", restrict, createPaymentBank);
-router.get("/payment",  getPayment);
+router.get("/payment", getPayment);
 
 module.exports = router;

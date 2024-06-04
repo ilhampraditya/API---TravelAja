@@ -7,8 +7,8 @@ const {
 } = require("../../controllers/booking.controllers");
 const router = express.Router();
 
-router.get("/booking",  getAllBooking);
-router.get("/booking", restrict, getByToken);
+router.get("/booking", getAllBooking);
+router.get("/mybooking", restrict, getByToken);
 router.post("/booking", restrict, createBooking);
 
 module.exports = router;

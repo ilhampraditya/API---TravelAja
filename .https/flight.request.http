@@ -3,7 +3,7 @@ GET http://localhost:3000/api/v1/flights
 Content-Type: application/json
 
 ### Get Flight By ID
-GET http://localhost:3000/api/v1/flights/1
+GET http://localhost:3000/api/v1/flights/GA0000001
 Content-Type: application/json
 
 ### Create Flight
@@ -11,12 +11,24 @@ POST http://localhost:3000/api/v1/flights
 Content-Type: application/json
 
 {
-  "flight_id": "GA0000007",
+  "flight_id": "GA0000001",
   "price": 1000000.00,
-  "date": "2024-06-01T10:00:00.000Z",
-  "departure_time": "2024-06-01T14:00:00.000Z",
-  "arrival_time": "2024-06-01T18:00:00.000Z",
+  "date": "2024-06-05",
+  "departure_time": "2024-06-05T14:00:00.000Z",
+  "arrival_time": "2024-06-05T18:00:00.000Z",
   "airline_id": "QG",
   "arrival_airport_id": "CGK",
-  "destination_airport_id": "LOP"
+  "destination_airport_id": "LOP",
+  "seat_class_id": 1
+}
+
+### SEARCH FLIGHT
+GET http://localhost:3000/api/v1/search
+Content-Type: application/json
+
+{
+  "arrival_airport_id": "CGK",
+  "destination_airport_id": "LOP",
+  "date":"2024-06-05",
+  "seat_class_id":1
 }
