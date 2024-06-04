@@ -523,7 +523,6 @@ module.exports = {
         }
 
 
-
         return res.status(200).json({
             status: true,
             message: 'Login berhasil',

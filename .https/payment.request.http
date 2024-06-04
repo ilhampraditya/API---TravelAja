@@ -1,20 +1,26 @@
 ### CREATE PAYMENT EWALLET
-
 POST http://localhost:3000/api/v1/payment_wallet
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoyLCJlbWFpbCI6InRyaG1mdkBtYXhhbWJhLmNvbSIsImlhdCI6MTcxNzUwNzM5OSwiZXhwIjoxNzE3NTkzNzk5fQ.ef3sR8NhLW6Q6G7At30Eepdzdv7nrEdQRHPxtzrTln0
 Content-Type: application/json
 
 {
     "payment_method": "Dana",
-    "no_telp": "089090909090"
+    "no_telp": "089090909090",
+    "booking_code": "TVLAJA-000003"
 }
 
-### CREATE PAYMENT BANK
 
+### CREATE PAYMENT BANK
 POST http://localhost:3000/api/v1/payment_bank
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoyLCJlbWFpbCI6InRyaG1mdkBtYXhhbWJhLmNvbSIsImlhdCI6MTcxNzUwNzM5OSwiZXhwIjoxNzE3NTkzNzk5fQ.ef3sR8NhLW6Q6G7At30Eepdzdv7nrEdQRHPxtzrTln0
 Content-Type: application/json
 
 {
     "payment_method": "BRI",
-    "card_number": "8274827428428742",
-    "valid_until": "12/25"
+    "card_number": "82748274284287421",
+    "valid_until": "12/25",
+    "booking_code": "TVLAJA-000004"
 }
+
+###
+GET http://localhost:3000/api/v1/payment

@@ -1,13 +1,13 @@
 const { PrismaClient } = require('@prisma/client');
-const data = require('./data.json');
+const data = require('../prisma/data.json');
 const bcrypt = require('bcrypt');
 const prisma = new PrismaClient();
 
 async function main() {
   await prisma.promotion.createMany({ data: data.promotion });
   await prisma.airport.createMany({ data: data.airports });
-  await prisma.seatClass.createMany({ data: data.seatClasses });
   await prisma.airlines.createMany({ data: data.airlines });
+  await prisma.seatClass.createMany({ data: data.seatClasses });
   await prisma.flights.createMany({ data: data.flights });
 
 

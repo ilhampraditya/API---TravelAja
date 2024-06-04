@@ -20,7 +20,7 @@ module.exports = {
                 }
             });
 
-            return res.status(201).send({
+            return res.status(201).json({
                 status: true,
                 message: "Promosi berhasil dibuat",
                 data: promo,
@@ -32,7 +32,7 @@ module.exports = {
     getAllPromo: async (req, res, next) => {
         try {
             const promo = await prisma.promotion.findMany();
-            return res.status(200).send({
+            return res.status(200).json({
                 status: true,
                 message: "Data Promosi berhasil diambil",
                 data: promo,

@@ -8,6 +8,6 @@ POST http://localhost:3000/api/v1/seat
 Content-Type: application/json
 
 {
-    "seat_number": 1,
-    "seat_class_id": 3
+    "seat_number": 4,
+    "seat_class_id": 1
 }

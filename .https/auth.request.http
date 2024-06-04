@@ -4,8 +4,8 @@ Content-Type: application/json
 
 {
   "name": "ilham",
-  "email": "epjdqjqe@maxamba.com",
-  "no_telp": "082172146229",
+  "email": "gqgeepo@muatoc.com",
+  "no_telp": "082304732146229",
   "password": "password123"
 }
 
@@ -19,11 +19,11 @@ Content-Type: application/json
 
 ### Verify OTP
 POST http://localhost:3000/api/v1/verify-otp
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoyLCJlbWFpbCI6ImtxZHl0bkBteW5hbmFpbW9ob21lcy5jb20iLCJpYXQiOjE3MTcwMTM1OTUsImV4cCI6MTcxNzA5OTk5NX0.fIkM7xAuF86Rvb69xR9adK4rj5ZdeDHf4O2LSK7MPqU
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoxLCJlbWFpbCI6ImdxZ2VlcG9AbXVhdG9jLmNvbSIsImlhdCI6MTcxNzQzNjkyMywiZXhwIjoxNzE3NTIzMzIzfQ.jOa2ubrIAWDAL7AoICCf-u_bWQqJOjLk7brATMhEEuI
 Content-Type: application/json
 
 {
-  "otp": 844366
+  "otp": 301888
 }
 
 ### get all user
@@ -83,3 +83,6 @@ Content-Type: application/json
   "name": "ilham praditya",
   "no_telp": "0976273456700"
 }
+
+###
+GET http://localhost:3000/api/v1/google
