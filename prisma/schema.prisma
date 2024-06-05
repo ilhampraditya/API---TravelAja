@@ -105,6 +105,7 @@ model Promotion {
 
 model Ticket {
     ticket_id    String    @id
+    url_qrcode   String
     seat         Seat      @relation(fields: [seat_id], references: [seat_id])
     seat_id      Int       @unique
     passenger    Passenger @relation(fields: [passenger_id], references: [passenger_id])
