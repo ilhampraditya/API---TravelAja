@@ -1,11 +1,11 @@
 ### Register User
-POST http://localhost:3000/api/v1/register
+POST https://expressjs-develop.up.railway.app/api/v1/register
 Content-Type: application/json
 
 {
   "name": "ilham",
-  "email": "eloxhtops@maxamba.com",
-  "no_telp": "08230321469",
+  "email": "wtbrwcfijjzkcgb@maxamba.com",
+  "no_telp": "0823032198469",
   "password": "password123"
 }
 
@@ -14,7 +14,7 @@ POST http://localhost:3000/api/v1/renew-otp
 Content-Type: application/json
 
 {
-  "email": "kqdytn@mynanaimohomes.com"
+  "email": "weywstlmia@nespressopixie.com"
 }
 
 ### Verify OTP
@@ -34,7 +34,7 @@ POST http://localhost:3000/api/v1/login
 Content-Type: application/json
 
 {
-  "emailOrNoTelp": "qhfuvidis@maxamba.com",
+  "emailOrNoTelp": "eloxhtops@maxamba.com",
   "password": "password123"
 }
 

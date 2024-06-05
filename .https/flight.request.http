@@ -11,6 +11,22 @@ POST http://localhost:3000/api/v1/flights
 Content-Type: application/json
 
 {
+  "flight_id": "GA0000006",
+  "price": 1000000.00,
+  "date": "2024-06-05",
+  "departure_time": "2024-06-05T14:00:00.000Z",
+  "arrival_time": "2024-06-05T18:00:00.000Z",
+  "airline_id": "QG",
+  "arrival_airport_id": "CGK",
+  "destination_airport_id": "LOP",
+  "seat_class_id": 1,
+  "promotion_id": 1
+}
+### Create Flight
+POST https://expressjs-develop.up.railway.app/api/v1/flights
+Content-Type: application/json
+
+{
   "flight_id": "GA0000001",
   "price": 1000000.00,
   "date": "2024-06-05",
@@ -19,7 +35,8 @@ Content-Type: application/json
   "airline_id": "QG",
   "arrival_airport_id": "CGK",
   "destination_airport_id": "LOP",
-  "seat_class_id": 1
+  "seat_class_id": 1,
+  "promotion_id": 1
 }
 
 ### SEARCH FLIGHT
@@ -30,5 +47,5 @@ Content-Type: application/json
   "arrival_airport_id": "CGK",
   "destination_airport_id": "LOP",
   "date":"2024-06-05",
-  "seat_class_id":1
+  "seat_class_id": 1
 }

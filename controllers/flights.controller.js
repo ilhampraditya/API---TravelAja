@@ -29,7 +29,12 @@ module.exports = {
     try {
       const flight = await prisma.flights.findUnique({
         where: { flight_id: id },
-        include: { airlines: true, arrival_airport: true, destination_airport: true, promotion: true }
+        include: {
+          airlines: true,
+          arrival_airport: true,
+          destination_airport: true,
+          promotion: true,
+        },
       });
 
       if (!flight) {
@@ -61,11 +66,10 @@ module.exports = {
       arrival_airport_id,
       destination_airport_id,
       seat_class_id,
-      promotion_id
+      promotion_id,
     } = req.body;
 
     try {
-
       const newDate = new Date(date);
       newDate.setUTCHours(0, 0, 0, 0);
 
@@ -81,10 +85,12 @@ module.exports = {
         });
       }
 
-      const flightExist = await prisma.flights.findUnique({ where: { flight_id } })
+      const flightExist = await prisma.flights.findUnique({
+        where: { flight_id },
+      });
 
       if (flightExist) {
-        return res.status(400).json({
+        return res.status(409).json({
           status: false,
           message: "Kode penerbangan sudah ada, silahkan coba yang lain!",
           data: null,
@@ -116,12 +122,14 @@ module.exports = {
       }
 
       if (promotion_id) {
-        const promotion = await prisma.promotion.findUnique({ where: { promotion_id } })
+        const promotion = await prisma.promotion.findUnique({
+          where: { promotion_id },
+        });
         const flight = await prisma.flights.create({
           data: {
             flight_id,
             price,
-            total_price: (price - (price * (promotion.discount / 100))),
+            total_price: price - price * (promotion.discount / 100),
             date: newDate,
             departure_time,
             arrival_time,
@@ -129,7 +137,7 @@ module.exports = {
             destination_airport_id,
             airline_id,
             seat_class_id,
-            promotion_id
+            promotion_id,
           },
         });
 
@@ -138,7 +146,6 @@ module.exports = {
           message: "Penerbangan berhasil dibuat",
           data: flight,
         });
-
       } else {
         const flight = await prisma.flights.create({
           data: {
@@ -151,7 +158,7 @@ module.exports = {
             arrival_airport_id,
             destination_airport_id,
             seat_class_id,
-            airline_id
+            airline_id,
           },
         });
 
@@ -167,10 +174,15 @@ module.exports = {
   },
 
   searchFlight: async (req, res, next) => {
-    const { arrival_airport_id, destination_airport_id, date, seat_class_id } = req.body
+    const { arrival_airport_id, destination_airport_id, date, seat_class_id } =
+      req.body;
     try {
-
-      if (!arrival_airport_id || !destination_airport_id || !date || !seat_class_id) {
+      if (
+        !arrival_airport_id ||
+        !destination_airport_id ||
+        !date ||
+        !seat_class_id
+      ) {
         return res.status(404).json({
           status: false,
           message: "field dibutuhkan!",
@@ -182,8 +194,18 @@ module.exports = {
       newDate.setUTCHours(0, 0, 0, 0);
 
       const flight = await prisma.flights.findMany({
-        where: { arrival_airport_id, destination_airport_id, date: newDate, seat_class_id },
-        include: { airlines: true, arrival_airport: true, destination_airport: true, promotion: true }
+        where: {
+          arrival_airport_id,
+          destination_airport_id,
+          date: newDate,
+          seat_class_id,
+        },
+        include: {
+          airlines: true,
+          arrival_airport: true,
+          destination_airport: true,
+          promotion: true,
+        },
       });
 
       if (!flight) {
@@ -202,5 +224,5 @@ module.exports = {
     } catch (error) {
       next(error);
     }
-  }
+  },
 };

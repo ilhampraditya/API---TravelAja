@@ -9,13 +9,13 @@ Content-Type: application/json
 {
   "fullname": "Rayeang 2",
   "passenger_type": "adult",
-  "born_date": "1985-05-16",
-  "citizen": "USA",
+  "born_date": "2003-05-15",
+  "citizen": "IDN",
   "identity_number": "A123456789",
   "booking_id": 1
 }
 
 ### GETBYTOKEN
 GET http://localhost:3000/api/v1/passenger-token
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjo1LCJlbWFpbCI6IndleXdzdGxtaWFAbmVzcHJlc3NvcGl4aWUuY29tIiwiaWF0IjoxNzE3NDE1NjM1LCJleHAiOjE3MTc1MDIwMzV9.6-dyTsCUB7DFkQ0BOAgiiuh9dms9BYfpEoWTCLZvxCw
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjo2LCJlbWFpbCI6InRnbW1xa3pndndxc0BteW5hbmFpbW9ob21lcy5jb20iLCJpYXQiOjE3MTc1MDUxMDgsImV4cCI6MTcxNzU5MTUwOH0.0I_CpqS-W10DgbMWCVfZYylNmoK3C7eTXv4WCdmEheU
 
