@@ -2,10 +2,12 @@ const { PrismaClient } = require('@prisma/client');
 const prisma = new PrismaClient();
 
 module.exports = {
-    getAll: async (req, res, next) => {
+    getByToken: async (req, res, next) => {
         const user = req.user
         try {
-            const booking = await prisma.booking.findMany({ where: { user_id: user.user_id } });
+            const booking = await prisma.booking.findMany({
+                where: { user_id: user.user_id }
+            });
 
             return res.status(200).json({
                 status: true,
@@ -44,7 +46,6 @@ module.exports = {
                 });
             }
 
-
             const booking = await prisma.booking.create({
                 data: {
                     booking_code,
@@ -55,6 +56,18 @@ module.exports = {
             return res.status(201).json({
                 status: true,
                 message: "Pemesanan dibuat",
+                data: booking,
+            });
+        } catch (error) {
+            next(error);
+        }
+    },
+    getAllBooking: async (req, res, next) => {
+        try {
+            const booking = await prisma.booking.findMany();
+            return res.status(200).json({
+                status: true,
+                message: "Data maskapai penerbangan berhasil diambil",
                 data: booking,
             });
         } catch (error) {

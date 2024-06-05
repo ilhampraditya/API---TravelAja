@@ -1,9 +1,14 @@
 const express = require("express");
 const { restrict } = require("../../middlewares/auth.middleware");
-const { getAll, createBooking } = require("../../controllers/booking.controllers");
+const {
+  getAllBooking,
+  createBooking,
+  getByToken,
+} = require("../../controllers/booking.controllers");
 const router = express.Router();
 
-router.get("/booking", restrict, getAll);
+router.get("/booking", getAllBooking);
+router.get("/mybooking", restrict, getByToken);
 router.post("/booking", restrict, createBooking);
 
 module.exports = router;

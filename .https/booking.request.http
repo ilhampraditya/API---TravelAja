@@ -1,11 +1,17 @@
+
+
+### CREATE BOOKING
 POST http://localhost:3000/api/v1/booking
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjo3LCJlbWFpbCI6ImdncHRydXVAbXluYW5haW1vaG9tZXMuY29tIiwiaWF0IjoxNzE3MTc0NDE2LCJleHAiOjE3MTcyNjA4MTZ9.e348NDhzdhjYGyIXvfEhyp4-PyZHMMCMx8Pix1qLDfs
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoyLCJlbWFpbCI6ImVsb3hodG9wc0BtYXhhbWJhLmNvbSIsImlhdCI6MTcxNzU5NDYyNywiZXhwIjoxNzE3NjgxMDI3fQ.z6YGSf4fxxBE5s8johIoeed5GzcRqD9SlPKBFaW9rKs
 Content-Type: application/json
 
 {
-    "flight_id": "GA1437093"
+    "flight_id": "GA0000001"
 }
 
 ###
+GET http://localhost:3000/api/v1/mybooking
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoyLCJlbWFpbCI6ImVsb3hodG9wc0BtYXhhbWJhLmNvbSIsImlhdCI6MTcxNzU5NDYyNywiZXhwIjoxNzE3NjgxMDI3fQ.z6YGSf4fxxBE5s8johIoeed5GzcRqD9SlPKBFaW9rKs
+
+###
 GET http://localhost:3000/api/v1/booking
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjo0LCJlbWFpbCI6InlmZnh6Z3h4QG11YXRvYy5jb20iLCJpYXQiOjE3MTcxNzIyOTQsImV4cCI6MTcxNzI1ODY5NH0.wRK7AzjDy1O_v08M_em8G3uJs1BE1I_vlkEvdDg6Q7w

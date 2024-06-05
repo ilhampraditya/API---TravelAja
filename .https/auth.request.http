@@ -3,9 +3,9 @@ POST http://localhost:3000/api/v1/register
 Content-Type: application/json
 
 {
-  "name": "akun2",
-  "email": "ggptruu@mynanaimohomes.com",
-  "no_telp": "082746700d8229",
+  "name": "ilham",
+  "email": "eloxhtops@maxamba.com",
+  "no_telp": "08230321469",
   "password": "password123"
 }
 
@@ -19,11 +19,11 @@ Content-Type: application/json
 
 ### Verify OTP
 POST http://localhost:3000/api/v1/verify-otp
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjo3LCJlbWFpbCI6ImdncHRydXVAbXluYW5haW1vaG9tZXMuY29tIiwiaWF0IjoxNzE3MTc0NDE2LCJleHAiOjE3MTcyNjA4MTZ9.e348NDhzdhjYGyIXvfEhyp4-PyZHMMCMx8Pix1qLDfs
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoyLCJlbWFpbCI6ImVsb3hodG9wc0BtYXhhbWJhLmNvbSIsImlhdCI6MTcxNzU5NDYyNywiZXhwIjoxNzE3NjgxMDI3fQ.z6YGSf4fxxBE5s8johIoeed5GzcRqD9SlPKBFaW9rKs
 Content-Type: application/json
 
 {
-  "otp": 755759
+  "otp": 626964
 }
 
 ### get all user
@@ -83,3 +83,6 @@ Content-Type: application/json
   "name": "ilham praditya",
   "no_telp": "0976273456700"
 }
+
+###
+GET http://localhost:3000/api/v1/google
