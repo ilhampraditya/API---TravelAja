@@ -3,7 +3,7 @@ POST http://localhost:3000/api/v1/register
 Content-Type: application/json
 
 {
-  "name": "ilham",
+  "name": "ilham ilham",
   "email": "eloxhtops@maxamba.com",
   "no_telp": "08230321469",
   "password": "password123"
