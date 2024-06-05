@@ -1073,124 +1073,6 @@ paths:
                             endDate:
                               format: date-time
                               example: '2024-06-05T00:00:00.000Z'
-  /flights/{id}:
-    get:
-      summary: mengambil data penerbangan berdasarkan parameter id
-      tags:
-        - Flights
-      security:
-        - bearerAuth: []
-      parameters:
-        - name: id
-          in: path
-          required: true
-          description: ID Fights
-          schema:
-            type: string
-      responses:
-        "200":
-          description: Data penerbangan berhasil diambil
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  status:
-                    type: boolean
-                    example: true
-                  message:
-                    type: string
-                    example: "Data penerbangan berhasil diambil"
-                  data:
-                    type: object
-                    properties:
-                      flight_id:
-                        type: string
-                        example: "GA0000001"
-                      price:
-                        type: integer
-                        example: 1000000
-                      total_price:
-                        type: integer
-                        example: 1000000
-                      date:
-                        type: string
-                        example: "2024-06-05T00:00:00.000Z"
-                      departure_time:
-                        type: string
-                        example: "2024-06-05T14:00:00.000Z"
-                      arrival_time:
-                        type: string
-                        example: "2024-06-05T14:00:00.000Z"
-                      airline_id:
-                        type: string
-                        example: "QG"
-                      arrival_airport_id:
-                        type: string
-                        example: "CGK"
-                      destination_airport_id:
-                        type: string
-                        example: "LOP"
-                      promotion_id:
-                        type: string
-                        example: null
-                      seat_class_id:
-                        type: integer
-                        example: 1
-                      airlines:
-                        properties:
-                          airline_id:
-                            type: string
-                            example: "QG"
-                          airline_name:
-                            type: string
-                            example: "Citilink"
-                          baggage:
-                            type: string
-                            example: "30"
-                          cabin_baggage:
-                            type: string
-                            example: "7"
-                          url_logo:
-                            type: string
-                            example: "https://ik.imagekit.io/travelaja/1717435283202_VBY4c9eNr.png"
-                      arrival_airport:
-                        properties:
-                          id:
-                            type: string
-                            example: "CGK"
-                          airport_name:
-                            type: string
-                            example: "Soekarno Hatta International Airport"
-                          continent:
-                            type: string
-                            example: "Asia"
-                          country:
-                            type: string
-                            example: "Indonesia"
-                          city:
-                            type: string
-                            example: "Jakarta"
-                      destination_airport:
-                        properties:
-                          id:
-                            type: string
-                            example: "LOP"
-                          airport_name:
-                            type: string
-                            example: "Lombok Praya International Airport"
-                          continent:
-                            type: string
-                            example: "Asia"
-                          country:
-                            type: string
-                            example: "Indonesia"
-                          city:
-                            type: string
-                            example: "Lombok"
-                      promotion:
-                        type: string
-                        example: null
     post:
       summary: Membuat penerbangan baru
       tags:
@@ -1348,11 +1230,131 @@ paths:
                   data:
                     type: string
                     example: null
-  /search:
+  /flights/{id}:
+    get:
+      summary: mengambil data penerbangan berdasarkan parameter id
+      tags:
+        - Flights
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: ID Fights
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Data penerbangan berhasil diambil
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                    example: true
+                  message:
+                    type: string
+                    example: "Data penerbangan berhasil diambil"
+                  data:
+                    type: object
+                    properties:
+                      flight_id:
+                        type: string
+                        example: "GA0000001"
+                      price:
+                        type: integer
+                        example: 1000000
+                      total_price:
+                        type: integer
+                        example: 1000000
+                      date:
+                        type: string
+                        example: "2024-06-05T00:00:00.000Z"
+                      departure_time:
+                        type: string
+                        example: "2024-06-05T14:00:00.000Z"
+                      arrival_time:
+                        type: string
+                        example: "2024-06-05T14:00:00.000Z"
+                      airline_id:
+                        type: string
+                        example: "QG"
+                      arrival_airport_id:
+                        type: string
+                        example: "CGK"
+                      destination_airport_id:
+                        type: string
+                        example: "LOP"
+                      promotion_id:
+                        type: string
+                        example: null
+                      seat_class_id:
+                        type: integer
+                        example: 1
+                      airlines:
+                        properties:
+                          airline_id:
+                            type: string
+                            example: "QG"
+                          airline_name:
+                            type: string
+                            example: "Citilink"
+                          baggage:
+                            type: string
+                            example: "30"
+                          cabin_baggage:
+                            type: string
+                            example: "7"
+                          url_logo:
+                            type: string
+                            example: "https://ik.imagekit.io/travelaja/1717435283202_VBY4c9eNr.png"
+                      arrival_airport:
+                        properties:
+                          id:
+                            type: string
+                            example: "CGK"
+                          airport_name:
+                            type: string
+                            example: "Soekarno Hatta International Airport"
+                          continent:
+                            type: string
+                            example: "Asia"
+                          country:
+                            type: string
+                            example: "Indonesia"
+                          city:
+                            type: string
+                            example: "Jakarta"
+                      destination_airport:
+                        properties:
+                          id:
+                            type: string
+                            example: "LOP"
+                          airport_name:
+                            type: string
+                            example: "Lombok Praya International Airport"
+                          continent:
+                            type: string
+                            example: "Asia"
+                          country:
+                            type: string
+                            example: "Indonesia"
+                          city:
+                            type: string
+                            example: "Lombok"
+                      promotion:
+                        type: string
+                        example: null
+                        /search:
     get:
       summary: Mengambil semua data penerbangan by search
       tags:
-        - Flights 
+        - Flights
+      security:
+      - bearerAuth: [] 
       description: Get all available flights
       requestBody:
         required: true
