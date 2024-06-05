@@ -24,7 +24,7 @@ module.exports = {
       if (!booking) {
         return res.status(400).json({
           status: false,
-          message: "Invalid booking code!",
+            message: "Kode pemesanan tidak valid!",
           data: null,
         });
       }

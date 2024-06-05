@@ -3,8 +3,8 @@ GET http://localhost:3000/api/v1/flights
 Content-Type: application/json
 
 ### Get Flight By ID
-GET http://localhost:3000/api/v1/flights/GA0000005
-Content-Type: application/json
+GET http://localhost:3000/api/v1/flights/GA0000001
+
 
 ### Create Flight
 POST http://localhost:3000/api/v1/flights

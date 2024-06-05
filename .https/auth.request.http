@@ -4,8 +4,8 @@ Content-Type: application/json
 
 {
   "name": "ilham",
-  "email": "gqgeepo@muatoc.com",
-  "no_telp": "082304732146229",
+  "email": "eloxhtops@maxamba.com",
+  "no_telp": "08230321469",
   "password": "password123"
 }
 
@@ -19,11 +19,11 @@ Content-Type: application/json
 
 ### Verify OTP
 POST http://localhost:3000/api/v1/verify-otp
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoxLCJlbWFpbCI6ImdxZ2VlcG9AbXVhdG9jLmNvbSIsImlhdCI6MTcxNzQzNjkyMywiZXhwIjoxNzE3NTIzMzIzfQ.jOa2ubrIAWDAL7AoICCf-u_bWQqJOjLk7brATMhEEuI
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoyLCJlbWFpbCI6ImVsb3hodG9wc0BtYXhhbWJhLmNvbSIsImlhdCI6MTcxNzU5NDYyNywiZXhwIjoxNzE3NjgxMDI3fQ.z6YGSf4fxxBE5s8johIoeed5GzcRqD9SlPKBFaW9rKs
 Content-Type: application/json
 
 {
-  "otp": 301888
+  "otp": 626964
 }
 
 ### get all user
@@ -34,8 +34,8 @@ POST http://localhost:3000/api/v1/login
 Content-Type: application/json
 
 {
-  "emailOrNoTelp": "travelajaaa@gmail.com",
-  "password": "DMmey1kA"
+  "emailOrNoTelp": "qhfuvidis@maxamba.com",
+  "password": "password123"
 }
 
 ### auth / login dengan token 
