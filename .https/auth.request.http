@@ -14,7 +14,7 @@ POST http://localhost:3000/api/v1/renew-otp
 Content-Type: application/json
 
 {
-  "email": "kqdytn@mynanaimohomes.com"
+  "email": "weywstlmia@nespressopixie.com"
 }
 
 ### Verify OTP
