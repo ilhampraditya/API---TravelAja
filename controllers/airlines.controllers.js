@@ -19,7 +19,6 @@ module.exports = {
     }
   },
 
-
   createAirline: async (req, res, next) => {
     let { airline_id,
       airline_name,
