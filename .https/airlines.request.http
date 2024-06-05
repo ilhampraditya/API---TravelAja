@@ -3,6 +3,8 @@ GET http://localhost:3000/api/v1/airlines
 ###
 GET http://localhost:3000/api/v1/airlines/1
 
+
+
 ###
 POST http://localhost:3000/api/v1/airlines
 Content-Type: application/json
@@ -14,16 +16,15 @@ Content-Type: application/json
   "cabin_baggage": "7",
   "seat_class_id": 1
 }
-
 ###
-# {
-#     "status": true,
-#     "message": "Maskapai penerbangan berhasil dibuat",
-#     "data": {
-#         "airline_id": "QG",
-#         "airline_name": "Citilink",
-#         "baggage": "30",
-#         "cabin_baggage": "7",
-#         "url_logo": "https://ik.imagekit.io/travelaja/1717388338334_iQYAw_oF7.jpg"
-#     }
-# }
+POST https://expressjs-develop.up.railway.app/api/v1/airlines
+Content-Type: application/json
+
+{
+  "airline_id": "QG",
+  "airline_name": "Citilink",
+  "baggage": "30",
+  "cabin_baggage": "7",
+  "seat_class_id": 1
+}
+
