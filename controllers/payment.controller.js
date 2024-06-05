@@ -4,7 +4,7 @@ const prisma = new PrismaClient();
 module.exports = {
   createPaymentEwallet: async (req, res, next) => {
     const { payment_method, no_telp, total_price } = req.body;
-    const user_id = req.user.user_id; 
+    const user_id = req.user.user_id;
 
     try {
       if (!payment_method || !no_telp || !total_price) {
@@ -60,8 +60,10 @@ module.exports = {
 
   createPaymentBank: async (req, res, next) => {
     const { payment_method, card_number, valid_until, total_price } = req.body;
-    const user_id = req.user.user_id; 
+    const user_id = req.user.user_id;
 
+    console.log("Request Body:", req.body);
+    console.log("User ID:", user_id);
     try {
       if (!payment_method || !card_number || !valid_until || !total_price) {
         return res.status(400).json({

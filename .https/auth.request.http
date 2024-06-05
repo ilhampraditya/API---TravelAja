@@ -4,8 +4,8 @@ Content-Type: application/json
 
 {
   "name": "Raya",
-  "email": "weywstlmia@nespressopixie.com",
-  "no_telp": "08111111111",
+  "email": "tgmmqkzgvwqs@mynanaimohomes.com",
+  "no_telp": "081111111111",
   "password": "password123"
 }
 
@@ -14,12 +14,12 @@ POST http://localhost:3000/api/v1/renew-otp
 Content-Type: application/json
 
 {
-  "email": "kqdytn@mynanaimohomes.com"
+  "email": "weywstlmia@nespressopixie.com"
 }
 
 ### Verify OTP
 POST http://localhost:3000/api/v1/verify-otp
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjo1LCJlbWFpbCI6IndleXdzdGxtaWFAbmVzcHJlc3NvcGl4aWUuY29tIiwiaWF0IjoxNzE3NDE1NjM1LCJleHAiOjE3MTc1MDIwMzV9.6-dyTsCUB7DFkQ0BOAgiiuh9dms9BYfpEoWTCLZvxCw
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjo2LCJlbWFpbCI6InRnbW1xa3pndndxc0BteW5hbmFpbW9ob21lcy5jb20iLCJpYXQiOjE3MTc1MDUxMDgsImV4cCI6MTcxNzU5MTUwOH0.0I_CpqS-W10DgbMWCVfZYylNmoK3C7eTXv4WCdmEheU
 Content-Type: application/json
 
 {
