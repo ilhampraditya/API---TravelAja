@@ -4,7 +4,7 @@ Content-Type: application/json
 
 ### Get Flight By ID
 GET http://localhost:3000/api/v1/flights/GA0000001
-Content-Type: application/json
+
 
 ### Create Flight
 POST http://localhost:3000/api/v1/flights
