@@ -1065,9 +1065,9 @@ paths:
     post:
       summary: membuat data penumpang 
       security:
-        - bearerAuth: []
+      - bearerAuth: []
       tags:
-        - Passenger
+      - Passenger
       requestBody:
         required: true
         content:
@@ -1097,50 +1097,65 @@ paths:
         "201":
           description: Penumpang berhasil dibuat
           content:
-           application/json:
-            schema:
-              type: object
-              properties:
-                status:
-                  type: boolean
-                  example: true
-                message:
-                  type: string
-                  example: "Penumpang berhasil dibuat"
-                data:
-                  type: object
-                  properties:
-                    id:
-                      type: integer
-                      example: 1
-                    fullname:
-                      type: string
-                      example: "travelajaa"
-                    passenger_type:
-                      type: string
-                      example: "adult"
-                    born_date:
-                      type: string
-                      example: "1985-05-16T00:00:00.000Z"
-                    citizen:
-                      type: string
-                      example: "USA"
-                    identity_number:
-                      type: string
-                      example: "A123456789"
-                    booking_id:
-                      type: integer
-                      example: 4
-                    booking:
-                      type: object
-                      properties:
-                        booking_id:
-                          type: integer
-                          example: 4
-                        other_booking_properties:
-                          type: string
-                          example: "example"
-
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                    example: true
+                  message:
+                    type: string
+                    example: "Penumpang berhasil dibuat"
+                  data:
+                    type: object
+                    properties:
+                      passenger_id:
+                        type: integer
+                        example: 3
+                      fullname:
+                        type: string
+                        example: "Rayeang 2"
+                      passenger_type:
+                        type: string
+                        example: "adult"
+                      born_date:
+                        type: string
+                        example: "1985-05-16T00:00:00.000Z"
+                      citizen:
+                        type: string
+                        example: "USA"
+                      identity_number:
+                        type: string
+                        example: "A123456789"
+                      booking_id:
+                        type: integer
+                        example: 1
+                      booking:
+                        type: object
+                        properties:
+                          booking_id:
+                            type: integer
+                            example: 1
+                          booking_code:
+                            type: string
+                            example: "TVLAJA-000001"
+                          booking_date:
+                            type: string
+                            format: date-time
+                            example: "2024-06-05T13:46:01.106Z"
+                          isPaid:
+                            type: boolean
+                            example: false
+                          user_id:
+                            type: integer
+                            example: 2
+                          flight_id:
+                            type: string
+                            example: "GA0000001"
+                          payment_id:
+                            type: string
+                            example: null
         "400":
           description: Bad Request
           content:
@@ -1207,6 +1222,61 @@ paths:
                         payment_id:
                           type: string
                           example: null
+  /booking/{id}:
+    get:
+      summary: mengambil data booking berdasarkan id dan detail riwayat pemesanan
+      tags:
+      - Booking
+      security:
+      - bearerAuth: []
+      parameters:
+      - in: path
+        name: id
+        required: true
+        schema:
+          type: string
+        description: Kode booking
+      responses:
+        "200":
+          description: Data pemesanan berhasil diambil
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                    example: true
+                  message:
+                    type: string
+                    example: "Data pemesanan berhasil diambil"
+                  data:
+                    type: object
+                    properties:
+                      booking_id:
+                        type: integer
+                        example: 2
+                      booking_code:
+                        type: string
+                        example: "TVLAJA-000002"
+                      booking_date:
+                        type: string
+                        format: date-time
+                        example: "2024-06-05T14:05:01.509Z"
+                      isPaid:
+                        type: boolean
+                        example: false
+                      user_id:
+                        type: integer
+                        example: 2
+                      flight_id:
+                        type: string
+                        example: "GA0000001"
+                      payment_id:
+                        type: string
+                        example: null
+ 
+       
 components:
   securitySchemes:
     bearerAuth:

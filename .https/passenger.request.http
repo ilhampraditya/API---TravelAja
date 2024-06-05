@@ -3,7 +3,7 @@ GET http://localhost:3000/api/v1/passenger
 
 ### Create passenger
 POST http://localhost:3000/api/v1/passenger
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoyLCJlbWFpbCI6InRyaG1mdkBtYXhhbWJhLmNvbSIsImlhdCI6MTcxNzUwNzM5OSwiZXhwIjoxNzE3NTkzNzk5fQ.ef3sR8NhLW6Q6G7At30Eepdzdv7nrEdQRHPxtzrTln0
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoyLCJlbWFpbCI6ImVsb3hodG9wc0BtYXhhbWJhLmNvbSIsImlhdCI6MTcxNzU5NDYyNywiZXhwIjoxNzE3NjgxMDI3fQ.z6YGSf4fxxBE5s8johIoeed5GzcRqD9SlPKBFaW9rKs
 Content-Type: application/json
 
 {
@@ -12,7 +12,7 @@ Content-Type: application/json
   "born_date": "1985-05-16",
   "citizen": "USA",
   "identity_number": "A123456789",
-  "booking_id": 4
+  "booking_id": 1
 }
 
 ### GETBYTOKEN
