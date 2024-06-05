@@ -61,7 +61,7 @@ module.exports = {
       const airlineExists = await prisma.airlines.findUnique({
         where: { airline_id: airlines_id },
       });
-      
+
       if (!airlineExists) {
         return res.status(404).send({
           status: false,

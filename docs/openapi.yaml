@@ -362,7 +362,7 @@ paths:
                   data:
                     type: string
                     example: null
-  /index:
+  /all-user:
     get:
       summary: Mendapatkan semua user
       tags:
@@ -768,7 +768,7 @@ paths:
                   data:
                     type: string
                     example: null
-        "422":
+        "402":
           description: field nama, no_telp dan password dibutuhkan!
           content:
             application/json:
@@ -853,7 +853,595 @@ paths:
                   data:
                     type: string
                     example: null
+  /flights:
+    get:
+      summary: Get All Flights 
+      tags:
+        - flights 
+      description: Get all available flights || jika promotion null maka object promotion null
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                    example: true
+                  message:
+                    type: string
+                    example: Data penerbangan berhasil diambil
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        flight_id:
+                          type: string
+                          example: GA0000001
+                        price:
+                          type: number
+                          example: 1000000
+                        total_price:
+                          type: number
+                          example: 1000000
+                        date:
+                          type: string
+                          format: date-time
+                          example: '2024-06-05T00:00:00.000Z'
+                        departure_time:
+                          type: string
+                          format: date-time
+                          example: '2024-06-05T14:00:00.000Z'
+                        arrival_time:
+                          type: string
+                          format: date-time
+                          example: '2024-06-05T18:00:00.000Z'
+                        airline_id:
+                          type: string
+                          example: QG
+                        arrival_airport_id:
+                          type: string
+                          example: CGK
+                        destination_airport_id:
+                          type: string
+                          example: LOP
+                        promotion_id:
+                          type: integer
+                          nullable: true
+                          example: null
+                        seat_class_id:
+                          type: integer
+                          example: 2
+                        airlines:
+                          type: object
+                          properties:
+                            airline_id:
+                              type: string
+                              example: QG
+                            airline_name:
+                              type: string
+                              example: Citilink
+                            baggage:
+                              type: string
+                              example: '30'
+                            cabin_baggage:
+                              type: string
+                              example: '7'
+                            url_logo:
+                              type: string
+                              example: 'https://ik.imagekit.io/travelaja/1717591564516_W7yo6KA-B.jpg'
+                        arrival_airport:
+                          type: object
+                          properties:
+                            id:
+                              type: string
+                              example: CGK
+                            airport_name:
+                              type: string
+                              example: Soekarno Hatta International Airport
+                            continent:
+                              type: string
+                              example: Asia
+                            country:
+                              type: string
+                              example: Indonesia
+                            city:
+                              type: string
+                              example: Jakarta
+                        destination_airport:
+                          type: object
+                          properties:
+                            id:
+                              type: string
+                              example: LOP
+                            airport_name:
+                              type: string
+                              example: Lombok Praya International Airport
+                            continent:
+                              type: string
+                              example: Asia
+                            country:
+                              type: string
+                              example: Indonesia
+                            city:
+                              type: string
+                              example: Lombok
+                        promotion:
+                          type: object
+                          properties:
+                            promotion_id:
+                              type: integer
+                              example: 1
+                            discount:
+                              type: string
+                              example: 20
+                            startDate:
+                              format: date-time
+                              example: '2024-06-05T00:00:00.000Z'
+                            endDate:
+                              format: date-time
+                              example: '2024-06-05T00:00:00.000Z'
+                          
 
+    post:
+      summary: Membuat penerbangan baru
+      tags:
+        - flights 
+      description: Endpoint ini digunakan untuk membuat penerbangan baru. || jika promotion null maka object promotion null || jika promotion null maka object promotion_id bisa dihapus
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                flight_id:
+                  type: string
+                  example: "GA0000002"
+                  description: ID penerbangan yang unik.
+                price:
+                  type: number
+                  example: 1000000.00
+                  description: Harga tiket penerbangan.
+                date:
+                  type: string
+                  format: date
+                  example: "2024-06-05"
+                departure_time:
+                  type: string
+                  format: date-time
+                  example: "2024-06-05T14:00:00.000Z"
+                arrival_time:
+                  type: string
+                  format: date-time
+                  example: "2024-06-05T18:00:00.000Z"
+                airline_id:
+                  type: string
+                  example: "QG"
+                  description: ID maskapai penerbangan.
+                arrival_airport_id:
+                  type: string
+                  example: "CGK"
+                  description: ID bandara kedatangan.
+                destination_airport_id:
+                  type: string
+                  example: "LOP"
+                  description: ID bandara tujuan.
+                seat_class_id:
+                  type: integer
+                  example: 1
+                  description: ID kelas kursi.
+                promotion_id:
+                  type: integer
+                  nullable: true
+                  example: 1
+                  description: ID promosi (opsional).
+      responses:
+        '201':
+          description: Penerbangan berhasil dibuat
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                    example: true
+                  message:
+                    type: string
+                    example: Penerbangan berhasil dibuat
+                  data:
+                    type: object
+                    properties:
+                      flight_id:
+                        type: string
+                        example: GA0000002
+                      price:
+                        type: number
+                        example: 1000000.00
+                      total_price:
+                        type: number
+                        example: 1000000.00
+                      date:
+                        type: string
+                        format: date
+                        example: '2024-06-05'
+                      departure_time:
+                        type: string
+                        format: date-time
+                        example: '2024-06-05T14:00:00.000Z'
+                      arrival_time:
+                        type: string
+                        format: date-time
+                        example: '2024-06-05T18:00:00.000Z'
+                      airline_id:
+                        type: string
+                        example: QG
+                      arrival_airport_id:
+                        type: string
+                        example: CGK
+                      destination_airport_id:
+                        type: string
+                        example: LOP
+                      promotion_id:
+                        type: integer
+                        nullable: true
+                        example: 1
+                      seat_class_id:
+                        type: integer
+                        example: 1
+                    
+        '400':
+          description: Permintaan tidak valid.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                    example: false
+                  message:
+                    type: string
+                    example: "Airline tidak ditemukan"
+                  data: 
+                    type: boolean
+                    example: null
+                  
+        '409':
+          description: Kode penerbangan sudah ada, silahkan coba yang lain!
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                    example: false
+                  message:
+                    type: string
+                    example: "Kode penerbangan sudah ada, silahkan coba yang lain!"
+                  data: 
+                    type: boolean
+                    example: null
+  /flights/{id}:
+    get:
+      summary: Get All Flights
+      tags:
+        - flights 
+      description: Get all available flights by id || example:GA0000001
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                    example: true
+                  message:
+                    type: string
+                    example: Data penerbangan berhasil diambil
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        flight_id:
+                          type: string
+                          example: GA0000001
+                        price:
+                          type: number
+                          example: 1000000
+                        total_price:
+                          type: number
+                          example: 1000000
+                        date:
+                          type: string
+                          format: date-time
+                          example: '2024-06-05T00:00:00.000Z'
+                        departure_time:
+                          type: string
+                          format: date-time
+                          example: '2024-06-05T14:00:00.000Z'
+                        arrival_time:
+                          type: string
+                          format: date-time
+                          example: '2024-06-05T18:00:00.000Z'
+                        airline_id:
+                          type: string
+                          example: QG
+                        arrival_airport_id:
+                          type: string
+                          example: CGK
+                        destination_airport_id:
+                          type: string
+                          example: LOP
+                        promotion_id:
+                          type: integer
+                          nullable: true
+                          example: null
+                        seat_class_id:
+                          type: integer
+                          example: 2
+                        airlines:
+                          type: object
+                          properties:
+                            airline_id:
+                              type: string
+                              example: QG
+                            airline_name:
+                              type: string
+                              example: Citilink
+                            baggage:
+                              type: string
+                              example: '30'
+                            cabin_baggage:
+                              type: string
+                              example: '7'
+                            url_logo:
+                              type: string
+                              example: 'https://ik.imagekit.io/travelaja/1717591564516_W7yo6KA-B.jpg'
+                        arrival_airport:
+                          type: object
+                          properties:
+                            id:
+                              type: string
+                              example: CGK
+                            airport_name:
+                              type: string
+                              example: Soekarno Hatta International Airport
+                            continent:
+                              type: string
+                              example: Asia
+                            country:
+                              type: string
+                              example: Indonesia
+                            city:
+                              type: string
+                              example: Jakarta
+                        destination_airport:
+                          type: object
+                          properties:
+                            id:
+                              type: string
+                              example: LOP
+                            airport_name:
+                              type: string
+                              example: Lombok Praya International Airport
+                            continent:
+                              type: string
+                              example: Asia
+                            country:
+                              type: string
+                              example: Indonesia
+                            city:
+                              type: string
+                              example: Lombok
+                        promotion:
+                          type: object
+                          properties:
+                            promotion_id:
+                              type: integer
+                              example: 1
+                            discount:
+                              type: string
+                              example: 20
+                            startDate:
+                              format: date-time
+                              example: '2024-06-05T00:00:00.000Z'
+                            endDate:
+                              format: date-time
+                              example: '2024-06-05T00:00:00.000Z'
+        "404":
+          description: Penerbangan Not Found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                    example: false
+                  message:
+                    type: string
+                    example: "Penerbangan tidak ditemukan"
+                  data:
+                    type: string
+                    example: null
+
+  /search:
+    get:
+      summary: Get All Flights
+      tags:
+        - flights 
+      description: Get all available flights
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                arrival_airport_id:
+                  type: string
+                  example: "CGK"
+                destination_airport_id:
+                  type: string
+                  example: "LOP"
+                date :
+                  type: string
+                  example: 2024-06-05
+                seat_class_id:
+                  type: integer
+                  example: 1
+
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                    example: true
+                  message:
+                    type: string
+                    example: Data penerbangan berhasil diambil
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        flight_id:
+                          type: string
+                          example: GA0000001
+                        price:
+                          type: number
+                          example: 1000000
+                        total_price:
+                          type: number
+                          example: 1000000
+                        date:
+                          type: string
+                          format: date-time
+                          example: '2024-06-05T00:00:00.000Z'
+                        departure_time:
+                          type: string
+                          format: date-time
+                          example: '2024-06-05T14:00:00.000Z'
+                        arrival_time:
+                          type: string
+                          format: date-time
+                          example: '2024-06-05T18:00:00.000Z'
+                        airline_id:
+                          type: string
+                          example: QG
+                        arrival_airport_id:
+                          type: string
+                          example: CGK
+                        destination_airport_id:
+                          type: string
+                          example: LOP
+                        promotion_id:
+                          type: integer
+                          nullable: true
+                          example: null
+                        seat_class_id:
+                          type: integer
+                          example: 2
+                        airlines:
+                          type: object
+                          properties:
+                            airline_id:
+                              type: string
+                              example: QG
+                            airline_name:
+                              type: string
+                              example: Citilink
+                            baggage:
+                              type: string
+                              example: '30'
+                            cabin_baggage:
+                              type: string
+                              example: '7'
+                            url_logo:
+                              type: string
+                              example: 'https://ik.imagekit.io/travelaja/1717591564516_W7yo6KA-B.jpg'
+                        arrival_airport:
+                          type: object
+                          properties:
+                            id:
+                              type: string
+                              example: CGK
+                            airport_name:
+                              type: string
+                              example: Soekarno Hatta International Airport
+                            continent:
+                              type: string
+                              example: Asia
+                            country:
+                              type: string
+                              example: Indonesia
+                            city:
+                              type: string
+                              example: Jakarta
+                        destination_airport:
+                          type: object
+                          properties:
+                            id:
+                              type: string
+                              example: LOP
+                            airport_name:
+                              type: string
+                              example: Lombok Praya International Airport
+                            continent:
+                              type: string
+                              example: Asia
+                            country:
+                              type: string
+                              example: Indonesia
+                            city:
+                              type: string
+                              example: Lombok
+                        promotion:
+                          type: object
+                          properties:
+                            promotion_id:
+                              type: integer
+                              example: 1
+                            discount:
+                              type: string
+                              example: 20
+                            startDate:
+                              format: date-time
+                              example: '2024-06-05T00:00:00.000Z'
+                            endDate:
+                              format: date-time
+                              example: '2024-06-05T00:00:00.000Z'
+        "404":
+          description: Penerbangan Not Found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                    example: false
+                  message:
+                    type: string
+                    example: "Penerbangan tidak ditemukan"
+                  data:
+                    type: string
+                    example: null
 components:
   securitySchemes:
     bearerAuth:

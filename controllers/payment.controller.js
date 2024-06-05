@@ -3,11 +3,11 @@ const prisma = new PrismaClient();
 
 module.exports = {
   createPaymentEwallet: async (req, res, next) => {
-    const { payment_method, no_telp, total_price } = req.body;
+    const { payment_method, no_telp, booking_code } = req.body;
     const user_id = req.user.user_id;
 
     try {
-      if (!payment_method || !no_telp || !total_price) {
+      if (!payment_method || !no_telp || !booking_code) {
         return res.status(400).json({
           status: false,
           message: "Field dibutuhkan!",
@@ -15,11 +15,11 @@ module.exports = {
         });
       }
 
-      const bookings = await prisma.booking.findMany({
-        where: { user_id, isPaid: false },
+      const booking = await prisma.booking.findFirst({
+        where: { user_id, isPaid: false, booking_code },
       });
 
-      if (bookings.length === 0) {
+      if (!booking) {
         return res.status(404).json({
           status: false,
           message: "Booking tidak ditemukan atau sudah dibayar",
@@ -27,31 +27,45 @@ module.exports = {
         });
       }
 
-      const payments = [];
-      for (const booking of bookings) {
-        const payment = await prisma.payment.create({
-          data: {
-            payment_method,
-            no_telp,
-            total_price,
-            booking: {
-              connect: { booking_id: booking.booking_id },
-            },
-          },
-        });
+      const flight = await prisma.flights.findUnique({
+        where: {
+          flight_id: booking.flight_id
+        }
 
-        await prisma.booking.update({
-          where: { booking_id: booking.booking_id },
-          data: { isPaid: true },
-        });
+      })
 
-        payments.push(payment);
-      }
+      pricePerTicket = flight.price
 
-      return res.status(201).send({
+      const passenger = await prisma.passenger.findMany({
+        where: {
+          booking_id: booking.booking_id
+        }
+      })
+
+      const passengerTotal = Number(passenger.length)
+      console.log(passengerTotal)
+
+      total_price = pricePerTicket * passengerTotal
+
+      const payment = await prisma.payment.create({
+        data: {
+          payment_method,
+          no_telp,
+          total_price
+        }
+      })
+
+      await prisma.booking.update({
+        where: { booking_id: booking.booking_id },
+        data: { isPaid: true },
+      });
+
+
+
+      return res.status(201).json({
         status: true,
         message: "Pembayaran berhasil ditambahkan",
-        data: payments,
+        data: payment
       });
     } catch (error) {
       next(error);
@@ -59,24 +73,23 @@ module.exports = {
   },
 
   createPaymentBank: async (req, res, next) => {
-    const { payment_method, card_number, valid_until, total_price } = req.body;
+    const { payment_method, card_number, valid_until, booking_code } = req.body;
     const user_id = req.user.user_id;
 
-    console.log("Request Body:", req.body);
-    console.log("User ID:", user_id);
     try {
-      if (!payment_method || !card_number || !valid_until || !total_price) {
+      if (!payment_method || !card_number || !valid_until || !booking_code) {
         return res.status(400).json({
           status: false,
           message: "Field dibutuhkan!",
           data: null,
         });
       }
-      const bookings = await prisma.booking.findMany({
-        where: { user_id, isPaid: false },
+
+      const booking = await prisma.booking.findFirst({
+        where: { user_id, isPaid: false, booking_code },
       });
 
-      if (bookings.length === 0) {
+      if (!booking) {
         return res.status(404).json({
           status: false,
           message: "Booking tidak ditemukan atau sudah dibayar",
@@ -84,32 +97,46 @@ module.exports = {
         });
       }
 
-      const payments = [];
-      for (const booking of bookings) {
-        const payment = await prisma.payment.create({
-          data: {
-            payment_method,
-            card_number,
-            valid_until,
-            total_price,
-            booking: {
-              connect: { booking_id: booking.booking_id },
-            },
-          },
-        });
+      const flight = await prisma.flights.findUnique({
+        where: {
+          flight_id: booking.flight_id
+        }
 
-        await prisma.booking.update({
-          where: { booking_id: booking.booking_id },
-          data: { isPaid: true },
-        });
+      })
 
-        payments.push(payment);
-      }
+      pricePerTicket = flight.price
 
-      return res.status(201).send({
+      const passenger = await prisma.passenger.findMany({
+        where: {
+          booking_id: booking.booking_id
+        }
+      })
+
+      const passengerTotal = Number(passenger.length)
+      console.log(passengerTotal)
+
+      total_price = pricePerTicket * passengerTotal
+
+      const payment = await prisma.payment.create({
+        data: {
+          payment_method,
+          card_number,
+          valid_until,
+          total_price
+        }
+      })
+
+      await prisma.booking.update({
+        where: { booking_id: booking.booking_id },
+        data: { isPaid: true },
+      });
+
+
+
+      return res.status(201).json({
         status: true,
         message: "Pembayaran berhasil ditambahkan",
-        data: payments,
+        data: payment
       });
     } catch (error) {
       next(error);
