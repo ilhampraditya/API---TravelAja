@@ -19,11 +19,11 @@ Content-Type: application/json
 
 ### Verify OTP
 POST http://localhost:3000/api/v1/verify-otp
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoyLCJlbWFpbCI6ImVsb3hodG9wc0BtYXhhbWJhLmNvbSIsImlhdCI6MTcxNzU5NDYyNywiZXhwIjoxNzE3NjgxMDI3fQ.z6YGSf4fxxBE5s8johIoeed5GzcRqD9SlPKBFaW9rKs
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoxMSwiZW1haWwiOiJibGxrdHRnZUBtaXRlb24uY29tIiwiaWF0IjoxNzE3Njg2ODU1LCJleHAiOjE3MTc3NzMyNTV9.xAWU-V9P5NskJcXxipM59hJ1Mh2DRTJQ3Q4YLk7_O4s
 Content-Type: application/json
 
 {
-  "otp": 626964
+  "otp": 665073
 }
 
 ### get all user
@@ -56,17 +56,17 @@ POST http://localhost:3000/api/v1/forgot-password
 Content-Type: application/json
 
 {
-    "email": "kqdytn@mynanaimohomes.com"
+    "email": "bllkttge@miteon.com"
 }
 
 ###
 POST http://localhost:3000/api/v1/reset-password
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImtxZHl0bkBteW5hbmFpbW9ob21lcy5jb20iLCJpYXQiOjE3MTcwMTQxOTd9.v47PUU1iUpDkXhoAykf4isXxxct6KazIAxLvQtf2n-c
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoxMSwiZW1haWwiOiJibGxrdHRnZUBtaXRlb24uY29tIiwiaWF0IjoxNzE3Njg3MTA4fQ._gAQmd7B1zXf6Yt922s1ztT0pk0ovcvcshsQGOx-xpw
 Content-Type: application/json
 
 {
-  "password": "newPassword1234",
-  "confirmPassword": "newPassword1234"
+  "password": "newPassword123",
+  "confirmPassword": "newPassword123"
 }
 
 ### GET PROFILE

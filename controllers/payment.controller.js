@@ -29,43 +29,50 @@ module.exports = {
 
       const flight = await prisma.flights.findUnique({
         where: {
-          flight_id: booking.flight_id
-        }
+          flight_id: booking.flight_id,
+        },
+      });
 
-      })
-
-      pricePerTicket = flight.price
+      pricePerTicket = flight.price;
 
       const passenger = await prisma.passenger.findMany({
         where: {
-          booking_id: booking.booking_id
-        }
-      })
+          booking_id: booking.booking_id,
+        },
+      });
 
-      const passengerTotal = Number(passenger.length)
-      console.log(passengerTotal)
+      const passengerTotal = Number(passenger.length);
+      console.log(passengerTotal);
 
-      total_price = pricePerTicket * passengerTotal
+      total_price = pricePerTicket * passengerTotal;
 
       const payment = await prisma.payment.create({
         data: {
           payment_method,
           no_telp,
-          total_price
-        }
-      })
+          total_price,
+        },
+      });
 
       await prisma.booking.update({
         where: { booking_id: booking.booking_id },
         data: { isPaid: true },
       });
 
+      const notif = await prisma.notification.create({
+        data: {
+          title: 'Pembayaran Berhasil',
+          message: `Pembayaran untuk booking dengan kode ${booking_code} berhasil.`,
+          user_id,
+        },
+      });
 
-
+      console.log(notif);
+      
       return res.status(201).json({
         status: true,
         message: "Pembayaran berhasil ditambahkan",
-        data: payment
+        data: payment,
       });
     } catch (error) {
       next(error);
@@ -99,44 +106,51 @@ module.exports = {
 
       const flight = await prisma.flights.findUnique({
         where: {
-          flight_id: booking.flight_id
-        }
+          flight_id: booking.flight_id,
+        },
+      });
 
-      })
-
-      pricePerTicket = flight.price
+      pricePerTicket = flight.price;
 
       const passenger = await prisma.passenger.findMany({
         where: {
-          booking_id: booking.booking_id
-        }
-      })
+          booking_id: booking.booking_id,
+        },
+      });
 
-      const passengerTotal = Number(passenger.length)
-      console.log(passengerTotal)
+      const passengerTotal = Number(passenger.length);
+      console.log(passengerTotal);
 
-      total_price = pricePerTicket * passengerTotal
+      total_price = pricePerTicket * passengerTotal;
 
       const payment = await prisma.payment.create({
         data: {
           payment_method,
           card_number,
           valid_until,
-          total_price
-        }
-      })
+          total_price,
+        },
+      });
 
       await prisma.booking.update({
         where: { booking_id: booking.booking_id },
         data: { isPaid: true },
       });
 
+      const notif = await prisma.notification.create({
+        data: {
+          title: 'Pembayaran Berhasil',
+          message: `Pembayaran untuk booking dengan kode ${booking_code} berhasil.`,
+          user_id,
+        },
+      });
 
+      console.log(notif);
 
       return res.status(201).json({
         status: true,
         message: "Pembayaran berhasil ditambahkan",
-        data: payment
+        data: payment,
       });
     } catch (error) {
       next(error);

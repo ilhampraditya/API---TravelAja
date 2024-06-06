@@ -12,14 +12,14 @@ Content-Type: application/json
 
 ### CREATE PAYMENT BANK
 POST http://localhost:3000/api/v1/payment_bank
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjo1LCJlbWFpbCI6IndleXdzdGxtaWFAbmVzcHJlc3NvcGl4aWUuY29tIiwiaWF0IjoxNzE3NDE1NjM1LCJleHAiOjE3MTc1MDIwMzV9.6-dyTsCUB7DFkQ0BOAgiiuh9dms9BYfpEoWTCLZvxCw
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoxMSwiZW1haWwiOiJibGxrdHRnZUBtaXRlb24uY29tIiwiaWF0IjoxNzE3Njg3MTA4fQ._gAQmd7B1zXf6Yt922s1ztT0pk0ovcvcshsQGOx-xpw
 Content-Type: application/json
 
 {
     "payment_method": "BRI",
     "card_number": "82748274284287421",
     "valid_until": "12/25",
-    "booking_code": "TVLAJA-000004"
+    "booking_code": "TVLAJA-000003"
 }
 
 ###
