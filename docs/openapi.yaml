@@ -944,12 +944,12 @@ paths:
 
   /flights:
     get:
-      summary: Mengambil semua data penerbangan 
+      summary: Mengambil semua data penerbangan
       tags:
-        - Flights 
+        - Flights
       description: Get all available flights || jika promotion null maka object promotion null
       responses:
-        '200':
+        "200":
           description: Successful operation
           content:
             application/json:
@@ -979,15 +979,15 @@ paths:
                         date:
                           type: string
                           format: date-time
-                          example: '2024-06-05T00:00:00.000Z'
+                          example: "2024-06-05T00:00:00.000Z"
                         departure_time:
                           type: string
                           format: date-time
-                          example: '2024-06-05T14:00:00.000Z'
+                          example: "2024-06-05T14:00:00.000Z"
                         arrival_time:
                           type: string
                           format: date-time
-                          example: '2024-06-05T18:00:00.000Z'
+                          example: "2024-06-05T18:00:00.000Z"
                         airline_id:
                           type: string
                           example: QG
@@ -1015,13 +1015,13 @@ paths:
                               example: Citilink
                             baggage:
                               type: string
-                              example: '30'
+                              example: "30"
                             cabin_baggage:
                               type: string
-                              example: '7'
+                              example: "7"
                             url_logo:
                               type: string
-                              example: 'https://ik.imagekit.io/travelaja/1717591564516_W7yo6KA-B.jpg'
+                              example: "https://ik.imagekit.io/travelaja/1717591564516_W7yo6KA-B.jpg"
                         arrival_airport:
                           type: object
                           properties:
@@ -1069,14 +1069,14 @@ paths:
                               example: 20
                             startDate:
                               format: date-time
-                              example: '2024-06-05T00:00:00.000Z'
+                              example: "2024-06-05T00:00:00.000Z"
                             endDate:
                               format: date-time
-                              example: '2024-06-05T00:00:00.000Z'
+                              example: "2024-06-05T00:00:00.000Z"
     post:
       summary: Membuat penerbangan baru
       tags:
-        - Flights 
+        - Flights
       description: Endpoint ini digunakan untuk membuat penerbangan baru. || jika promotion null maka object promotion null || jika promotion null maka object promotion_id bisa dihapus
       requestBody:
         required: true
@@ -1127,7 +1127,7 @@ paths:
                   example: 1
                   description: ID promosi (opsional).
       responses:
-        '201':
+        "201":
           description: Penerbangan berhasil dibuat
           content:
             application/json:
@@ -1155,15 +1155,15 @@ paths:
                       date:
                         type: string
                         format: date
-                        example: '2024-06-05'
+                        example: "2024-06-05"
                       departure_time:
                         type: string
                         format: date-time
-                        example: '2024-06-05T14:00:00.000Z'
+                        example: "2024-06-05T14:00:00.000Z"
                       arrival_time:
                         type: string
                         format: date-time
-                        example: '2024-06-05T18:00:00.000Z'
+                        example: "2024-06-05T18:00:00.000Z"
                       airline_id:
                         type: string
                         example: QG
@@ -1180,8 +1180,8 @@ paths:
                       seat_class_id:
                         type: integer
                         example: 1
-                    
-        '400':
+
+        "400":
           description: Permintaan tidak valid.
           content:
             application/json:
@@ -1194,11 +1194,11 @@ paths:
                   message:
                     type: string
                     example: "Airline tidak ditemukan"
-                  data: 
+                  data:
                     type: boolean
                     example: null
-                  
-        '409':
+
+        "409":
           description: Kode penerbangan sudah ada, silahkan coba yang lain!
           content:
             application/json:
@@ -1211,7 +1211,7 @@ paths:
                   message:
                     type: string
                     example: "Kode penerbangan sudah ada, silahkan coba yang lain!"
-                  data: 
+                  data:
                     type: boolean
                     example: null
         "404":
@@ -1372,7 +1372,7 @@ paths:
                   type: integer
                   example: 1
       responses:
-        '200':
+        "200":
           description: Successful operation
           content:
             application/json:
@@ -1402,15 +1402,15 @@ paths:
                         date:
                           type: string
                           format: date-time
-                          example: '2024-06-05T00:00:00.000Z'
+                          example: "2024-06-05T00:00:00.000Z"
                         departure_time:
                           type: string
                           format: date-time
-                          example: '2024-06-05T14:00:00.000Z'
+                          example: "2024-06-05T14:00:00.000Z"
                         arrival_time:
                           type: string
                           format: date-time
-                          example: '2024-06-05T18:00:00.000Z'
+                          example: "2024-06-05T18:00:00.000Z"
                         airline_id:
                           type: string
                           example: QG
@@ -1438,13 +1438,13 @@ paths:
                               example: Citilink
                             baggage:
                               type: string
-                              example: '30'
+                              example: "30"
                             cabin_baggage:
                               type: string
-                              example: '7'
+                              example: "7"
                             url_logo:
                               type: string
-                              example: 'https://ik.imagekit.io/travelaja/1717591564516_W7yo6KA-B.jpg'
+                              example: "https://ik.imagekit.io/travelaja/1717591564516_W7yo6KA-B.jpg"
                         arrival_airport:
                           type: object
                           properties:
@@ -1492,10 +1492,10 @@ paths:
                               example: 20
                             startDate:
                               format: date-time
-                              example: '2024-06-05T00:00:00.000Z'
+                              example: "2024-06-05T00:00:00.000Z"
                             endDate:
                               format: date-time
-                              example: '2024-06-05T00:00:00.000Z'
+                              example: "2024-06-05T00:00:00.000Z"
         "404":
           description: Penerbangan Not Found
           content:
@@ -1514,11 +1514,11 @@ paths:
                     example: null
   /passenger:
     post:
-      summary: membuat data penumpang 
+      summary: membuat data penumpang
       security:
-      - bearerAuth: []
+        - bearerAuth: []
       tags:
-      - Passenger
+        - Passenger
       requestBody:
         required: true
         content:
@@ -1624,14 +1624,13 @@ paths:
                     type: string
                     example: null
 
-  
   /mybooking:
     get:
-      summary: mengambil data booking berdasarkan token 
+      summary: mengambil data booking berdasarkan token
       tags:
-      - Booking
+        - Booking
       security:
-      - bearerAuth: []
+        - bearerAuth: []
       responses:
         "200":
           description: Data pemesanan berhasil diambil
@@ -1677,16 +1676,16 @@ paths:
     get:
       summary: mengambil data booking berdasarkan id dan detail riwayat pemesanan
       tags:
-      - Booking
+        - Booking
       security:
-      - bearerAuth: []
+        - bearerAuth: []
       parameters:
-      - in: path
-        name: id
-        required: true
-        schema:
-          type: string
-        description: Kode booking
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+          description: Kode booking
       responses:
         "200":
           description: Data pemesanan berhasil diambil
