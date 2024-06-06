@@ -8,6 +8,17 @@ GET http://localhost:3000/api/v1/airport?search=lombok
 POST http://localhost:3000/api/v1/airport
 Content-Type: application/json
 
+{
+    "airport_id": "LOP",
+    "airport_name": "Lombok Praya International Airport",
+    "continent": "Asia",
+    "country": "Indonesia",
+    "city": "Lombok"
+}
+###
+POST https://expressjs-develop.up.railway.app/api/v1/airport
+Content-Type: application/json
+
 # {
 #     "airport_id": "LOP",
 #     "airport_name": "Lombok Praya International Airport",

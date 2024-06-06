@@ -13,6 +13,7 @@ const {
   getuserbyid,
   updateuserbyid,
   googleOauth2,
+  changePassword,
 } = require("../../controllers/user.controller");
 const { restrict } = require("../../middlewares/auth.middleware");
 const { uploadAvatar } = require("../../controllers/media.controllers");
@@ -32,6 +33,7 @@ router.post("/verify-otp", restrict, verifyOtp);
 router.post("/forgot-password", forgotPassword);
 router.post("/reset-password", restrict, resetPassword);
 router.get("/reset-password", verifyResetToken);
+router.put("/change-password", restrict, changePassword)
 
 router.get(
   "/google",

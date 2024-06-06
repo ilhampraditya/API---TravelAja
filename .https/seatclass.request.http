@@ -13,6 +13,15 @@ Content-Type: application/json
   "seat_amount": 60,
   "airlines_id": "QG"
 }
+###
+POST https://expressjs-develop.up.railway.app/api/v1/seatclasses
+Content-Type: application/json
+
+{
+  "seat_class_type": "Economy",
+  "seat_amount": 60,
+  "airlines_id": "QG"
+}
 
 
 

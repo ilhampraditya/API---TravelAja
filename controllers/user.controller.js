@@ -529,6 +529,46 @@ module.exports = {
             err: null,
             data: { token }
         });
+    },
+    changePassword: async (req, res, next) => {
+        try {
+            let { user_id } = req.user
+            let { oldPassword, newPassword } = req.body
+
+            if (!oldPassword || !newPassword) {
+                return res.status(400).json({
+                    status: false,
+                    message: "field dibutuhkan!",
+                    data: null,
+                });
+            }
+
+            const user = await prisma.user.findUnique({ where: { user_id } })
+
+            const isSamePassword = await bcrypt.compare(oldPassword, user.password);
+
+            if (!isSamePassword) {
+                return res.status(400).json({
+                    status: false,
+                    message: "Password lama tidak sesuai!",
+                    data: null,
+                });
+            }
+
+            let encryptedPassword = await bcrypt.hash(newPassword, 10);
+            const updatedUser = await prisma.user.update({ where: { user_id }, data: { password: encryptedPassword } })
+
+            return res.status(200).json({
+                status: true,
+                message: "Password berhasil diubah!",
+                data: null,
+            });
+
+
+        }
+        catch (error) {
+            next(error)
+        }
     }
 
 };
