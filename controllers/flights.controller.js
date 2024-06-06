@@ -174,8 +174,8 @@ module.exports = {
   },
 
   searchFlight: async (req, res, next) => {
-    const { arrival_airport_id, destination_airport_id, date, seat_class_id } =
-      req.body;
+    let { arrival_airport_id, destination_airport_id, date, seat_class_id } =
+      req.query;
     try {
       if (
         !arrival_airport_id ||
@@ -189,6 +189,8 @@ module.exports = {
           data: null,
         });
       }
+
+      seat_class_id = Number(seat_class_id)
 
       const newDate = new Date(date);
       newDate.setUTCHours(0, 0, 0, 0);
