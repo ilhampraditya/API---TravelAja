@@ -1235,8 +1235,6 @@ paths:
       summary: mengambil data penerbangan berdasarkan parameter id
       tags:
         - Flights
-      security:
-        - bearerAuth: []
       parameters:
         - name: id
           in: path

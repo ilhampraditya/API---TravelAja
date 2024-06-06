@@ -7,19 +7,31 @@ datasource db {
     url      = env("DATABASE_URL")
 }
 
+model Notification {
+    id      Int     @id @default(autoincrement())
+    title   String
+    message String
+    isRead  Boolean @default(false)
+    User    User   @relation(fields: [user_id], references: [user_id])
+    user_id Int
+
+    @@map("notifications")
+}
+
 model User {
-    user_id       Int       @id @default(autoincrement())
+    user_id       Int            @id @default(autoincrement())
     name          String?
-    email         String    @unique
-    no_telp       String?   @unique
+    email         String         @unique
+    no_telp       String?        @unique
     password      String?
     otp           Int?
     otpExpiration DateTime?
-    isVerified    Boolean   @default(false)
-    role          String    @default("user")
+    isVerified    Boolean        @default(false)
+    role          String         @default("user")
     google_id     String?
     avatar_url    String?
     booking       Booking[]
+    notification  Notification[]
 
     @@map("users")
 }
@@ -157,10 +169,3 @@ model Payment {
     @@map("payments")
 }
 
-model Notifikasi{
-    notifikasi_id Int      @id @default(autoincrement())
-    title String?
-    message String?
-    isRead Boolean  @default(false)
-
-}

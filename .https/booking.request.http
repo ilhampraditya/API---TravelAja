@@ -1,6 +1,6 @@
 ### CREATE BOOKING
 POST http://localhost:3000/api/v1/booking
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoyLCJlbWFpbCI6ImVsb3hodG9wc0BtYXhhbWJhLmNvbSIsImlhdCI6MTcxNzU5NDYyNywiZXhwIjoxNzE3NjgxMDI3fQ.z6YGSf4fxxBE5s8johIoeed5GzcRqD9SlPKBFaW9rKs
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoxMSwiZW1haWwiOiJibGxrdHRnZUBtaXRlb24uY29tIiwiaWF0IjoxNzE3Njg3MTA4fQ._gAQmd7B1zXf6Yt922s1ztT0pk0ovcvcshsQGOx-xpw
 Content-Type: application/json
 
 {
@@ -9,7 +9,7 @@ Content-Type: application/json
 
 ### get booking by token
 GET http://localhost:3000/api/v1/mybooking
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoyLCJlbWFpbCI6ImVsb3hodG9wc0BtYXhhbWJhLmNvbSIsImlhdCI6MTcxNzU5NDYyNywiZXhwIjoxNzE3NjgxMDI3fQ.z6YGSf4fxxBE5s8johIoeed5GzcRqD9SlPKBFaW9rKs
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoxMSwiZW1haWwiOiJibGxrdHRnZUBtaXRlb24uY29tIiwiaWF0IjoxNzE3Njg3MTA4fQ._gAQmd7B1zXf6Yt922s1ztT0pk0ovcvcshsQGOx-xpw
 
 ### get all booking
 GET http://localhost:3000/api/v1/booking
