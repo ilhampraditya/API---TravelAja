@@ -15,14 +15,25 @@ Content-Type: application/json
     "country": "Indonesia",
     "city": "Lombok"
 }
+###
+POST https://expressjs-develop.up.railway.app/api/v1/airport
+Content-Type: application/json
 
 # {
-#     "airport_id": "CGK",
-#     "airport_name": "Soekarno Hatta International Airport",
+#     "airport_id": "LOP",
+#     "airport_name": "Lombok Praya International Airport",
 #     "continent": "Asia",
 #     "country": "Indonesia",
-#     "city": "Jakarta"
+#     "city": "Lombok"
 # }
+
+{
+    "airport_id": "CGK",
+    "airport_name": "Soekarno Hatta International Airport",
+    "continent": "Asia",
+    "country": "Indonesia",
+    "city": "Jakarta"
+}
 
 ### edit airport berdasarkan airport id
 PUT http://localhost:3000/api/v1/airport/YIA

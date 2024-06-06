@@ -362,7 +362,7 @@ paths:
                   data:
                     type: string
                     example: null
-  /index:
+  /all-user:
     get:
       summary: Mendapatkan semua user
       tags:
