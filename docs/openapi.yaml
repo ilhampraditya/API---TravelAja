@@ -1352,6 +1352,25 @@ paths:
       tags:
         - Flights
       description: Get all available flights
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                arrival_airport_id:
+                  type: string
+                  example: "CGK"
+                destination_airport_id:
+                  type: string
+                  example: "LOP"
+                date :
+                  type: string
+                  example: 2024-06-05
+                seat_class_id:
+                  type: integer
+                  example: 1
       responses:
         "200":
           description: Successful operation

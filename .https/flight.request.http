@@ -40,7 +40,7 @@ Content-Type: application/json
 }
 
 ### SEARCH FLIGHT
-GET http://localhost:3000/api/v1/search
+POST http://localhost:3000/api/v1/search
 Content-Type: application/json
 
 {
@@ -49,3 +49,5 @@ Content-Type: application/json
   "date":"2024-06-05",
   "seat_class_id": 1
 }
+
+GET http://localhost:3000/api/v1/search?arrival_airport_id=CGK&destination_airport_id=LOP&date=2024-06-05&seat_class_id=1

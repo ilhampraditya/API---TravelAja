@@ -5,12 +5,11 @@ const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
 const crypto = require("crypto");
 const { JWT_SECRET_KEY } = process.env;
-const { formatdate } = require('../libs/formatdate')
+const { formatdate } = require("../libs/formatdate");
 const nodemailer = require("../libs/nodemailer");
 const { getHTML, sendMail } = require("../libs/nodemailer");
 const { generateOTP } = require("../libs/otpGenerator");
-const { generateRandomString } = require("../libs/passGenerator")
-
+const { generateRandomString } = require("../libs/passGenerator");
 
 module.exports = {
     register: async (req, res, next) => {
@@ -28,8 +27,9 @@ module.exports = {
             const emailExist = await prisma.user.findUnique({ where: { email } });
 
             if (emailExist && !emailExist.isVerified) {
-                const deleteUser = await prisma.user.delete({ where: { id: emailExist.id } })
-
+                const deleteUser = await prisma.user.delete({
+                    where: { id: emailExist.id },
+                });
             } else if (emailExist) {
                 return res.status(401).json({
                     status: false,
@@ -41,8 +41,9 @@ module.exports = {
             const noTelpExist = await prisma.user.findUnique({ where: { no_telp } });
 
             if (noTelpExist && !noTelpExist.isVerified) {
-                const deleteUser = await prisma.user.delete({ where: { id: noTelpExist.id } })
-
+                const deleteUser = await prisma.user.delete({
+                    where: { id: noTelpExist.id },
+                });
             } else if (noTelpExist) {
                 return res.status(401).json({
                     status: false,
@@ -64,7 +65,7 @@ module.exports = {
                     otp,
                     otpExpiration,
                     role: "user",
-                    isVerified: false
+                    isVerified: false,
                 },
             });
 
@@ -74,11 +75,26 @@ module.exports = {
 
             await sendMail(user.email, subject, emailContent);
 
-            const token = jwt.sign({
-                user_id: user.user_id, email: user.email
-            }, JWT_SECRET_KEY, {
-                expiresIn: '1d'
+            const token = jwt.sign(
+                {
+                    user_id: user.user_id,
+                    email: user.email,
+                },
+                JWT_SECRET_KEY,
+                {
+                    expiresIn: "1d",
+                }
+            );
+
+            const notif = await prisma.notification.create({
+                data: {
+                    title: "Registrasi Berhasil",
+                    message: `Hi! ${name} Akun Anda telah berhasil dibuat`,
+                    user_id: user.user_id,
+                },
             });
+
+            console.log(notif);
 
             return res.status(201).json({
                 status: true,
@@ -136,8 +152,8 @@ module.exports = {
                 where: { user_id: user.user_id },
                 data: {
                     otp: otp,
-                    otpExpiration: new Date(Date.now() + 5 * 60 * 1000) // Sesuaikan dengan kebutuhan Anda
-                }
+                    otpExpiration: new Date(Date.now() + 5 * 60 * 1000), // Sesuaikan dengan kebutuhan Anda
+                },
             });
 
             const subject = "Verifikasi OTP Baru";
@@ -159,9 +175,8 @@ module.exports = {
 
     verifyOtp: async (req, res, next) => {
         try {
-            const { user_id } = req.user
+            const { user_id } = req.user;
             const { otp } = req.body;
-
 
             if (!otp) {
                 return res.status(400).json({
@@ -172,10 +187,10 @@ module.exports = {
             }
 
             const user = await prisma.user.findUnique({
-                where: { user_id }
+                where: { user_id },
             });
 
-            console.log(user)
+            console.log(user);
 
             if (user.otp !== otp) {
                 return res.status(401).json({
@@ -190,10 +205,9 @@ module.exports = {
                 data: {
                     isVerified: true,
                     otp: null,
-                    otpExpiration: null
+                    otpExpiration: null,
                 },
             });
-
 
             return res.status(200).json({
                 status: true,
@@ -219,11 +233,8 @@ module.exports = {
 
             const user = await prisma.user.findFirst({
                 where: {
-                    OR: [
-                        { email: emailOrNoTelp },
-                        { no_telp: emailOrNoTelp }
-                    ]
-                }
+                    OR: [{ email: emailOrNoTelp }, { no_telp: emailOrNoTelp }],
+                },
             });
 
             if (!user) {
@@ -245,14 +256,13 @@ module.exports = {
             if (!user.isVerified) {
                 const user = await prisma.user.findFirst({
                     where: {
-                        OR: [
-                            { email: emailOrNoTelp },
-                            { no_telp: emailOrNoTelp }
-                        ]
-                    }
-                })
+                        OR: [{ email: emailOrNoTelp }, { no_telp: emailOrNoTelp }],
+                    },
+                });
 
-                const deleteUser = await prisma.user.delete({ where: { user_id: user.user_id } })
+                const deleteUser = await prisma.user.delete({
+                    where: { user_id: user.user_id },
+                });
 
                 return res.status(403).json({
                     status: false,
@@ -261,7 +271,11 @@ module.exports = {
                 });
             }
             delete user.password;
-            const token = jwt.sign({ user_id: user.user_id, email: user.email }, JWT_SECRET_KEY, { expiresIn: '1d' });
+            const token = jwt.sign(
+                { user_id: user.user_id, email: user.email },
+                JWT_SECRET_KEY,
+                { expiresIn: "1d" }
+            );
 
             return res.status(200).json({
                 status: true,
@@ -309,7 +323,10 @@ module.exports = {
                     message: "Email tidak ditemukan",
                 });
             }
-            const token = jwt.sign({ email: findUser.email }, JWT_SECRET_KEY);
+            const token = jwt.sign(
+                { user_id: findUser.user_id, email: findUser.email },
+                JWT_SECRET_KEY
+            );
 
             const html = await nodemailer.getHTML("email-reset-password.ejs", {
                 name: findUser.name,
@@ -362,8 +379,7 @@ module.exports = {
             if (!password || !confirmPassword) {
                 return res.status(400).json({
                     status: false,
-                    message:
-                        "Password dan Konfirmasi password harus diisi",
+                    message: "Password dan Konfirmasi password harus diisi",
                     data: null,
                 });
             }
@@ -371,17 +387,14 @@ module.exports = {
             if (password !== confirmPassword) {
                 return res.status(400).json({
                     status: false,
-                    message:
-                        "Pastikan Password dan konfirmasi Password cocok!",
+                    message: "Pastikan Password dan konfirmasi Password cocok!",
                     data: null,
                 });
             }
 
-
-
             const user = await prisma.user.findUnique({
                 where: { email: req.user.email },
-                select: { password: true }
+                select: { password: true },
             });
 
             if (!user) {
@@ -407,13 +420,20 @@ module.exports = {
                 select: { user_id: true, email: true, password: true },
             });
 
+            const notif = await prisma.notification.create({
+                data: {
+                    title: "Password anda telah berubah",
+                    message: "Password akun Anda telah berhasil diubah",
+                    user_id: updateUser.user_id,
+                },
+            });
 
+            console.log(notif);
             res.status(200).json({
                 status: true,
                 message: "Berhasil mengatur ulang password pengguna!",
                 data: updateUser,
             });
-
         } catch (err) {
             next(err);
         }
@@ -421,8 +441,8 @@ module.exports = {
 
     getuserbyid: async (req, res, next) => {
         try {
-            let { user_id } = req.user
-            user_id = Number(user_id)
+            let { user_id } = req.user;
+            user_id = Number(user_id);
             const user = await prisma.user.findUnique({ where: { user_id } });
 
             if (!user) {
@@ -436,9 +456,14 @@ module.exports = {
             return res.status(200).json({
                 status: true,
                 message: "Data pengguna berhasil diambil",
-                data: { user_id: user.user_id, name: user.name, email: user.email, no_telp: user.no_telp, avatar_url: user.avatar_url },
+                data: {
+                    user_id: user.user_id,
+                    name: user.name,
+                    email: user.email,
+                    no_telp: user.no_telp,
+                    avatar_url: user.avatar_url,
+                },
             });
-
         } catch (error) {
             next(error);
         }
@@ -446,9 +471,9 @@ module.exports = {
 
     updateuserbyid: async (req, res, next) => {
         try {
-            let { user_id } = req.user
-            let { name, no_telp } = req.body
-            user_id = Number(user_id)
+            let { user_id } = req.user;
+            let { name, no_telp } = req.body;
+            user_id = Number(user_id);
             const user = await prisma.user.findUnique({ where: { user_id } });
 
             if (!user) {
@@ -485,14 +510,21 @@ module.exports = {
             //     });
             // }
 
-            const updatedUser = await prisma.user.update({ where: { user_id }, data: { name, no_telp } })
+            const updatedUser = await prisma.user.update({
+                where: { user_id },
+                data: { name, no_telp },
+            });
 
             return res.status(200).json({
                 status: true,
                 message: "User profile berhasil diupdate!",
-                data: { user_id: updatedUser.user_id, name: updatedUser.name, no_telp: updatedUser.no_telp, avatar_url: updatedUser.avatar_url },
+                data: {
+                    user_id: updatedUser.user_id,
+                    name: updatedUser.name,
+                    no_telp: updatedUser.no_telp,
+                    avatar_url: updatedUser.avatar_url,
+                },
             });
-
         } catch (error) {
             next(error);
         }
@@ -502,15 +534,22 @@ module.exports = {
         const user = req.user;
         let token = jwt.sign({ user_id: user.user_id }, JWT_SECRET_KEY);
 
-
-        const userExist = await prisma.user.findUnique({ where: { user_id: user.user_id } })
+        const userExist = await prisma.user.findUnique({
+            where: { user_id: user.user_id },
+        });
         if (userExist && !userExist.password) {
             const password = generateRandomString();
             const encryptedPassword = await bcrypt.hash(password, 10);
-            const updatedUser = await prisma.user.update({ where: { user_id: user.user_id }, data: { password: encryptedPassword } })
+            const updatedUser = await prisma.user.update({
+                where: { user_id: user.user_id },
+                data: { password: encryptedPassword },
+            });
 
             const subject = "Kredensial Akun TravelAja";
-            const emailContent = await getHTML("random-password.ejs", { email: updatedUser.email, password });
+            const emailContent = await getHTML("random-password.ejs", {
+                email: updatedUser.email,
+                password,
+            });
             await sendMail(updatedUser.email, subject, emailContent);
 
             return res.status(200).json({
