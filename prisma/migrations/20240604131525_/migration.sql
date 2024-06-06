@@ -1,2 +1,0 @@
--- AlterTable
-ALTER TABLE "payments" ADD COLUMN     "payment_date" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP;
