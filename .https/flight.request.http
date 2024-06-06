@@ -49,3 +49,14 @@ Content-Type: application/json
   "date":"2024-06-05",
   "seat_class_id": 1
 }
+
+###
+GET https://expressjs-develop.up.railway.app/api/v1/search
+Content-Type: application/json
+
+{
+  "arrival_airport_id": "CGK",
+  "destination_airport_id": "LOP",
+  "date":"2024-06-05",
+  "seat_class_id": 1
+}

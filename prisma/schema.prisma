@@ -156,3 +156,11 @@ model Payment {
 
     @@map("payments")
 }
+
+model Notifikasi{
+    notifikasi_id Int      @id @default(autoincrement())
+    title String?
+    message String?
+    isRead Boolean  @default(false)
+
+}
