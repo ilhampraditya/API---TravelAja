@@ -1,4 +1,15 @@
 -- CreateTable
+CREATE TABLE "notifications" (
+    "id" SERIAL NOT NULL,
+    "title" TEXT NOT NULL,
+    "message" TEXT NOT NULL,
+    "isRead" BOOLEAN NOT NULL DEFAULT false,
+    "user_id" INTEGER NOT NULL,
+
+    CONSTRAINT "notifications_pkey" PRIMARY KEY ("id")
+);
+
+-- CreateTable
 CREATE TABLE "users" (
     "user_id" SERIAL NOT NULL,
     "name" TEXT,
@@ -87,6 +98,7 @@ CREATE TABLE "promotions" (
 -- CreateTable
 CREATE TABLE "tickets" (
     "ticket_id" TEXT NOT NULL,
+    "url_qrcode" TEXT NOT NULL,
     "seat_id" INTEGER NOT NULL,
     "passenger_id" INTEGER NOT NULL,
 
@@ -149,6 +161,9 @@ CREATE UNIQUE INDEX "bookings_booking_code_key" ON "bookings"("booking_code");
 
 -- CreateIndex
 CREATE UNIQUE INDEX "bookings_payment_id_key" ON "bookings"("payment_id");
+
+-- AddForeignKey
+ALTER TABLE "notifications" ADD CONSTRAINT "notifications_user_id_fkey" FOREIGN KEY ("user_id") REFERENCES "users"("user_id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "seats" ADD CONSTRAINT "seats_seat_class_id_fkey" FOREIGN KEY ("seat_class_id") REFERENCES "seatclass"("seat_class_id") ON DELETE RESTRICT ON UPDATE CASCADE;
