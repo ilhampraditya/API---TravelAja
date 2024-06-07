@@ -293,13 +293,34 @@ module.exports = {
           if (fraudStatus == 'accept') {
             let payment = await prisma.payment.update({ where: { payment_id: booking.payment_id }, data: { status: 'PAID' } })
             responseData = payment
+            const notif = await prisma.notification.create({
+              data: {
+                title: 'Pembayaran Berhasil',
+                message: `Pembayaran untuk booking dengan kode ${booking.booking_code} berhasil.`,
+                user_id: booking.user_id
+              }
+            });
           }
         } else if (transactionStatus == 'settlement') {
           let payment = await prisma.payment.update({ where: { payment_id: booking.payment_id }, data: { status: 'PAID' } })
           responseData = payment
+          const notif = await prisma.notification.create({
+            data: {
+              title: 'Pembayaran Berhasil',
+              message: `Pembayaran untuk booking dengan kode ${booking.booking_code} berhasil.`,
+              user_id: booking.user_id
+            }
+          });
         } else if (transactionStatus == 'cancel' || transactionStatus == 'deny' || transactionStatus == 'expire') {
           let payment = await prisma.payment.update({ where: { payment_id: booking.payment_id }, data: { status: 'CANCELED' } })
           responseData = payment
+          const notif = await prisma.notification.create({
+            data: {
+              title: 'Pembayaran Gagal',
+              message: `Pembayaran untuk booking dengan kode ${booking.booking_code} gagal.`,
+              user_id: booking.user_id
+            }
+          });
         } else if (transactionStatus == 'pending') {
           let payment = prisma.payment.update({ where: { payment_id: booking.payment_id }, data: { status: 'PENDING_PAYMENT' } })
           responseData = payment
