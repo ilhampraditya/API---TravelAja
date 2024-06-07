@@ -1,3 +1,6 @@
+-- CreateEnum
+CREATE TYPE "transactions_status" AS ENUM ('PENDING_PAYMENT', 'PAID', 'CANCELED');
+
 -- CreateTable
 CREATE TABLE "notifications" (
     "id" SERIAL NOT NULL,
@@ -123,10 +126,11 @@ CREATE TABLE "bookings" (
     "booking_id" SERIAL NOT NULL,
     "booking_code" TEXT NOT NULL,
     "booking_date" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    "isPaid" BOOLEAN NOT NULL DEFAULT false,
     "user_id" INTEGER NOT NULL,
     "flight_id" TEXT NOT NULL,
     "payment_id" INTEGER,
+    "snap_token" TEXT,
+    "snap_redirect_url" TEXT,
 
     CONSTRAINT "bookings_pkey" PRIMARY KEY ("booking_id")
 );
@@ -134,12 +138,9 @@ CREATE TABLE "bookings" (
 -- CreateTable
 CREATE TABLE "payments" (
     "payment_id" SERIAL NOT NULL,
-    "payment_method" TEXT NOT NULL,
-    "no_telp" TEXT,
-    "card_number" TEXT,
-    "valid_until" TEXT,
     "payment_date" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "total_price" DOUBLE PRECISION NOT NULL,
+    "status" "transactions_status" NOT NULL DEFAULT 'PENDING_PAYMENT',
 
     CONSTRAINT "payments_pkey" PRIMARY KEY ("payment_id")
 );

@@ -873,7 +873,6 @@ paths:
                 newPassword:
                   type: string
                   example: "newpassword123"
-               
       responses:
         "200":
           description: password berhasil diupdate!
@@ -891,7 +890,7 @@ paths:
                   data:
                     example: null
         "400":
-          description: Request yang tidak valid karena field yang dibutuhkan tidak ada 
+          description: Request yang tidak valid karena field yang dibutuhkan tidak ada
           content:
             application/json:
               schema:
@@ -920,8 +919,6 @@ paths:
                     example: "Password lama tidak sesuai!"
                   data:
                     example: null
-        
-      
   /promotion:
     post:
       summary: membuat promosi
