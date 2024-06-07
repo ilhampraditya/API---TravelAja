@@ -309,8 +309,7 @@ module.exports = {
 
       res.status(200).json({
         status: 'success',
-        message: 'OK',
-        data: responseData
+        message: 'OK'
       })
 
     } catch (error) {
