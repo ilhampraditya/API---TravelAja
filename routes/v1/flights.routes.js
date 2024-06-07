@@ -11,6 +11,6 @@ const {
 router.get("/flights", getAllFlights);
 router.get("/flights/:id", getFlightById);
 router.post("/flights", createFlight);
-router.post("/search", searchFlight)
+router.get("/search", searchFlight)
 
 module.exports = router;
