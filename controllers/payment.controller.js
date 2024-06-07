@@ -304,6 +304,7 @@ module.exports = {
         } else if (transactionStatus == 'settlement') {
           let payment = await prisma.payment.update({ where: { payment_id: booking.payment_id }, data: { status: 'PAID' } })
           responseData = payment
+
           const notif = await prisma.notification.create({
             data: {
               title: 'Pembayaran Berhasil',
@@ -321,6 +322,7 @@ module.exports = {
               user_id: booking.user_id
             }
           });
+          
         } else if (transactionStatus == 'pending') {
           let payment = prisma.payment.update({ where: { payment_id: booking.payment_id }, data: { status: 'PENDING_PAYMENT' } })
           responseData = payment
