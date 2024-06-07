@@ -4,7 +4,7 @@ const {
   // createPaymentBank,
   getPayment,
   createPaymentMidtrans,
-  webhooks
+  webhookNotification
 } = require("../../controllers/payment.controller");
 const { restrict } = require("../../middlewares/auth.middleware");
 const router = express.Router();
@@ -13,6 +13,6 @@ const router = express.Router();
 // router.post("/payment_bank", restrict, createPaymentBank);
 router.get("/payment", getPayment);
 router.post("/payment", createPaymentMidtrans)
-router.post("/webhook", webhooks)
+router.post("/webhook-midtrans", webhookNotification)
 
 module.exports = router;
