@@ -264,16 +264,16 @@ module.exports = {
   },
 
   webhookNotification: async (req, res, next) => {
-    const { data } = req.body
+    // const { data } = req.body
 
     try {
-      if (!data) {
-        res.status(400).json({
-          status: 'error',
-          message: 'field dibutuhkan!',
-          data: null
-        })
-      }
+      // if (!data) {
+      //   res.status(400).json({
+      //     status: 'error',
+      //     message: 'field dibutuhkan!',
+      //     data: null
+      //   })
+      // }
 
       // const booking = await prisma.booking.findUnique({ where: { booking_code: data.order_id } })
       // if (booking) {
