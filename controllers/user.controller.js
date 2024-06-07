@@ -587,7 +587,7 @@ module.exports = {
             const isSamePassword = await bcrypt.compare(oldPassword, user.password);
 
             if (!isSamePassword) {
-                return res.status(400).json({
+                return res.status(401).json({
                     status: false,
                     message: "Password lama tidak sesuai!",
                     data: null,

@@ -702,7 +702,7 @@ paths:
 
   /updateprofile:
     post:
-      summary: mengupdate profile termasuk password
+      summary: mengupdate profile
       tags:
         - Profile
       security:
@@ -853,6 +853,74 @@ paths:
                   data:
                     type: string
                     example: null
+  /change-password:
+    put:
+      summary: mengupdate password
+      tags:
+        - Profile
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                oldPassword:
+                  type: string
+                  example: "oldpassword123"
+                newPassword:
+                  type: string
+                  example: "newpassword123"
+
+      responses:
+        "200":
+          description: password berhasil diupdate!
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                    example: true
+                  message:
+                    type: string
+                    example: "Password berhasil diubah!"
+                  data:
+                    example: null
+        "400":
+          description: Request yang tidak valid karena field yang dibutuhkan tidak ada
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                    example: false
+                  message:
+                    type: string
+                    example: "Field dibutuhkan!"
+                  data:
+                    example: null
+        "401":
+          description: Otentikasi gagal karena password lama tidak sesuai.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                    example: false
+                  message:
+                    type: string
+                    example: "Password lama tidak sesuai!"
+                  data:
+                    example: null
+
   /promotion:
     post:
       summary: membuat promosi
@@ -1348,32 +1416,43 @@ paths:
                         example: null
   /search:
     get:
-      summary: Mengambil semua data penerbangan by search
+      summary: Mengambil semua data penerbangan berdasarkan pencarian
       tags:
         - Flights
-      description: Get all available flights
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              type: object
-              properties:
-                arrival_airport_id:
-                  type: string
-                  example: "CGK"
-                destination_airport_id:
-                  type: string
-                  example: "LOP"
-                date :
-                  type: string
-                  example: 2024-06-05
-                seat_class_id:
-                  type: integer
-                  example: 1
+      description: Mengambil semua penerbangan yang tersedia berdasarkan kriteria pencarian yang diberikan.
+      parameters:
+        - name: arrival_airport_id
+          in: query
+          required: true
+          description: Kode bandara kedatangan
+          schema:
+            type: string
+            example: CGK
+        - name: destination_airport_id
+          in: query
+          required: true
+          description: Kode bandara tujuan
+          schema:
+            type: string
+            example: LOP
+        - name: date
+          in: query
+          required: true
+          description: Tanggal keberangkatan
+          schema:
+            type: string
+            format: date
+            example: 2024-06-05
+        - name: seat_class_id
+          in: query
+          required: true
+          description: ID kelas tempat duduk
+          schema:
+            type: integer
+            example: 1
       responses:
         "200":
-          description: Successful operation
+          description: Operasi berhasil
           content:
             application/json:
               schema:
@@ -1489,15 +1568,17 @@ paths:
                               example: 1
                             discount:
                               type: string
-                              example: 20
+                              example: 20%
                             startDate:
+                              type: string
                               format: date-time
                               example: "2024-06-05T00:00:00.000Z"
                             endDate:
+                              type: string
                               format: date-time
                               example: "2024-06-05T00:00:00.000Z"
         "404":
-          description: Penerbangan Not Found
+          description: Penerbangan tidak ditemukan
           content:
             application/json:
               schema:
@@ -1508,7 +1589,7 @@ paths:
                     example: false
                   message:
                     type: string
-                    example: "Penerbangan tidak ditemukan"
+                    example: Penerbangan tidak ditemukan
                   data:
                     type: string
                     example: null

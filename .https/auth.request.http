@@ -9,6 +9,28 @@ Content-Type: application/json
   "password": "password123"
 }
 
+### Register User
+POST http://localhost:3000/api/v1/register
+Content-Type: application/json
+
+{
+  "name": "ilham",
+  "email": "wypofgfbghn@muatoc.com",
+  "no_telp": "0823032198469",
+  "password": "password123"
+}
+
+### Register User
+POST http://localhost:3000/api/v1/register
+Content-Type: application/json
+
+{
+  "name": "ilham",
+  "email": "wypofgfbghn@muatoc.com",
+  "no_telp": "0823032198469",
+  "password": "password123"
+}
+
 ### Renew OTP
 POST http://localhost:3000/api/v1/renew-otp
 Content-Type: application/json
@@ -19,11 +41,11 @@ Content-Type: application/json
 
 ### Verify OTP
 POST http://localhost:3000/api/v1/verify-otp
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoxLCJlbWFpbCI6InRhc3hwYm9peGRxZG15eEBteW5hbmFpbW9ob21lcy5jb20iLCJpYXQiOjE3MTc3NTc0ODAsImV4cCI6MTcxNzg0Mzg4MH0.bxt4yxTOB5GCFGv0uWNHQi-CzGXCzl3kI_op1cbH3q4
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoxLCJlbWFpbCI6Ind5cG9mZ2ZiZ2huQG11YXRvYy5jb20iLCJpYXQiOjE3MTc2OTU2ODcsImV4cCI6MTcxNzc4MjA4N30.A9czIepcdWgrM2RbS0KSwiOKl5fqrFkNPy-108fECso
 Content-Type: application/json
 
 {
-  "otp": 417637
+  "otp": 135879
 }
 
 ### get all user
@@ -34,8 +56,8 @@ POST http://localhost:3000/api/v1/login
 Content-Type: application/json
 
 {
-  "emailOrNoTelp": "tasxpboixdqdmyx@mynanaimohomes.com",
-  "password": "password123"
+  "emailOrNoTelp": "wypofgfbghn@muatoc.com",
+  "password": "password1234"
 }
 
 ### auth / login dengan token 
@@ -71,7 +93,7 @@ Content-Type: application/json
 
 ### GET PROFILE
 GET http://localhost:3000/api/v1/profile
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoyLCJlbWFpbCI6ImtxZHl0bkBteW5hbmFpbW9ob21lcy5jb20iLCJpYXQiOjE3MTcwMTQyODksImV4cCI6MTcxNzEwMDY4OX0.oT_JteCY2CrLpPShEPxndJoEEatGAa4T0Cg5Dg5jxiU
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoxLCJlbWFpbCI6Ind5cG9mZ2ZiZ2huQG11YXRvYy5jb20iLCJpYXQiOjE3MTc2OTU2ODcsImV4cCI6MTcxNzc4MjA4N30.A9czIepcdWgrM2RbS0KSwiOKl5fqrFkNPy-108fECso
 
 
 ### UPDATE USER BY ID
@@ -83,6 +105,17 @@ Content-Type: application/json
   "name": "ilham praditya",
   "no_telp": "0976273456700"
 }
+
+### UPDATE PASSWORD
+PUT http://localhost:3000/api/v1/change-password
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoxLCJlbWFpbCI6Ind5cG9mZ2ZiZ2huQG11YXRvYy5jb20iLCJpYXQiOjE3MTc2OTU2ODcsImV4cCI6MTcxNzc4MjA4N30.A9czIepcdWgrM2RbS0KSwiOKl5fqrFkNPy-108fECso
+Content-Type: application/json
+
+{
+    "oldPassword":"password123",
+    "newPassword":"password1234"
+}
+
 
 ###
 GET http://localhost:3000/api/v1/google
