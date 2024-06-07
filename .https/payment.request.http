@@ -33,3 +33,13 @@ Content-Type: application/json
 {
     "booking_code": "TVLAJA-000004"
 }
+
+###
+POST https://expressjs-develop.up.railway.app/api/v1/webhook
+Content-Type: application/json
+
+{
+    "data": {
+        "tes": "1"
+    }
+}
