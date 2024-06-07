@@ -264,47 +264,47 @@ module.exports = {
   },
 
   webhookNotification: async (req, res, next) => {
-    // const { data } = req.body
+    const data = req.body
 
     try {
-      // if (!data) {
-      //   res.status(400).json({
-      //     status: 'error',
-      //     message: 'field dibutuhkan!',
-      //     data: null
-      //   })
-      // }
+      if (!data) {
+        res.status(400).json({
+          status: 'error',
+          message: 'field dibutuhkan!',
+          data: null
+        })
+      }
 
-      // const booking = await prisma.booking.findUnique({ where: { booking_code: data.order_id } })
-      // if (booking) {
-      //   const hash = crypto.createHash('sha512').update(`${booking.booking_code}${data.status_code}${data.gross_amount}${MIDTRANS_SERVER_KEY}`).digest('hex')
-      //   if (data.signature_key !== hash) {
-      //     return {
-      //       status: 'error',
-      //       message: 'invalid signature key!'
-      //     }
-      //   }
+      const booking = await prisma.booking.findUnique({ where: { booking_code: data.order_id } })
+      if (booking) {
+        const hash = crypto.createHash('sha512').update(`${booking.booking_code}${data.status_code}${data.gross_amount}${MIDTRANS_SERVER_KEY}`).digest('hex')
+        if (data.signature_key !== hash) {
+          return {
+            status: 'error',
+            message: 'invalid signature key!'
+          }
+        }
 
-      //   let responseData = null
-      //   let transactionStatus = data.transaction_status
-      //   let fraudStatus = data.fraud_status
+        let responseData = null
+        let transactionStatus = data.transaction_status
+        let fraudStatus = data.fraud_status
 
-      //   if (transactionStatus == 'capture') {
-      //     if (fraudStatus == 'accept') {
-      //       let payment = await prisma.payment.update({ where: { payment_id: booking.payment_id }, data: { status: 'PAID' } })
-      //       responseData = payment
-      //     }
-      //   } else if (transactionStatus == 'settlement') {
-      //     let payment = await prisma.payment.update({ where: { payment_id: booking.payment_id }, data: { status: 'PAID' } })
-      //     responseData = payment
-      //   } else if (transactionStatus == 'cancel' || transactionStatus == 'deny' || transactionStatus == 'expire') {
-      //     let payment = await prisma.payment.update({ where: { payment_id: booking.payment_id }, data: { status: 'CANCELED' } })
-      //     responseData = payment
-      //   } else if (transactionStatus == 'pending') {
-      //     let payment = prisma.payment.update({ where: { payment_id: booking.payment_id }, data: { status: 'PENDING_PAYMENT' } })
-      //     responseData = payment
-      //   }
-      // }
+        if (transactionStatus == 'capture') {
+          if (fraudStatus == 'accept') {
+            let payment = await prisma.payment.update({ where: { payment_id: booking.payment_id }, data: { status: 'PAID' } })
+            responseData = payment
+          }
+        } else if (transactionStatus == 'settlement') {
+          let payment = await prisma.payment.update({ where: { payment_id: booking.payment_id }, data: { status: 'PAID' } })
+          responseData = payment
+        } else if (transactionStatus == 'cancel' || transactionStatus == 'deny' || transactionStatus == 'expire') {
+          let payment = await prisma.payment.update({ where: { payment_id: booking.payment_id }, data: { status: 'CANCELED' } })
+          responseData = payment
+        } else if (transactionStatus == 'pending') {
+          let payment = prisma.payment.update({ where: { payment_id: booking.payment_id }, data: { status: 'PENDING_PAYMENT' } })
+          responseData = payment
+        }
+      }
 
 
       res.status(200).json({
