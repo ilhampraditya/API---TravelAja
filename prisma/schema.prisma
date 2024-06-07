@@ -12,7 +12,7 @@ model Notification {
     title   String
     message String
     isRead  Boolean @default(false)
-    User    User   @relation(fields: [user_id], references: [user_id])
+    User    User    @relation(fields: [user_id], references: [user_id])
     user_id Int
 
     @@map("notifications")
@@ -141,31 +141,34 @@ model Passenger {
 }
 
 model Booking {
-    booking_id   Int         @id @default(autoincrement())
-    booking_code String      @unique
-    booking_date DateTime    @default(now())
-    isPaid       Boolean     @default(false)
-    passenger    Passenger[]
-    user         User        @relation(fields: [user_id], references: [user_id])
-    user_id      Int
-    flight       Flights     @relation(fields: [flight_id], references: [flight_id])
-    flight_id    String
-    payment      Payment?    @relation(fields: [payment_id], references: [payment_id])
-    payment_id   Int?        @unique
+    booking_id        Int         @id @default(autoincrement())
+    booking_code      String      @unique
+    booking_date      DateTime    @default(now())
+    passenger         Passenger[]
+    user              User        @relation(fields: [user_id], references: [user_id])
+    user_id           Int
+    flight            Flights     @relation(fields: [flight_id], references: [flight_id])
+    flight_id         String
+    payment           Payment?    @relation(fields: [payment_id], references: [payment_id])
+    payment_id        Int?        @unique
+    snap_token        String?
+    snap_redirect_url String?
 
     @@map("bookings")
 }
 
 model Payment {
-    payment_id     Int      @id @default(autoincrement())
-    payment_method String
-    no_telp        String?
-    card_number    String?
-    valid_until    String?
-    payment_date   DateTime @default(now())
-    total_price    Float
-    booking        Booking?
+    payment_id   Int                 @id @default(autoincrement())
+    payment_date DateTime            @default(now())
+    total_price  Float
+    status       transactions_status @default(PENDING_PAYMENT)
+    booking      Booking?
 
     @@map("payments")
 }
 
+enum transactions_status {
+    PENDING_PAYMENT
+    PAID
+    CANCELED
+}
