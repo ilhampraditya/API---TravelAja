@@ -24,3 +24,12 @@ Content-Type: application/json
 
 ###
 GET http://localhost:3000/api/v1/payment
+
+
+### CREATE PAYMENT MIDTRANS
+POST http://localhost:3000/api/v1/payment
+Content-Type: application/json
+
+{
+    "booking_code": "TVLAJA-000004"
+}

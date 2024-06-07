@@ -1,10 +1,21 @@
 ### Register User
-POST https://expressjs-develop.up.railway.app/api/v1/register
+POST http://localhost:3000/api/v1/register
 Content-Type: application/json
 
 {
   "name": "ilham",
-  "email": "wtbrwcfijjzkcgb@maxamba.com",
+  "email": "tasxpboixdqdmyx@mynanaimohomes.com",
+  "no_telp": "08230332184629",
+  "password": "password123"
+}
+
+### Register User
+POST http://localhost:3000/api/v1/register
+Content-Type: application/json
+
+{
+  "name": "ilham",
+  "email": "wypofgfbghn@muatoc.com",
   "no_telp": "0823032198469",
   "password": "password123"
 }
@@ -67,17 +78,17 @@ POST http://localhost:3000/api/v1/forgot-password
 Content-Type: application/json
 
 {
-    "email": "bllkttge@miteon.com"
+    "email": "kqdytn@mynanaimohomes.com"
 }
 
 ###
 POST http://localhost:3000/api/v1/reset-password
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoxMSwiZW1haWwiOiJibGxrdHRnZUBtaXRlb24uY29tIiwiaWF0IjoxNzE3Njg3MTA4fQ._gAQmd7B1zXf6Yt922s1ztT0pk0ovcvcshsQGOx-xpw
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImtxZHl0bkBteW5hbmFpbW9ob21lcy5jb20iLCJpYXQiOjE3MTcwMTQxOTd9.v47PUU1iUpDkXhoAykf4isXxxct6KazIAxLvQtf2n-c
 Content-Type: application/json
 
 {
-  "password": "newPassword123",
-  "confirmPassword": "newPassword123"
+  "password": "newPassword1234",
+  "confirmPassword": "newPassword1234"
 }
 
 ### GET PROFILE
@@ -108,3 +119,15 @@ Content-Type: application/json
 
 ###
 GET http://localhost:3000/api/v1/google
+
+
+### GANTI PASSWORD
+
+PUT http://localhost:3000/api/v1/change-password
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjozLCJlbWFpbCI6InRydWdlY3Nicm5AbmVzcHJlc3NvcGl4aWUuY29tIiwiaWF0IjoxNzE3Njg1Mjg0LCJleHAiOjE3MTc3NzE2ODR9.gjZ3x0Yh2OgxNDC_cCSshoxu_-nveUJjdrKtxRJs4wI
+Content-Type: application/json
+
+{
+  "oldPassword": "password123",
+  "newPassword": "newpassword123"
+}
