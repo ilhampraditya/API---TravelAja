@@ -4,8 +4,8 @@ Content-Type: application/json
 
 {
   "name": "ilham",
-  "email": "xfsctqgcdx@nespressopixie.com",
-  "no_telp": "0821216229",
+  "email": "bllkttge@miteon.com",
+  "no_telp": "08212162211119",
   "password": "password123"
 }
 
@@ -19,7 +19,7 @@ Content-Type: application/json
 
 ### Verify OTP
 POST https://expressjs-develop.up.railway.app/api/v1/verify-otp
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NiwiZW1haWwiOiJtcXNheGFjcEBtdWF0b2MuY29tIiwiaWF0IjoxNzE2NjY2NjMzLCJleHAiOjE3MTY3NTMwMzN9.W3NoC1hAUqzrvw5qBK_caziJRhcY2TEkKsLO5MsMQm4
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjo1LCJlbWFpbCI6ImJsbGt0dGdlQG1pdGVvbi5jb20iLCJpYXQiOjE3MTc3NzQ1MzUsImV4cCI6MTcxNzg2MDkzNX0.rPj7JR554_RvmriCraDi8y4yxlHf4etM_MPyRchPUkc
 Content-Type: application/json
 
 {

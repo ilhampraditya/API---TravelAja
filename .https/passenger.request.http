@@ -12,7 +12,7 @@ Content-Type: application/json
   "born_date": "2003-05-15",
   "citizen": "IDN",
   "identity_number": "A1234567892",
-  "booking_id": 4
+  "booking_id": 1
 }
 
 ### GETBYTOKEN

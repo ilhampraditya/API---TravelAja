@@ -854,10 +854,46 @@ paths:
                     type: string
                     example: null
   /promotion:
+    get:
+      summary: mengambil data promosi
+      tags:
+        - Promotion
+      security:
+        - bearerAuth: []
+
+      responses:
+        "200":
+          description: Data Promosi berhasil diambil
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                    example: true
+                  message:
+                    type: string
+                    example: "Data Promosi berhasil diambil"
+                  data:
+                    type: object
+                    properties:
+                      promotion_id:
+                        type: integer
+                        example: 1
+                      discount:
+                        type: integer
+                        example: 20
+                      startDate:
+                        type: string
+                        example: "2024-06-01T14:00:00.000Z"
+                      endDate:
+                        type: string
+                        example: "2024-06-02T14:00:00.000Z"
     post:
       summary: membuat promosi
       tags:
-        - Promotion
+        - Admin
       security:
         - bearerAuth: []
       requestBody:
@@ -905,16 +941,15 @@ paths:
                       endDate:
                         type: string
                         example: "2024-06-02T14:00:00.000Z"
+  /seatclasses:
     get:
-      summary: mengambil data promosi
+      summary: Ambil semua kelas kursi
       tags:
-        - Promotion
-      security:
-        - bearerAuth: []
-
+        - Seatclass
+      description: Mengambil semua data kelas kursi dengan opsional pencarian berdasarkan tipe kelas kursi.
       responses:
-        "200":
-          description: Data Promosi berhasil diambil
+        200:
+          description: Data kelas kursi berhasil diambil
           content:
             application/json:
               schema:
@@ -925,22 +960,210 @@ paths:
                     example: true
                   message:
                     type: string
-                    example: "Data Promosi berhasil diambil"
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        seat_class_id:
+                          type: integer
+                          example: 1
+                        seat_class_type:
+                          type: string
+                          example: Economy
+                        seat_amount:
+                          type: integer
+                          example: 60
+                        airlines_id:
+                          type: string
+                          example: QG
+
+    post:
+      summary: Buat kelas kursi baru
+      tags:
+        - Admin
+      description: Membuat kelas kursi baru untuk maskapai penerbangan.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                seat_class_type:
+                  type: string
+                  example: Business
+                seat_amount:
+                  type: integer
+                  example: 60
+                airlines_id:
+                  type: string
+                  example: QG
+              required:
+                - seat_class_type
+                - seat_amount
+                - airlines_id
+      responses:
+        200:
+          description: Data kelas kursi berhasil diambil
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                  message:
+                    type: string
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        seat_class_id:
+                          type: integer
+                          example: 1
+                        seat_class_type:
+                          type: string
+                          example: Economy
+                        seat_amount:
+                          type: integer
+                          example: 60
+                        airlines_id:
+                          type: string
+                          example: QG
+        400:
+          description: Data tidak valid
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                    example: false
+                  message:
+                    type: string
+                    example: "airlines_id tidak ditemukan"
+                  data:
+                    type: string
+                    example: null
+  /airlines:
+    get:
+      summary: Ambil semua data maskapai penerbangan
+      tags:
+        - Airlines
+      description: Mengambil data semua maskapai penerbangan
+      responses:
+        '200':
+          description: Data maskapai penerbangan berhasil diambil
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                    example: true
+                  message:
+                    type: string
+                    example: Data maskapai penerbangan berhasil diambil
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        airline_id:
+                          type: string
+                          example: QG
+                        airline_name:
+                          type: string
+                          example: Citilink
+                        baggage:
+                          type: string
+                          example: 30
+                        cabin_baggage:
+                          type: string
+                          example: 7
+                        url_logo:
+                          type: string
+                          example: https://ik.imagekit.io/travelaja/1717746984903_F_KfuWMqs.png
+    post:
+      summary: Buat data maskapai penerbangan baru
+      tags:
+        - Admin
+      description: Membuat data maskapai penerbangan baru dengan logo yang diunggah
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                airline_id:
+                  type: string
+                  example: QG
+                airline_name:
+                  type: string
+                  example: Citilink
+                baggage:
+                  type: string
+                  example: 30
+                cabin_baggage:
+                  type: string
+                  example: 7
+                file:
+                  type: string
+                  format: binary
+      responses:
+        '201':
+          description: Maskapai penerbangan berhasil dibuat
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                    example: true
+                  message:
+                    type: string
+                    example: Maskapai penerbangan berhasil dibuat
                   data:
                     type: object
                     properties:
-                      promotion_id:
-                        type: integer
-                        example: 1
-                      discount:
-                        type: integer
-                        example: 20
-                      startDate:
+                      airline_id:
                         type: string
-                        example: "2024-06-01T14:00:00.000Z"
-                      endDate:
+                        example: QG
+                      airline_name:
                         type: string
-                        example: "2024-06-02T14:00:00.000Z"
+                        example: Citilink
+                      baggage:
+                        type: string
+                        example: 30
+                      cabin_baggage:
+                        type: string
+                        example: 7
+                      url_logo:
+                        type: string
+                        example: https://ik.imagekit.io/travelaja/1717746984903_F_KfuWMqs.png
+        '400':
+          description: File tidak ada atau data tidak valid
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                    example: false
+                  message:
+                    type: string
+                    example: file tidak ada!
+                  data:
+                    type: object
+                    nullable: true
+
 
   /flights:
     get:
@@ -1076,7 +1299,7 @@ paths:
     post:
       summary: Membuat penerbangan baru
       tags:
-        - Flights 
+        - Admin
       description: Endpoint ini digunakan untuk membuat penerbangan baru. || jika promotion null maka object promotion null || jika promotion null maka object promotion_id bisa dihapus
       requestBody:
         required: true
@@ -1498,6 +1721,56 @@ paths:
                     type: string
                     example: null
   /passenger:
+    get:
+      summary: Ambil semua data penumpang
+      tags:
+      - Passenger
+      description: Mengambil data semua penumpang beserta informasi booking yang terkait
+      responses:
+        '200':
+          description: Data penumpang berhasil diambil
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                    example: true
+                  message:
+                    type: string
+                    example: Data penumpang berhasil diambil
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        passenger_id:
+                          type: string
+                          example: P0001
+                        name:
+                          type: string
+                          example: John Doe
+                        email:
+                          type: string
+                          example: johndoe@example.com
+                        booking:
+                          type: array
+                          items:
+                            type: object
+                            properties:
+                              booking_id:
+                                type: string
+                                example: B0001
+                              flight_id:
+                                type: string
+                                example: GA0000001
+                              passenger_id:
+                                type: string
+                                example: P0001
+                              seat_number:
+                                type: string
+                                example: 12A
     post:
       summary: membuat data penumpang 
       security:
@@ -1608,8 +1881,6 @@ paths:
                   data:
                     type: string
                     example: null
-
-  
   /mybooking:
     get:
       summary: mengambil data booking berdasarkan token 
