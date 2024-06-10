@@ -1,7 +1,7 @@
 // airlines.controller.js
-const sharp = require('sharp');
-const path = require('path')
-const imagekit = require('../libs/imagekit')
+const sharp = require("sharp");
+const path = require("path");
+const imagekit = require("../libs/imagekit");
 const { PrismaClient } = require("@prisma/client");
 const prisma = new PrismaClient();
 
@@ -20,14 +20,9 @@ module.exports = {
   },
 
   createAirline: async (req, res, next) => {
-    let { airline_id,
-      airline_name,
-      baggage,
-      cabin_baggage
-    } = req.body;
+    let { airline_id, airline_name, baggage, cabin_baggage } = req.body;
 
     try {
-
       if (!req.file) {
         return res.status(400).json({
           status: false,
@@ -38,16 +33,16 @@ module.exports = {
 
       const resizedBuffer = await sharp(req.file.buffer)
         .resize(300, 300)
-        .toFormat('jpeg')
+        .toFormat("jpeg")
         .jpeg({ quality: 90 })
         .toBuffer();
 
-      let strFile = resizedBuffer.toString('base64')
+      let strFile = resizedBuffer.toString("base64");
 
       let { url } = await imagekit.upload({
         fileName: Date.now() + path.extname(req.file.originalname),
-        file: strFile
-      })
+        file: strFile,
+      });
 
       const airline = await prisma.airlines.create({
         data: {
@@ -55,8 +50,8 @@ module.exports = {
           airline_name,
           baggage,
           cabin_baggage,
-          url_logo: url
-        }
+          url_logo: url,
+        },
       });
 
       return res.status(201).json({

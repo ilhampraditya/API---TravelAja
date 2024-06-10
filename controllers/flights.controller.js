@@ -190,7 +190,7 @@ module.exports = {
         });
       }
 
-      seat_class_id = Number(seat_class_id)
+      seat_class_id = Number(seat_class_id);
 
       const newDate = new Date(date);
       newDate.setUTCHours(0, 0, 0, 0);
