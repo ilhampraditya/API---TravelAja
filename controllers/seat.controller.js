@@ -2,16 +2,24 @@ const { PrismaClient } = require('@prisma/client');
 const prisma = new PrismaClient();
 
 module.exports = {
-    getAllSeatBySeatClassId: async (req, res, next) => {
+    getEmptySeatBySeatClassId: async (req, res, next) => {
         const { seat_class_id } = req.params.id
         try {
 
-            const seat = await prisma.seat.findMany({ where: { seat_class_id } });
+            const seats = await prisma.seat.findMany({
+                where: {
+                    seat_class_id,
+                    OR: [
+                        { status: 'AVAILABLE' },
+                        { status: 'CHECK_AGAIN_LATER' }
+                    ]
+                }
+            });
 
             return res.status(200).json({
                 status: true,
-                message: "Data kursi berhasil diambil",
-                data: seat,
+                message: "Data kursi kosong berhasil diambil",
+                data: seats,
             });
         } catch (error) {
             next(error);
@@ -19,11 +27,11 @@ module.exports = {
     },
 
     createSeat: async (req, res, next) => {
-        const { seat_number, seat_class_id } = req.body;
+        const { seat_class_id } = req.body;
         try {
 
 
-            if (!seat_class_id || !seat_number) {
+            if (!seat_class_id) {
                 return res.status(400).json({
                     status: false,
                     message: "field dibutuhkan !",
@@ -40,36 +48,21 @@ module.exports = {
                     data: null,
                 });
             }
+            let seat_amount = seatClassExist.seat_amount
 
-            if (seat_number > seatClassExist.seat_amount) {
-                return res.status(400).json({
-                    status: false,
-                    message: `Jumlah maksimal nomor kursi adalah ${seatClassExist.seat_amount} !`,
-                    data: null,
+            for (let i = 1; i <= seat_amount; i++) {
+                const seat = await prisma.seat.create({
+                    data: {
+                        seat_number: i,
+                        seat_class_id
+                    }
                 });
             }
 
-
-            const seatExist = await prisma.seat.findFirst({ where: { seat_number, seat_class_id } })
-            if (seatExist) {
-                return res.status(400).json({
-                    status: false,
-                    message: "Nomor kursi sudah ada!",
-                    data: null,
-                });
-            }
-
-
-            const seat = await prisma.seat.create({
-                data: {
-                    seat_number,
-                    seat_class_id
-                },
-            });
             return res.status(201).send({
                 status: true,
                 message: "Kursi berhasil dibuat",
-                data: seat,
+                data: null,
             });
         } catch (error) {
             next(error);

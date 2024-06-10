@@ -300,6 +300,15 @@ module.exports = {
                 user_id: booking.user_id
               }
             });
+            const passengers = await prisma.passenger.findMany({ where: { booking_id: booking.booking_id } })
+
+            for (const passenger of passengers) {
+              const ticket = await prisma.ticket.findUnique({
+                where: { passenger_id: passenger.passenger_id },
+              });
+
+              const seat = await prisma.seat.update({ where: { seat_id: ticket.seat_id }, data: { status: 'BOOKED' } })
+            }
           }
         } else if (transactionStatus == 'settlement') {
           let payment = await prisma.payment.update({ where: { payment_id: booking.payment_id }, data: { status: 'PAID' } })
@@ -312,6 +321,17 @@ module.exports = {
               user_id: booking.user_id
             }
           });
+
+          const passengers = await prisma.passenger.findMany({ where: { booking_id: booking.booking_id } })
+
+          for (const passenger of passengers) {
+            const ticket = await prisma.ticket.findUnique({
+              where: { passenger_id: passenger.passenger_id },
+            });
+
+            const seat = await prisma.seat.update({ where: { seat_id: ticket.seat_id }, data: { status: 'BOOKED' } })
+          }
+
         } else if (transactionStatus == 'cancel' || transactionStatus == 'deny' || transactionStatus == 'expire') {
           let payment = await prisma.payment.update({ where: { payment_id: booking.payment_id }, data: { status: 'CANCELED' } })
           responseData = payment
@@ -322,7 +342,17 @@ module.exports = {
               user_id: booking.user_id
             }
           });
-          
+
+          const passengers = await prisma.passenger.findMany({ where: { booking_id: booking.booking_id } })
+
+          for (const passenger of passengers) {
+            const ticket = await prisma.ticket.findUnique({
+              where: { passenger_id: passenger.passenger_id },
+            });
+
+            const seat = await prisma.seat.update({ where: { seat_id: ticket.seat_id }, data: { status: 'AVAILABLE' } })
+          }
+
         } else if (transactionStatus == 'pending') {
           let payment = prisma.payment.update({ where: { payment_id: booking.payment_id }, data: { status: 'PENDING_PAYMENT' } })
           responseData = payment
