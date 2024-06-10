@@ -1,4 +1,4 @@
-const { PrismaClient } = require('@prisma/client');
+const { PrismaClient } = require("@prisma/client");
 const prisma = new PrismaClient();
 
 module.exports = {
@@ -7,11 +7,11 @@ module.exports = {
       const { search } = req.query;
       const searchConditions = search
         ? {
-          OR: [
-            { seat_class_type: { contains: search, mode: "insensitive" } },
-            // { seat_number: { contains: search, mode: "insensitive" } }
-          ]
-        }
+            OR: [
+              { seat_class_type: { contains: search, mode: "insensitive" } },
+              // { seat_number: { contains: search, mode: "insensitive" } }
+            ],
+          }
         : {};
 
       const seatClass = await prisma.seatClass.findMany({
@@ -30,8 +30,6 @@ module.exports = {
   createSeatClass: async (req, res, next) => {
     const { seat_class_type, seat_amount, airlines_id } = req.body;
     try {
-
-
       if (!seat_class_type || !seat_amount || !airlines_id) {
         return res.status(400).json({
           status: false,
@@ -40,7 +38,9 @@ module.exports = {
         });
       }
 
-      const airlineIdExist = await prisma.airlines.findUnique({ where: { airline_id: airlines_id } })
+      const airlineIdExist = await prisma.airlines.findUnique({
+        where: { airline_id: airlines_id },
+      });
 
       if (!airlineIdExist) {
         return res.status(400).json({
@@ -54,7 +54,7 @@ module.exports = {
         data: {
           seat_class_type,
           seat_amount,
-          airlines_id
+          airlines_id,
         },
       });
 

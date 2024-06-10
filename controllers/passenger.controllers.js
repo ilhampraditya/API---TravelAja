@@ -16,7 +16,6 @@ module.exports = {
       const newDate = new Date(born_date);
       newDate.setUTCHours(0, 0, 0, 0);
 
-
       const booking = await prisma.booking.findUnique({
         where: { booking_id },
       });
@@ -24,7 +23,7 @@ module.exports = {
       if (!booking) {
         return res.status(400).json({
           status: false,
-            message: "Kode pemesanan tidak valid!",
+          message: "Kode pemesanan tidak valid!",
           data: null,
         });
       }
@@ -64,7 +63,7 @@ module.exports = {
       return res.status(200).json({
         status: true,
         message: "Data penumpang berhasil diambil",
-        data: passengers
+        data: passengers,
       });
     } catch (error) {
       next(error);
@@ -83,7 +82,7 @@ module.exports = {
         },
       });
 
-      const booking_id = bookings.map(booking => booking.booking_id);
+      const booking_id = bookings.map((booking) => booking.booking_id);
 
       const passengers = await prisma.passenger.findMany({
         where: {
@@ -99,11 +98,10 @@ module.exports = {
       return res.status(200).json({
         status: true,
         message: "Data pemesanan berhasil diambil",
-        data: passengers
+        data: passengers,
       });
     } catch (error) {
       next(error);
     }
   },
-
 };

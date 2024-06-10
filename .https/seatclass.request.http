@@ -20,7 +20,7 @@ Content-Type: application/json
 {
   "seat_class_type": "Economy",
   "seat_amount": 60,
-  "airlines_id": "QG"
+  "airlines_id": "LA"
 }
 
 
