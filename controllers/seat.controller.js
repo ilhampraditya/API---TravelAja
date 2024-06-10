@@ -32,7 +32,6 @@ module.exports = {
           data: null,
         });
       }
-
       const seatClassExist = await prisma.seat.findFirst({
         where: { seat_number, seat_class_id },
       });
@@ -54,7 +53,6 @@ module.exports = {
           },
         });
       }
-
       return res.status(201).send({
         status: true,
         message: "Kursi berhasil dibuat",
