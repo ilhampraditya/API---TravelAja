@@ -19,14 +19,14 @@ Content-Type: application/json
   "airline_id": "QG",
   "arrival_airport_id": "CGK",
   "destination_airport_id": "LOP",
-  "seat_class_id": 2
+  "seat_class_id": 1
 }
 ### Create Flight
 POST https://expressjs-develop.up.railway.app/api/v1/flights
 Content-Type: application/json
 
 {
-  "flight_id": "GA0000001",
+  "flight_id": "GA0000002",
   "price": 1000000.00,
   "date": "2024-06-05",
   "departure_time": "2024-06-05T14:00:00.000Z",

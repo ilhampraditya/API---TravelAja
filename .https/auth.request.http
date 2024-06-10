@@ -3,9 +3,9 @@ POST https://expressjs-develop.up.railway.app/api/v1/register
 Content-Type: application/json
 
 {
-  "name": "Tesmidtrans20",
-  "email": "gudchqh@miteon.com",
-  "no_telp": "08230468629",
+  "name": "ilham",
+  "email": "tybnzdnndga@maxamba.com",
+  "no_telp": "0823046668629",
   "password": "password123"
 }
 
@@ -14,9 +14,9 @@ POST http://localhost:3000/api/v1/register
 Content-Type: application/json
 
 {
-  "name": "Tesmidtrans20",
-  "email": "daphenegray@navalcadets.com",
-  "no_telp": "08230468629",
+  "name": "ilham",
+  "email": "uednlqwakocawe@maxamba.com",
+  "no_telp": "082307840029",
   "password": "password123"
 }
 
@@ -31,20 +31,20 @@ Content-Type: application/json
 
 ### Verify OTP
 POST https://expressjs-develop.up.railway.app/api/v1/verify-otp
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoyLCJlbWFpbCI6Imd1ZGNocWhAbWl0ZW9uLmNvbSIsImlhdCI6MTcxODAwMTk0NCwiZXhwIjoxNzE4MDg4MzQ0fQ.s971eTw9LPF1CQ-zgHkkXT4FOqWm99pJq2GHm3s11q4
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjo1LCJlbWFpbCI6InR5Ym56ZG5uZGdhQG1heGFtYmEuY29tIiwiaWF0IjoxNzE4MDM3NTAxLCJleHAiOjE3MTgxMjM5MDF9.B4ARux9cPsmZeZSgsHx0SnLocuu8hWHYCqaCMSb_b4k
 Content-Type: application/json
 
 {
-  "otp": 265008
+  "otp": 887203
 }
 
 ### Verify OTP
 POST http://localhost:3000/api/v1/verify-otp
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoxLCJlbWFpbCI6ImRhcGhlbmVncmF5QG5hdmFsY2FkZXRzLmNvbSIsImlhdCI6MTcxODAwNzAyOSwiZXhwIjoxNzE4MDkzNDI5fQ.jPhrWZyiAzLEEWryweDCixPgH77_ITrrL4TDSfLJvu0
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjo2LCJlbWFpbCI6InVlZG5scXdha29jYXdlQG1heGFtYmEuY29tIiwiaWF0IjoxNzE4MDI4NzM3LCJleHAiOjE3MTgxMTUxMzd9.Y4HZ_oSXtgOK-59u5wDdcLIB1YYt0TeHO6KsdOxdSs4
 Content-Type: application/json
 
 {
-  "otp": 178539
+  "otp": 101569
 }
 
 ### get all user
@@ -55,7 +55,7 @@ POST https://expressjs-develop.up.railway.app/api/v1/login
 Content-Type: application/json
 
 {
-  "emailOrNoTelp": "gudchqh@miteon.com",
+  "emailOrNoTelp": "tybnzdnndga@maxamba.com",
   "password": "password123"
 }
 
@@ -64,7 +64,7 @@ POST http://localhost:3000/api/v1/login
 Content-Type: application/json
 
 {
-  "emailOrNoTelp": "daphenegray@navalcadets.com",
+  "emailOrNoTelp": "uednlqwakocawe@maxamba.com",
   "password": "password123"
 }
 
