@@ -4,4 +4,3 @@ node_modules
 request.http
 local.http
 /prisma/migrations/
-.https/

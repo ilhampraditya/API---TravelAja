@@ -1,0 +1,23 @@
+### CREATE TICKET
+
+POST https://expressjs-develop.up.railway.app/api/v1/create-ticket
+Content-Type: application/json
+
+{
+    "seat_id": 6,
+    "passenger_id": 5
+}
+
+### CREATE TICKET
+
+POST http://localhost:3000/api/v1/create-ticket
+Content-Type: application/json
+
+{
+    "seat_id": 2,
+    "passenger_id": 1
+}
+
+### GET TICKET
+GET http://localhost:3000/api/v1/get-ticket/TVLAJA-000013
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoxLCJlbWFpbCI6ImRhcGhlbmVncmF5QG5hdmFsY2FkZXRzLmNvbSIsImlhdCI6MTcxODAwNzI1MSwiZXhwIjoxNzE4MDkzNjUxfQ.IXwFxs-jFcJln5sEvvywpMJDBjTfjj4dhoFSZLoB_RU

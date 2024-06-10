@@ -1,11 +1,11 @@
 ### Register User
-POST http://localhost:3000/api/v1/register
+POST https://expressjs-develop.up.railway.app/api/v1/register
 Content-Type: application/json
 
 {
-  "name": "ilham",
-  "email": "tasxpboixdqdmyx@mynanaimohomes.com",
-  "no_telp": "08230332184629",
+  "name": "Tesmidtrans20",
+  "email": "gudchqh@miteon.com",
+  "no_telp": "08230468629",
   "password": "password123"
 }
 
@@ -14,33 +14,12 @@ POST http://localhost:3000/api/v1/register
 Content-Type: application/json
 
 {
-  "name": "ilham",
-  "email": "wypofgfbghn@muatoc.com",
-  "no_telp": "0823032198469",
+  "name": "Tesmidtrans20",
+  "email": "daphenegray@navalcadets.com",
+  "no_telp": "08230468629",
   "password": "password123"
 }
 
-### Register User
-POST http://localhost:3000/api/v1/register
-Content-Type: application/json
-
-{
-  "name": "ilham",
-  "email": "wypofgfbghn@muatoc.com",
-  "no_telp": "0823032198469",
-  "password": "password123"
-}
-
-### Register User
-POST http://localhost:3000/api/v1/register
-Content-Type: application/json
-
-{
-  "name": "ilham",
-  "email": "wypofgfbghn@muatoc.com",
-  "no_telp": "0823032198469",
-  "password": "password123"
-}
 
 ### Renew OTP
 POST http://localhost:3000/api/v1/renew-otp
@@ -51,24 +30,42 @@ Content-Type: application/json
 }
 
 ### Verify OTP
-POST http://localhost:3000/api/v1/verify-otp
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoxLCJlbWFpbCI6Ind5cG9mZ2ZiZ2huQG11YXRvYy5jb20iLCJpYXQiOjE3MTc2OTU2ODcsImV4cCI6MTcxNzc4MjA4N30.A9czIepcdWgrM2RbS0KSwiOKl5fqrFkNPy-108fECso
+POST https://expressjs-develop.up.railway.app/api/v1/verify-otp
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoyLCJlbWFpbCI6Imd1ZGNocWhAbWl0ZW9uLmNvbSIsImlhdCI6MTcxODAwMTk0NCwiZXhwIjoxNzE4MDg4MzQ0fQ.s971eTw9LPF1CQ-zgHkkXT4FOqWm99pJq2GHm3s11q4
 Content-Type: application/json
 
 {
-  "otp": 135879
+  "otp": 265008
+}
+
+### Verify OTP
+POST http://localhost:3000/api/v1/verify-otp
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoxLCJlbWFpbCI6ImRhcGhlbmVncmF5QG5hdmFsY2FkZXRzLmNvbSIsImlhdCI6MTcxODAwNzAyOSwiZXhwIjoxNzE4MDkzNDI5fQ.jPhrWZyiAzLEEWryweDCixPgH77_ITrrL4TDSfLJvu0
+Content-Type: application/json
+
+{
+  "otp": 178539
 }
 
 ### get all user
 GET http://localhost:3000/api/v1/all-user
 
 ### Login User with Email
+POST https://expressjs-develop.up.railway.app/api/v1/login
+Content-Type: application/json
+
+{
+  "emailOrNoTelp": "gudchqh@miteon.com",
+  "password": "password123"
+}
+
+### Login User with Email
 POST http://localhost:3000/api/v1/login
 Content-Type: application/json
 
 {
-  "emailOrNoTelp": "wypofgfbghn@muatoc.com",
-  "password": "password1234"
+  "emailOrNoTelp": "daphenegray@navalcadets.com",
+  "password": "password123"
 }
 
 ### auth / login dengan token 

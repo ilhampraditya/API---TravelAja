@@ -5,7 +5,7 @@ GET http://localhost:3000/api/v1/airport
 GET http://localhost:3000/api/v1/airport?search=lombok
 
 ### Create a new airport
-POST http://localhost:3000/api/v1/airport
+POST https://expressjs-develop.up.railway.app/api/v1/airport
 Content-Type: application/json
 
 {
@@ -15,6 +15,15 @@ Content-Type: application/json
     "country": "Indonesia",
     "city": "Lombok"
 }
+
+# {
+#     "airport_id": "CGK",
+#     "airport_name": "Soekarno Hatta International Airport",
+#     "continent": "Asia",
+#     "country": "Indonesia",
+#     "city": "Jakarta"
+# }
+
 ###
 POST http://localhost:3000/api/v1/airport
 Content-Type: application/json

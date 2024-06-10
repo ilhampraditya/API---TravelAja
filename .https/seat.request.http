@@ -4,10 +4,17 @@ GET http://localhost:3000/api/v1/seat/1
 
 ### CREATE SEAT
 
+POST https://expressjs-develop.up.railway.app/api/v1/seat
+Content-Type: application/json
+
+{
+    "seat_class_id": 1
+}
+
+###
 POST http://localhost:3000/api/v1/seat
 Content-Type: application/json
 
 {
-    "seat_number": 4,
     "seat_class_id": 1
 }

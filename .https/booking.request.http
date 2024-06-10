@@ -1,6 +1,6 @@
 ### CREATE BOOKING
-POST http://localhost:3000/api/v1/booking
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoxLCJlbWFpbCI6InRhc3hwYm9peGRxZG15eEBteW5hbmFpbW9ob21lcy5jb20iLCJpYXQiOjE3MTc3NTc1MjgsImV4cCI6MTcxNzg0MzkyOH0.6sK0GUbmrueRBUsZXpgKgo7XO5-iMDLwp0-xs4WD9VA
+POST https://expressjs-develop.up.railway.app/api/v1/booking
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoyLCJlbWFpbCI6Imd1ZGNocWhAbWl0ZW9uLmNvbSIsImlhdCI6MTcxODAwOTQzOSwiZXhwIjoxNzE4MDk1ODM5fQ.cePVxyjSlu0sSx8nqxHf-H7aB1mM_P2to8wgDg9JRYw
 Content-Type: application/json
 
 {
