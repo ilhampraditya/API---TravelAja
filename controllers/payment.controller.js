@@ -308,7 +308,11 @@ module.exports = {
               });
 
               const seat = await prisma.seat.update({ where: { seat_id: ticket.seat_id }, data: { status: 'BOOKED' } })
+
+              const updatedTicket = await prisma.ticket.update({ where: { passenger_id: passenger.passenger_id }, data: { isActive: true } })
             }
+
+
           }
         } else if (transactionStatus == 'settlement') {
           let payment = await prisma.payment.update({ where: { payment_id: booking.payment_id }, data: { status: 'PAID' } })
@@ -330,6 +334,9 @@ module.exports = {
             });
 
             const seat = await prisma.seat.update({ where: { seat_id: ticket.seat_id }, data: { status: 'BOOKED' } })
+
+            const updatedTicket = await prisma.ticket.update({ where: { passenger_id: passenger.passenger_id }, data: { isActive: true } })
+
           }
 
         } else if (transactionStatus == 'cancel' || transactionStatus == 'deny' || transactionStatus == 'expire') {
