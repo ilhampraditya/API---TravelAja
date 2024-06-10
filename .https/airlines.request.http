@@ -4,26 +4,3 @@ GET https://expressjs-develop.up.railway.app/api/v1/airlines
 GET http://localhost:3000/api/v1/airlines
 
 
-###
-POST http://localhost:3000/api/v1/airlines
-Content-Type: application/json
-
-{
-  "airline_id": "QG",
-  "airline_name": "Citilink",
-  "baggage": "30",
-  "cabin_baggage": "7",
-  "seat_class_id": 1
-}
-###
-POST https://expressjs-develop.up.railway.app/api/v1/airlines
-Content-Type: application/json
-
-{
-  "airline_id": "QG",
-  "airline_name": "Citilink",
-  "baggage": "30",
-  "cabin_baggage": "7",
-  "seat_class_id": 1
-}
-

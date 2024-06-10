@@ -1,6 +1,6 @@
 ### CREATE PAYMENT EWALLET
 POST http://localhost:3000/api/v1/payment_wallet
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjozLCJlbWFpbCI6InBrcXB4c0BtYXhhbWJhLmNvbSIsImlhdCI6MTcxNzM5NDU4NiwiZXhwIjoxNzE3NDgwOTg2fQ.IzofSsduFE3Rk634cfpKnhRTSFB0I3OSXnujWDy1V5g
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoyLCJlbWFpbCI6InRyaG1mdkBtYXhhbWJhLmNvbSIsImlhdCI6MTcxNzUwNzM5OSwiZXhwIjoxNzE3NTkzNzk5fQ.ef3sR8NhLW6Q6G7At30Eepdzdv7nrEdQRHPxtzrTln0
 Content-Type: application/json
 
 {
@@ -24,3 +24,22 @@ Content-Type: application/json
 
 ###
 GET http://localhost:3000/api/v1/payment
+
+
+### CREATE PAYMENT MIDTRANS
+POST http://localhost:3000/api/v1/payment
+Content-Type: application/json
+
+{
+    "booking_code": "TVLAJA-000004"
+}
+
+###
+POST https://expressjs-develop.up.railway.app/api/v1/webhook
+Content-Type: application/json
+
+{
+    "data": {
+        "tes": "1"
+    }
+}
