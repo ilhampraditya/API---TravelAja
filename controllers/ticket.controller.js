@@ -4,6 +4,7 @@ const prisma = new PrismaClient();
 module.exports = {
     getTicketByBookingCode: async (req, res, next) => {
         const { booking_code } = req.params
+
         const { user_id } = req.user
         try {
 
@@ -19,7 +20,6 @@ module.exports = {
             }
 
             const passengers = await prisma.passenger.findMany({ where: { booking_id: booking.booking_id } })
-
 
             let tickets = [];
 
