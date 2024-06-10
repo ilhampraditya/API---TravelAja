@@ -2,6 +2,7 @@ const { PrismaClient } = require("@prisma/client");
 const prisma = new PrismaClient();
 const { MIDTRANS_SERVER_KEY, FRONT_END_URL, MIDTRANS_APP_URL } = process.env
 const crypto = require('crypto')
+const imagekit = require('../libs/imagekit')
 const QRCode = require('qrcode');
 
 module.exports = {
@@ -312,6 +313,7 @@ module.exports = {
 
               const seat = await prisma.seat.update({ where: { seat_id: ticket.seat_id }, data: { status: 'BOOKED' } })
 
+              const updatedTicket = await prisma.ticket.update({ where: { passenger_id: passenger.passenger_id }, data: { isActive: true } })
               let QRContent = `TICKET_ID:${updatedTicket.ticket_id}\nDEPARTURE_CODE:${flight.arrival_airport_id}\nDESTINATION_CODE:${flight.destination_airport_id}\nSEAT_NUMBER:${seat.seat_number}\nPASSENGER_NAME:${passenger.fullname}`
               const qrCodeDataURL = await QRCode.toDataURL(QRContent);
               const base64Data = qrCodeDataURL.replace(/^data:image\/png;base64,/, '');
@@ -321,7 +323,7 @@ module.exports = {
                 file: buffer
               })
 
-              const updatedTicket = await prisma.ticket.update({ where: { passenger_id: passenger.passenger_id }, data: { isActive: true, url_qrcode: url } })
+              const updatedTicket2 = await prisma.ticket.update({ where: { passenger_id: passenger.passenger_id }, data: { url_qrcode: url } })
 
             }
 
@@ -350,6 +352,7 @@ module.exports = {
 
             const seat = await prisma.seat.update({ where: { seat_id: ticket.seat_id }, data: { status: 'BOOKED' } })
 
+            const updatedTicket = await prisma.ticket.update({ where: { passenger_id: passenger.passenger_id }, data: { isActive: true } })
             let QRContent = `TICKET_ID:${updatedTicket.ticket_id}\nDEPARTURE_CODE:${flight.arrival_airport_id}\nDESTINATION_CODE:${flight.destination_airport_id}\nSEAT_NUMBER:${seat.seat_number}\nPASSENGER_NAME:${passenger.fullname}`
             const qrCodeDataURL = await QRCode.toDataURL(QRContent);
             const base64Data = qrCodeDataURL.replace(/^data:image\/png;base64,/, '');
@@ -359,7 +362,7 @@ module.exports = {
               file: buffer
             })
 
-            const updatedTicket = await prisma.ticket.update({ where: { passenger_id: passenger.passenger_id }, data: { isActive: true, url_qrcode: url } })
+            const updatedTicket2 = await prisma.ticket.update({ where: { passenger_id: passenger.passenger_id }, data: { url_qrcode: url } })
 
           }
 
