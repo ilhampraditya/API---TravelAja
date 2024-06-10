@@ -40,6 +40,7 @@ module.exports = {
     const user = req.user;
     const { flight_id } = req.body;
     try {
+      
       const lastBooking = await prisma.booking.findFirst({
         orderBy: {
           booking_date: "desc",
@@ -70,6 +71,7 @@ module.exports = {
           flight_id,
         },
       });
+      
       return res.status(201).json({
         status: true,
         message: "Pemesanan dibuat",

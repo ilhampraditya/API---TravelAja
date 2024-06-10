@@ -243,7 +243,7 @@ paths:
                 properties:
                   status:
                     type: boolean
-                    example: false
+                    example: false``
                   message:
                     type: string
                     example: "Parameter verifikasi tidak valid"
@@ -702,7 +702,7 @@ paths:
 
   /updateprofile:
     post:
-      summary: mengupdate profile termasuk password
+      summary: mengupdate profile
       tags:
         - Profile
       security:
@@ -853,17 +853,29 @@ paths:
                   data:
                     type: string
                     example: null
-  /promotion:
-    get:
-      summary: mengambil data promosi
+  /change-password:
+    put:
+      summary: mengupdate password
       tags:
-        - Promotion
+        - Profile
       security:
         - bearerAuth: []
-
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                oldPassword:
+                  type: string
+                  example: "oldpassword123"
+                newPassword:
+                  type: string
+                  example: "newpassword123"
       responses:
         "200":
-          description: Data Promosi berhasil diambil
+          description: password berhasil diupdate!
           content:
             application/json:
               schema:
@@ -874,26 +886,44 @@ paths:
                     example: true
                   message:
                     type: string
-                    example: "Data Promosi berhasil diambil"
+                    example: "Password berhasil diubah!"
                   data:
-                    type: object
-                    properties:
-                      promotion_id:
-                        type: integer
-                        example: 1
-                      discount:
-                        type: integer
-                        example: 20
-                      startDate:
-                        type: string
-                        example: "2024-06-01T14:00:00.000Z"
-                      endDate:
-                        type: string
-                        example: "2024-06-02T14:00:00.000Z"
+                    example: null
+        "400":
+          description: Request yang tidak valid karena field yang dibutuhkan tidak ada
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                    example: false
+                  message:
+                    type: string
+                    example: "Field dibutuhkan!"
+                  data:
+                    example: null
+        "401":
+          description: Otentikasi gagal karena password lama tidak sesuai.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                    example: false
+                  message:
+                    type: string
+                    example: "Password lama tidak sesuai!"
+                  data:
+                    example: null
+  /promotion:
     post:
       summary: membuat promosi
       tags:
-        - Admin
+        - Promotion
       security:
         - bearerAuth: []
       requestBody:
@@ -941,15 +971,16 @@ paths:
                       endDate:
                         type: string
                         example: "2024-06-02T14:00:00.000Z"
-  /seatclasses:
     get:
-      summary: Ambil semua kelas kursi
+      summary: mengambil data promosi
       tags:
-        - Seatclass
-      description: Mengambil semua data kelas kursi dengan opsional pencarian berdasarkan tipe kelas kursi.
+        - Promotion
+      security:
+        - bearerAuth: []
+
       responses:
-        200:
-          description: Data kelas kursi berhasil diambil
+        "200":
+          description: Data Promosi berhasil diambil
           content:
             application/json:
               schema:
@@ -960,30 +991,370 @@ paths:
                     example: true
                   message:
                     type: string
+                    example: "Data Promosi berhasil diambil"
+                  data:
+                    type: object
+                    properties:
+                      promotion_id:
+                        type: integer
+                        example: 1
+                      discount:
+                        type: integer
+                        example: 20
+                      startDate:
+                        type: string
+                        example: "2024-06-01T14:00:00.000Z"
+                      endDate:
+                        type: string
+                        example: "2024-06-02T14:00:00.000Z"
+  /airport:
+    get:
+      tags:
+        - Airport
+      summary: Get all airports
+      description: Retrieve a list of all airports
+      parameters:
+        - in: query
+          name: search
+          schema:
+            type: string
+          description: Search query to filter airports by name or city
+      responses:
+        200:
+          description: A list of airports
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                    example: true
+                  message:
+                    type: string
+                    example: Berhasil menampilkan semua bandara
                   data:
                     type: array
                     items:
                       type: object
                       properties:
-                        seat_class_id:
-                          type: integer
-                          example: 1
-                        seat_class_type:
+                        airport_id:
                           type: string
-                          example: Economy
-                        seat_amount:
-                          type: integer
-                          example: 60
-                        airlines_id:
+                          example: LOP
+                        airport_name:
                           type: string
-                          example: QG
-
+                          example: Lombok Praya International Airport
+                        continent:
+                          type: string
+                          example: Asia
+                        country:
+                          type: string
+                          example: Indonesia
+                        city:
+                          type: string
+                          example: Jakarta
     post:
-      summary: Buat kelas kursi baru
       tags:
-        - Admin
-      description: Membuat kelas kursi baru untuk maskapai penerbangan.
+        - Airport
+      summary: Create a new airport
+      description: Add a new airport to the database
       requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                        airport_id:
+                          type: string
+                          example: LOP
+                        airport_name:
+                          type: string
+                          example: Lombok Praya International Airport
+                        continent:
+                          type: string
+                          example: Asia
+                        country:
+                          type: string
+                          example: Indonesia
+                        city:
+                          type: string
+                          example: Jakarta
+      responses:
+        201:
+          description: Airport created successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                    example: true
+                  message:
+                    type: string
+                    example: Pembuatan bandara berhasil
+                  data:
+                    type: object
+                    properties: 
+                      airport_id:
+                        type: string
+                        example: LOP
+                      airport_name:
+                        type: string
+                        example: Lombok Praya International Airport
+                      continent:
+                        type: string
+                        example: Asia
+                      country:
+                        type: string
+                        example: Indonesia
+                      city:
+                        type: string
+                        example: Lombok
+        400:
+          description: Missing required fields
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                    example: false
+                  message:
+                    type: string
+                    example: Harap menyediakan airport_id, nama bandara, benua, negara, dan kota
+                  data:
+                    type: string
+                    example: null
+        409:
+          description: Airport already exists
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                    example: false
+                  message:
+                    type: string
+                    example: Airport dengan ID ini sudah ada
+                  data:
+                    type: string
+                    example: null
+
+  /airport/{airportId}:
+    get:
+      tags:
+        - Airport
+      summary: Get airport by ID
+      description: Retrieve details of a specific airport by its ID
+      parameters:
+        - in: path
+          name: airportId
+          required: true
+          schema:
+            type: string
+          description: The airportId of the airport to retrieve
+      responses:
+        200:
+          description: Details of the specified airport
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                    example: true
+                  message:
+                    type: string
+                    example: Berhasil menampilkan bandara
+                  data:
+                    type: object
+                    properties:
+                        airport_id:
+                          type: string
+                          example: LOP
+                        airport_name:
+                          type: string
+                          example: Lombok Praya International Airport
+                        continent:
+                          type: string
+                          example: Asia
+                        country:
+                          type: string
+                          example: Indonesia
+                        city:
+                          type: string
+                          example: Jakarta
+        404:
+          description: Airport not found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                    example: false
+                  message:
+                    type: string
+                    example: Bandara tidak ditemukan
+                  data:
+                    type: string
+                    example : null
+    put:
+      tags:
+        - Airport
+      summary: Edit airport by ID
+      description: Update the details of a specific airport by its ID
+      parameters:
+        - in: path
+          name: airportId
+          required: true
+          schema:
+            type: string
+          description: The ID of the airport to update
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                airport_name:
+                  type: string
+                  example: Yogyakarta International Airport
+                continent:
+                  type: string
+                  example: Asia
+                country:
+                  type: string
+                  example: Indonesia
+                city:
+                  type: string
+                  example: Yogyakarta
+      responses:
+        200:
+          description: Airport updated successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                    example: true
+                  message:
+                    type: string
+                    example: Pembaharuan bandara berhasil
+                  data:
+                    type: object
+                    properties:
+                      airportId:
+                        type: string
+                        example: YIA
+                  airport_name:
+                    type: string
+                    example: Yogyakarta International Airport
+                  continent:
+                    type: string
+                    example: Asia
+                  country:
+                    type: string
+                    example: Indonesia
+                  city:
+                    type: string
+                    example: Yogyakarta
+        400:
+          description: Missing required fields
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                    example: false
+                  message:
+                    type: string
+                    example: Harap menyediakan nama bandara, benua, negara, dan kota
+                  data:
+                    type: string
+                    example : null
+        404:
+          description: Airport not found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                    example: false
+                  message:
+                    type: string
+                    example: Bandara tidak ditemukan
+                  data:
+                    type: string
+                    example : null
+
+    delete:
+      tags:
+        - Airport
+      summary: Delete airport by ID
+      description: Remove a specific airport by its ID from the database
+      parameters:
+        - in: path
+          name: airportId
+          required: true
+          schema:
+            type: string
+          description: The ID of the airport to delete
+      responses:
+        200:
+          description: Airport deleted successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                    example: true
+                  message:
+                    type: string
+                    example: Penghapusan bandara berhasil
+                  data:
+                    type: string
+                    example : null
+        404:
+          description: Airport not found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                    example: false
+                  message:
+                    type: string
+                    example: Bandara tidak ditemukan
+                  data:
+                    type: string
+                    example : null
+  /seatclasses:
+    post:
+      tags:
+        - SeatClass
+      summary: Create a new seat class
+      description: Create a new seat class with the provided details
+      requestBody:
+        description: Details of the seat class to be created
         required: true
         content:
           application/json:
@@ -992,71 +1363,16 @@ paths:
               properties:
                 seat_class_type:
                   type: string
-                  example: Business
+                  example: Economy
                 seat_amount:
                   type: integer
                   example: 60
                 airlines_id:
                   type: string
                   example: QG
-              required:
-                - seat_class_type
-                - seat_amount
-                - airlines_id
       responses:
-        200:
-          description: Data kelas kursi berhasil diambil
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  status:
-                    type: boolean
-                  message:
-                    type: string
-                  data:
-                    type: array
-                    items:
-                      type: object
-                      properties:
-                        seat_class_id:
-                          type: integer
-                          example: 1
-                        seat_class_type:
-                          type: string
-                          example: Economy
-                        seat_amount:
-                          type: integer
-                          example: 60
-                        airlines_id:
-                          type: string
-                          example: QG
-        400:
-          description: Data tidak valid
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  status:
-                    type: boolean
-                    example: false
-                  message:
-                    type: string
-                    example: "airlines_id tidak ditemukan"
-                  data:
-                    type: string
-                    example: null
-  /airlines:
-    get:
-      summary: Ambil semua data maskapai penerbangan
-      tags:
-        - Airlines
-      description: Mengambil data semua maskapai penerbangan
-      responses:
-        '200':
-          description: Data maskapai penerbangan berhasil diambil
+        201:
+          description: Seat class created successfully
           content:
             application/json:
               schema:
@@ -1067,88 +1383,24 @@ paths:
                     example: true
                   message:
                     type: string
-                    example: Data maskapai penerbangan berhasil diambil
-                  data:
-                    type: array
-                    items:
-                      type: object
-                      properties:
-                        airline_id:
-                          type: string
-                          example: QG
-                        airline_name:
-                          type: string
-                          example: Citilink
-                        baggage:
-                          type: string
-                          example: 30
-                        cabin_baggage:
-                          type: string
-                          example: 7
-                        url_logo:
-                          type: string
-                          example: https://ik.imagekit.io/travelaja/1717746984903_F_KfuWMqs.png
-    post:
-      summary: Buat data maskapai penerbangan baru
-      tags:
-        - Admin
-      description: Membuat data maskapai penerbangan baru dengan logo yang diunggah
-      requestBody:
-        required: true
-        content:
-          multipart/form-data:
-            schema:
-              type: object
-              properties:
-                airline_id:
-                  type: string
-                  example: QG
-                airline_name:
-                  type: string
-                  example: Citilink
-                baggage:
-                  type: string
-                  example: 30
-                cabin_baggage:
-                  type: string
-                  example: 7
-                file:
-                  type: string
-                  format: binary
-      responses:
-        '201':
-          description: Maskapai penerbangan berhasil dibuat
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  status:
-                    type: boolean
-                    example: true
-                  message:
-                    type: string
-                    example: Maskapai penerbangan berhasil dibuat
+                    example: Kelas kursi berhasil dibuat
                   data:
                     type: object
                     properties:
-                      airline_id:
+                      id:
+                        type: string
+                        example: 1
+                      seat_class_type:
+                        type: string
+                        example: Economy
+                      seat_amount:
+                        type: integer
+                        example: 60
+                      airlines_id:
                         type: string
                         example: QG
-                      airline_name:
-                        type: string
-                        example: Citilink
-                      baggage:
-                        type: string
-                        example: 30
-                      cabin_baggage:
-                        type: string
-                        example: 7
-                      url_logo:
-                        type: string
-                        example: https://ik.imagekit.io/travelaja/1717746984903_F_KfuWMqs.png
-        '400':
-          description: File tidak ada atau data tidak valid
+        400:
+          description: Bad request due to missing or invalid fields
           content:
             application/json:
               schema:
@@ -1159,20 +1411,31 @@ paths:
                     example: false
                   message:
                     type: string
-                    example: file tidak ada!
+                    example: field dibutuhkan !
                   data:
-                    type: object
-                    nullable: true
-
-
+                    type: string
+                    example: null
+        404:
+          description: Airline not found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                    example: false
+                  message:
+                    type: string
+                    example: airlines_id tidak ditemukan                   
   /flights:
     get:
-      summary: Mengambil semua data penerbangan 
+      summary: Mengambil semua data penerbangan
       tags:
-        - Flights 
+        - Flights
       description: Get all available flights || jika promotion null maka object promotion null
       responses:
-        '200':
+        "200":
           description: Successful operation
           content:
             application/json:
@@ -1202,15 +1465,15 @@ paths:
                         date:
                           type: string
                           format: date-time
-                          example: '2024-06-05T00:00:00.000Z'
+                          example: "2024-06-05T00:00:00.000Z"
                         departure_time:
                           type: string
                           format: date-time
-                          example: '2024-06-05T14:00:00.000Z'
+                          example: "2024-06-05T14:00:00.000Z"
                         arrival_time:
                           type: string
                           format: date-time
-                          example: '2024-06-05T18:00:00.000Z'
+                          example: "2024-06-05T18:00:00.000Z"
                         airline_id:
                           type: string
                           example: QG
@@ -1238,13 +1501,13 @@ paths:
                               example: Citilink
                             baggage:
                               type: string
-                              example: '30'
+                              example: "30"
                             cabin_baggage:
                               type: string
-                              example: '7'
+                              example: "7"
                             url_logo:
                               type: string
-                              example: 'https://ik.imagekit.io/travelaja/1717591564516_W7yo6KA-B.jpg'
+                              example: "https://ik.imagekit.io/travelaja/1717591564516_W7yo6KA-B.jpg"
                         arrival_airport:
                           type: object
                           properties:
@@ -1292,14 +1555,14 @@ paths:
                               example: 20
                             startDate:
                               format: date-time
-                              example: '2024-06-05T00:00:00.000Z'
+                              example: "2024-06-05T00:00:00.000Z"
                             endDate:
                               format: date-time
-                              example: '2024-06-05T00:00:00.000Z'
+                              example: "2024-06-05T00:00:00.000Z"
     post:
       summary: Membuat penerbangan baru
       tags:
-        - Admin
+        - Flights
       description: Endpoint ini digunakan untuk membuat penerbangan baru. || jika promotion null maka object promotion null || jika promotion null maka object promotion_id bisa dihapus
       requestBody:
         required: true
@@ -1350,7 +1613,7 @@ paths:
                   example: 1
                   description: ID promosi (opsional).
       responses:
-        '201':
+        "201":
           description: Penerbangan berhasil dibuat
           content:
             application/json:
@@ -1378,15 +1641,15 @@ paths:
                       date:
                         type: string
                         format: date
-                        example: '2024-06-05'
+                        example: "2024-06-05"
                       departure_time:
                         type: string
                         format: date-time
-                        example: '2024-06-05T14:00:00.000Z'
+                        example: "2024-06-05T14:00:00.000Z"
                       arrival_time:
                         type: string
                         format: date-time
-                        example: '2024-06-05T18:00:00.000Z'
+                        example: "2024-06-05T18:00:00.000Z"
                       airline_id:
                         type: string
                         example: QG
@@ -1403,8 +1666,8 @@ paths:
                       seat_class_id:
                         type: integer
                         example: 1
-                    
-        '400':
+
+        "400":
           description: Permintaan tidak valid.
           content:
             application/json:
@@ -1417,11 +1680,11 @@ paths:
                   message:
                     type: string
                     example: "Airline tidak ditemukan"
-                  data: 
+                  data:
                     type: boolean
                     example: null
-                  
-        '409':
+
+        "409":
           description: Kode penerbangan sudah ada, silahkan coba yang lain!
           content:
             application/json:
@@ -1434,7 +1697,7 @@ paths:
                   message:
                     type: string
                     example: "Kode penerbangan sudah ada, silahkan coba yang lain!"
-                  data: 
+                  data:
                     type: boolean
                     example: null
         "404":
@@ -1458,8 +1721,6 @@ paths:
       summary: mengambil data penerbangan berdasarkan parameter id
       tags:
         - Flights
-      security:
-        - bearerAuth: []
       parameters:
         - name: id
           in: path
@@ -1573,15 +1834,43 @@ paths:
                         example: null
   /search:
     get:
-      summary: Mengambil semua data penerbangan by search
+      summary: Mengambil semua data penerbangan berdasarkan pencarian
       tags:
         - Flights
-      security:
-      - bearerAuth: [] 
-      description: Get all available flights
+      description: Mengambil semua penerbangan yang tersedia berdasarkan kriteria pencarian yang diberikan.
+      parameters:
+        - name: arrival_airport_id
+          in: query
+          required: true
+          description: Kode bandara kedatangan
+          schema:
+            type: string
+            example: CGK
+        - name: destination_airport_id
+          in: query
+          required: true
+          description: Kode bandara tujuan
+          schema:
+            type: string
+            example: LOP
+        - name: date
+          in: query
+          required: true
+          description: Tanggal keberangkatan
+          schema:
+            type: string
+            format: date
+            example: 2024-06-05
+        - name: seat_class_id
+          in: query
+          required: true
+          description: ID kelas tempat duduk
+          schema:
+            type: integer
+            example: 1
       responses:
-        '200':
-          description: Successful operation
+        "200":
+          description: Operasi berhasil
           content:
             application/json:
               schema:
@@ -1610,15 +1899,15 @@ paths:
                         date:
                           type: string
                           format: date-time
-                          example: '2024-06-05T00:00:00.000Z'
+                          example: "2024-06-05T00:00:00.000Z"
                         departure_time:
                           type: string
                           format: date-time
-                          example: '2024-06-05T14:00:00.000Z'
+                          example: "2024-06-05T14:00:00.000Z"
                         arrival_time:
                           type: string
                           format: date-time
-                          example: '2024-06-05T18:00:00.000Z'
+                          example: "2024-06-05T18:00:00.000Z"
                         airline_id:
                           type: string
                           example: QG
@@ -1646,13 +1935,13 @@ paths:
                               example: Citilink
                             baggage:
                               type: string
-                              example: '30'
+                              example: "30"
                             cabin_baggage:
                               type: string
-                              example: '7'
+                              example: "7"
                             url_logo:
                               type: string
-                              example: 'https://ik.imagekit.io/travelaja/1717591564516_W7yo6KA-B.jpg'
+                              example: "https://ik.imagekit.io/travelaja/1717591564516_W7yo6KA-B.jpg"
                         arrival_airport:
                           type: object
                           properties:
@@ -1697,15 +1986,17 @@ paths:
                               example: 1
                             discount:
                               type: string
-                              example: 20
+                              example: 20%
                             startDate:
+                              type: string
                               format: date-time
-                              example: '2024-06-05T00:00:00.000Z'
+                              example: "2024-06-05T00:00:00.000Z"
                             endDate:
+                              type: string
                               format: date-time
-                              example: '2024-06-05T00:00:00.000Z'
+                              example: "2024-06-05T00:00:00.000Z"
         "404":
-          description: Penerbangan Not Found
+          description: Penerbangan tidak ditemukan
           content:
             application/json:
               schema:
@@ -1716,67 +2007,17 @@ paths:
                     example: false
                   message:
                     type: string
-                    example: "Penerbangan tidak ditemukan"
+                    example: Penerbangan tidak ditemukan
                   data:
                     type: string
                     example: null
   /passenger:
-    get:
-      summary: Ambil semua data penumpang
-      tags:
-      - Passenger
-      description: Mengambil data semua penumpang beserta informasi booking yang terkait
-      responses:
-        '200':
-          description: Data penumpang berhasil diambil
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  status:
-                    type: boolean
-                    example: true
-                  message:
-                    type: string
-                    example: Data penumpang berhasil diambil
-                  data:
-                    type: array
-                    items:
-                      type: object
-                      properties:
-                        passenger_id:
-                          type: string
-                          example: P0001
-                        name:
-                          type: string
-                          example: John Doe
-                        email:
-                          type: string
-                          example: johndoe@example.com
-                        booking:
-                          type: array
-                          items:
-                            type: object
-                            properties:
-                              booking_id:
-                                type: string
-                                example: B0001
-                              flight_id:
-                                type: string
-                                example: GA0000001
-                              passenger_id:
-                                type: string
-                                example: P0001
-                              seat_number:
-                                type: string
-                                example: 12A
     post:
-      summary: membuat data penumpang 
+      summary: membuat data penumpang
       security:
-      - bearerAuth: []
+        - bearerAuth: []
       tags:
-      - Passenger
+        - Passenger
       requestBody:
         required: true
         content:
@@ -1881,13 +2122,14 @@ paths:
                   data:
                     type: string
                     example: null
+
   /mybooking:
     get:
-      summary: mengambil data booking berdasarkan token 
+      summary: mengambil data booking berdasarkan token
       tags:
-      - Booking
+        - Booking
       security:
-      - bearerAuth: []
+        - bearerAuth: []
       responses:
         "200":
           description: Data pemesanan berhasil diambil
@@ -1933,16 +2175,16 @@ paths:
     get:
       summary: mengambil data booking berdasarkan id dan detail riwayat pemesanan
       tags:
-      - Booking
+        - Booking
       security:
-      - bearerAuth: []
+        - bearerAuth: []
       parameters:
-      - in: path
-        name: id
-        required: true
-        schema:
-          type: string
-        description: Kode booking
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+          description: Kode booking
       responses:
         "200":
           description: Data pemesanan berhasil diambil
@@ -1982,6 +2224,7 @@ paths:
                       payment_id:
                         type: string
                         example: null
+
   /notification:
     get:
       summary: Get all notifications
@@ -1989,7 +2232,7 @@ paths:
       tags:
         - Notification
       responses:
-        '200':
+        "200":
           description: Notifications retrieved successfully
           content:
             application/json:
@@ -2024,7 +2267,7 @@ paths:
       security:
         - bearerAuth: []
       responses:
-        '200':
+        "200":
           description: Notifications retrieved successfully
           content:
             application/json:
@@ -2050,7 +2293,7 @@ paths:
                           type: string
                         isRead:
                           type: boolean
-        '401':
+        "401":
           description: Unauthorized
           content:
             application/json:
@@ -2063,6 +2306,7 @@ paths:
                   message:
                     type: string
                     example: "Unauthorized"
+
 components:
   securitySchemes:
     bearerAuth:

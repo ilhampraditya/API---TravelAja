@@ -45,15 +45,15 @@ module.exports = {
         status: true,
         message: "Pembuatan bandara berhasil",
         data: {
-          [newAirport.id]: {
-            airport_id: newAirport.id,
-            airport_name: newAirport.airport_name,
-            continent: newAirport.continent,
-            city: newAirport.city,
-            country: newAirport.country,
-          },
+            [newAirport.id]: {
+                airport_id: newAirport.id,
+                airport_name: newAirport.airport_name,
+                continent: newAirport.continent,
+                city: newAirport.city,
+                country: newAirport.country
+            }
         },
-      });
+    });
     } catch (err) {
       next(err);
     }
@@ -88,10 +88,10 @@ module.exports = {
 
   getAirportById: async (req, res, next) => {
     try {
-      const { airport_id } = req.params;
+      const { airportId } = req.params;
 
       const airport = await prisma.airport.findUnique({
-        where: { id: airport_id },
+        where: { id: airportId },
       });
 
       if (!airport) {
