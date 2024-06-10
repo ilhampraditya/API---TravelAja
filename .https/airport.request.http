@@ -40,12 +40,20 @@ Content-Type: application/json
 # }
 
 {
-    "airport_id": "CGK",
-    "airport_name": "Soekarno Hatta International Airport",
+    "airport_id": "JKT",
+    "airport_name": "Jakarta airport",
     "continent": "Asia",
     "country": "Indonesia",
     "city": "Jakarta"
 }
+
+# {
+#     "airport_id": "CGK",
+#     "airport_name": "Soekarno Hatta International Airport",
+#     "continent": "Asia",
+#     "country": "Indonesia",
+#     "city": "Jakarta"
+# }
 
 ### edit airport berdasarkan airport id
 PUT http://localhost:3000/api/v1/airport/YIA

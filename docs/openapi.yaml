@@ -923,7 +923,7 @@ paths:
     post:
       summary: membuat promosi
       tags:
-        - Promotion
+        - Admin
       security:
         - bearerAuth: []
       requestBody:
@@ -974,7 +974,7 @@ paths:
     get:
       summary: mengambil data promosi
       tags:
-        - Promotion
+        - Admin
       security:
         - bearerAuth: []
 
@@ -1010,7 +1010,7 @@ paths:
   /airport:
     get:
       tags:
-        - Airport
+        - Admin
       summary: Get all airports
       description: Retrieve a list of all airports
       parameters:
@@ -1055,7 +1055,7 @@ paths:
                           example: Jakarta
     post:
       tags:
-        - Airport
+        - Admin
       summary: Create a new airport
       description: Add a new airport to the database
       requestBody:
@@ -1148,7 +1148,7 @@ paths:
   /airport/{airportId}:
     get:
       tags:
-        - Airport
+        - Admin
       summary: Get airport by ID
       description: Retrieve details of a specific airport by its ID
       parameters:
@@ -1208,7 +1208,7 @@ paths:
                     example : null
     put:
       tags:
-        - Airport
+        - Admin
       summary: Edit airport by ID
       description: Update the details of a specific airport by its ID
       parameters:
@@ -1304,7 +1304,7 @@ paths:
 
     delete:
       tags:
-        - Airport
+        - Admin
       summary: Delete airport by ID
       description: Remove a specific airport by its ID from the database
       parameters:
@@ -1347,87 +1347,7 @@ paths:
                   data:
                     type: string
                     example : null
-  /seatclasses:
-    post:
-      tags:
-        - SeatClass
-      summary: Create a new seat class
-      description: Create a new seat class with the provided details
-      requestBody:
-        description: Details of the seat class to be created
-        required: true
-        content:
-          application/json:
-            schema:
-              type: object
-              properties:
-                seat_class_type:
-                  type: string
-                  example: Economy
-                seat_amount:
-                  type: integer
-                  example: 60
-                airlines_id:
-                  type: string
-                  example: QG
-      responses:
-        201:
-          description: Seat class created successfully
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  status:
-                    type: boolean
-                    example: true
-                  message:
-                    type: string
-                    example: Kelas kursi berhasil dibuat
-                  data:
-                    type: object
-                    properties:
-                      id:
-                        type: string
-                        example: 1
-                      seat_class_type:
-                        type: string
-                        example: Economy
-                      seat_amount:
-                        type: integer
-                        example: 60
-                      airlines_id:
-                        type: string
-                        example: QG
-        400:
-          description: Bad request due to missing or invalid fields
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  status:
-                    type: boolean
-                    example: false
-                  message:
-                    type: string
-                    example: field dibutuhkan !
-                  data:
-                    type: string
-                    example: null
-        404:
-          description: Airline not found
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  status:
-                    type: boolean
-                    example: false
-                  message:
-                    type: string
-                    example: airlines_id tidak ditemukan                   
+                
   /flights:
     get:
       summary: Mengambil semua data penerbangan
@@ -1562,7 +1482,7 @@ paths:
     post:
       summary: Membuat penerbangan baru
       tags:
-        - Flights
+        - Admin
       description: Endpoint ini digunakan untuk membuat penerbangan baru. || jika promotion null maka object promotion null || jika promotion null maka object promotion_id bisa dihapus
       requestBody:
         required: true
@@ -2122,6 +2042,161 @@ paths:
                   data:
                     type: string
                     example: null
+  /passenger-token:
+    get:
+      summary: Menampilkan data penumpang berdasarkan token pengguna
+      security:
+        - bearerAuth: []
+      tags:
+        - Passenger
+      responses:
+        "200":
+          description: Data penumpang berhasil diambil
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                    example: true
+                  message:
+                    type: string
+                    example: "Data pemesanan berhasil diambil"
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        passenger_id:
+                          type: integer
+                          example: 5
+                        fullname:
+                          type: string
+                          example: "Rayeang 2"
+                        passenger_type:
+                          type: string
+                          example: "adult"
+                        born_date:
+                          type: string
+                          format: date-time
+                          example: "2003-05-15T00:00:00.000Z"
+                        citizen:
+                          type: string
+                          example: "IDN"
+                        identity_number:
+                          type: string
+                          example: "A1234567893"
+                        booking_id:
+                          type: integer
+                          example: 4
+                        booking:
+                          type: object
+                          properties:
+                            booking_id:
+                              type: integer
+                              example: 4
+                            booking_code:
+                              type: string
+                              example: "TVLAJA-000002"
+                            booking_date:
+                              type: string
+                              format: date-time
+                              example: "2024-06-10T14:26:14.815Z"
+                            user_id:
+                              type: integer
+                              example: 6
+                            flight_id:
+                              type: string
+                              example: "GA0000002"
+                            payment_id:
+                              type: integer
+                              nullable: true
+                              example: null
+                            snap_token:
+                              type: string
+                              nullable: true
+                              example: null
+                            snap_redirect_url:
+                              type: string
+                              nullable: true
+                              example: null
+  /booking:
+    post:
+      summary: Membuat data pemesanan
+      security:
+        - bearerAuth: []
+      tags:
+        - Booking
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                flight_id:
+                  type: string
+                  example: "GA0000002"
+      responses:
+        "201":
+          description: Pemesanan berhasil dibuat
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                    example: true
+                  message:
+                    type: string
+                    example: "Pemesanan dibuat"
+                  data:
+                    type: object
+                    properties:
+                      booking_id:
+                        type: integer
+                        example: 8
+                      booking_code:
+                        type: string
+                        example: "TVLAJA-000005"
+                      booking_date:
+                        type: string
+                        format: date-time
+                        example: "2024-06-10T15:55:00.746Z"
+                      user_id:
+                        type: integer
+                        example: 6
+                      flight_id:
+                        type: string
+                        example: "GA0000002"
+                      payment_id:
+                        type: string
+                        example: null
+                      snap_token:
+                        type: string
+                        example: null
+                      snap_redirect_url:
+                        type: string
+                        example: null
+        "400":
+          description: Permintaan tidak valid
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                    example: false
+                  message:
+                    type: string
+                    example: "field dibutuhkan !" 
+                  data:
+                    example: null
+             
+              
 
   /mybooking:
     get:
@@ -2306,6 +2381,221 @@ paths:
                   message:
                     type: string
                     example: "Unauthorized"
+  /seat/{id}:
+    get:
+      summary: Mengambil data kursi kosong berdasarkan kelas kursi
+      tags:
+        - Seat
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: ID kelas kursi
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Data kursi kosong berhasil diambil
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                    example: true
+                  message:
+                    type: string
+                    example: "Data kursi kosong berhasil diambil"
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        seat_id:
+                          type: integer
+                          example: 1
+                        seat_number:
+                          type: integer
+                          example: 1
+                        status:
+                          type: string
+                          example: "AVAILABLE"
+                        seat_class_id:
+                          type: integer
+                          example: 2
+  /seat:
+    post:
+      summary: Membuat kursi berdasarkan kelas kursi
+      tags:
+        - Seat
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                seat_class_id:
+                  type: integer
+                  description: ID kelas kursi untuk membuat kursi
+                  example: 1
+      responses:
+        "201":
+          description: Kursi berhasil dibuat
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                    example: true
+                  message:
+                    type: string
+                    example: "Kursi berhasil dibuat"
+                  data:
+                    example: null
+        "400":
+          description: Permintaan tidak valid
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                    example: false
+                  message:
+                    type: string
+                    example: "field dibutuhkan !"  
+                  data:
+                    example: null
+
+  /seatclasses:
+    post:
+      tags:
+        - SeatClass
+      summary: Create a new seat class
+      description: Create a new seat class with the provided details
+      requestBody:
+        description: Details of the seat class to be created
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                seat_class_type:
+                  type: string
+                  example: Economy
+                seat_amount:
+                  type: integer
+                  example: 60
+                airlines_id:
+                  type: string
+                  example: QG
+      responses:
+        201:
+          description: Seat class created successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                    example: true
+                  message:
+                    type: string
+                    example: Kelas kursi berhasil dibuat
+                  data:
+                    type: object
+                    properties:
+                      id:
+                        type: string
+                        example: 1
+                      seat_class_type:
+                        type: string
+                        example: Economy
+                      seat_amount:
+                        type: integer
+                        example: 60
+                      airlines_id:
+                        type: string
+                        example: QG
+        400:
+          description: Bad request due to missing or invalid fields
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                    example: false
+                  message:
+                    type: string
+                    example: field dibutuhkan !
+                  data:
+                    type: string
+                    example: null
+        404:
+          description: Airline not found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                    example: false
+                  message:
+                    type: string
+                    example: airlines_id tidak ditemukan    
+    get:
+      summary: Mengambil data kelas kursi
+      tags:
+        - SeatClass
+      responses:
+        "200":
+          description: Data kelas kursi berhasil diambil
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                    example: true
+                  message:
+                    type: string
+                    example: "Data kelas kursi berhasil diambil"
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        seat_class_id:
+                          type: integer
+                          description: ID unik untuk kelas kursi
+                          example: 1
+                        seat_class_type:
+                          type: string
+                          description: Jenis atau tipe kelas kursi
+                          example: "Economy"
+                        seat_amount:
+                          type: integer
+                          description: Jumlah kursi dalam kelas kursi ini
+                          example: 60
+                        airlines_id:
+                          type: string
+                          description: ID maskapai yang memiliki kelas kursi ini
+                          example: "QG"
+
+  
+
+                
 
 components:
   securitySchemes:

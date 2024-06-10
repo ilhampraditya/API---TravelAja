@@ -13,7 +13,15 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoyLCJlb
 Content-Type: application/json
 
 {
-    "flight_id": "GA0000001"
+    "flight_id": "GA0000002"
+}
+### CREATE BOOKING
+POST http://localhost:3000/api/v1/booking
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjo2LCJlbWFpbCI6InVlZG5scXdha29jYXdlQG1heGFtYmEuY29tIiwiaWF0IjoxNzE4MDI5NTQ1LCJleHAiOjE3MTgxMTU5NDV9.HL33Ca4VpIfvrsugf1DIcxtDd_TYwYPsGWlApZtro30
+Content-Type: application/json
+
+{
+    "flight_id": "GA0000002"
 }
 
 ### get booking by token

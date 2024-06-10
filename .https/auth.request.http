@@ -3,9 +3,9 @@ POST https://expressjs-develop.up.railway.app/api/v1/register
 Content-Type: application/json
 
 {
-  "name": "Tesmidtrans20",
-  "email": "gudchqh@miteon.com",
-  "no_telp": "08230468629",
+  "name": "ilham",
+  "email": "tybnzdnndga@maxamba.com",
+  "no_telp": "0823046668629",
   "password": "password123"
 }
 
@@ -35,7 +35,7 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoxLCJlb
 Content-Type: application/json
 
 {
-  "otp": 265008
+  "otp": 887203
 }
 
 ### Verify OTP
@@ -55,7 +55,7 @@ POST https://expressjs-develop.up.railway.app/api/v1/login
 Content-Type: application/json
 
 {
-  "emailOrNoTelp": "gudchqh@miteon.com",
+  "emailOrNoTelp": "tybnzdnndga@maxamba.com",
   "password": "password123"
 }
 

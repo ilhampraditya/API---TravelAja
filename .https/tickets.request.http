@@ -4,8 +4,8 @@ POST https://expressjs-develop.up.railway.app/api/v1/create-ticket
 Content-Type: application/json
 
 {
-    "seat_id": 6,
-    "passenger_id": 5
+    "seat_id": 21,
+    "passenger_id": 8
 }
 
 ### CREATE TICKET
