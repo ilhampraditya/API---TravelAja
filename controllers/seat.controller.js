@@ -23,16 +23,8 @@ module.exports = {
   },
 
   createSeat: async (req, res, next) => {
-    const { seat_class_id } = req.body;
+    const { seat_number, seat_class_id } = req.body;
     try {
-      if (!seatClassExist) {
-        return res.status(400).json({
-          status: false,
-          message: "Kelas kursi tidak ditemukan!",
-          data: null,
-        });
-      }
-
       if (!seat_class_id) {
         return res.status(400).json({
           status: false,
@@ -41,7 +33,7 @@ module.exports = {
         });
       }
 
-      const seatExist = await prisma.seat.findFirst({
+      const seatClassExist = await prisma.seat.findFirst({
         where: { seat_number, seat_class_id },
       });
 
