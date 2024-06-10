@@ -30,6 +30,7 @@ module.exports = {
       const flight = await prisma.flights.findUnique({
         where: { flight_id: id },
         include: {
+          seatclass: true,
           airlines: true,
           arrival_airport: true,
           destination_airport: true,
