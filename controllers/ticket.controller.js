@@ -4,10 +4,22 @@ const prisma = new PrismaClient();
 module.exports = {
     getTicketByBookingCode: async (req, res, next) => {
         const { booking_code } = req.params
+        const { user_id } = req.user
         try {
 
-            const booking = await prisma.booking.findUnique({ where: { booking_code } });
+            const booking = await prisma.booking.findUnique({ where: { booking_code, user_id } });
+
+
+            if (!booking) {
+                return res.status(404).json({
+                    status: false,
+                    message: "Data booking tidak ada!",
+                    data: null,
+                });
+            }
+
             const passengers = await prisma.passenger.findMany({ where: { booking_id: booking.booking_id } })
+
 
             let tickets = [];
 
