@@ -336,6 +336,7 @@ module.exports = {
             const seat = await prisma.seat.update({ where: { seat_id: ticket.seat_id }, data: { status: 'BOOKED' } })
 
             const updatedTicket = await prisma.ticket.update({ where: { passenger_id: passenger.passenger_id }, data: { isActive: true } })
+
           }
 
         } else if (transactionStatus == 'cancel' || transactionStatus == 'deny' || transactionStatus == 'expire') {
