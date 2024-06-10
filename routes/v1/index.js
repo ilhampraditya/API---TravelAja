@@ -11,6 +11,7 @@ const Payment = require("../v1/payment.routes");
 const Passenger = require("../v1/passenger.routes");
 const Booking = require("../v1/booking.routes");
 const Notification = require("../v1/notification.routes")
+const Ticket = require("../v1/tickets.route")
 
 const swaggerUI = require("swagger-ui-express");
 const YAML = require("yaml");
@@ -40,7 +41,8 @@ router.use(
   Payment,
   Passenger,
   Booking,
-  Notification
+  Notification,
+  Ticket
 );
 
 module.exports = router;

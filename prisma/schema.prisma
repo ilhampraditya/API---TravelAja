@@ -61,10 +61,10 @@ model Airport {
 }
 
 model Seat {
-    seat_id       Int       @id @default(autoincrement())
+    seat_id       Int         @id @default(autoincrement())
     seat_number   Int
-    isBooked      Boolean   @default(false)
-    seatClass     SeatClass @relation(fields: [seat_class_id], references: [seat_class_id])
+    status        seat_status @default(AVAILABLE)
+    seatClass     SeatClass   @relation(fields: [seat_class_id], references: [seat_class_id])
     seat_class_id Int
     ticket        Ticket?
 
@@ -117,7 +117,8 @@ model Promotion {
 
 model Ticket {
     ticket_id    String    @id
-    url_qrcode   String
+    url_qrcode   String?
+    isActive     Boolean   @default(false)
     seat         Seat      @relation(fields: [seat_id], references: [seat_id])
     seat_id      Int       @unique
     passenger    Passenger @relation(fields: [passenger_id], references: [passenger_id])
@@ -171,4 +172,10 @@ enum transactions_status {
     PENDING_PAYMENT
     PAID
     CANCELED
+}
+
+enum seat_status {
+    AVAILABLE
+    CHECK_AGAIN_LATER
+    BOOKED
 }

@@ -1,11 +1,11 @@
 const express = require("express");
 const {
-  getAllSeatBySeatClassId,
   createSeat,
+  getEmptySeatBySeatClassId,
 } = require("../../controllers/seat.controller");
 const router = express.Router();
 
-router.get("/seat/:id", getAllSeatBySeatClassId);
+router.get("/seat/:id", getEmptySeatBySeatClassId);
 router.post("/seat", createSeat);
 
 module.exports = router;
