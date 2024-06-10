@@ -923,7 +923,7 @@ paths:
     post:
       summary: membuat promosi
       tags:
-        - Promotion
+        - Admin
       security:
         - bearerAuth: []
       requestBody:
@@ -975,6 +975,9 @@ paths:
       summary: mengambil data promosi
       tags:
         - Admin
+      security:
+        - bearerAuth: []
+
       responses:
         "200":
           description: Data Promosi berhasil diambil
@@ -1004,7 +1007,347 @@ paths:
                       endDate:
                         type: string
                         example: "2024-06-02T14:00:00.000Z"
+  /airport:
+    get:
+      tags:
+        - Admin
+      summary: Get all airports
+      description: Retrieve a list of all airports
+      parameters:
+        - in: query
+          name: search
+          schema:
+            type: string
+          description: Search query to filter airports by name or city
+      responses:
+        200:
+          description: A list of airports
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                    example: true
+                  message:
+                    type: string
+                    example: Berhasil menampilkan semua bandara
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        airport_id:
+                          type: string
+                          example: LOP
+                        airport_name:
+                          type: string
+                          example: Lombok Praya International Airport
+                        continent:
+                          type: string
+                          example: Asia
+                        country:
+                          type: string
+                          example: Indonesia
+                        city:
+                          type: string
+                          example: Jakarta
+    post:
+      tags:
+        - Admin
+      summary: Create a new airport
+      description: Add a new airport to the database
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                        airport_id:
+                          type: string
+                          example: LOP
+                        airport_name:
+                          type: string
+                          example: Lombok Praya International Airport
+                        continent:
+                          type: string
+                          example: Asia
+                        country:
+                          type: string
+                          example: Indonesia
+                        city:
+                          type: string
+                          example: Jakarta
+      responses:
+        201:
+          description: Airport created successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                    example: true
+                  message:
+                    type: string
+                    example: Pembuatan bandara berhasil
+                  data:
+                    type: object
+                    properties: 
+                      airport_id:
+                        type: string
+                        example: LOP
+                      airport_name:
+                        type: string
+                        example: Lombok Praya International Airport
+                      continent:
+                        type: string
+                        example: Asia
+                      country:
+                        type: string
+                        example: Indonesia
+                      city:
+                        type: string
+                        example: Lombok
+        400:
+          description: Missing required fields
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                    example: false
+                  message:
+                    type: string
+                    example: Harap menyediakan airport_id, nama bandara, benua, negara, dan kota
+                  data:
+                    type: string
+                    example: null
+        409:
+          description: Airport already exists
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                    example: false
+                  message:
+                    type: string
+                    example: Airport dengan ID ini sudah ada
+                  data:
+                    type: string
+                    example: null
 
+  /airport/{airportId}:
+    get:
+      tags:
+        - Admin
+      summary: Get airport by ID
+      description: Retrieve details of a specific airport by its ID
+      parameters:
+        - in: path
+          name: airportId
+          required: true
+          schema:
+            type: string
+          description: The airportId of the airport to retrieve
+      responses:
+        200:
+          description: Details of the specified airport
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                    example: true
+                  message:
+                    type: string
+                    example: Berhasil menampilkan bandara
+                  data:
+                    type: object
+                    properties:
+                        airport_id:
+                          type: string
+                          example: LOP
+                        airport_name:
+                          type: string
+                          example: Lombok Praya International Airport
+                        continent:
+                          type: string
+                          example: Asia
+                        country:
+                          type: string
+                          example: Indonesia
+                        city:
+                          type: string
+                          example: Jakarta
+        404:
+          description: Airport not found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                    example: false
+                  message:
+                    type: string
+                    example: Bandara tidak ditemukan
+                  data:
+                    type: string
+                    example : null
+    put:
+      tags:
+        - Admin
+      summary: Edit airport by ID
+      description: Update the details of a specific airport by its ID
+      parameters:
+        - in: path
+          name: airportId
+          required: true
+          schema:
+            type: string
+          description: The ID of the airport to update
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                airport_name:
+                  type: string
+                  example: Yogyakarta International Airport
+                continent:
+                  type: string
+                  example: Asia
+                country:
+                  type: string
+                  example: Indonesia
+                city:
+                  type: string
+                  example: Yogyakarta
+      responses:
+        200:
+          description: Airport updated successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                    example: true
+                  message:
+                    type: string
+                    example: Pembaharuan bandara berhasil
+                  data:
+                    type: object
+                    properties:
+                      airportId:
+                        type: string
+                        example: YIA
+                  airport_name:
+                    type: string
+                    example: Yogyakarta International Airport
+                  continent:
+                    type: string
+                    example: Asia
+                  country:
+                    type: string
+                    example: Indonesia
+                  city:
+                    type: string
+                    example: Yogyakarta
+        400:
+          description: Missing required fields
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                    example: false
+                  message:
+                    type: string
+                    example: Harap menyediakan nama bandara, benua, negara, dan kota
+                  data:
+                    type: string
+                    example : null
+        404:
+          description: Airport not found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                    example: false
+                  message:
+                    type: string
+                    example: Bandara tidak ditemukan
+                  data:
+                    type: string
+                    example : null
+
+    delete:
+      tags:
+        - Admin
+      summary: Delete airport by ID
+      description: Remove a specific airport by its ID from the database
+      parameters:
+        - in: path
+          name: airportId
+          required: true
+          schema:
+            type: string
+          description: The ID of the airport to delete
+      responses:
+        200:
+          description: Airport deleted successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                    example: true
+                  message:
+                    type: string
+                    example: Penghapusan bandara berhasil
+                  data:
+                    type: string
+                    example : null
+        404:
+          description: Airport not found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                    example: false
+                  message:
+                    type: string
+                    example: Bandara tidak ditemukan
+                  data:
+                    type: string
+                    example : null
+                
   /flights:
     get:
       summary: Mengambil semua data penerbangan
@@ -1139,7 +1482,7 @@ paths:
     post:
       summary: Membuat penerbangan baru
       tags:
-        - Flights
+        - Admin
       description: Endpoint ini digunakan untuk membuat penerbangan baru. || jika promotion null maka object promotion null || jika promotion null maka object promotion_id bisa dihapus
       requestBody:
         required: true
@@ -2130,6 +2473,86 @@ paths:
                     example: null
 
   /seatclasses:
+    post:
+      tags:
+        - SeatClass
+      summary: Create a new seat class
+      description: Create a new seat class with the provided details
+      requestBody:
+        description: Details of the seat class to be created
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                seat_class_type:
+                  type: string
+                  example: Economy
+                seat_amount:
+                  type: integer
+                  example: 60
+                airlines_id:
+                  type: string
+                  example: QG
+      responses:
+        201:
+          description: Seat class created successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                    example: true
+                  message:
+                    type: string
+                    example: Kelas kursi berhasil dibuat
+                  data:
+                    type: object
+                    properties:
+                      id:
+                        type: string
+                        example: 1
+                      seat_class_type:
+                        type: string
+                        example: Economy
+                      seat_amount:
+                        type: integer
+                        example: 60
+                      airlines_id:
+                        type: string
+                        example: QG
+        400:
+          description: Bad request due to missing or invalid fields
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                    example: false
+                  message:
+                    type: string
+                    example: field dibutuhkan !
+                  data:
+                    type: string
+                    example: null
+        404:
+          description: Airline not found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                    example: false
+                  message:
+                    type: string
+                    example: airlines_id tidak ditemukan    
     get:
       summary: Mengambil data kelas kursi
       tags:

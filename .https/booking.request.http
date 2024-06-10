@@ -1,6 +1,15 @@
 ### CREATE BOOKING
 POST https://expressjs-develop.up.railway.app/api/v1/booking
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjo1LCJlbWFpbCI6InR5Ym56ZG5uZGdhQG1heGFtYmEuY29tIiwiaWF0IjoxNzE4MDM3NTU3LCJleHAiOjE3MTgxMjM5NTd9.T8Nkrv-1uahccbp2VNjv6pqU3s-BvSQBuqpDeDK9JDQ
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoyLCJlbWFpbCI6Imd1ZGNocWhAbWl0ZW9uLmNvbSIsImlhdCI6MTcxODAzMTUzNywiZXhwIjoxNzE4MTE3OTM3fQ.8lelZ_tVNvDB5aqnB2Q0AaMOQXVpPKRuBlUgbnHHmBk
+Content-Type: application/json
+
+{
+    "flight_id": "GA0000001"
+}
+
+### CREATE BOOKING
+POST http://localhost:3000/api/v1/booking
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoyLCJlbWFpbCI6Imd1ZGNocWhAbWl0ZW9uLmNvbSIsImlhdCI6MTcxODAzMTUzNywiZXhwIjoxNzE4MTE3OTM3fQ.8lelZ_tVNvDB5aqnB2Q0AaMOQXVpPKRuBlUgbnHHmBk
 Content-Type: application/json
 
 {
@@ -17,7 +26,7 @@ Content-Type: application/json
 
 ### get booking by token
 GET http://localhost:3000/api/v1/mybooking
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjo1LCJlbWFpbCI6InR5Ym56ZG5uZGdhQG1heGFtYmEuY29tIiwiaWF0IjoxNzE4MDM3NTU3LCJleHAiOjE3MTgxMjM5NTd9.T8Nkrv-1uahccbp2VNjv6pqU3s-BvSQBuqpDeDK9JDQ
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoyLCJlbWFpbCI6Imd1ZGNocWhAbWl0ZW9uLmNvbSIsImlhdCI6MTcxODAzMTUzNywiZXhwIjoxNzE4MTE3OTM3fQ.8lelZ_tVNvDB5aqnB2Q0AaMOQXVpPKRuBlUgbnHHmBk
 
 ### get all booking
 GET http://localhost:3000/api/v1/booking

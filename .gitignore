@@ -3,5 +3,5 @@ node_modules
 .env
 request.http
 local.http
-/prisma/migrations/
 .http/
+/prisma/migrations/

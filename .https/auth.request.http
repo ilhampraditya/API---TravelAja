@@ -14,9 +14,9 @@ POST http://localhost:3000/api/v1/register
 Content-Type: application/json
 
 {
-  "name": "ilham",
-  "email": "uednlqwakocawe@maxamba.com",
-  "no_telp": "082307840029",
+  "name": "Tesmidtrans20",
+  "email": "bllkttge@miteon.com",
+  "no_telp": "08230468629",
   "password": "password123"
 }
 
@@ -31,7 +31,7 @@ Content-Type: application/json
 
 ### Verify OTP
 POST https://expressjs-develop.up.railway.app/api/v1/verify-otp
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjo1LCJlbWFpbCI6InR5Ym56ZG5uZGdhQG1heGFtYmEuY29tIiwiaWF0IjoxNzE4MDM3NTAxLCJleHAiOjE3MTgxMjM5MDF9.B4ARux9cPsmZeZSgsHx0SnLocuu8hWHYCqaCMSb_b4k
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoxLCJlbWFpbCI6ImJsbGt0dGdlQG1pdGVvbi5jb20iLCJpYXQiOjE3MTgwMzE0ODEsImV4cCI6MTcxODExNzg4MX0.zZg1chU55oLDPYlkG93h0yYHDqvhk25TZU7P8joNymo
 Content-Type: application/json
 
 {
@@ -40,11 +40,11 @@ Content-Type: application/json
 
 ### Verify OTP
 POST http://localhost:3000/api/v1/verify-otp
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjo2LCJlbWFpbCI6InVlZG5scXdha29jYXdlQG1heGFtYmEuY29tIiwiaWF0IjoxNzE4MDI4NzM3LCJleHAiOjE3MTgxMTUxMzd9.Y4HZ_oSXtgOK-59u5wDdcLIB1YYt0TeHO6KsdOxdSs4
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoxLCJlbWFpbCI6ImJsbGt0dGdlQG1pdGVvbi5jb20iLCJpYXQiOjE3MTgwMzE0ODEsImV4cCI6MTcxODExNzg4MX0.zZg1chU55oLDPYlkG93h0yYHDqvhk25TZU7P8joNymo
 Content-Type: application/json
 
 {
-  "otp": 101569
+  "otp": 519533
 }
 
 ### get all user
@@ -64,7 +64,7 @@ POST http://localhost:3000/api/v1/login
 Content-Type: application/json
 
 {
-  "emailOrNoTelp": "uednlqwakocawe@maxamba.com",
+  "emailOrNoTelp": "bllkttge@miteon.com",
   "password": "password123"
 }
 
@@ -86,17 +86,17 @@ POST http://localhost:3000/api/v1/forgot-password
 Content-Type: application/json
 
 {
-    "email": "kqdytn@mynanaimohomes.com"
+    "email": "bllkttge@miteon.com"
 }
 
 ###
 POST http://localhost:3000/api/v1/reset-password
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImtxZHl0bkBteW5hbmFpbW9ob21lcy5jb20iLCJpYXQiOjE3MTcwMTQxOTd9.v47PUU1iUpDkXhoAykf4isXxxct6KazIAxLvQtf2n-c
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoxMSwiZW1haWwiOiJibGxrdHRnZUBtaXRlb24uY29tIiwiaWF0IjoxNzE3Njg3MTA4fQ._gAQmd7B1zXf6Yt922s1ztT0pk0ovcvcshsQGOx-xpw
 Content-Type: application/json
 
 {
-  "password": "newPassword1234",
-  "confirmPassword": "newPassword1234"
+  "password": "newPassword123",
+  "confirmPassword": "newPassword123"
 }
 
 ### GET PROFILE

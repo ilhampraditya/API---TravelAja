@@ -175,12 +175,18 @@ module.exports = {
   },
 
   createPaymentMidtrans: async (req, res, next) => {
-    let { booking_code } = req.body
+    let { booking_code } = req.body;
 
     try {
-      const booking = await prisma.booking.findUnique({ where: { booking_code } })
-      const passengers = await prisma.passenger.findMany({ where: { booking_id: booking.booking_id } })
-      const user = await prisma.user.findUnique({ where: { user_id: booking.user_id } })
+      const booking = await prisma.booking.findUnique({
+        where: { booking_code },
+      });
+      const passengers = await prisma.passenger.findMany({
+        where: { booking_id: booking.booking_id },
+      });
+      const user = await prisma.user.findUnique({
+        where: { user_id: booking.user_id },
+      });
 
       const flight = await prisma.flights.findUnique({
         where: {
@@ -201,108 +207,125 @@ module.exports = {
 
       total_price = pricePerTicket * passengerTotal;
 
-      transaction_id = booking_code
-      gross_amount = total_price
+      transaction_id = booking_code;
+      gross_amount = total_price;
 
-      const authString = btoa(`${MIDTRANS_SERVER_KEY}:`)
+      const authString = btoa(`${MIDTRANS_SERVER_KEY}:`);
 
       const payload = {
         transaction_details: {
           order_id: transaction_id,
-          gross_amount
+          gross_amount,
         },
         customer_details: {
           first_name: user.name,
-          email: user.email
-        }
-        ,
+          email: user.email,
+        },
         callbacks: {
           finish: `${FRONT_END_URL}/booking-status?booking_code=${booking_code}`,
           error: `${FRONT_END_URL}/booking-status?booking_code=${booking_code}`,
-          pending: `${FRONT_END_URL}/booking-status?booking_code=${booking_code}`
-        }
-      }
-
-      console.log(payload)
-
-      const response = await fetch(`https://app.sandbox.midtrans.com/snap/v1/transactions`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'Accept': 'application/json',
-          'Authorization': `Basic ${authString}`
+          pending: `${FRONT_END_URL}/booking-status?booking_code=${booking_code}`,
         },
-        body: JSON.stringify(payload)
-      })
+      };
 
-      const data = await response.json()
+      console.log(payload);
 
-      console.log(response)
+      const response = await fetch(
+        `https://app.sandbox.midtrans.com/snap/v1/transactions`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Accept: "application/json",
+            Authorization: `Basic ${authString}`,
+          },
+          body: JSON.stringify(payload),
+        }
+      );
+
+      const data = await response.json();
+
+      console.log(response);
       if (response.status !== 201) {
         return res.status(500).json({
-          status: 'error',
-          message: 'Gagal membuat transaksi!'
-        })
+          status: "error",
+          message: "Gagal membuat transaksi!",
+        });
       }
 
       const payment = await prisma.payment.create({
         data: {
-          total_price
-        }
-      })
+          total_price,
+        },
+      });
 
-      const updatedBooking = await prisma.booking.update({ where: { booking_code }, data: { snap_token: data.token, snap_redirect_url: data.redirect_url, payment_id: payment.payment_id } })
+      const updatedBooking = await prisma.booking.update({
+        where: { booking_code },
+        data: {
+          snap_token: data.token,
+          snap_redirect_url: data.redirect_url,
+          payment_id: payment.payment_id,
+        },
+      });
 
       res.status(200).json({
-        status: 'true',
-        message: 'success',
-        data: updatedBooking
-      })
-
-    }
-    catch (error) {
-      next(error)
+        status: "true",
+        message: "success",
+        data: updatedBooking,
+      });
+    } catch (error) {
+      next(error);
     }
   },
 
   webhookNotification: async (req, res, next) => {
-    const data = req.body
+    const data = req.body;
 
     try {
       if (!data) {
         res.status(400).json({
-          status: 'error',
-          message: 'field dibutuhkan!',
-          data: null
-        })
+          status: "error",
+          message: "field dibutuhkan!",
+          data: null,
+        });
       }
 
-      const booking = await prisma.booking.findUnique({ where: { booking_code: data.order_id } })
+      const booking = await prisma.booking.findUnique({
+        where: { booking_code: data.order_id },
+      });
       if (booking) {
-        const hash = crypto.createHash('sha512').update(`${booking.booking_code}${data.status_code}${data.gross_amount}${MIDTRANS_SERVER_KEY}`).digest('hex')
+        const hash = crypto
+          .createHash("sha512")
+          .update(
+            `${booking.booking_code}${data.status_code}${data.gross_amount}${MIDTRANS_SERVER_KEY}`
+          )
+          .digest("hex");
         if (data.signature_key !== hash) {
           return {
-            status: 'error',
-            message: 'invalid signature key!'
-          }
+            status: "error",
+            message: "invalid signature key!",
+          };
         }
 
         const flight = await prisma.flights.findUnique({ where: { flight_id: booking.flight_id } })
 
-        let responseData = null
-        let transactionStatus = data.transaction_status
-        let fraudStatus = data.fraud_status
+        let responseData = null;
+        let transactionStatus = data.transaction_status;
+        let fraudStatus = data.fraud_status;
 
-        if (transactionStatus == 'capture') {
-          if (fraudStatus == 'accept') {
-            let payment = await prisma.payment.update({ where: { payment_id: booking.payment_id }, data: { status: 'PAID' } })
-            responseData = payment
+        if (transactionStatus == "capture") {
+          if (fraudStatus == "accept") {
+            let payment = await prisma.payment.update({
+              where: { payment_id: booking.payment_id },
+              data: { status: "PAID" },
+            });
+            responseData = payment;
             const notif = await prisma.notification.create({
               data: {
-                title: 'Pembayaran Berhasil',
+                title: "Pembayaran Berhasil",
                 message: `Pembayaran untuk booking dengan kode ${booking.booking_code} berhasil.`,
-                user_id: booking.user_id
-              }
+                user_id: booking.user_id,
+              },
             });
             const passengers = await prisma.passenger.findMany({ where: { booking_id: booking.booking_id } })
 
@@ -331,16 +354,19 @@ module.exports = {
 
 
           }
-        } else if (transactionStatus == 'settlement') {
-          let payment = await prisma.payment.update({ where: { payment_id: booking.payment_id }, data: { status: 'PAID' } })
-          responseData = payment
+        } else if (transactionStatus == "settlement") {
+          let payment = await prisma.payment.update({
+            where: { payment_id: booking.payment_id },
+            data: { status: "PAID" },
+          });
+          responseData = payment;
 
           const notif = await prisma.notification.create({
             data: {
-              title: 'Pembayaran Berhasil',
+              title: "Pembayaran Berhasil",
               message: `Pembayaran untuk booking dengan kode ${booking.booking_code} berhasil.`,
-              user_id: booking.user_id
-            }
+              user_id: booking.user_id,
+            },
           });
 
           const passengers = await prisma.passenger.findMany({ where: { booking_id: booking.booking_id } })
@@ -371,10 +397,10 @@ module.exports = {
           responseData = payment
           const notif = await prisma.notification.create({
             data: {
-              title: 'Pembayaran Gagal',
+              title: "Pembayaran Gagal",
               message: `Pembayaran untuk booking dengan kode ${booking.booking_code} gagal.`,
-              user_id: booking.user_id
-            }
+              user_id: booking.user_id,
+            },
           });
 
           const passengers = await prisma.passenger.findMany({ where: { booking_id: booking.booking_id } })
@@ -393,14 +419,12 @@ module.exports = {
         }
       }
 
-
       res.status(200).json({
-        status: 'success',
-        message: 'OK'
-      })
-
+        status: "success",
+        message: "OK",
+      });
     } catch (error) {
-      next(error)
+      next(error);
     }
-  }
+  },
 };
