@@ -312,6 +312,7 @@ module.exports = {
 
               const seat = await prisma.seat.update({ where: { seat_id: ticket.seat_id }, data: { status: 'BOOKED' } })
 
+
               let QRContent = `TICKET_ID:${updatedTicket.ticket_id}\nDEPARTURE_CODE:${flight.arrival_airport_id}\nDESTINATION_CODE:${flight.destination_airport_id}\nSEAT_NUMBER:${seat.seat_number}\nPASSENGER_NAME:${passenger.fullname}`
               const qrCodeDataURL = await QRCode.toDataURL(QRContent);
               const base64Data = qrCodeDataURL.replace(/^data:image\/png;base64,/, '');
@@ -324,9 +325,6 @@ module.exports = {
               const updatedTicket = await prisma.ticket.update({ where: { passenger_id: passenger.passenger_id }, data: { isActive: true, url_qrcode: url } })
 
             }
-
-
-
 
           }
         } else if (transactionStatus == 'settlement') {
@@ -349,6 +347,7 @@ module.exports = {
             });
 
             const seat = await prisma.seat.update({ where: { seat_id: ticket.seat_id }, data: { status: 'BOOKED' } })
+
 
             let QRContent = `TICKET_ID:${updatedTicket.ticket_id}\nDEPARTURE_CODE:${flight.arrival_airport_id}\nDESTINATION_CODE:${flight.destination_airport_id}\nSEAT_NUMBER:${seat.seat_number}\nPASSENGER_NAME:${passenger.fullname}`
             const qrCodeDataURL = await QRCode.toDataURL(QRContent);
