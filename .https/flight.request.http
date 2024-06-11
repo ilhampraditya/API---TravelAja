@@ -26,6 +26,7 @@ Content-Type: application/json
   "destination_airport_id": "LOP",
   "promotion_id": 2,
   "seat_class_id": 3
+
 }
 ### Create Flight
 POST https://expressjs-develop.up.railway.app/api/v1/flights
