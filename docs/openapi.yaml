@@ -1645,7 +1645,8 @@ paths:
         - name: id
           in: path
           required: true
-          description: ID Fights
+          description: ID Flights
+          example: GA0000002
           schema:
             type: string
       responses:
