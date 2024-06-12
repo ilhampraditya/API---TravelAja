@@ -3,8 +3,7 @@ GET http://localhost:3000/api/v1/flights
 Content-Type: application/json
 
 ### Get Flight By ID
-GET http://localhost:3000/api/v1/flights/GA0000002
-
+GET http://localhost:3000/api/v1/flights/GA0000001
 
 ### Create Flight
 POST http://localhost:3000/api/v1/flights
@@ -21,6 +20,7 @@ Content-Type: application/json
   "destination_airport_id": "LOP",
   "seat_class_id": 2
 }
+
 ### Create Flight
 POST https://expressjs-develop.up.railway.app/api/v1/flights
 Content-Type: application/json

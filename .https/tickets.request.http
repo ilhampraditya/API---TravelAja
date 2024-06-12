@@ -14,7 +14,7 @@ POST http://localhost:3000/api/v1/create-ticket
 Content-Type: application/json
 
 {
-    "seat_id": 2,
+    "seat_id": 32,
     "passenger_id": 1
 }
 

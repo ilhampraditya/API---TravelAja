@@ -5,7 +5,7 @@ GET http://localhost:3000/api/v1/airport
 GET http://localhost:3000/api/v1/airport/CGK
 
 ### Get airport search
-GET http://localhost:3000/api/v1/airport?search=lombok
+GET http://localhost:3000/api/v1/airport?search=surabaya
 
 # ### Create a new airport
 # POST https://expressjs-develop.up.railway.app/api/v1/airport

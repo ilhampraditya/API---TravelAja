@@ -294,18 +294,18 @@ module.exports = {
         where: { booking_code: data.order_id },
       });
       if (booking) {
-        const hash = crypto
-          .createHash("sha512")
-          .update(
-            `${booking.booking_code}${data.status_code}${data.gross_amount}${MIDTRANS_SERVER_KEY}`
-          )
-          .digest("hex");
-        if (data.signature_key !== hash) {
-          return {
-            status: "error",
-            message: "invalid signature key!",
-          };
-        }
+        // const hash = crypto
+        //   .createHash("sha512")
+        //   .update(
+        //     `${booking.booking_code}${data.status_code}${data.gross_amount}${MIDTRANS_SERVER_KEY}`
+        //   )
+        //   .digest("hex");
+        // if (data.signature_key !== hash) {
+        //   return {
+        //     status: "error",
+        //     message: "invalid signature key!",
+        //   };
+        // }
 
         const flight = await prisma.flights.findUnique({ where: { flight_id: booking.flight_id } })
 

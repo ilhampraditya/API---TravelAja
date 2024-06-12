@@ -68,4 +68,17 @@ module.exports = {
             next(error);
         }
     },
+
+    getAllseat: async (req, res, next) => {
+        try {
+          const seat = await prisma.seat.findMany();
+          return res.status(200).json({
+            status: true,
+            message: "Data seat berhasil diambil",
+            data: seat,
+          });
+        } catch (error) {
+          next(error);
+        }
+      },
 };

@@ -9,7 +9,7 @@ Content-Type: application/json
 
 ### CREATE BOOKING
 POST http://localhost:3000/api/v1/booking
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoyLCJlbWFpbCI6Imd1ZGNocWhAbWl0ZW9uLmNvbSIsImlhdCI6MTcxODAzMTUzNywiZXhwIjoxNzE4MTE3OTM3fQ.8lelZ_tVNvDB5aqnB2Q0AaMOQXVpPKRuBlUgbnHHmBk
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoyLCJlbWFpbCI6InVtZWR3cGN4eEBtdWF0b2MuY29tIiwiaWF0IjoxNzE4MTE2MTAyLCJleHAiOjE3MTgyMDI1MDJ9.aSQQS5FH3V09M-lGci98qcB3E3pHJLx2VacZw8km3XY
 Content-Type: application/json
 
 {

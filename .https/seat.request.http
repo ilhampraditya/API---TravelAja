@@ -1,6 +1,8 @@
 ### GET ALL BY SEAT CLASS ID
+GET http://localhost:3000/api/v1/seat
 
-GET http://localhost:3000/api/v1/seat/1
+### GET ALL BY SEAT CLASS ID
+GET http://localhost:3000/api/v1/seat/32
 
 ### CREATE SEAT
 

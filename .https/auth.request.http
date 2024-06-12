@@ -15,8 +15,8 @@ Content-Type: application/json
 
 {
   "name": "Tesmidtrans20",
-  "email": "bllkttge@miteon.com",
-  "no_telp": "08230468629",
+  "email": "umedwpcxx@muatoc.com",
+  "no_telp": "082304686291",
   "password": "password123"
 }
 
@@ -31,20 +31,20 @@ Content-Type: application/json
 
 ### Verify OTP
 POST https://expressjs-develop.up.railway.app/api/v1/verify-otp
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoxLCJlbWFpbCI6ImJsbGt0dGdlQG1pdGVvbi5jb20iLCJpYXQiOjE3MTgwMzE0ODEsImV4cCI6MTcxODExNzg4MX0.zZg1chU55oLDPYlkG93h0yYHDqvhk25TZU7P8joNymo
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoyLCJlbWFpbCI6InVtZWR3cGN4eEBtdWF0b2MuY29tIiwiaWF0IjoxNzE4MTE1OTQ1LCJleHAiOjE3MTgyMDIzNDV9.6Uf24UV7u1FyV4GRncBUW_KuPnTXNOwjMhQ1A0HAVOc
 Content-Type: application/json
 
 {
-  "otp": 265008
+  "otp": 645662
 }
 
 ### Verify OTP
 POST http://localhost:3000/api/v1/verify-otp
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoxLCJlbWFpbCI6ImJsbGt0dGdlQG1pdGVvbi5jb20iLCJpYXQiOjE3MTgwMzE0ODEsImV4cCI6MTcxODExNzg4MX0.zZg1chU55oLDPYlkG93h0yYHDqvhk25TZU7P8joNymo
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoyLCJlbWFpbCI6InVtZWR3cGN4eEBtdWF0b2MuY29tIiwiaWF0IjoxNzE4MTE1OTQ1LCJleHAiOjE3MTgyMDIzNDV9.6Uf24UV7u1FyV4GRncBUW_KuPnTXNOwjMhQ1A0HAVOc
 Content-Type: application/json
 
 {
-  "otp": 519533
+  "otp": 645662
 }
 
 ### get all user
@@ -64,7 +64,7 @@ POST http://localhost:3000/api/v1/login
 Content-Type: application/json
 
 {
-  "emailOrNoTelp": "bllkttge@miteon.com",
+  "emailOrNoTelp": "umedwpcxx@muatoc.com",
   "password": "password123"
 }
 
