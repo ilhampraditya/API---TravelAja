@@ -564,12 +564,14 @@ module.exports = {
       console.log(notif);
 
 
-      link = `${FRONT_END_URL}/token=${token}`
+      link = `${FRONT_END_URL}/?token=${token}`
+
       console.log(link)
       return res.redirect(link); // redirect to client
     }
 
-    link = `${FRONT_END_URL}/token=${token}`
+
+    link = `${FRONT_END_URL}/?token=${token}`
     console.log(link)
     return res.redirect(link); // redirect to client
 

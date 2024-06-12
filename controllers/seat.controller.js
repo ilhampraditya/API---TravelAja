@@ -3,7 +3,6 @@ const prisma = new PrismaClient();
 
 module.exports = {
     getAllSeats: async (req, res, next) => {
-
         let { id } = req.params
 
         try {
