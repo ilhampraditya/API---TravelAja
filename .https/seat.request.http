@@ -4,13 +4,14 @@ GET http://localhost:3000/api/v1/seat
 ### GET ALL BY SEAT CLASS ID
 GET http://localhost:3000/api/v1/seat/32
 
+
 ### CREATE SEAT
 
 POST https://expressjs-develop.up.railway.app/api/v1/seat
 Content-Type: application/json
 
 {
-    "seat_class_id": 1
+    "seat_class_id": 4
 }
 
 ###

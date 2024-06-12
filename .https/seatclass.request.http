@@ -1,4 +1,6 @@
 GET http://localhost:3000/api/v1/seatclasses
+###
+GET https://expressjs-develop.up.railway.app/api/v1/seatclasses
 
 ### GET Seat Class by ID
 
@@ -11,7 +13,7 @@ Content-Type: application/json
 {
   "seat_class_type": "Economy",
   "seat_amount": 60,
-  "airlines_id": "QG"
+  "airlines_id": "GA"
 }
 ###
 POST https://expressjs-develop.up.railway.app/api/v1/seatclasses

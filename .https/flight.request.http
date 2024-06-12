@@ -1,6 +1,8 @@
 ### Get All Flights
 GET http://localhost:3000/api/v1/flights
-Content-Type: application/json
+
+### Get All Flights
+GET https://expressjs-develop.up.railway.app/api/v1/flights
 
 ### Get Flight By ID
 GET http://localhost:3000/api/v1/flights/GA0000001
@@ -12,13 +14,15 @@ Content-Type: application/json
 {
   "flight_id": "GA0000001",
   "price": 1000000.00,
-  "date": "2024-06-05",
-  "departure_time": "2024-06-05T14:00:00.000Z",
-  "arrival_time": "2024-06-05T18:00:00.000Z",
-  "airline_id": "QG",
-  "arrival_airport_id": "CGK",
+  "date": "2024-06-20",
+  "departure_time": "2024-06-20T14:00:00.000Z",
+  "arrival_time": "2024-06-20T18:00:00.000Z",
+  "airline_id": "QZ",
+  "arrival_airport_id": "SUB",
   "destination_airport_id": "LOP",
-  "seat_class_id": 2
+  "promotion_id": 2,
+  "seat_class_id": 3
+
 }
 
 ### Create Flight
@@ -26,15 +30,16 @@ POST https://expressjs-develop.up.railway.app/api/v1/flights
 Content-Type: application/json
 
 {
-  "flight_id": "GA0000001",
-  "price": 1000000.00,
-  "date": "2024-06-05",
-  "departure_time": "2024-06-05T14:00:00.000Z",
-  "arrival_time": "2024-06-05T18:00:00.000Z",
-  "airline_id": "QG",
-  "arrival_airport_id": "CGK",
+  "flight_id": "GA0000005",
+  "price": 2000000.00,
+  "date": "2024-06-20",
+  "departure_time": "2024-06-20T14:00:00.000Z",
+  "arrival_time": "2024-06-20T18:00:00.000Z",
+  "airline_id": "GA",
+  "arrival_airport_id": "YIA",
   "destination_airport_id": "LOP",
-  "seat_class_id": 1
+  "promotion_id": 2,
+  "seat_class_id": 4
 }
 
 ### Create Flight
@@ -47,7 +52,7 @@ Content-Type: application/json
   "date": "2024-06-05",
   "departure_time": "2024-06-05T14:00:00.000Z",
   "arrival_time": "2024-06-05T18:00:00.000Z",
-  "airline_id": "QG",
+  "airline_id": "GA",
   "arrival_airport_id": "CGK",
   "destination_airport_id": "LOP",
   "seat_class_id": 1

@@ -1,23 +1,25 @@
 ### Get all airport
 GET http://localhost:3000/api/v1/airport
 
+### Get all airport
+GET https://expressjs-develop.up.railway.app/api/v1/airport
+
 ### Get all airport by id
 GET http://localhost:3000/api/v1/airport/CGK
 
 ### Get airport search
+GET http://localhost:3000/api/v1/airport?search=lombok
+
+### Get airport search
 GET http://localhost:3000/api/v1/airport?search=surabaya
 
-# ### Create a new airport
-# POST https://expressjs-develop.up.railway.app/api/v1/airport
-# Content-Type: application/json
-
-# {
-#     "airport_id": "LOP",
-#     "airport_name": "Lombok Praya International Airport",
-#     "continent": "Asia",
-#     "country": "Indonesia",
-#     "city": "Lombok"
-# }
+{
+    "airport_id": "SUB",
+    "airport_name": "Juanda",
+    "continent": "Asia",
+    "country": "Indonesia",
+    "city": "Surabaya"
+}
 
 # # {
 # #     "airport_id": "CGK",
@@ -40,12 +42,20 @@ Content-Type: application/json
 # }
 
 {
-    "airport_id": "CGK",
-    "airport_name": "Soekarno Hatta International Airport",
+    "airport_id": "JKT",
+    "airport_name": "Jakarta airport",
     "continent": "Asia",
     "country": "Indonesia",
     "city": "Jakarta"
 }
+
+# {
+#     "airport_id": "LOP",
+#     "airport_name": "Lombok Praya International Airport",
+#     "continent": "Asia",
+#     "country": "Indonesia",
+#     "city": "Lombok"
+# }
 
 ### edit airport berdasarkan airport id
 PUT http://localhost:3000/api/v1/airport/YIA

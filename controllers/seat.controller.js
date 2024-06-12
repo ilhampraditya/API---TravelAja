@@ -59,7 +59,7 @@ module.exports = {
                 });
             }
 
-            return res.status(201).send({
+            return res.status(201).json({
                 status: true,
                 message: "Kursi berhasil dibuat",
                 data: null,

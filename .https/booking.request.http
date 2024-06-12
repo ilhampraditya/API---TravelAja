@@ -16,6 +16,23 @@ Content-Type: application/json
     "flight_id": "GA0000001"
 }
 
+### CREATE BOOKING
+POST http://localhost:3000/api/v1/booking
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoyLCJlbWFpbCI6Imd1ZGNocWhAbWl0ZW9uLmNvbSIsImlhdCI6MTcxODAzMTUzNywiZXhwIjoxNzE4MTE3OTM3fQ.8lelZ_tVNvDB5aqnB2Q0AaMOQXVpPKRuBlUgbnHHmBk
+Content-Type: application/json
+
+{
+    "flight_id": "GA0000002"
+}
+### CREATE BOOKING
+POST http://localhost:3000/api/v1/booking
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjo2LCJlbWFpbCI6InVlZG5scXdha29jYXdlQG1heGFtYmEuY29tIiwiaWF0IjoxNzE4MDI5NTQ1LCJleHAiOjE3MTgxMTU5NDV9.HL33Ca4VpIfvrsugf1DIcxtDd_TYwYPsGWlApZtro30
+Content-Type: application/json
+
+{
+    "flight_id": "GA0000002"
+}
+
 ### get booking by token
 GET http://localhost:3000/api/v1/mybooking
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoyLCJlbWFpbCI6Imd1ZGNocWhAbWl0ZW9uLmNvbSIsImlhdCI6MTcxODAzMTUzNywiZXhwIjoxNzE4MTE3OTM3fQ.8lelZ_tVNvDB5aqnB2Q0AaMOQXVpPKRuBlUgbnHHmBk
