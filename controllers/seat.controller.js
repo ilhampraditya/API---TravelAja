@@ -2,6 +2,25 @@ const { PrismaClient } = require("@prisma/client");
 const prisma = new PrismaClient();
 
 module.exports = {
+    getAllSeats: async (req, res, next) => {
+        const { seat_class_id } = req.params.id
+        try {
+
+            const seats = await prisma.seat.findMany({
+                where: {
+                    seat_class_id
+                }
+            });
+
+            return res.status(200).json({
+                status: true,
+                message: "Data kursi berhasil diambil",
+                data: seats,
+            });
+        } catch (error) {
+            next(error);
+        }
+    },
     getEmptySeatBySeatClassId: async (req, res, next) => {
         const { seat_class_id } = req.params.id
         try {
