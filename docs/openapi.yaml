@@ -1065,21 +1065,21 @@ paths:
             schema:
               type: object
               properties:
-                        airport_id:
-                          type: string
-                          example: LOP
-                        airport_name:
-                          type: string
-                          example: Lombok Praya International Airport
-                        continent:
-                          type: string
-                          example: Asia
-                        country:
-                          type: string
-                          example: Indonesia
-                        city:
-                          type: string
-                          example: Jakarta
+                airport_id:
+                  type: string
+                  example: LOP
+                airport_name:
+                  type: string
+                  example: Lombok Praya International Airport
+                continent:
+                  type: string
+                  example: Asia
+                country:
+                  type: string
+                  example: Indonesia
+                city:
+                  type: string
+                  example: Jakarta
       responses:
         201:
           description: Airport created successfully
@@ -1096,7 +1096,7 @@ paths:
                     example: Pembuatan bandara berhasil
                   data:
                     type: object
-                    properties: 
+                    properties:
                       airport_id:
                         type: string
                         example: LOP
@@ -1175,21 +1175,21 @@ paths:
                   data:
                     type: object
                     properties:
-                        airport_id:
-                          type: string
-                          example: LOP
-                        airport_name:
-                          type: string
-                          example: Lombok Praya International Airport
-                        continent:
-                          type: string
-                          example: Asia
-                        country:
-                          type: string
-                          example: Indonesia
-                        city:
-                          type: string
-                          example: Jakarta
+                      airport_id:
+                        type: string
+                        example: LOP
+                      airport_name:
+                        type: string
+                        example: Lombok Praya International Airport
+                      continent:
+                        type: string
+                        example: Asia
+                      country:
+                        type: string
+                        example: Indonesia
+                      city:
+                        type: string
+                        example: Jakarta
         404:
           description: Airport not found
           content:
@@ -1205,7 +1205,7 @@ paths:
                     example: Bandara tidak ditemukan
                   data:
                     type: string
-                    example : null
+                    example: null
     put:
       tags:
         - Admin
@@ -1284,7 +1284,7 @@ paths:
                     example: Harap menyediakan nama bandara, benua, negara, dan kota
                   data:
                     type: string
-                    example : null
+                    example: null
         404:
           description: Airport not found
           content:
@@ -1300,7 +1300,7 @@ paths:
                     example: Bandara tidak ditemukan
                   data:
                     type: string
-                    example : null
+                    example: null
 
     delete:
       tags:
@@ -1330,7 +1330,7 @@ paths:
                     example: Penghapusan bandara berhasil
                   data:
                     type: string
-                    example : null
+                    example: null
         404:
           description: Airport not found
           content:
@@ -1346,8 +1346,8 @@ paths:
                     example: Bandara tidak ditemukan
                   data:
                     type: string
-                    example : null
-                
+                    example: null
+
   /flights:
     get:
       summary: Mengambil semua data penerbangan
@@ -2193,11 +2193,9 @@ paths:
                     example: false
                   message:
                     type: string
-                    example: "field dibutuhkan !" 
+                    example: "field dibutuhkan !"
                   data:
                     example: null
-             
-              
 
   /mybooking:
     get:
@@ -2328,12 +2326,16 @@ paths:
                       properties:
                         id:
                           type: integer
-                        user_id:
-                          type: integer
+                          example: 1
                         message:
                           type: string
+                          example: Hi! Ilham Akun Anda telah berhasil dibuat
                         isRead:
                           type: boolean
+                          example: false
+                        user_id:
+                          type: integer
+                          example: 1
   /notification-user:
     get:
       summary: Get notifications for a specific user
@@ -2363,25 +2365,17 @@ paths:
                       properties:
                         id:
                           type: integer
-                        user_id:
-                          type: integer
+                          example: 1
                         message:
                           type: string
+                          example: Hi! Ilham Akun Anda telah berhasil dibuat
                         isRead:
                           type: boolean
-        "401":
-          description: Unauthorized
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  status:
-                    type: boolean
-                    example: false
-                  message:
-                    type: string
-                    example: "Unauthorized"
+                          example: false
+                        user_id:
+                          type: integer
+                          example: 1
+
   /seat/{id}:
     get:
       summary: Mengambil data kursi kosong berdasarkan kelas kursi
@@ -2469,7 +2463,7 @@ paths:
                     example: false
                   message:
                     type: string
-                    example: "field dibutuhkan !"  
+                    example: "field dibutuhkan !"
                   data:
                     example: null
 
@@ -2553,7 +2547,7 @@ paths:
                     example: false
                   message:
                     type: string
-                    example: airlines_id tidak ditemukan    
+                    example: airlines_id tidak ditemukan
     get:
       summary: Mengambil data kelas kursi
       tags:
@@ -2593,10 +2587,6 @@ paths:
                           type: string
                           description: ID maskapai yang memiliki kelas kursi ini
                           example: "QG"
-
-  
-
-                
 
 components:
   securitySchemes:
