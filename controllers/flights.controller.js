@@ -175,14 +175,14 @@ module.exports = {
   },
 
   searchFlight: async (req, res, next) => {
-    let { arrival_airport_id, destination_airport_id, date, seat_class_id } =
+    let { arrival_airport_id, destination_airport_id, date, seat_class_type } =
       req.query;
     try {
       if (
         !arrival_airport_id ||
         !destination_airport_id ||
         !date ||
-        !seat_class_id
+        !seat_class_type
       ) {
         return res.status(404).json({
           status: false,
@@ -191,17 +191,25 @@ module.exports = {
         });
       }
 
-      seat_class_id = Number(seat_class_id);
+      const seatClasses = await prisma.seatClass.findMany({ where: { seat_class_type: { contains: seat_class_type, mode: 'insensitive' } } })
+
+      // console.log(seatClasses)
 
       const newDate = new Date(date);
       newDate.setUTCHours(0, 0, 0, 0);
+
+      const seatClassIds = seatClasses.map(seatClass => seatClass.seat_class_id);
+
+
 
       const flight = await prisma.flights.findMany({
         where: {
           arrival_airport_id,
           destination_airport_id,
           date: newDate,
-          seat_class_id,
+          seat_class_id: {
+            in: seatClassIds,
+          },
         },
         include: {
           airlines: true,
