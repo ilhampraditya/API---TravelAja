@@ -3,12 +3,16 @@ const prisma = new PrismaClient();
 
 module.exports = {
     getAllSeats: async (req, res, next) => {
-        const { seat_class_id } = req.params.id
+      
+        let { id } = req.params
+
         try {
+
+            id = Number(id)
 
             const seats = await prisma.seat.findMany({
                 where: {
-                    seat_class_id
+                    seat_class_id: id
                 }
             });
 
