@@ -4,7 +4,7 @@ const prisma = new PrismaClient();
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
 const crypto = require("crypto");
-const { JWT_SECRET_KEY } = process.env;
+const { JWT_SECRET_KEY, FRONT_END_URL } = process.env;
 const { formatdate } = require("../libs/formatdate");
 const nodemailer = require("../libs/nodemailer");
 const { getHTML, sendMail } = require("../libs/nodemailer");
@@ -537,6 +537,7 @@ module.exports = {
     const userExist = await prisma.user.findUnique({
       where: { user_id: user.user_id },
     });
+
     if (userExist && !userExist.password) {
       const password = generateRandomString();
       const encryptedPassword = await bcrypt.hash(password, 10);
@@ -552,20 +553,23 @@ module.exports = {
       });
       await sendMail(updatedUser.email, subject, emailContent);
 
-      return res.status(200).json({
-        status: true,
-        message: "Login berhasil dan periksa email anda untuk kredensial login",
-        err: null,
-        data: { token },
+      const notif = await prisma.notification.create({
+        data: {
+          title: "Login dengan google pertama kali berhasil",
+          message: `Silahkan Cek Email anda untuk kredensial akun, silahkan ubah password sesuai keinginan!`,
+          user_id: user.user_id,
+        },
       });
+
+      console.log(notif);
+
+      res.cookie('token', token, { httpOnly: true }); // set token to cookies
+      return res.redirect(FRONT_END_URL); // redirect to client
     }
 
-    return res.status(200).json({
-      status: true,
-      message: "Login berhasil",
-      err: null,
-      data: { token },
-    });
+    res.cookie('token', token, { httpOnly: true }); // set token to cookies
+    return res.redirect(FRONT_END_URL); // redirect to client
+
   },
   changePassword: async (req, res, next) => {
     try {
