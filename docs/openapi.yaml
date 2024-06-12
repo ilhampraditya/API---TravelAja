@@ -1782,13 +1782,13 @@ paths:
             type: string
             format: date
             example: 2024-06-05
-        - name: seat_class_id
+        - name: seat_class_type
           in: query
           required: true
-          description: ID kelas tempat duduk
+          description: Nama kelas maskapai
           schema:
-            type: integer
-            example: 1
+            type: string
+            example: economy
       responses:
         "200":
           description: Operasi berhasil
