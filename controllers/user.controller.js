@@ -563,12 +563,14 @@ module.exports = {
 
       console.log(notif);
 
-      res.cookie('token', token, { httpOnly: true }); // set token to cookies
-      return res.redirect(FRONT_END_URL); // redirect to client
+      link = `${FRONT_END_URL}/token=${token}`
+      console.log(link)
+      return res.redirect(link); // redirect to client
     }
 
-    res.cookie('token', token, { httpOnly: true }); // set token to cookies
-    return res.redirect(FRONT_END_URL); // redirect to client
+    link = `${FRONT_END_URL}/token=${token}`
+    console.log(link)
+    return res.redirect(link); // redirect to client
 
   },
   changePassword: async (req, res, next) => {
