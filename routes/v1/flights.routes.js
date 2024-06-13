@@ -6,11 +6,12 @@ const {
   createFlight,
   searchFlight,
 } = require("../../controllers/flights.controller");
+const { restrict } = require("../../middlewares/auth.middleware");
 
 
 router.get("/flights", getAllFlights);
 router.get("/flights/:id", getFlightById);
-router.post("/flights", createFlight);
+router.post("/flights", restrict, createFlight);
 router.get("/search", searchFlight)
 
 module.exports = router;
