@@ -5,7 +5,17 @@ const prisma = new PrismaClient();
 module.exports = {
   createAirport: async (req, res, next) => {
     try {
+      const { role } = req.user
       const { airport_id, airport_name, continent, country, city } = req.body;
+
+      if (role !== 'admin') {
+        return res.status(400).json({
+          status: true,
+          message: "Anda bukan admin!",
+          data: null,
+        });
+      }
+
 
       if (!airport_id || !airport_name || !continent || !country || !city) {
         return res.status(400).json({
@@ -45,15 +55,15 @@ module.exports = {
         status: true,
         message: "Pembuatan bandara berhasil",
         data: {
-            [newAirport.id]: {
-                airport_id: newAirport.id,
-                airport_name: newAirport.airport_name,
-                continent: newAirport.continent,
-                city: newAirport.city,
-                country: newAirport.country
-            }
+          [newAirport.id]: {
+            airport_id: newAirport.id,
+            airport_name: newAirport.airport_name,
+            continent: newAirport.continent,
+            city: newAirport.city,
+            country: newAirport.country
+          }
         },
-    });
+      });
     } catch (err) {
       next(err);
     }
@@ -65,11 +75,11 @@ module.exports = {
 
       const searchConditions = search
         ? {
-            OR: [
-              { airport_name: { contains: search, mode: "insensitive" } },
-              { city: { contains: search, mode: "insensitive" } },
-            ],
-          }
+          OR: [
+            { airport_name: { contains: search, mode: "insensitive" } },
+            { city: { contains: search, mode: "insensitive" } },
+          ],
+        }
         : {};
 
       const airports = await prisma.airport.findMany({
@@ -114,8 +124,17 @@ module.exports = {
 
   editAirportById: async (req, res, next) => {
     try {
+      const { role } = req.user
       const { airportId } = req.params;
       const { airport_name, continent, country, city } = req.body;
+
+      if (role !== 'admin') {
+        return res.status(400).json({
+          status: true,
+          message: "Anda bukan admin!",
+          data: null,
+        });
+      }
 
       if (!airport_name || !continent || !country || !city) {
         return res.status(400).json({
@@ -159,35 +178,6 @@ module.exports = {
           country: editedAirport.country,
           city: editedAirport.city,
         },
-      });
-    } catch (error) {
-      next(error);
-    }
-  },
-
-  deleteAirport: async (req, res, next) => {
-    try {
-      const { airportId } = req.params;
-      const airport = await prisma.airport.findUnique({
-        where: { id: airportId },
-      });
-      if (!airport) {
-        res.status(404).json({
-          status: false,
-          message: "Bandara tidak ditemukan",
-          data: null,
-        });
-      }
-      const deletedAirport = await prisma.airport.delete({
-        where: {
-          id: airportId,
-        },
-      });
-
-      res.status(200).json({
-        status: true,
-        message: "Penghapusan bandara berhasil",
-        data: null,
       });
     } catch (error) {
       next(error);

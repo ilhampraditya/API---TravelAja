@@ -10,6 +10,7 @@ const nodemailer = require("../libs/nodemailer");
 const { getHTML, sendMail } = require("../libs/nodemailer");
 const { generateOTP } = require("../libs/otpGenerator");
 const { generateRandomString } = require("../libs/passGenerator");
+const { use } = require("passport");
 
 module.exports = {
   register: async (req, res, next) => {
@@ -28,7 +29,7 @@ module.exports = {
 
       if (emailExist && !emailExist.isVerified) {
         const deleteUser = await prisma.user.delete({
-          where: { id: emailExist.id },
+          where: { user_id: emailExist.user_id },
         });
       } else if (emailExist) {
         return res.status(401).json({
@@ -79,6 +80,7 @@ module.exports = {
         {
           user_id: user.user_id,
           email: user.email,
+          role: user.role
         },
         JWT_SECRET_KEY,
         {
@@ -86,15 +88,6 @@ module.exports = {
         }
       );
 
-      const notif = await prisma.notification.create({
-        data: {
-          title: "Registrasi Berhasil",
-          message: `Hi! ${name} Akun Anda telah berhasil dibuat`,
-          user_id: user.user_id,
-        },
-      });
-
-      console.log(notif);
 
       return res.status(201).json({
         status: true,
@@ -209,6 +202,16 @@ module.exports = {
         },
       });
 
+      const notif = await prisma.notification.create({
+        data: {
+          title: "Registrasi Berhasil",
+          message: `Hi! ${user.name} Akun Anda telah berhasil dibuat`,
+          user_id: user.user_id,
+        },
+      });
+
+      console.log(notif);
+
       return res.status(200).json({
         status: true,
         message: "User berhasil diverifikasi",
@@ -272,7 +275,7 @@ module.exports = {
       }
       delete user.password;
       const token = jwt.sign(
-        { user_id: user.user_id, email: user.email },
+        { user_id: user.user_id, email: user.email, role: user.role },
         JWT_SECRET_KEY,
         { expiresIn: "1d" }
       );
@@ -562,7 +565,6 @@ module.exports = {
       });
 
       console.log(notif);
-
 
       link = `${FRONT_END_URL}/?token=${token}`
 
