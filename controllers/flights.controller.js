@@ -57,6 +57,7 @@ module.exports = {
   },
 
   createFlight: async (req, res, next) => {
+    const { role } = req.user
     const {
       flight_id,
       price,
@@ -71,6 +72,15 @@ module.exports = {
     } = req.body;
 
     try {
+
+      if (role !== 'admin') {
+        return res.status(400).json({
+          status: true,
+          message: "Anda bukan admin!",
+          data: null,
+        });
+      }
+
       const newDate = new Date(date);
       newDate.setUTCHours(0, 0, 0, 0);
 

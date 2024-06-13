@@ -49,9 +49,17 @@ module.exports = {
     },
 
     createSeat: async (req, res, next) => {
+        const { role } = req.user
         const { seat_class_id } = req.body;
         try {
 
+            if (role !== 'admin') {
+                return res.status(400).json({
+                    status: true,
+                    message: "Anda bukan admin!",
+                    data: null,
+                });
+            }
 
             if (!seat_class_id) {
                 return res.status(400).json({

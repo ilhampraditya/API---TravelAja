@@ -971,6 +971,7 @@ paths:
                       endDate:
                         type: string
                         example: "2024-06-02T14:00:00.000Z"
+
     get:
       summary: mengambil data promosi
       tags:
@@ -1753,6 +1754,86 @@ paths:
                       promotion:
                         type: string
                         example: null
+  /airlines:
+    post:
+      summary: Membuat data maskapai penerbangan
+      tags:
+        - Admin
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                airline_id:
+                  type: string
+                  example: JT
+                  description: ID maskapai penerbangan
+                airline_name:
+                  type: string
+                  example: "Lion Air"
+                  description: Nama maskapai penerbangan
+                baggage:
+                  type: string
+                  example: "30"
+                cabin_baggage:
+                  type: string
+                  example: "7"
+                file:
+                  type: string
+                  format: binary
+                  description: File logo maskapai dalam format gambar
+      responses:
+        "201":
+          description: Maskapai penerbangan berhasil dibuat
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                    example: true
+                  message:
+                    type: string
+                    example: "Maskapai penerbangan berhasil dibuat"
+                  data:
+                    type: object
+                    properties:
+                      airline_id:
+                        type: string
+                        example: JT
+                      airline_name:
+                        type: string
+                        example: "Lion Air"
+                      baggage:
+                        type: integer
+                        example: 30
+                      cabin_baggage:
+                        type: integer
+                        example: 7
+                      url_logo:
+                        type: string
+                        example: "https://ik.imagekit.io/travelaja/1718268380363_0QDj6ipbS.png"
+        "400":
+          description: Request tidak valid atau file tidak ada
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                    example: false
+                  message:
+                    type: string
+                    example: "file tidak ada!"
+                  data:
+                    type: object
+                    example: null
   /search:
     get:
       summary: Mengambil semua data penerbangan berdasarkan pencarian
@@ -2587,6 +2668,92 @@ paths:
                           type: string
                           description: ID maskapai yang memiliki kelas kursi ini
                           example: "QG"
+
+  /create-ticket:
+    post:
+      tags:
+        - Tiket
+      summary: Membuat tiket
+      description: Membuat tiket baru dengan detail yang diberikan
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                seat_id:
+                  type: integer
+                  example: 7
+                  description: ID kursi yang akan dipesan
+                passenger_id:
+                  type: integer
+                  example: 8
+                  description: ID penumpang yang memesan tiket
+      responses:
+        "201":
+          description: Tiket berhasil dibuat
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                    example: true
+                  message:
+                    type: string
+                    example: "Tiket berhasil dibuat"
+                  data:
+                    type: object
+                    properties:
+                      ticket_id:
+                        type: string
+                        example: "TVLAJADOM000001"
+                      url_qrcode:
+                        type: string
+                        example: "null"
+                      isActive:
+                        type: string
+                        example: "false"
+                      seat_id:
+                        type: string
+                        example: "7"
+                      passenger_id:
+                        type: string
+                        example: "8"
+        "400":
+          description: Permintaan tidak valid atau field diperlukan tidak ada
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                    example: false
+                  message:
+                    type: string
+                    example: "field dibutuhkan !"
+                  data:
+                    type: object
+                    example: null
+        "404":
+          description: Data tidak ditemukan (misalnya, kursi atau penumpang tidak ditemukan)
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                    example: false
+                  message:
+                    type: string
+                    example: "Kursi tidak ditemukan!"
+                  data:
+                    type: object
+                    example: null
 
 components:
   securitySchemes:

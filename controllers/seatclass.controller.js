@@ -7,11 +7,11 @@ module.exports = {
       const { search } = req.query;
       const searchConditions = search
         ? {
-            OR: [
-              { seat_class_type: { contains: search, mode: "insensitive" } },
-              // { seat_number: { contains: search, mode: "insensitive" } }
-            ],
-          }
+          OR: [
+            { seat_class_type: { contains: search, mode: "insensitive" } },
+            // { seat_number: { contains: search, mode: "insensitive" } }
+          ],
+        }
         : {};
 
       const seatClass = await prisma.seatClass.findMany({
@@ -28,8 +28,18 @@ module.exports = {
   },
 
   createSeatClass: async (req, res, next) => {
+    const { role } = req.user
     const { seat_class_type, seat_amount, airlines_id } = req.body;
     try {
+
+      if (role !== 'admin') {
+        return res.status(400).json({
+          status: true,
+          message: "Anda bukan admin!",
+          data: null,
+        });
+      }
+
       if (!seat_class_type || !seat_amount || !airlines_id) {
         return res.status(400).json({
           status: false,
