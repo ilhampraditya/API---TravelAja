@@ -175,14 +175,13 @@ module.exports = {
   },
 
   searchFlight: async (req, res, next) => {
-    let { arrival_airport_id, destination_airport_id, date, seat_class_id } =
-      req.query;
+    let { arrival_airport_id, destination_airport_id, date, seat_class_type } = req.query;
     try {
       if (
         !arrival_airport_id ||
         !destination_airport_id ||
         !date ||
-        !seat_class_id
+        !seat_class_type
       ) {
         return res.status(404).json({
           status: false,
@@ -190,8 +189,6 @@ module.exports = {
           data: null,
         });
       }
-
-      seat_class_id = Number(seat_class_id);
 
       const newDate = new Date(date);
       newDate.setUTCHours(0, 0, 0, 0);
@@ -201,9 +198,15 @@ module.exports = {
           arrival_airport_id,
           destination_airport_id,
           date: newDate,
-          seat_class_id,
+          seatclass: {
+            seat_class_type: {
+              contains: seat_class_type,
+              mode: 'insensitive',
+            },
+          },
         },
         include: {
+          seatclass: true,
           airlines: true,
           arrival_airport: true,
           destination_airport: true,
@@ -211,7 +214,7 @@ module.exports = {
         },
       });
 
-      if (!flight) {
+      if (!flight || flight.length === 0) {
         return res.status(404).json({
           status: false,
           message: "Penerbangan tidak ditemukan",
@@ -228,4 +231,5 @@ module.exports = {
       next(error);
     }
   },
+
 };
