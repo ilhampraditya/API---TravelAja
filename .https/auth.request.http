@@ -15,8 +15,8 @@ Content-Type: application/json
 
 {
   "name": "Tesmidtrans20",
-  "email": "bllkttge@miteon.com",
-  "no_telp": "08230468629",
+  "email": "dying322@navalcadets.com",
+  "no_telp": "0823046008629",
   "password": "password123"
 }
 
@@ -40,11 +40,11 @@ Content-Type: application/json
 
 ### Verify OTP
 POST http://localhost:3000/api/v1/verify-otp
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoxLCJlbWFpbCI6ImJsbGt0dGdlQG1pdGVvbi5jb20iLCJpYXQiOjE3MTgwMzE0ODEsImV4cCI6MTcxODExNzg4MX0.zZg1chU55oLDPYlkG93h0yYHDqvhk25TZU7P8joNymo
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjo3LCJlbWFpbCI6ImR5aW5nMzIyQG5hdmFsY2FkZXRzLmNvbSIsImlhdCI6MTcxODI3MTQ2MiwiZXhwIjoxNzE4MzU3ODYyfQ.Stn4FF5Jn-qlZNzSgxIpijR4aRrEWzwdogrr-Bocq7I
 Content-Type: application/json
 
 {
-  "otp": 519533
+  "otp": 171114
 }
 
 ### get all user
@@ -64,7 +64,7 @@ POST http://localhost:3000/api/v1/login
 Content-Type: application/json
 
 {
-  "emailOrNoTelp": "bllkttge@miteon.com",
+  "emailOrNoTelp": "dying322@navalcadets.com",
   "password": "password123"
 }
 
