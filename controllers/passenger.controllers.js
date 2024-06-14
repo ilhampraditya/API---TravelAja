@@ -7,7 +7,6 @@ module.exports = {
       fullname,
       passenger_type,
       born_date,
-      citizen,
       identity_number,
       booking_id,
     } = req.body;
@@ -33,10 +32,8 @@ module.exports = {
           fullname,
           passenger_type,
           born_date: newDate,
-          citizen,
           identity_number,
-          booking_id,
-          // booking_id: booking.booking_id,
+          booking_id
         },
         include: {
           booking: true,
@@ -70,34 +67,19 @@ module.exports = {
     }
   },
 
-  getByToken: async (req, res, next) => {
+  getByBookingId: async (req, res, next) => {
     const user = req.user;
+    const { booking_id } = req.params
     try {
-      const bookings = await prisma.booking.findMany({
-        where: {
-          user_id: user.user_id,
-        },
-        select: {
-          booking_id: true,
-        },
-      });
-
-      const booking_id = bookings.map((booking) => booking.booking_id);
-
       const passengers = await prisma.passenger.findMany({
         where: {
-          booking_id: {
-            in: booking_id,
-          },
-        },
-        include: {
-          booking: true,
-        },
+          booking_id
+        }
       });
 
       return res.status(200).json({
         status: true,
-        message: "Data pemesanan berhasil diambil",
+        message: "Data penumpang berhasil diambil",
         data: passengers,
       });
     } catch (error) {

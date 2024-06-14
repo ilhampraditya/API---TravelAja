@@ -124,7 +124,7 @@ model Ticket {
     passenger    Passenger @relation(fields: [passenger_id], references: [passenger_id])
     passenger_id Int       @unique
 
-    @@map("tickets")    
+    @@map("tickets")
 }
 
 model Passenger {
@@ -132,7 +132,6 @@ model Passenger {
     fullname        String
     passenger_type  String
     born_date       DateTime
-    citizen         String
     identity_number String
     ticket          Ticket?
     booking         Booking  @relation(fields: [booking_id], references: [booking_id])
