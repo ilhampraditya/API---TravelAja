@@ -32,6 +32,14 @@ module.exports = {
                 }
             }
 
+            if (!tickets) {
+                return res.status(404).json({
+                    status: true,
+                    message: "Data tiket tidak ditemukan!",
+                    data: tickets,
+                });
+            }
+
             return res.status(200).json({
                 status: true,
                 message: "Data tiket berhasil diambil",

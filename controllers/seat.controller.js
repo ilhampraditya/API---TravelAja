@@ -12,6 +12,8 @@ module.exports = {
             const seats = await prisma.seat.findMany({
                 where: {
                     seat_class_id: id
+                }, orderBy: {
+                    seat_number: 'asc'
                 }
             });
 
