@@ -63,4 +63,65 @@ module.exports = {
       next(error);
     }
   },
+
+  updateAirline: async (req, res, next) => {
+    const { airline_id } = req.params;
+    const { airline_name, baggage, cabin_baggage } = req.body;
+
+    try {
+      let updateData = {
+        airline_name,
+        baggage,
+        cabin_baggage,
+      };
+
+      if (req.file) {
+        const resizedBuffer = await sharp(req.file.buffer)
+          .resize(300, 300)
+          .toFormat("jpeg")
+          .jpeg({ quality: 90 })
+          .toBuffer();
+
+        let strFile = resizedBuffer.toString("base64");
+
+        let { url } = await imagekit.upload({
+          fileName: Date.now() + path.extname(req.file.originalname),
+          file: strFile,
+        });
+
+        updateData.url_logo = url;
+      }
+
+      const updatedAirline = await prisma.airlines.update({
+        where: { airline_id },
+        data: updateData,
+      });
+
+      return res.status(200).json({
+        status: true,
+        message: "Maskapai penerbangan berhasil diupdate",
+        data: updatedAirline,
+      });
+    } catch (error) {
+      next(error);
+    }
+  },
+
+  deleteAirline: async (req, res, next) => {
+    const { airline_id } = req.params;
+
+    try {
+      await prisma.airlines.delete({
+        where: { airline_id },
+      });
+
+      return res.status(200).json({
+        status: true,
+        message: "Maskapai penerbangan berhasil dihapus",
+        data: null,
+      });
+    } catch (error) {
+      next(error);
+    }
+  },
 };

@@ -17,16 +17,16 @@ Content-Type: application/json
 
 ### Create passenger
 POST https://expressjs-develop.up.railway.app/api/v1/passenger
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjo1LCJlbWFpbCI6InR5Ym56ZG5uZGdhQG1heGFtYmEuY29tIiwiaWF0IjoxNzE4MDM3NTU3LCJleHAiOjE3MTgxMjM5NTd9.T8Nkrv-1uahccbp2VNjv6pqU3s-BvSQBuqpDeDK9JDQ
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoyLCJlbWFpbCI6Imd1ZGNocWhAbWl0ZW9uLmNvbSIsInJvbGUiOiJ1c2VyIiwiaWF0IjoxNzE4MzMwMTQ5LCJleHAiOjE3MTg0MTY1NDl9.BkQmShsWbxQMP1TBE5C9RI-NjGjRAuVlQXBZNnpWMA4
 Content-Type: application/json
 
 {
-  "fullname": "mullet",
+  "fullname": "mullet 4",
   "passenger_type": "adult",
   "born_date": "2003-05-15",
   "citizen": "IDN",
   "identity_number": "A1234567893",
-  "booking_id": 23
+  "booking_id": 42
 }
 
 ###

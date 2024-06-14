@@ -4,7 +4,7 @@ Content-Type: application/json
 
 {
   "name": "ilham",
-  "email": "tybnzdnndga@maxamba.com",
+  "email": "gudchqh@miteon.com",
   "no_telp": "0823046668629",
   "password": "password123"
 }
@@ -55,7 +55,7 @@ POST https://expressjs-develop.up.railway.app/api/v1/login
 Content-Type: application/json
 
 {
-  "emailOrNoTelp": "tybnzdnndga@maxamba.com",
+  "emailOrNoTelp": "gudchqh@miteon.com",
   "password": "password123"
 }
 
@@ -64,7 +64,7 @@ POST http://localhost:3000/api/v1/login
 Content-Type: application/json
 
 {
-  "emailOrNoTelp": "umedwpcxx@muatoc.com",
+  "emailOrNoTelp": "bllkttge@miteon.com",
   "password": "password123"
 }
 
@@ -91,12 +91,12 @@ Content-Type: application/json
 
 ###
 POST http://localhost:3000/api/v1/reset-password
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoxMSwiZW1haWwiOiJibGxrdHRnZUBtaXRlb24uY29tIiwiaWF0IjoxNzE3Njg3MTA4fQ._gAQmd7B1zXf6Yt922s1ztT0pk0ovcvcshsQGOx-xpw
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoxLCJlbWFpbCI6ImJsbGt0dGdlQG1pdGVvbi5jb20iLCJpYXQiOjE3MTgzNzQyMDksImV4cCI6MTcxODQ2MDYwOX0.cRyIuh0Y-61cLfOYsd_f8vavathW8gCyb1HnJqkXGJ8
 Content-Type: application/json
 
 {
-  "password": "newPassword123",
-  "confirmPassword": "newPassword123"
+  "password": "1Password123",
+  "confirmPassword": "1Password123"
 }
 
 ### GET PROFILE

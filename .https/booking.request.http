@@ -1,6 +1,6 @@
 ### CREATE BOOKING
 POST https://expressjs-develop.up.railway.app/api/v1/booking
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoyLCJlbWFpbCI6Imd1ZGNocWhAbWl0ZW9uLmNvbSIsImlhdCI6MTcxODAzMTUzNywiZXhwIjoxNzE4MTE3OTM3fQ.8lelZ_tVNvDB5aqnB2Q0AaMOQXVpPKRuBlUgbnHHmBk
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoyLCJlbWFpbCI6Imd1ZGNocWhAbWl0ZW9uLmNvbSIsInJvbGUiOiJ1c2VyIiwiaWF0IjoxNzE4MzMwMTQ5LCJleHAiOjE3MTg0MTY1NDl9.BkQmShsWbxQMP1TBE5C9RI-NjGjRAuVlQXBZNnpWMA4
 Content-Type: application/json
 
 {
