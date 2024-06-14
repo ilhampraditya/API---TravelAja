@@ -181,9 +181,7 @@ module.exports = {
       const booking = await prisma.booking.findUnique({
         where: { booking_code },
       });
-      const passengers = await prisma.passenger.findMany({
-        where: { booking_id: booking.booking_id },
-      });
+
       const user = await prisma.user.findUnique({
         where: { user_id: booking.user_id },
       });
@@ -196,13 +194,19 @@ module.exports = {
 
       pricePerTicket = flight.price;
 
-      const passenger = await prisma.passenger.findMany({
+      const passengers = await prisma.passenger.findMany({
         where: {
           booking_id: booking.booking_id,
         },
       });
 
-      const passengerTotal = Number(passenger.length);
+      for (const passenger of passengers) {
+        const ticket = await prisma.ticket.findUnique({ where: { passenger_id: passenger.passenger_id } })
+
+        await prisma.seat.update({ where: { seat_id: ticket.seat_id }, data: { status: 'CHECK_AGAIN_LATER' } })
+      }
+
+      const passengerTotal = Number(passengers.length);
       console.log(passengerTotal);
 
       total_price = pricePerTicket * passengerTotal;
