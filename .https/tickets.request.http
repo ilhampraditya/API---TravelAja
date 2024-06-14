@@ -5,7 +5,7 @@ Content-Type: application/json
 
 {
     "seat_id": 25,
-    "passenger_id": 8
+    "passenger_id": 15
 }
 
 ### CREATE TICKET

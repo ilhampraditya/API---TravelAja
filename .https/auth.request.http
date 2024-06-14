@@ -4,8 +4,8 @@ Content-Type: application/json
 
 {
   "name": "ilham",
-  "email": "tybnzdnndga@maxamba.com",
-  "no_telp": "0823046668629",
+  "email": "verieecoral@navalcadets.com",
+  "no_telp": "0823046666729",
   "password": "password123"
 }
 
@@ -31,11 +31,11 @@ Content-Type: application/json
 
 ### Verify OTP
 POST https://expressjs-develop.up.railway.app/api/v1/verify-otp
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoxLCJlbWFpbCI6ImJsbGt0dGdlQG1pdGVvbi5jb20iLCJpYXQiOjE3MTgwMzE0ODEsImV4cCI6MTcxODExNzg4MX0.zZg1chU55oLDPYlkG93h0yYHDqvhk25TZU7P8joNymo
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjozOSwiZW1haWwiOiJ2ZXJpZWVjb3JhbEBuYXZhbGNhZGV0cy5jb20iLCJyb2xlIjoidXNlciIsImlhdCI6MTcxODI4MzM0OSwiZXhwIjoxNzE4MzY5NzQ5fQ.VKB66rhLuF_02toQxiDDKeqhfCxsnViXkDDHtMPArL8
 Content-Type: application/json
 
 {
-  "otp": 887203
+  "otp": 681436
 }
 
 ### Verify OTP
@@ -55,7 +55,7 @@ POST https://expressjs-develop.up.railway.app/api/v1/login
 Content-Type: application/json
 
 {
-  "emailOrNoTelp": "tybnzdnndga@maxamba.com",
+  "emailOrNoTelp": "verieecoral@navalcadets.com",
   "password": "password123"
 }
 
