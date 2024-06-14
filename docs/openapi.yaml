@@ -1996,9 +1996,6 @@ paths:
                 born_date:
                   type: string
                   example: "1985-05-16"
-                citizen:
-                  type: string
-                  example: "USA"
                 identity_number:
                   type: string
                   example: "A123456789"
@@ -2034,9 +2031,6 @@ paths:
                       born_date:
                         type: string
                         example: "1985-05-16T00:00:00.000Z"
-                      citizen:
-                        type: string
-                        example: "USA"
                       identity_number:
                         type: string
                         example: "A123456789"
