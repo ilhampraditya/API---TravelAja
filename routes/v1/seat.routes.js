@@ -9,5 +9,4 @@ const router = express.Router();
 router.get("/seat/:id", getAllSeats);
 router.post("/seat", restrict, createSeat);
 
-
 module.exports = router;
