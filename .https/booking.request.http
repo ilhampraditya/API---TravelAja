@@ -1,10 +1,10 @@
 ### CREATE BOOKING
 POST https://expressjs-develop.up.railway.app/api/v1/booking
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjozOSwiZW1haWwiOiJ2ZXJpZWVjb3JhbEBuYXZhbGNhZGV0cy5jb20iLCJyb2xlIjoidXNlciIsImlhdCI6MTcxODI4NTA5MSwiZXhwIjoxNzE4MzcxNDkxfQ.kfZ6ZgoTGsAlTpTCYVRXZJMoybiEKxFVo3RU4_ahksY
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoxLCJlbWFpbCI6InByYWRpdHlhaWxoYW0yNUBnbWFpbC5jb20iLCJyb2xlIjoiYWRtaW4iLCJpYXQiOjE3MTgzNjE2MjUsImV4cCI6MTcxODQ0ODAyNX0.C7BCxHGq6UUzq5QntEq-7CjYk4DvNtkJfeoWwBuw_fo
 Content-Type: application/json
 
 {
-    "flight_id": "GA0000001"
+    "flight_id": "GAECO0000001"
 }
 
 ### CREATE BOOKING

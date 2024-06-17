@@ -31,7 +31,7 @@ POST https://expressjs-develop.up.railway.app/api/v1/payment
 Content-Type: application/json
 
 {
-    "booking_code": "TVLAJA-000025"
+    "booking_code": "TVLAJA-000038"
 }
 
 ### CREATE PAYMENT MIDTRANS

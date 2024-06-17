@@ -17,12 +17,13 @@ Content-Type: application/json
 }
 ###
 POST https://expressjs-develop.up.railway.app/api/v1/seatclasses
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoxLCJlbWFpbCI6InByYWRpdHlhaWxoYW0yNUBnbWFpbC5jb20iLCJyb2xlIjoiYWRtaW4iLCJpYXQiOjE3MTgzNjE2MjUsImV4cCI6MTcxODQ0ODAyNX0.C7BCxHGq6UUzq5QntEq-7CjYk4DvNtkJfeoWwBuw_fo
 Content-Type: application/json
 
 {
-  "seat_class_type": "Economy",
-  "seat_amount": 60,
-  "airlines_id": "GA"
+  "seat_class_type": "Bussines",
+  "seat_amount": 30,
+  "airlines_id": "QG"
 }
 
 
