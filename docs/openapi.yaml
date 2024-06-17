@@ -2713,7 +2713,6 @@ paths:
                     type: object
                     example: null
 
-
   /get-ticket/{booking_code}:
     get:
       tags:
@@ -2818,7 +2817,6 @@ paths:
       responses:
         "201":
           description: sukses membuat link pembayaran
-
           content:
             application/json:
               schema:
@@ -2859,7 +2857,6 @@ paths:
                         example: "https://app.sandbox.midtrans.com/snap/v4/redirection/d609426d-fe13-4d49-ac1c-d718e8be53d1"
         "400":
           description: Permintaan tidak valid atau field diperlukan tidak ada
-
           content:
             application/json:
               schema:
@@ -2874,6 +2871,7 @@ paths:
                   data:
                     type: object
                     example: null
+
   /bookingprocess:
     post:
       tags:
