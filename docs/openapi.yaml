@@ -2713,6 +2713,7 @@ paths:
                     type: object
                     example: null
 
+
   /get-ticket/{booking_code}:
     get:
       tags:
@@ -2816,7 +2817,8 @@ paths:
 
       responses:
         "201":
-          description: Tiket berhasil dibuat
+          description: sukses membuat link pembayaran
+
           content:
             application/json:
               schema:
@@ -2827,27 +2829,37 @@ paths:
                     example: true
                   message:
                     type: string
-                    example: "Tiket berhasil dibuat"
+                    example: "Pemesanan dibuat"
                   data:
                     type: object
                     properties:
-                      ticket_id:
+                      booking_id:
+                        type: integer
+                        example: 74
+                      booking_code:
                         type: string
-                        example: "TVLAJADOM000001"
-                      url_qrcode:
+                        example: "TVLAJA-000074"
+                      booking_date:
                         type: string
-                        example: "null"
-                      isActive:
+                        example: "2024-06-17T16:56:01.416Z"
+                      user_id:
+                        type: integer
+                        example: 1
+                      flight_id:
                         type: string
-                        example: "false"
-                      seat_id:
+                        example: "GA12312312"
+                      payment_id:
+                        type: integer
+                        example: 4
+                      snap_token:
                         type: string
-                        example: "7"
-                      passenger_id:
+                        example: "d609426d-fe13-4d49-ac1c-d718e8be53d1"
+                      snap_redirect_url:
                         type: string
-                        example: "8"
+                        example: "https://app.sandbox.midtrans.com/snap/v4/redirection/d609426d-fe13-4d49-ac1c-d718e8be53d1"
         "400":
           description: Permintaan tidak valid atau field diperlukan tidak ada
+
           content:
             application/json:
               schema:
@@ -2862,6 +2874,94 @@ paths:
                   data:
                     type: object
                     example: null
+  /bookingprocess:
+    post:
+      tags:
+        - Booking
+      security:
+        - bearerAuth: []
+      summary: Membuat link pembayaran midtrans
+      description: Membuat link pembayaran midtrans
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                flight_id:
+                  type: string
+                  example: GA12312312
+                  description: ID penerbangan
+                passengers:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      fullname:
+                        type: string
+                        example: TesArray2
+                        description: Nama lengkap penumpang
+                      passenger_type:
+                        type: string
+                        enum: [adult, child, infant]
+                        example: adult
+                        description: Tipe penumpang
+                      born_date:
+                        type: string
+                        format: date
+                        example: 2003-05-15
+                        description: Tanggal lahir penumpang
+                      identity_number:
+                        type: string
+                        example: A1234567893
+                        description: Nomor identitas penumpang
+                      seat_id:
+                        type: integer
+                        example: 15
+                        description: ID kursi penumpang
+
+      responses:
+        "201":
+          description: sukses membuat link pembayaran
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                    example: true
+                  message:
+                    type: string
+                    example: "Pemesanan dibuat"
+                  data:
+                    type: object
+                    properties:
+                      booking_id:
+                        type: integer
+                        example: 74
+                      booking_code:
+                        type: string
+                        example: "TVLAJA-000074"
+                      booking_date:
+                        type: string
+                        example: "2024-06-17T16:56:01.416Z"
+                      user_id:
+                        type: integer
+                        example: 1
+                      flight_id:
+                        type: string
+                        example: "GA12312312"
+                      payment_id:
+                        type: integer
+                        example: 4
+                      snap_token:
+                        type: string
+                        example: "d609426d-fe13-4d49-ac1c-d718e8be53d1"
+                      snap_redirect_url:
+                        type: string
+                        example: "https://app.sandbox.midtrans.com/snap/v4/redirection/d609426d-fe13-4d49-ac1c-d718e8be53d1"
 
 components:
   securitySchemes:
