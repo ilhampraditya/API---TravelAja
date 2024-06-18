@@ -1794,8 +1794,7 @@ paths:
                   data:
                     type: object
                     example: null
-                    
-  /flights/search:
+  /search:
     get:
       summary: Mengambil semua data penerbangan berdasarkan pencarian
       tags:

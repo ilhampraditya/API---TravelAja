@@ -3,7 +3,6 @@ const { restrict } = require("../../middlewares/auth.middleware");
 const {
   getAllBooking,
   createBooking,
-
   getBookingById,
   BookingProcess,
   bookingHistory,
