@@ -4,34 +4,65 @@ const { MIDTRANS_SERVER_KEY, FRONT_END_URL, MIDTRANS_APP_URL } = process.env
 
 
 module.exports = {
-  getById: async (req, res, next) => {
+  getBookingById: async (req, res, next) => {
     const booking_code = req.params.id;
     const { user_id } = req.user;
     try {
       const booking = await prisma.booking.findUnique({
         where: { booking_code, user_id },
+        include: {
+          payment: true,
+          flight: true,
+          flight: { include: { airlines: true, seatclass: true, arrival_airport: true, destination_airport: true } }
+        }
       });
+
+      const passengers = await prisma.passenger.findMany({ where: { booking_id: booking.booking_id }, include: { ticket: true } })
+      const passengerCount = passengers.length;
+
+      const bookingWithMoreDetails = {
+        ...booking,
+        total_passengers: passengerCount,
+        passengers: passengers,
+      };
 
       return res.status(200).json({
         status: true,
         message: "Data pemesanan berhasil diambil",
-        data: booking,
+        data: bookingWithMoreDetails,
       });
     } catch (error) {
       next(error);
     }
   },
-  getByToken: async (req, res, next) => {
+  bookingHistory: async (req, res, next) => {
     const user = req.user;
     try {
-      const booking = await prisma.booking.findMany({
+      const bookings = await prisma.booking.findMany({
         where: { user_id: user.user_id },
+        include: {
+          payment: true,
+          flight: true,
+          flight: { include: { airlines: true, arrival_airport: true, destination_airport: true } },
+        }
       });
+
+      const bookingWithPassengers = await Promise.all(
+        bookings.map(async booking => {
+          const passengers = await prisma.passenger.findMany({ where: { booking_id: booking.booking_id } });
+          const passengerCount = passengers.length;
+
+          return {
+            ...booking,
+            total_passengers: passengerCount,
+          };
+        })
+      );
 
       return res.status(200).json({
         status: true,
         message: "Data pemesanan berhasil diambil",
-        data: booking,
+        data: bookingWithPassengers,
       });
     } catch (error) {
       next(error);
