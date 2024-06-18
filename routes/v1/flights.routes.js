@@ -12,6 +12,6 @@ const { restrict } = require("../../middlewares/auth.middleware");
 router.get("/flights", getAllFlights);
 router.get("/flights/:id", getFlightById);
 router.post("/flights", restrict, createFlight);
-router.get("/flights/search", searchFlight)
+router.get("/search", searchFlight)
 
 module.exports = router;
