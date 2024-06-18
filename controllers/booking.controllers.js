@@ -213,7 +213,7 @@ module.exports = {
         },
       });
 
-      pricePerTicket = flight.price;
+      pricePerTicket = flight.total_price;
 
       const listpassengers = await prisma.passenger.findMany({
         where: {
