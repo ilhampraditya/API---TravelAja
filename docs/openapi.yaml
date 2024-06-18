@@ -1597,7 +1597,7 @@ paths:
                   data:
                     type: string
                     example: null
-  /flights/{id}:
+  /flights/id/{id}:
     get:
       summary: mengambil data penerbangan berdasarkan parameter id
       tags:
@@ -1794,7 +1794,8 @@ paths:
                   data:
                     type: object
                     example: null
-  /search:
+                    
+  /flights/search:
     get:
       summary: Mengambil semua data penerbangan berdasarkan pencarian
       tags:
@@ -2202,7 +2203,7 @@ paths:
                         payment_id:
                           type: string
                           example: null
-  /booking/{id}:
+  /booking/id/{id}:
     get:
       summary: mengambil data booking berdasarkan id dan detail riwayat pemesanan
       tags:
