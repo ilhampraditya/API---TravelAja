@@ -1,23 +1,38 @@
 const { PrismaClient } = require("@prisma/client");
 const { search } = require("../routes/v1");
 const prisma = new PrismaClient();
+const getPagination = require('../libs/getPagination');
 
 module.exports = {
   getAllFlights: async (req, res, next) => {
+    let { page = 1, limit = 10 } = req.query;
+    page = parseInt(page);
+    limit = parseInt(limit);
+
+    const offset = (page - 1) * limit;
+
     try {
-      const flights = await prisma.flights.findMany({
-        include: {
-          airlines: true,
-          arrival_airport: true,
-          destination_airport: true,
-          promotion: true,
-        },
-      });
+      const [flights, total] = await prisma.$transaction([
+        prisma.flights.findMany({
+          skip: offset,
+          take: limit,
+          include: {
+            airlines: true,
+            arrival_airport: true,
+            destination_airport: true,
+            promotion: true,
+          },
+        }),
+        prisma.flights.count()
+      ]);
+
+      const pagination = getPagination(req, page, limit, total);
 
       return res.status(200).json({
         status: true,
         message: "Data penerbangan berhasil diambil",
         data: flights,
+        pagination,
       });
     } catch (error) {
       next(error);
@@ -57,6 +72,7 @@ module.exports = {
   },
 
   createFlight: async (req, res, next) => {
+    const { role } = req.user
     const {
       flight_id,
       price,
@@ -71,6 +87,15 @@ module.exports = {
     } = req.body;
 
     try {
+
+      if (role !== 'admin') {
+        return res.status(400).json({
+          status: true,
+          message: "Anda bukan admin!",
+          data: null,
+        });
+      }
+
       const newDate = new Date(date);
       newDate.setUTCHours(0, 0, 0, 0);
 
@@ -233,6 +258,7 @@ module.exports = {
         message: "Data penerbangan berhasil diambil",
         data: flight,
       });
+
     } catch (error) {
       next(error);
     }

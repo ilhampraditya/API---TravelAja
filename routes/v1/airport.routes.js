@@ -3,14 +3,14 @@ const {
   createAirport,
   getAllAirports,
   editAirportById,
-  deleteAirport,
   getAirportById,
 } = require("../../controllers/airport.controller");
+const { restrict } = require("../../middlewares/auth.middleware");
 
-router.post("/airport", createAirport);
+router.post("/airport", restrict, createAirport);
 router.get("/airport", getAllAirports);
 router.get("/airport/:airportId", getAirportById);
-router.put("/airport/:airportId", editAirportById);
-router.delete("/airport/:airportId", deleteAirport);
+router.put("/airport/:airportId", restrict, editAirportById);
+
 
 module.exports = router;

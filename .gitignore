@@ -4,4 +4,5 @@ node_modules
 request.http
 local.http
 .http/
-/prisma/migrations/
+/prisma/data
+/prisma/seed

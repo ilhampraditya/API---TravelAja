@@ -5,8 +5,9 @@ const {
   getAllSeatClasses,
   createSeatClass,
 } = require("../../controllers/seatclass.controller");
+const { restrict } = require("../../middlewares/auth.middleware");
 
 router.get("/seatclasses", getAllSeatClasses);
-router.post("/seatclasses", createSeatClass);
+router.post("/seatclasses", restrict, createSeatClass);
 
 module.exports = router;

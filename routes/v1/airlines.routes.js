@@ -4,12 +4,11 @@ const {
   getAllAirlines,
   createAirline,
   updateAirline,
-  deleteAirline,
 } = require("../../controllers/airlines.controllers");
+const { restrict } = require("../../middlewares/auth.middleware");
 
 router.get("/airlines", getAllAirlines);
-router.post("/airlines", image.single("file"), createAirline);
-router.put("/airlines/:airline_id", image.single("file"), updateAirline);
-router.delete("/airlines/:airline_id", deleteAirline);
+router.post("/airlines", restrict, image.single("file"), createAirline);
+router.put("/airlines/:airline_id", restrict, image.single("file"), updateAirline)
 
 module.exports = router;

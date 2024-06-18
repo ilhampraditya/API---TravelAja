@@ -971,6 +971,7 @@ paths:
                       endDate:
                         type: string
                         example: "2024-06-02T14:00:00.000Z"
+
     get:
       summary: mengambil data promosi
       tags:
@@ -1010,7 +1011,7 @@ paths:
   /airport:
     get:
       tags:
-        - Admin
+        - Airport
       summary: Get all airports
       description: Retrieve a list of all airports
       parameters:
@@ -1056,6 +1057,8 @@ paths:
     post:
       tags:
         - Admin
+      security:
+        - bearerAuth: []
       summary: Create a new airport
       description: Add a new airport to the database
       requestBody:
@@ -1148,7 +1151,7 @@ paths:
   /airport/{airportId}:
     get:
       tags:
-        - Admin
+        - Airport
       summary: Get airport by ID
       description: Retrieve details of a specific airport by its ID
       parameters:
@@ -1209,6 +1212,8 @@ paths:
     put:
       tags:
         - Admin
+      security:
+        - bearerAuth: []
       summary: Edit airport by ID
       description: Update the details of a specific airport by its ID
       parameters:
@@ -1282,52 +1287,6 @@ paths:
                   message:
                     type: string
                     example: Harap menyediakan nama bandara, benua, negara, dan kota
-                  data:
-                    type: string
-                    example: null
-        404:
-          description: Airport not found
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  status:
-                    type: boolean
-                    example: false
-                  message:
-                    type: string
-                    example: Bandara tidak ditemukan
-                  data:
-                    type: string
-                    example: null
-
-    delete:
-      tags:
-        - Admin
-      summary: Delete airport by ID
-      description: Remove a specific airport by its ID from the database
-      parameters:
-        - in: path
-          name: airportId
-          required: true
-          schema:
-            type: string
-          description: The ID of the airport to delete
-      responses:
-        200:
-          description: Airport deleted successfully
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  status:
-                    type: boolean
-                    example: true
-                  message:
-                    type: string
-                    example: Penghapusan bandara berhasil
                   data:
                     type: string
                     example: null
@@ -1482,7 +1441,9 @@ paths:
     post:
       summary: Membuat penerbangan baru
       tags:
-        - Flights
+        - Admin
+      security:
+        - bearerAuth: []
       description: Endpoint ini digunakan untuk membuat penerbangan baru. || jika promotion null maka object promotion null || jika promotion null maka object promotion_id bisa dihapus
       requestBody:
         required: true
@@ -1753,6 +1714,86 @@ paths:
                       promotion:
                         type: string
                         example: null
+  /airlines:
+    post:
+      summary: Membuat data maskapai penerbangan
+      tags:
+        - Admin
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                airline_id:
+                  type: string
+                  example: JT
+                  description: ID maskapai penerbangan
+                airline_name:
+                  type: string
+                  example: "Lion Air"
+                  description: Nama maskapai penerbangan
+                baggage:
+                  type: string
+                  example: "30"
+                cabin_baggage:
+                  type: string
+                  example: "7"
+                file:
+                  type: string
+                  format: binary
+                  description: File logo maskapai dalam format gambar
+      responses:
+        "201":
+          description: Maskapai penerbangan berhasil dibuat
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                    example: true
+                  message:
+                    type: string
+                    example: "Maskapai penerbangan berhasil dibuat"
+                  data:
+                    type: object
+                    properties:
+                      airline_id:
+                        type: string
+                        example: JT
+                      airline_name:
+                        type: string
+                        example: "Lion Air"
+                      baggage:
+                        type: integer
+                        example: 30
+                      cabin_baggage:
+                        type: integer
+                        example: 7
+                      url_logo:
+                        type: string
+                        example: "https://ik.imagekit.io/travelaja/1718268380363_0QDj6ipbS.png"
+        "400":
+          description: Request tidak valid atau file tidak ada
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                    example: false
+                  message:
+                    type: string
+                    example: "file tidak ada!"
+                  data:
+                    type: object
+                    example: null
   /search:
     get:
       summary: Mengambil semua data penerbangan berdasarkan pencarian
@@ -1955,9 +1996,6 @@ paths:
                 born_date:
                   type: string
                   example: "1985-05-16"
-                citizen:
-                  type: string
-                  example: "USA"
                 identity_number:
                   type: string
                   example: "A123456789"
@@ -1993,9 +2031,6 @@ paths:
                       born_date:
                         type: string
                         example: "1985-05-16T00:00:00.000Z"
-                      citizen:
-                        type: string
-                        example: "USA"
                       identity_number:
                         type: string
                         example: "A123456789"
@@ -2422,7 +2457,9 @@ paths:
     post:
       summary: Membuat kursi berdasarkan kelas kursi
       tags:
-        - Seat
+        - Admin
+      security:
+        - bearerAuth: []
       requestBody:
         required: true
         content:
@@ -2469,7 +2506,9 @@ paths:
   /seatclasses:
     post:
       tags:
-        - SeatClass
+        - Admin
+      security:
+        - bearerAuth: []
       summary: Create a new seat class
       description: Create a new seat class with the provided details
       requestBody:
@@ -2586,6 +2625,242 @@ paths:
                           type: string
                           description: ID maskapai yang memiliki kelas kursi ini
                           example: "QG"
+
+  /create-ticket:
+    post:
+      tags:
+        - Tiket
+      summary: Membuat tiket
+      description: Membuat tiket baru dengan detail yang diberikan
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                seat_id:
+                  type: integer
+                  example: 7
+                  description: ID kursi yang akan dipesan
+                passenger_id:
+                  type: integer
+                  example: 8
+                  description: ID penumpang yang memesan tiket
+      responses:
+        "201":
+          description: Tiket berhasil dibuat
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                    example: true
+                  message:
+                    type: string
+                    example: "Tiket berhasil dibuat"
+                  data:
+                    type: object
+                    properties:
+                      ticket_id:
+                        type: string
+                        example: "TVLAJADOM000001"
+                      url_qrcode:
+                        type: string
+                        example: "null"
+                      isActive:
+                        type: string
+                        example: "false"
+                      seat_id:
+                        type: string
+                        example: "7"
+                      passenger_id:
+                        type: string
+                        example: "8"
+        "400":
+          description: Permintaan tidak valid atau field diperlukan tidak ada
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                    example: false
+                  message:
+                    type: string
+                    example: "field dibutuhkan !"
+                  data:
+                    type: object
+                    example: null
+        "404":
+          description: Data tidak ditemukan (misalnya, kursi atau penumpang tidak ditemukan)
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                    example: false
+                  message:
+                    type: string
+                    example: "Kursi tidak ditemukan!"
+                  data:
+                    type: object
+                    example: null
+
+  /get-ticket/{booking_code}:
+    get:
+      tags:
+        - Tiket
+      security:
+        - bearerAuth: []
+      summary: mengambil tiket
+      description: mengambil tiket berdasarkan kode pesanan
+      parameters:
+        - in: path
+          name: booking_code
+          required: true
+          schema:
+            type: string
+          description: Kode booking
+      responses:
+        "200":
+          description: Data tiket berhasil diambil
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                    example: true
+                  message:
+                    type: string
+                    example: "Data tiket berhasil diambil"
+                  data:
+                    type: object
+                    example: null
+
+        "404":
+          description: Tidak ada tiket
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                    example: false
+                  message:
+                    type: string
+                    example: "Data tiket tidak ditemukan!"
+                  data:
+                    type: object
+                    example: null
+
+  /passenger/{booking_id}:
+    get:
+      tags:
+        - Passenger
+      security:
+        - bearerAuth: []
+      summary: mengambil data penumpang by booking_id
+      description: mengambil data penumpang berdasarkan booking_id
+      parameters:
+        - in: path
+          name: booking_id
+          required: true
+          schema:
+            type: string
+          description: id booking
+      responses:
+        "200":
+          description: Data penumpang berhasil diambil
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                    example: true
+                  message:
+                    type: string
+                    example: "Data penumpang berhasil diambil"
+                  data:
+                    type: object
+                    example: null
+
+  /payment:
+    post:
+      tags:
+        - Payment
+      summary: Membuat link pembayaran midtrans
+      description: Membuat link pembayaran midtrans
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                booking_code:
+                  type: string
+                  example: TVLAJA-000001
+                  description: kode pemesanan
+
+      responses:
+        "201":
+          description: Tiket berhasil dibuat
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                    example: true
+                  message:
+                    type: string
+                    example: "Tiket berhasil dibuat"
+                  data:
+                    type: object
+                    properties:
+                      ticket_id:
+                        type: string
+                        example: "TVLAJADOM000001"
+                      url_qrcode:
+                        type: string
+                        example: "null"
+                      isActive:
+                        type: string
+                        example: "false"
+                      seat_id:
+                        type: string
+                        example: "7"
+                      passenger_id:
+                        type: string
+                        example: "8"
+        "400":
+          description: Permintaan tidak valid atau field diperlukan tidak ada
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                    example: false
+                  message:
+                    type: string
+                    example: "field dibutuhkan !"
+                  data:
+                    type: object
+                    example: null
 
 components:
   securitySchemes:

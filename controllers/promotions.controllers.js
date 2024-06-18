@@ -4,9 +4,19 @@ const prisma = new PrismaClient();
 
 module.exports = {
   createPromotion: async (req, res, next) => {
+    const { role } = req.user
     const { discount, startDate, endDate } = req.body;
 
     try {
+
+      if (role !== 'admin') {
+        return res.status(400).json({
+          status: true,
+          message: "Anda bukan admin!",
+          data: null,
+        });
+      }
+
       const promo = await prisma.promotion.create({
         data: {
           discount,

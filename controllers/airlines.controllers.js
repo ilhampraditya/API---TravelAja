@@ -20,9 +20,18 @@ module.exports = {
   },
 
   createAirline: async (req, res, next) => {
+    const { role } = req.user
     let { airline_id, airline_name, baggage, cabin_baggage } = req.body;
 
     try {
+      if (role !== 'admin') {
+        return res.status(400).json({
+          status: true,
+          message: "Anda bukan admin!",
+          data: null,
+        });
+      }
+
       if (!req.file) {
         return res.status(400).json({
           status: false,
@@ -63,17 +72,22 @@ module.exports = {
       next(error);
     }
   },
-
   updateAirline: async (req, res, next) => {
+    const { role } = req.user
     const { airline_id } = req.params;
     const { airline_name, baggage, cabin_baggage } = req.body;
 
     try {
-      let updateData = {
-        airline_name,
-        baggage,
-        cabin_baggage,
-      };
+
+      if (role !== 'admin') {
+        return res.status(400).json({
+          status: true,
+          message: "Anda bukan admin!",
+          data: null,
+        });
+      }
+
+
 
       if (req.file) {
         const resizedBuffer = await sharp(req.file.buffer)
@@ -89,37 +103,21 @@ module.exports = {
           file: strFile,
         });
 
-        updateData.url_logo = url;
+        const updatedAirline = await prisma.airlines.update({
+          where: { airline_id },
+          data: { airline_name, baggage, cabin_baggage, url_logo: url },
+        });
+
+        return res.status(200).json({
+          status: true,
+          message: "Maskapai penerbangan berhasil diupdate",
+          data: updatedAirline,
+        });
       }
 
-      const updatedAirline = await prisma.airlines.update({
-        where: { airline_id },
-        data: updateData,
-      });
 
-      return res.status(200).json({
-        status: true,
-        message: "Maskapai penerbangan berhasil diupdate",
-        data: updatedAirline,
-      });
-    } catch (error) {
-      next(error);
-    }
-  },
 
-  deleteAirline: async (req, res, next) => {
-    const { airline_id } = req.params;
 
-    try {
-      await prisma.airlines.delete({
-        where: { airline_id },
-      });
-
-      return res.status(200).json({
-        status: true,
-        message: "Maskapai penerbangan berhasil dihapus",
-        data: null,
-      });
     } catch (error) {
       next(error);
     }

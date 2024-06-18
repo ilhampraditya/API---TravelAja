@@ -32,6 +32,14 @@ module.exports = {
                 }
             }
 
+            if (!tickets) {
+                return res.status(404).json({
+                    status: true,
+                    message: "Data tiket tidak ditemukan!",
+                    data: tickets,
+                });
+            }
+
             return res.status(200).json({
                 status: true,
                 message: "Data tiket berhasil diambil",
@@ -104,9 +112,6 @@ module.exports = {
                 });
             }
 
-
-
-
             const ticket = await prisma.ticket.create({
                 data: {
                     seat_id,
@@ -114,9 +119,6 @@ module.exports = {
                     ticket_id
                 },
             });
-
-            const seat = await prisma.seat.update({ where: { seat_id }, data: { status: 'CHECK_AGAIN_LATER' } })
-
 
             return res.status(201).json({
                 status: true,
