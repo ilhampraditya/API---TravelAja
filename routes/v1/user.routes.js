@@ -19,21 +19,21 @@ const { restrict } = require("../../middlewares/auth.middleware");
 const { uploadAvatar } = require("../../controllers/media.controllers");
 const passport = require("../../libs/passport");
 
-router.post("/register", register);
-router.post("/login", login);
-router.get("/all-user", getAllUsers);
-router.get("/auth", restrict, auth);
-router.get("/profile", restrict, getuserbyid);
-router.post("/updateprofile", restrict, updateuserbyid);
-router.post("/uploadavatar", restrict, image.single("file"), uploadAvatar);
+router.post("/user/register", register);
+router.post("/user/login", login);
+router.get("/user", restrict, getAllUsers);
+router.get("/user/auth", restrict, auth);
+router.get("/user/profile", restrict, getuserbyid);
+router.post("/user/updateprofile", restrict, updateuserbyid);
+router.post("/user/uploadavatar", restrict, image.single("file"), uploadAvatar);
 
-router.post("/renew-otp", renewOTP);
-router.post("/verify-otp", restrict, verifyOtp);
+router.post("/user/otp/renew", renewOTP);
+router.post("/user/otp/verify", restrict, verifyOtp);
 
-router.post("/forgot-password", forgotPassword);
-router.post("/reset-password", restrict, resetPassword);
-router.get("/reset-password", verifyResetToken);
-router.put("/change-password", restrict, changePassword)
+router.post("/user/password/forgot", forgotPassword);
+router.post("/user/password/reset", restrict, resetPassword);
+router.get("/user/password/reset", verifyResetToken);
+router.put("/user/password/change", restrict, changePassword)
 
 router.get(
   "/google",

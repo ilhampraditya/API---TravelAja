@@ -335,7 +335,7 @@ module.exports = {
         name: findUser.name,
         url: `${req.protocol}://${req.get(
           "host"
-        )}/api/v1/reset-password?token=${token}`,
+        )}/api/v1/user/password/reset?token=${token}`,
       });
 
       try {

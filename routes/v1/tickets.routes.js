@@ -4,7 +4,7 @@ const { createTicket, getTicketByBookingCode } = require("../../controllers/tick
 const router = express.Router();
 
 
-router.get("/get-ticket/:booking_code", restrict, getTicketByBookingCode);
-router.post("/create-ticket", createTicket);
+router.get("/ticket/:booking_code", restrict, getTicketByBookingCode);
+router.post("/ticket", createTicket);
 
 module.exports = router;
