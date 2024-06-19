@@ -1,5 +1,7 @@
 const { PrismaClient } = require("@prisma/client");
 const prisma = new PrismaClient();
+const { MIDTRANS_SERVER_KEY, FRONT_END_URL, MIDTRANS_APP_URL } = process.env
+
 
 module.exports = {
   getById: async (req, res, next) => {
@@ -40,7 +42,7 @@ module.exports = {
     const user = req.user;
     const { flight_id } = req.body;
     try {
-      
+
       const lastBooking = await prisma.booking.findFirst({
         orderBy: {
           booking_date: "desc",
@@ -71,7 +73,7 @@ module.exports = {
           flight_id,
         },
       });
-      
+
       return res.status(201).json({
         status: true,
         message: "Pemesanan dibuat",
@@ -93,4 +95,213 @@ module.exports = {
       next(error);
     }
   },
+  BookingProcess: async (req, res, next) => {
+    const userData = req.user;
+    const { flight_id, passengers } = req.body;
+
+    try {
+
+      const lastBooking = await prisma.booking.findFirst({
+        orderBy: {
+          booking_date: "desc",
+        },
+      });
+
+      let booking_code;
+      if (!lastBooking) {
+        booking_code = "TVLAJA-000001";
+      } else {
+        const lastCode = lastBooking.booking_code;
+        const numberPart = parseInt(lastCode.split("-")[1], 10);
+        const newNumberPart = (numberPart + 1).toString().padStart(6, "0");
+        booking_code = `TVLAJA-${newNumberPart}`;
+      }
+      if (!flight_id) {
+        return res.status(400).json({
+          status: false,
+          message: "field dibutuhkan !",
+          data: null,
+        });
+      }
+
+      const booking = await prisma.booking.create({
+        data: {
+          booking_code,
+          user_id: userData.user_id,
+          flight_id,
+        },
+      });
+
+
+      await Promise.all(
+        passengers.map(async (passenger, index) => {
+
+          const newDate = new Date(passenger.born_date);
+          newDate.setUTCHours(0, 0, 0, 0);
+
+          const createdPassenger = await prisma.passenger.create({
+            data: {
+              fullname: passenger.fullname,
+              passenger_type: passenger.passenger_type,
+              born_date: newDate,
+              identity_number: passenger.identity_number,
+              booking_id: booking.booking_id
+            }
+          });
+
+          let { seat_id } = passenger
+          console.log(seat_id)
+
+          const seatExist = await prisma.seat.findFirst({ where: { seat_id } })
+          if (!seatExist) {
+            return res.status(400).json({
+              status: false,
+              message: "Kursi tidak ditemukan!",
+              data: null,
+            });
+          }
+
+          const ticketExist = await prisma.ticket.findUnique({ where: { seat_id } })
+
+
+          if (ticketExist) {
+            if (seatExist.status == 'CHECK_AGAIN_LATER' || seatExist.status == 'BOOKED') {
+              return res.status(400).json({
+                status: false,
+                message: "Kursi tidak bisa dipesan!",
+                data: null,
+              });
+            }
+          }
+
+          const lastTicket = await prisma.ticket.findFirst({
+            orderBy: {
+              ticket_id: 'desc',
+            },
+          });
+
+          console.log('last ticket : ', lastTicket)
+
+          let ticket_id;
+          if (!lastTicket) {
+            ticket_id = 'TVLAJADOM000001';
+          } else {
+            const lastCode = lastTicket.ticket_id;
+            const numberPart = parseInt(lastCode.slice(-6), 10);
+            const newNumberPart = (numberPart + 1 + index).toString().padStart(6, '0');
+            ticket_id = `TVLAJADOM${newNumberPart}`;
+          }
+
+          await prisma.ticket.create({
+            data: {
+              seat_id,
+              passenger_id: createdPassenger.passenger_id,
+              ticket_id
+            }
+          })
+
+        })
+      );
+
+      const user = await prisma.user.findUnique({
+        where: { user_id: booking.user_id },
+      });
+
+      const flight = await prisma.flights.findUnique({
+        where: {
+          flight_id: booking.flight_id,
+        },
+      });
+
+      pricePerTicket = flight.price;
+
+      const listpassengers = await prisma.passenger.findMany({
+        where: {
+          booking_id: booking.booking_id,
+        },
+      });
+      console.log('listpassengers :>> ', listpassengers);
+
+      for (const mypassenger of listpassengers) {
+        console.log('mypassenger :>> ', mypassenger);
+        const ticket = await prisma.ticket.findUnique({ where: { passenger_id: mypassenger.passenger_id } })
+        console.log('ticket :>> ', ticket);
+        await prisma.seat.update({ where: { seat_id: ticket.seat_id }, data: { status: 'CHECK_AGAIN_LATER' } })
+      }
+
+      const passengerTotal = Number(listpassengers.length);
+      console.log(passengerTotal);
+
+      total_price = pricePerTicket * passengerTotal;
+
+      transaction_id = booking_code;
+      gross_amount = total_price;
+
+      const authString = btoa(`${MIDTRANS_SERVER_KEY}:`);
+
+      const payload = {
+        transaction_details: {
+          order_id: transaction_id,
+          gross_amount,
+        },
+        customer_details: {
+          first_name: user.name,
+          email: user.email,
+        },
+        callbacks: {
+          finish: `${FRONT_END_URL}/booking-status?booking_code=${booking_code}`,
+          error: `${FRONT_END_URL}/booking-status?booking_code=${booking_code}`,
+          pending: `${FRONT_END_URL}/booking-status?booking_code=${booking_code}`,
+        },
+      };
+
+      console.log(payload);
+
+      const response = await fetch(
+        `https://app.sandbox.midtrans.com/snap/v1/transactions`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Accept: "application/json",
+            Authorization: `Basic ${authString}`,
+          },
+          body: JSON.stringify(payload),
+        }
+      );
+
+      const data = await response.json();
+
+      console.log(response);
+      if (response.status !== 201) {
+        return res.status(500).json({
+          status: "error",
+          message: "Gagal membuat transaksi!",
+        });
+      }
+
+      const payment = await prisma.payment.create({
+        data: {
+          total_price,
+        },
+      });
+
+      const updatedBooking = await prisma.booking.update({
+        where: { booking_code },
+        data: {
+          snap_token: data.token,
+          snap_redirect_url: data.redirect_url,
+          payment_id: payment.payment_id,
+        },
+      });
+
+      return res.status(201).json({
+        status: true,
+        message: "Pemesanan dibuat",
+        data: updatedBooking,
+      });
+    } catch (error) {
+      next(error);
+    }
+  }
 };

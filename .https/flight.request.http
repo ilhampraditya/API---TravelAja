@@ -1,5 +1,11 @@
 ### Get All Flights
-GET http://localhost:3000/api/v1/flights?limit=10&page=1
+GET http://localhost:3000/api/v1/flights
+
+### Get All Flights
+GET http://localhost:3000/api/v1/flights/promotion
+
+### Get All Flights
+GET http://localhost:3000/api/v1/flights/promotion?page=1&limit=4
 
 ### Get All Flights
 GET https://expressjs-develop.up.railway.app/api/v1/flights

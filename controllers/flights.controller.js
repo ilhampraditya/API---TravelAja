@@ -4,40 +4,130 @@ const prisma = new PrismaClient();
 const getPagination = require('../libs/getPagination');
 
 module.exports = {
-  getAllFlights: async (req, res, next) => {
-    let { page = 1, limit = 10 } = req.query;
-    page = parseInt(page);
-    limit = parseInt(limit);
-
-    const offset = (page - 1) * limit;
-
+  getPromotion: async (req, res, next) => {   
     try {
-      const [flights, total] = await prisma.$transaction([
-        prisma.flights.findMany({
-          skip: offset,
-          take: limit,
-          include: {
-            airlines: true,
-            arrival_airport: true,
-            destination_airport: true,
-            promotion: true,
-          },
-        }),
-        prisma.flights.count()
-      ]);
+      const { page = 1, limit = 1 } = req.query;
 
-      const pagination = getPagination(req, page, limit, total);
+      let whereQuery = { promotion_id: { not: null } };
+
+      const flights = await prisma.flights.findMany({
+          skip: (parseInt(page) - 1) * parseInt(limit),
+          take: parseInt(limit),
+          where: whereQuery,
+          include: {
+              airlines: true,
+              arrival_airport: true,
+              destination_airport: true,
+              promotion: true,
+              seatclass: true
+          },
+      });
+
+      let count = await prisma.flights.count({ where: whereQuery });
+      const pagination = getPagination(req, page, limit, count);
+
+      return res.status(200).json({
+          status: true,
+          message: "Data promo berhasil diambil",
+          data: flights,
+          pagination,
+      });
+  } catch (error) {
+      next(error);
+  }
+  },
+
+  getAllFlights: async (req, res, next) => {
+    try {
+      const flights = await prisma.flights.findMany({
+        include: {
+          airlines: true,
+          arrival_airport: true,
+          destination_airport: true,
+          promotion: true,
+          seatclass: true
+        },
+      });
 
       return res.status(200).json({
         status: true,
         message: "Data penerbangan berhasil diambil",
         data: flights,
-        pagination,
       });
     } catch (error) {
       next(error);
     }
   },
+
+
+    
+  //   getAllFlights: async (req, res, next) => {
+  //   let { page = 1, limit = 10 } = req.query;
+  //   page = parseInt(page);
+  //   limit = parseInt(limit);
+
+  //   const offset = (page - 1) * limit;
+
+  //   try {
+  //     const [flights, total] = await prisma.$transaction([
+  //       prisma.flights.findMany({
+  //         skip: offset,
+  //         take: limit,
+  //         include: {
+  //           airlines: true,
+  //           arrival_airport: true,
+  //           destination_airport: true,
+  //           promotion: true,
+  //         },
+  //       }),
+  //       prisma.flights.count()
+  //     ]);
+
+  //     const pagination = getPagination(req, page, limit, total);
+
+  //     return res.status(200).json({
+  //       status: true,
+  //       message: "Data penerbangan berhasil diambil",
+  //       data: flights,
+  //       pagination,
+  //     });
+  //   } catch (error) {
+  //     next(error);
+  //   }
+  // },
+
+  getFlightById: async (req, res, next) => {
+    const id = req.params.id;
+    try {
+      const flight = await prisma.flights.findUnique({
+        where: { flight_id: id },
+        include: {
+          seatclass: true,
+          airlines: true,
+          arrival_airport: true,
+          destination_airport: true,
+          promotion: true,
+        },
+      });
+
+      if (!flight) {
+        return res.status(404).json({
+          status: false,
+          message: "Penerbangan tidak ditemukan",
+          data: null,
+        });
+      }
+
+      res.status(200).json({
+        status: true,
+        message: "Data penerbangan berhasil diambil",
+        data: flight,
+      });
+    } catch (error) {
+      next(error);
+    }
+  },
+
 
   getFlightById: async (req, res, next) => {
     const id = req.params.id;
