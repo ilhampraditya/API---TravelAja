@@ -13,6 +13,6 @@ const router = express.Router();
 // router.post("/payment_bank", restrict, createPaymentBank);
 router.get("/payment", getPayment);
 router.post("/payment", createPaymentMidtrans)
-router.post("/webhook-midtrans", webhookNotification)
+router.post("/payment/webhook", webhookNotification)
 
 module.exports = router;

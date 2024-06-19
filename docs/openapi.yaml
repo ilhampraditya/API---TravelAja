@@ -7,7 +7,7 @@ servers:
   - url: http://localhost:3000/api/v1
   - url: https://expressjs-develop.up.railway.app/api/v1
 paths:
-  /register:
+  /user/register:
     post:
       summary: Register User baru
       tags:
@@ -84,7 +84,7 @@ paths:
                     type: string
                     example: null
 
-  /renew-otp:
+  /user/otp/renew:
     post:
       summary: Memperbarui OTP
       tags:
@@ -165,7 +165,7 @@ paths:
                     type: string
                     example: null
 
-  /verify-otp:
+  /user/otp/verify:
     post:
       summary: Memverifikasi OTP
       tags:
@@ -251,7 +251,7 @@ paths:
                     type: string
                     example: null
 
-  /login:
+  /user/login:
     post:
       summary: Login user
       tags:
@@ -362,7 +362,7 @@ paths:
                   data:
                     type: string
                     example: null
-  /all-user:
+  /user:
     get:
       summary: Mendapatkan semua user
       tags:
@@ -415,7 +415,7 @@ paths:
                     type: string
                     example: null
 
-  /auth:
+  /user/auth:
     get:
       summary: Autentikasi user
       tags:
@@ -461,7 +461,7 @@ paths:
                   data:
                     type: string
                     example: null
-  /forgot-password:
+  /user/password/forgot:
     post:
       summary: lupa password
       tags:
@@ -520,7 +520,7 @@ paths:
                     type: string
                     example: "gagal mengirim email"
 
-  /reset-password:
+  /user/password/reset:
     post:
       summary: reset password
       tags:
@@ -647,7 +647,7 @@ paths:
                         type: string
                         example: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NSwiZW1haWwiOiJhcGhzMTJAZ21haWwuY29tIiwiaWF0IjoxNzE2Mzk4NTQ4LCJleHAiOjE3MTY0ODQ5NDh9.RWhn7PfFE25eqyUhhjBmQxPCa1kJELChTcgDj3_CBRMdU"
 
-  /profile:
+  /user/profile:
     get:
       summary: mengambil profile
       tags:
@@ -700,7 +700,7 @@ paths:
                     type: string
                     example: null
 
-  /updateprofile:
+  /user/updateprofile:
     post:
       summary: mengupdate profile
       tags:
@@ -800,7 +800,7 @@ paths:
                   data:
                     type: string
                     example: null
-  /uploadavatar:
+  /user/uploadavatar:
     post:
       summary: mengupload avatar
       tags:
@@ -853,7 +853,7 @@ paths:
                   data:
                     type: string
                     example: null
-  /change-password:
+  /user/password/change:
     put:
       summary: mengupdate password
       tags:
@@ -1597,7 +1597,7 @@ paths:
                   data:
                     type: string
                     example: null
-  /flights/{id}:
+  /flights/id/{id}:
     get:
       summary: mengambil data penerbangan berdasarkan parameter id
       tags:
@@ -1794,7 +1794,8 @@ paths:
                   data:
                     type: object
                     example: null
-  /search:
+                    
+  /flights/search:
     get:
       summary: Mengambil semua data penerbangan berdasarkan pencarian
       tags:
@@ -2078,85 +2079,7 @@ paths:
                   data:
                     type: string
                     example: null
-  /passenger-token:
-    get:
-      summary: Menampilkan data penumpang berdasarkan token pengguna
-      security:
-        - bearerAuth: []
-      tags:
-        - Passenger
-      responses:
-        "200":
-          description: Data penumpang berhasil diambil
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  status:
-                    type: boolean
-                    example: true
-                  message:
-                    type: string
-                    example: "Data pemesanan berhasil diambil"
-                  data:
-                    type: array
-                    items:
-                      type: object
-                      properties:
-                        passenger_id:
-                          type: integer
-                          example: 5
-                        fullname:
-                          type: string
-                          example: "Rayeang 2"
-                        passenger_type:
-                          type: string
-                          example: "adult"
-                        born_date:
-                          type: string
-                          format: date-time
-                          example: "2003-05-15T00:00:00.000Z"
-                        citizen:
-                          type: string
-                          example: "IDN"
-                        identity_number:
-                          type: string
-                          example: "A1234567893"
-                        booking_id:
-                          type: integer
-                          example: 4
-                        booking:
-                          type: object
-                          properties:
-                            booking_id:
-                              type: integer
-                              example: 4
-                            booking_code:
-                              type: string
-                              example: "TVLAJA-000002"
-                            booking_date:
-                              type: string
-                              format: date-time
-                              example: "2024-06-10T14:26:14.815Z"
-                            user_id:
-                              type: integer
-                              example: 6
-                            flight_id:
-                              type: string
-                              example: "GA0000002"
-                            payment_id:
-                              type: integer
-                              nullable: true
-                              example: null
-                            snap_token:
-                              type: string
-                              nullable: true
-                              example: null
-                            snap_redirect_url:
-                              type: string
-                              nullable: true
-                              example: null
+
   /booking:
     post:
       summary: Membuat data pemesanan
@@ -2232,7 +2155,7 @@ paths:
                   data:
                     example: null
 
-  /mybooking:
+  /booking/history:
     get:
       summary: mengambil data booking berdasarkan token
       tags:
@@ -2280,7 +2203,7 @@ paths:
                         payment_id:
                           type: string
                           example: null
-  /booking/{id}:
+  /booking/id/{id}:
     get:
       summary: mengambil data booking berdasarkan id dan detail riwayat pemesanan
       tags:
@@ -2371,7 +2294,7 @@ paths:
                         user_id:
                           type: integer
                           example: 1
-  /notification-user:
+  /notification/user:
     get:
       summary: Get notifications for a specific user
       description: Retrieve notifications for the authenticated user and mark them as read.
@@ -2627,7 +2550,7 @@ paths:
                           description: ID maskapai yang memiliki kelas kursi ini
                           example: "QG"
 
-  /create-ticket:
+  /ticket:
     post:
       tags:
         - Tiket
@@ -2713,7 +2636,7 @@ paths:
                     type: object
                     example: null
 
-  /get-ticket/{booking_code}:
+  /ticket/{booking_code}:
     get:
       tags:
         - Tiket
@@ -2816,7 +2739,7 @@ paths:
 
       responses:
         "201":
-          description: Tiket berhasil dibuat
+          description: sukses membuat link pembayaran
           content:
             application/json:
               schema:
@@ -2827,25 +2750,34 @@ paths:
                     example: true
                   message:
                     type: string
-                    example: "Tiket berhasil dibuat"
+                    example: "Pemesanan dibuat"
                   data:
                     type: object
                     properties:
-                      ticket_id:
+                      booking_id:
+                        type: integer
+                        example: 74
+                      booking_code:
                         type: string
-                        example: "TVLAJADOM000001"
-                      url_qrcode:
+                        example: "TVLAJA-000074"
+                      booking_date:
                         type: string
-                        example: "null"
-                      isActive:
+                        example: "2024-06-17T16:56:01.416Z"
+                      user_id:
+                        type: integer
+                        example: 1
+                      flight_id:
                         type: string
-                        example: "false"
-                      seat_id:
+                        example: "GA12312312"
+                      payment_id:
+                        type: integer
+                        example: 4
+                      snap_token:
                         type: string
-                        example: "7"
-                      passenger_id:
+                        example: "d609426d-fe13-4d49-ac1c-d718e8be53d1"
+                      snap_redirect_url:
                         type: string
-                        example: "8"
+                        example: "https://app.sandbox.midtrans.com/snap/v4/redirection/d609426d-fe13-4d49-ac1c-d718e8be53d1"
         "400":
           description: Permintaan tidak valid atau field diperlukan tidak ada
           content:
@@ -2862,6 +2794,95 @@ paths:
                   data:
                     type: object
                     example: null
+
+  /booking/process:
+    post:
+      tags:
+        - Booking
+      security:
+        - bearerAuth: []
+      summary: Membuat link pembayaran midtrans
+      description: Membuat link pembayaran midtrans
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                flight_id:
+                  type: string
+                  example: GA12312312
+                  description: ID penerbangan
+                passengers:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      fullname:
+                        type: string
+                        example: TesArray2
+                        description: Nama lengkap penumpang
+                      passenger_type:
+                        type: string
+                        enum: [adult, child, infant]
+                        example: adult
+                        description: Tipe penumpang
+                      born_date:
+                        type: string
+                        format: date
+                        example: 2003-05-15
+                        description: Tanggal lahir penumpang
+                      identity_number:
+                        type: string
+                        example: A1234567893
+                        description: Nomor identitas penumpang
+                      seat_id:
+                        type: integer
+                        example: 15
+                        description: ID kursi penumpang
+
+      responses:
+        "201":
+          description: sukses membuat link pembayaran
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                    example: true
+                  message:
+                    type: string
+                    example: "Pemesanan dibuat"
+                  data:
+                    type: object
+                    properties:
+                      booking_id:
+                        type: integer
+                        example: 74
+                      booking_code:
+                        type: string
+                        example: "TVLAJA-000074"
+                      booking_date:
+                        type: string
+                        example: "2024-06-17T16:56:01.416Z"
+                      user_id:
+                        type: integer
+                        example: 1
+                      flight_id:
+                        type: string
+                        example: "GA12312312"
+                      payment_id:
+                        type: integer
+                        example: 4
+                      snap_token:
+                        type: string
+                        example: "d609426d-fe13-4d49-ac1c-d718e8be53d1"
+                      snap_redirect_url:
+                        type: string
+                        example: "https://app.sandbox.midtrans.com/snap/v4/redirection/d609426d-fe13-4d49-ac1c-d718e8be53d1"
 
 components:
   securitySchemes:

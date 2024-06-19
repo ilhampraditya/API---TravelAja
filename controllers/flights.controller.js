@@ -11,6 +11,7 @@ module.exports = {
           arrival_airport: true,
           destination_airport: true,
           promotion: true,
+          seatclass: true
         },
       });
 

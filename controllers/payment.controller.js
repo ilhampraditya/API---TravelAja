@@ -415,6 +415,8 @@ module.exports = {
             });
 
             const seat = await prisma.seat.update({ where: { seat_id: ticket.seat_id }, data: { status: 'AVAILABLE' } })
+
+            const deletedTicket = await prisma.ticket.delete({ where: { ticket_id: ticket.ticket_id } })
           }
 
         } else if (transactionStatus == 'pending') {
