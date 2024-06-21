@@ -971,7 +971,6 @@ paths:
                       endDate:
                         type: string
                         example: "2024-06-02T14:00:00.000Z"
-
     get:
       summary: mengambil data promosi
       tags:
@@ -1008,6 +1007,7 @@ paths:
                       endDate:
                         type: string
                         example: "2024-06-02T14:00:00.000Z"
+                        
   /airport:
     get:
       tags:
@@ -1714,6 +1714,7 @@ paths:
                       promotion:
                         type: string
                         example: null
+                        
   /airlines:
     post:
       summary: Membuat data maskapai penerbangan
@@ -2883,7 +2884,181 @@ paths:
                       snap_redirect_url:
                         type: string
                         example: "https://app.sandbox.midtrans.com/snap/v4/redirection/d609426d-fe13-4d49-ac1c-d718e8be53d1"
-
+  /flights/promotion:
+    get:
+      summary: Get all flights with promotions
+      tags :
+      - Promotion
+      description: Retrieve a list of flights that have promotions.
+      parameters:
+        - name: page
+          in: query
+          description: Page number for pagination
+          required: false
+          schema:
+            type: integer
+            default: 1
+        - name: limit
+          in: query
+          description: Number of items per page
+          required: false
+          schema:
+            type: integer
+            default: 4
+      responses:
+        '200':
+          description: Successfully retrieved list of flights with promotions
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                    example: true
+                  message:
+                    type: string
+                    example: Data promo berhasil diambil
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        flight_id:
+                          type: string
+                          example: GABUS0001
+                        price:
+                          type: number
+                          example: 1500000
+                        total_price:
+                          type: number
+                          example: 1350000
+                        date:
+                          type: string
+                          format: date-time
+                          example: 2024-07-06T00:00:00.000Z
+                        departure_time:
+                          type: string
+                          format: date-time
+                          example: 2024-07-06T09:00:00.000Z
+                        arrival_time:
+                          type: string
+                          format: date-time
+                          example: 2024-07-06T11:00:00.000Z
+                        airline_id:
+                          type: string
+                          example: GA
+                        arrival_airport_id:
+                          type: string
+                          example: CGK
+                        destination_airport_id:
+                          type: string
+                          example: DPS
+                        promotion_id:
+                          type: integer
+                          example: 1
+                        seat_class_id:
+                          type: integer
+                          example: 2
+                        airlines:
+                          type: object
+                          properties:
+                            airline_id:
+                              type: string
+                              example: GA
+                            airline_name:
+                              type: string
+                              example: Garuda Indonesia
+                            baggage:
+                              type: string
+                              example: 30kg
+                            cabin_baggage:
+                              type: string
+                              example: 7kg
+                            url_logo:
+                              type: string
+                              example: https://ik.imagekit.io/tvlk/image/imageResource/2019/12/12/1576140134467-906ded3638e9045d664adc40caa8ec47.png?tr=q-75
+                        arrival_airport:
+                          type: object
+                          properties:
+                            id:
+                              type: string
+                              example: CGK
+                            airport_name:
+                              type: string
+                              example: Soekarno-Hatta International Airport
+                            continent:
+                              type: string
+                              example: Asia
+                            country:
+                              type: string
+                              example: Indonesia
+                            city:
+                              type: string
+                              example: Jakarta
+                        destination_airport:
+                          type: object
+                          properties:
+                            id:
+                              type: string
+                              example: DPS
+                            airport_name:
+                              type: string
+                              example: Ngurah Rai International Airport
+                            continent:
+                              type: string
+                              example: Asia
+                            country:
+                              type: string
+                              example: Indonesia
+                            city:
+                              type: string
+                              example: Denpasar
+                        promotion:
+                          type: object
+                          properties:
+                            promotion_id:
+                              type: integer
+                              example: 1
+                            discount:
+                              type: number
+                              format: float
+                              example: 10
+                            startDate:
+                              type: string
+                              format: date-time
+                              example: 2024-07-01T14:00:00.000Z
+                            endDate:
+                              type: string
+                              format: date-time
+                              example: 2024-08-01T14:00:00.000Z
+                        seatclass:
+                          type: object
+                          properties:
+                            seat_class_id:
+                              type: integer
+                              example: 2
+                            seat_class_type:
+                              type: string
+                              example: Business
+                            seat_amount:
+                              type: integer
+                              example: 30
+                            airlines_id:
+                              type: string
+                              example: GA
+                  pagination:
+                    type: object
+                    properties:
+                      next:
+                        type: string
+                        example: http://localhost:3000/api/v1/flights/promotion?page=11&limit=4
+                      prev:
+                        type: string
+                        example: null
+                      total:
+                        type: integer
+                        example: 10
 components:
   securitySchemes:
     bearerAuth:
