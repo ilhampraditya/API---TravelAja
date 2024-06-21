@@ -14,9 +14,9 @@ POST http://localhost:3000/api/v1/user/register
 Content-Type: application/json
 
 {
-  "name": "Tesmidtrans20",
-  "email": "dying322@navalcadets.com",
-  "no_telp": "0823046008629",
+  "name": "ilham",
+  "email": "bvxtejm@mynanaimohomes.com",
+  "no_telp": "08230466729",
   "password": "password123"
 }
 
@@ -31,20 +31,20 @@ Content-Type: application/json
 
 ### Verify OTP
 POST https://expressjs-develop.up.railway.app/api/v1/verify-otp
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoxLCJlbWFpbCI6InByYWRpdHlhaWxoYW0yNUBnbWFpbC5jb20iLCJyb2xlIjoidXNlciIsImlhdCI6MTcxODM2MTM1NSwiZXhwIjoxNzE4NDQ3NzU1fQ.sCk0w4_UTAjiHYZPRc9NJFBDkQ47pJt-Bn053m4w_yc
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjo2LCJlbWFpbCI6ImJ2eHRlam1AbXluYW5haW1vaG9tZXMuY29tIiwicm9sZSI6InVzZXIiLCJpYXQiOjE3MTg5MDQ3OTcsImV4cCI6MTcxODk5MTE5N30.U7y77mW3O-YcOm5W4t-jTOTDcMUNwawLZR09W1H_PCU
 Content-Type: application/json
 
 {
-  "otp": 752226
+  "otp": 626879
 }
 
 ### Verify OTP
-POST http://localhost:3000/api/v1/verify-otp
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjo3LCJlbWFpbCI6ImR5aW5nMzIyQG5hdmFsY2FkZXRzLmNvbSIsImlhdCI6MTcxODI3MTQ2MiwiZXhwIjoxNzE4MzU3ODYyfQ.Stn4FF5Jn-qlZNzSgxIpijR4aRrEWzwdogrr-Bocq7I
+POST http://localhost:3000/api/v1/user/otp/verify
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjo2LCJlbWFpbCI6ImJ2eHRlam1AbXluYW5haW1vaG9tZXMuY29tIiwicm9sZSI6InVzZXIiLCJpYXQiOjE3MTg5MDQ3OTcsImV4cCI6MTcxODk5MTE5N30.U7y77mW3O-YcOm5W4t-jTOTDcMUNwawLZR09W1H_PCU
 Content-Type: application/json
 
 {
-  "otp": 171114
+  "otp": 626879
 }
 
 ### get all user
@@ -55,16 +55,16 @@ POST https://expressjs-develop.up.railway.app/api/v1/user/login
 Content-Type: application/json
 
 {
-  "emailOrNoTelp": "pradityailham25@gmail.com",
+  "emailOrNoTelp": "bvxtejm@mynanaimohomes.com",
   "password": "password123"
 }
 
 ### Login User with Email
-POST http://localhost:3000/api/v1/login
+POST http://localhost:3000/api/v1/user/login
 Content-Type: application/json
 
 {
-  "emailOrNoTelp": "dying322@navalcadets.com",
+  "emailOrNoTelp": "bvxtejm@mynanaimohomes.com",
   "password": "password123"
 }
 

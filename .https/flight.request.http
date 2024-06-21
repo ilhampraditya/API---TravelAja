@@ -13,18 +13,18 @@ GET https://expressjs-develop.up.railway.app/api/v1/flights/GA0000002
 
 ### Create Flight
 POST http://localhost:3000/api/v1/flights
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjo2LCJlbWFpbCI6ImJ2eHRlam1AbXluYW5haW1vaG9tZXMuY29tIiwicm9sZSI6ImFkbWluIiwiaWF0IjoxNzE4OTA1MjI4LCJleHAiOjE3MTg5OTE2Mjh9.NJ_Q5JsvDrDCfIz1m8xUfUoaMBlnEdYdocTktnG9fhg
 Content-Type: application/json
 
 {
-  "flight_id": "GAECO0000001",
+  "flight_id": "GAECO0000003",
   "price": 1000000.00,
   "date": "2024-06-20",
   "departure_time": "2024-06-20T14:00:00.000Z",
   "arrival_time": "2024-06-20T18:00:00.000Z",
-  "airline_id": "JT",
-  "arrival_airport_id": "SUB",
-  "destination_airport_id": "LOP",
-  "promotion_id": 1,
+  "airline_id": "GA",
+  "arrival_airport_id": "LOP",
+  "destination_airport_id": "CGK",
   "seat_class_id": 1
 }
 ### Create Flight

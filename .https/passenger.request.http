@@ -3,15 +3,15 @@ GET http://localhost:3000/api/v1/passenger
 
 ### Create passenger
 POST http://localhost:3000/api/v1/passenger
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjozOSwiZW1haWwiOiJ2ZXJpZWVjb3JhbEBuYXZhbGNhZGV0cy5jb20iLCJyb2xlIjoidXNlciIsImlhdCI6MTcxODI4NTA5MSwiZXhwIjoxNzE4MzcxNDkxfQ.kfZ6ZgoTGsAlTpTCYVRXZJMoybiEKxFVo3RU4_ahksY
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjo2LCJlbWFpbCI6ImJ2eHRlam1AbXluYW5haW1vaG9tZXMuY29tIiwicm9sZSI6ImFkbWluIiwiaWF0IjoxNzE4OTA1MjI4LCJleHAiOjE3MTg5OTE2Mjh9.NJ_Q5JsvDrDCfIz1m8xUfUoaMBlnEdYdocTktnG9fhg
 Content-Type: application/json
 
 {
-  "fullname": "mullet",
+  "fullname": "sari",
   "passenger_type": "adult",
   "born_date": "2003-05-15",
-  "identity_number": "A12345637893",
-  "booking_id": 27
+  "identity_number": "A124395637893",
+  "booking_id": 2
 }
 
 ### Create passenger

@@ -15,8 +15,9 @@ Content-Type: application/json
 
 ###
 POST http://localhost:3000/api/v1/seat
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjo2LCJlbWFpbCI6ImJ2eHRlam1AbXluYW5haW1vaG9tZXMuY29tIiwicm9sZSI6ImFkbWluIiwiaWF0IjoxNzE4OTA1MjI4LCJleHAiOjE3MTg5OTE2Mjh9.NJ_Q5JsvDrDCfIz1m8xUfUoaMBlnEdYdocTktnG9fhg
 Content-Type: application/json
 
 {
-    "seat_class_id": 1
+    "seat_class_id": 3
 }
