@@ -15,37 +15,37 @@ GET http://localhost:3000/api/v1/flights/GA0000001
 
 ### Create Flight
 POST http://localhost:3000/api/v1/flights
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjo2LCJlbWFpbCI6ImJ2eHRlam1AbXluYW5haW1vaG9tZXMuY29tIiwicm9sZSI6ImFkbWluIiwiaWF0IjoxNzE4OTA1MjI4LCJleHAiOjE3MTg5OTE2Mjh9.NJ_Q5JsvDrDCfIz1m8xUfUoaMBlnEdYdocTktnG9fhg
 Content-Type: application/json
 
 {
-  "flight_id": "GA0000001",
+  "flight_id": "GAECO0000003",
   "price": 1000000.00,
   "date": "2024-06-20",
   "departure_time": "2024-06-20T14:00:00.000Z",
   "arrival_time": "2024-06-20T18:00:00.000Z",
-  "airline_id": "QZ",
-  "arrival_airport_id": "SUB",
-  "destination_airport_id": "LOP",
-  "promotion_id": 2,
-  "seat_class_id": 3
-
+  "airline_id": "GA",
+  "arrival_airport_id": "LOP",
+  "destination_airport_id": "CGK",
+  "seat_class_id": 1
 }
 
 ### Create Flight
 POST https://expressjs-develop.up.railway.app/api/v1/flights
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoxLCJlbWFpbCI6InByYWRpdHlhaWxoYW0yNUBnbWFpbC5jb20iLCJyb2xlIjoiYWRtaW4iLCJpYXQiOjE3MTgzNjE2MjUsImV4cCI6MTcxODQ0ODAyNX0.C7BCxHGq6UUzq5QntEq-7CjYk4DvNtkJfeoWwBuw_fo
 Content-Type: application/json
 
 {
-  "flight_id": "GA0000005",
-  "price": 2000000.00,
+  "flight_id": "GABUSS0000005",
+  "price": 3000000.00,
   "date": "2024-06-20",
   "departure_time": "2024-06-20T14:00:00.000Z",
   "arrival_time": "2024-06-20T18:00:00.000Z",
-  "airline_id": "GA",
-  "arrival_airport_id": "YIA",
-  "destination_airport_id": "LOP",
-  "promotion_id": 2,
-  "seat_class_id": 4
+  "airline_id": "QG",
+  "arrival_airport_id": "SUB",
+  "destination_airport_id": "CGK",
+  "promotion_id": 1,
+  "seat_class_id": 8
 }
 
 ### Create Flight

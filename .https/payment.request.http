@@ -31,7 +31,7 @@ POST https://expressjs-develop.up.railway.app/api/v1/payment
 Content-Type: application/json
 
 {
-    "booking_code": "TVLAJA-000037"
+    "booking_code": "TVLAJA-000021"
 }
 
 ### CREATE PAYMENT MIDTRANS
@@ -39,7 +39,7 @@ POST http://localhost:3000/api/v1/payment
 Content-Type: application/json
 
 {
-    "booking_code": "TVLAJA-000016"
+    "booking_code": "TVLAJA-000013"
 }
 
 
@@ -49,7 +49,7 @@ Content-Type: application/json
 
 
 ###
-POST https://expressjs-develop.up.railway.app/api/v1/webhook-midtrans
+POST http://localhost:3000/api/v1/webhook-midtrans
 Content-Type: application/json
 
 {
@@ -60,7 +60,7 @@ Content-Type: application/json
   "status_code": "200",
   "signature_key": "16d6f84b2fb0468e2a9cf99a8ac4e5d803d42180347aaa70cb2a7abb13b5c6130458ca9c71956a962c0827637cd3bc7d40b21a8ae9fab12c7c3efe351b18d00a",
   "payment_type": "credit_card",
-  "order_id": "TVLAJA-000037",
+  "order_id": "TVLAJA-000013",
   "merchant_id": "G141532850",
   "masked_card": "48111111-1114",
   "gross_amount": "10000.00",
