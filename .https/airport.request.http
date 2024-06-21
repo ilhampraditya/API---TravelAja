@@ -12,26 +12,36 @@ GET http://localhost:3000/api/v1/airport?search=lombok
 
 ### Create a new airport
 POST https://expressjs-develop.up.railway.app/api/v1/airport
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoxLCJlbWFpbCI6InByYWRpdHlhaWxoYW0yNUBnbWFpbC5jb20iLCJyb2xlIjoiYWRtaW4iLCJpYXQiOjE3MTgzNjE2MjUsImV4cCI6MTcxODQ0ODAyNX0.C7BCxHGq6UUzq5QntEq-7CjYk4DvNtkJfeoWwBuw_fo
 Content-Type: application/json
 
+# {
+#     "airport_id": "SUB",
+#     "airport_name": "Juanda",
+#     "continent": "Asia",
+#     "country": "Indonesia",
+#     "city": "Surabaya"
+# }
+
+# {
+#     "airport_id": "CGK",
+#     "airport_name": "Soekarno Hatta International Airport",
+#     "continent": "Asia",
+#     "country": "Indonesia",
+#     "city": "Jakarta"
+# }
+
 {
-    "airport_id": "SUB",
-    "airport_name": "Juanda",
+    "airport_id": "DPS",
+    "airport_name": "Ngurah Rai International Airport",
     "continent": "Asia",
     "country": "Indonesia",
-    "city": "Surabaya"
+    "city": "Bali"
 }
-
-# # {
-# #     "airport_id": "CGK",
-# #     "airport_name": "Soekarno Hatta International Airport",
-# #     "continent": "Asia",
-# #     "country": "Indonesia",
-# #     "city": "Jakarta"
-# # }
 
 ###
 POST http://localhost:3000/api/v1/airport
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjo2LCJlbWFpbCI6ImJ2eHRlam1AbXluYW5haW1vaG9tZXMuY29tIiwicm9sZSI6ImFkbWluIiwiaWF0IjoxNzE4OTA1MjI4LCJleHAiOjE3MTg5OTE2Mjh9.NJ_Q5JsvDrDCfIz1m8xUfUoaMBlnEdYdocTktnG9fhg
 Content-Type: application/json
 
 # {
@@ -42,21 +52,21 @@ Content-Type: application/json
 #     "city": "Lombok"
 # }
 
-{
-    "airport_id": "JKT",
-    "airport_name": "Jakarta airport",
-    "continent": "Asia",
-    "country": "Indonesia",
-    "city": "Jakarta"
-}
-
 # {
-#     "airport_id": "CGK",
-#     "airport_name": "Soekarno Hatta International Airport",
+#     "airport_id": "JKT",
+#     "airport_name": "Jakarta airport",
 #     "continent": "Asia",
 #     "country": "Indonesia",
 #     "city": "Jakarta"
 # }
+
+{
+    "airport_id": "CGK",
+    "airport_name": "Soekarno Hatta International Airport",
+    "continent": "Asia",
+    "country": "Indonesia",
+    "city": "Jakarta"
+}
 
 ### edit airport berdasarkan airport id
 PUT http://localhost:3000/api/v1/airport/YIA

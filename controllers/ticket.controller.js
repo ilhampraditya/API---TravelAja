@@ -6,45 +6,61 @@ module.exports = {
         const { booking_code } = req.params
         const { user_id } = req.user
         try {
-
-            const booking = await prisma.booking.findUnique({ where: { booking_code, user_id } });
-
+            const booking = await prisma.booking.findUnique({
+                where: { booking_code, user_id },
+                include: {
+                    flight: {
+                        include: {
+                            airlines: true,
+                            seatclass: true,
+                            arrival_airport: true,
+                            destination_airport: true
+                        }
+                    },
+                    passenger: {
+                        include: { ticket: true }
+                    },
+                },
+            });
 
             if (!booking) {
                 return res.status(404).json({
                     status: false,
-                    message: "Data booking tidak ada!",
+                    message: "Data Tiket tidak ada!",
                     data: null,
                 });
             }
 
-            const passengers = await prisma.passenger.findMany({ where: { booking_id: booking.booking_id } })
+            const passengers = await prisma.passenger.findMany({
+                where: { booking_id: booking.booking_id },
+                include: { ticket: true }
+            });
 
+            const passengerCount = passengers.length;
 
-            let tickets = [];
+            // Prepare response with structured data
+            const response = {
+                booking_id: booking.booking_id,
+                booking_code: booking.booking_code,
+                user_id: booking.user_id,
+                flight_id: booking.flight_id,
+                payment_id: booking.payment_id,
+                snap_token: booking.snap_token,
+                snap_redirect_url: booking.snap_redirect_url,
+                flight: booking.flight,
+                total_passengers: passengerCount,
+            };
 
-            for (const passenger of passengers) {
-                const ticket = await prisma.ticket.findUnique({
-                    where: { passenger_id: passenger.passenger_id },
-                });
-                if (ticket) {
-                    tickets.push(ticket);
-                }
-            }
-
-            if (!tickets) {
-                return res.status(404).json({
-                    status: true,
-                    message: "Data tiket tidak ditemukan!",
-                    data: tickets,
-                });
+            if (passengerCount > 0) {
+                response.passengers = passengers;
             }
 
             return res.status(200).json({
                 status: true,
                 message: "Data tiket berhasil diambil",
-                data: tickets,
+                data: response,
             });
+
         } catch (error) {
             next(error);
         }

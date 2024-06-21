@@ -4,19 +4,19 @@ Content-Type: application/json
 
 {
   "name": "ilham",
-  "email": "tybnzdnndga@maxamba.com",
-  "no_telp": "0823046668629",
+  "email": "pradityailham25@gmail.com",
+  "no_telp": "0823046666729",
   "password": "password123"
 }
 
 ### Register User
-POST http://localhost:3000/api/v1/register
+POST http://localhost:3000/api/v1/user/register
 Content-Type: application/json
 
 {
-  "name": "Tesmidtrans20",
-  "email": "bllkttge@miteon.com",
-  "no_telp": "08230468629",
+  "name": "ilham",
+  "email": "bvxtejm@mynanaimohomes.com",
+  "no_telp": "08230466729",
   "password": "password123"
 }
 
@@ -31,40 +31,40 @@ Content-Type: application/json
 
 ### Verify OTP
 POST https://expressjs-develop.up.railway.app/api/v1/verify-otp
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoxLCJlbWFpbCI6ImJsbGt0dGdlQG1pdGVvbi5jb20iLCJpYXQiOjE3MTgwMzE0ODEsImV4cCI6MTcxODExNzg4MX0.zZg1chU55oLDPYlkG93h0yYHDqvhk25TZU7P8joNymo
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjo2LCJlbWFpbCI6ImJ2eHRlam1AbXluYW5haW1vaG9tZXMuY29tIiwicm9sZSI6InVzZXIiLCJpYXQiOjE3MTg5MDQ3OTcsImV4cCI6MTcxODk5MTE5N30.U7y77mW3O-YcOm5W4t-jTOTDcMUNwawLZR09W1H_PCU
 Content-Type: application/json
 
 {
-  "otp": 887203
+  "otp": 626879
 }
 
 ### Verify OTP
-POST http://localhost:3000/api/v1/verify-otp
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoxLCJlbWFpbCI6ImJsbGt0dGdlQG1pdGVvbi5jb20iLCJpYXQiOjE3MTgwMzE0ODEsImV4cCI6MTcxODExNzg4MX0.zZg1chU55oLDPYlkG93h0yYHDqvhk25TZU7P8joNymo
+POST http://localhost:3000/api/v1/user/otp/verify
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjo2LCJlbWFpbCI6ImJ2eHRlam1AbXluYW5haW1vaG9tZXMuY29tIiwicm9sZSI6InVzZXIiLCJpYXQiOjE3MTg5MDQ3OTcsImV4cCI6MTcxODk5MTE5N30.U7y77mW3O-YcOm5W4t-jTOTDcMUNwawLZR09W1H_PCU
 Content-Type: application/json
 
 {
-  "otp": 519533
+  "otp": 626879
 }
 
 ### get all user
 GET http://localhost:3000/api/v1/all-user
 
 ### Login User with Email
-POST https://expressjs-develop.up.railway.app/api/v1/login
+POST https://expressjs-develop.up.railway.app/api/v1/user/login
 Content-Type: application/json
 
 {
-  "emailOrNoTelp": "tybnzdnndga@maxamba.com",
+  "emailOrNoTelp": "bvxtejm@mynanaimohomes.com",
   "password": "password123"
 }
 
 ### Login User with Email
-POST http://localhost:3000/api/v1/login
+POST http://localhost:3000/api/v1/user/login
 Content-Type: application/json
 
 {
-  "emailOrNoTelp": "bllkttge@miteon.com",
+  "emailOrNoTelp": "bvxtejm@mynanaimohomes.com",
   "password": "password123"
 }
 
