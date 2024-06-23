@@ -1,5 +1,5 @@
 ### Register User
-POST https://expressjs-develop.up.railway.app/api/v1/register
+POST https://expressjs-develop.up.railway.app/api/v1/user/register
 Content-Type: application/json
 
 {
@@ -30,12 +30,12 @@ Content-Type: application/json
 }
 
 ### Verify OTP
-POST https://expressjs-develop.up.railway.app/api/v1/verify-otp
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjo2LCJlbWFpbCI6ImJ2eHRlam1AbXluYW5haW1vaG9tZXMuY29tIiwicm9sZSI6InVzZXIiLCJpYXQiOjE3MTg5MDQ3OTcsImV4cCI6MTcxODk5MTE5N30.U7y77mW3O-YcOm5W4t-jTOTDcMUNwawLZR09W1H_PCU
+POST https://expressjs-develop.up.railway.app/api/v1/user/otp/verify
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjozLCJlbWFpbCI6InByYWRpdHlhaWxoYW0yNUBnbWFpbC5jb20iLCJyb2xlIjoidXNlciIsImlhdCI6MTcxODk4MjU0MywiZXhwIjoxNzE5MDY4OTQzfQ.0e54wXre9eO5crdse4-nAoiJOF0H9E_d0FyCnmj_naQ
 Content-Type: application/json
 
 {
-  "otp": 626879
+  "otp": 352770
 }
 
 ### Verify OTP
@@ -55,7 +55,7 @@ POST https://expressjs-develop.up.railway.app/api/v1/user/login
 Content-Type: application/json
 
 {
-  "emailOrNoTelp": "bvxtejm@mynanaimohomes.com",
+  "emailOrNoTelp": "pradityailham25@gmail.com",
   "password": "password123"
 }
 

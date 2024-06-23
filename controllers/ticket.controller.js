@@ -3,11 +3,15 @@ const prisma = new PrismaClient();
 
 module.exports = {
     getTicketByBookingCode: async (req, res, next) => {
-        const { booking_code } = req.params
-        const { user_id } = req.user
+        const { booking_code } = req.params;
+        const { user_id } = req.user;
+
         try {
             const booking = await prisma.booking.findUnique({
-                where: { booking_code, user_id },
+                where: {
+                    booking_code,
+                    user_id
+                },
                 include: {
                     flight: {
                         include: {
@@ -18,27 +22,43 @@ module.exports = {
                         }
                     },
                     passenger: {
-                        include: { ticket: true }
-                    },
-                },
+                        include: {
+                            ticket: {
+                                include: {
+                                    seat: true 
+                                }
+                            }
+                        }
+                    }
+                }
             });
 
             if (!booking) {
                 return res.status(404).json({
                     status: false,
                     message: "Data Tiket tidak ada!",
-                    data: null,
+                    data: null
                 });
             }
 
-            const passengers = await prisma.passenger.findMany({
-                where: { booking_id: booking.booking_id },
-                include: { ticket: true }
-            });
+            const passengers = booking.passenger.map(passenger => ({
+                passenger_id: passenger.passenger_id,
+                fullname: passenger.fullname,
+                passenger_type: passenger.passenger_type,
+                born_date: passenger.born_date,
+                identity_number: passenger.identity_number,
+                ticket: {
+                    ticket_id: passenger.ticket.ticket_id,
+                    url_qrcode: passenger.ticket.url_qrcode,
+                    isActive: passenger.ticket.isActive,
+                    seat: {
+                        seat_id: passenger.ticket.seat.seat_id,
+                        seat_number: passenger.ticket.seat.seat_number,
+                        status: passenger.ticket.seat.status
+                    }
+                }
+            }));
 
-            const passengerCount = passengers.length;
-
-            // Prepare response with structured data
             const response = {
                 booking_id: booking.booking_id,
                 booking_code: booking.booking_code,
@@ -48,17 +68,14 @@ module.exports = {
                 snap_token: booking.snap_token,
                 snap_redirect_url: booking.snap_redirect_url,
                 flight: booking.flight,
-                total_passengers: passengerCount,
+                total_passengers: passengers.length,
+                passengers: passengers
             };
-
-            if (passengerCount > 0) {
-                response.passengers = passengers;
-            }
 
             return res.status(200).json({
                 status: true,
                 message: "Data tiket berhasil diambil",
-                data: response,
+                data: response
             });
 
         } catch (error) {
@@ -99,8 +116,6 @@ module.exports = {
                 }
 
             }
-
-
 
             const lastTicket = await prisma.ticket.findFirst({
                 orderBy: {
