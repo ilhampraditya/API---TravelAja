@@ -3,34 +3,74 @@ const prisma = new PrismaClient();
 
 module.exports = {
     getTicketByBookingCode: async (req, res, next) => {
-        const { booking_code } = req.params
-        const { user_id } = req.user
+        const { booking_code } = req.params;
+        const { user_id } = req.user;
+
         try {
-
-            const booking = await prisma.booking.findUnique({ where: { booking_code, user_id } });
-
+            const booking = await prisma.booking.findUnique({
+                where: {
+                    booking_code,
+                    user_id
+                },
+                include: {
+                    flight: {
+                        include: {
+                            airlines: true,
+                            seatclass: true,
+                            arrival_airport: true,
+                            destination_airport: true
+                        }
+                    },
+                    passenger: {
+                        include: {
+                            ticket: {
+                                include: {
+                                    seat: true 
+                                }
+                            }
+                        }
+                    }
+                }
+            });
 
             if (!booking) {
                 return res.status(404).json({
                     status: false,
-                    message: "Data booking tidak ada!",
-                    data: null,
+                    message: "Data Tiket tidak ada!",
+                    data: null
                 });
             }
 
-            const passengers = await prisma.passenger.findMany({ where: { booking_id: booking.booking_id } })
-
-
-            let tickets = [];
-
-            for (const passenger of passengers) {
-                const ticket = await prisma.ticket.findUnique({
-                    where: { passenger_id: passenger.passenger_id },
-                });
-                if (ticket) {
-                    tickets.push(ticket);
+            const passengers = booking.passenger.map(passenger => ({
+                passenger_id: passenger.passenger_id,
+                fullname: passenger.fullname,
+                passenger_type: passenger.passenger_type,
+                born_date: passenger.born_date,
+                identity_number: passenger.identity_number,
+                ticket: {
+                    ticket_id: passenger.ticket.ticket_id,
+                    url_qrcode: passenger.ticket.url_qrcode,
+                    isActive: passenger.ticket.isActive,
+                    seat: {
+                        seat_id: passenger.ticket.seat.seat_id,
+                        seat_number: passenger.ticket.seat.seat_number,
+                        status: passenger.ticket.seat.status
+                    }
                 }
-            }
+            }));
+
+            const response = {
+                booking_id: booking.booking_id,
+                booking_code: booking.booking_code,
+                user_id: booking.user_id,
+                flight_id: booking.flight_id,
+                payment_id: booking.payment_id,
+                snap_token: booking.snap_token,
+                snap_redirect_url: booking.snap_redirect_url,
+                flight: booking.flight,
+                total_passengers: passengers.length,
+                passengers: passengers
+            };
 
             if (!tickets) {
                 return res.status(404).json({
@@ -43,8 +83,9 @@ module.exports = {
             return res.status(200).json({
                 status: true,
                 message: "Data tiket berhasil diambil",
-                data: tickets,
+                data: response
             });
+
         } catch (error) {
             next(error);
         }
@@ -83,8 +124,6 @@ module.exports = {
                 }
 
             }
-
-
 
             const lastTicket = await prisma.ticket.findFirst({
                 orderBy: {

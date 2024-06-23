@@ -4,20 +4,24 @@ POST https://expressjs-develop.up.railway.app/api/v1/create-ticket
 Content-Type: application/json
 
 {
-    "seat_id": 21,
-    "passenger_id": 8
+    "seat_id": 10,
+    "passenger_id": 6
 }
 
 ### CREATE TICKET
 
-POST http://localhost:3000/api/v1/create-ticket
+POST http://localhost:3000/api/v1/ticket
 Content-Type: application/json
 
 {
-    "seat_id": 2,
-    "passenger_id": 1
+    "seat_id": 8,
+    "passenger_id": 3
 }
 
 ### GET TICKET
-GET http://localhost:3000/api/v1/get-ticket/TVLAJA-000013
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoxLCJlbWFpbCI6ImRhcGhlbmVncmF5QG5hdmFsY2FkZXRzLmNvbSIsImlhdCI6MTcxODAwNzI1MSwiZXhwIjoxNzE4MDkzNjUxfQ.IXwFxs-jFcJln5sEvvywpMJDBjTfjj4dhoFSZLoB_RU
+GET http://localhost:3000/api/v1/ticket/TVLAJA-000001
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjo2LCJlbWFpbCI6ImJ2eHRlam1AbXluYW5haW1vaG9tZXMuY29tIiwicm9sZSI6ImFkbWluIiwiaWF0IjoxNzE5MTQ3Njk4LCJleHAiOjE3MTkyMzQwOTh9.Sv0Vo0peYvhmlO4HgjyG1u8EC6kM25hnDio93mj8_1w
+
+### GET TICKET
+GET https://expressjs-develop.up.railway.app/api/v1/ticket/TVLAJADOM000006
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjo2LCJlbWFpbCI6ImJ2eHRlam1AbXluYW5haW1vaG9tZXMuY29tIiwicm9sZSI6ImFkbWluIiwiaWF0IjoxNzE4OTcyNDg4LCJleHAiOjE3MTkwNTg4ODh9.UEj-SzNBN1BOypTnN_5ryeXq27Y5_YZMKsle72ZFJmI

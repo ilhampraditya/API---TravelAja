@@ -140,12 +140,12 @@ module.exports = {
 
       let booking_code;
       if (!lastBooking) {
-        booking_code = "TVLAJA-000001";
+        booking_code = "TESTVLAJA-000001";
       } else {
         const lastCode = lastBooking.booking_code;
         const numberPart = parseInt(lastCode.split("-")[1], 10);
         const newNumberPart = (numberPart + 1).toString().padStart(6, "0");
-        booking_code = `TVLAJA-${newNumberPart}`;
+        booking_code = `TESTVLAJA-${newNumberPart}`;
       }
       if (!flight_id) {
         return res.status(400).json({
@@ -223,11 +223,14 @@ module.exports = {
             ticket_id = `TVLAJADOM${newNumberPart}`;
           }
 
+          const expiresAt = new Date(Date.now() + 20 * 60 * 1000);
+
           await prisma.ticket.create({
             data: {
               seat_id,
               passenger_id: createdPassenger.passenger_id,
-              ticket_id
+              ticket_id,
+              expiresAt: expiresAt
             }
           })
 
@@ -270,6 +273,8 @@ module.exports = {
 
       const authString = btoa(`${MIDTRANS_SERVER_KEY}:`);
 
+      console.log('authString :>> ', authString);
+
       const payload = {
         transaction_details: {
           order_id: transaction_id,
@@ -280,9 +285,9 @@ module.exports = {
           email: user.email,
         },
         callbacks: {
-          finish: `${FRONT_END_URL}/booking-status?booking_code=${booking_code}`,
-          error: `${FRONT_END_URL}/booking-status?booking_code=${booking_code}`,
-          pending: `${FRONT_END_URL}/booking-status?booking_code=${booking_code}`,
+          finish: `${FRONT_END_URL}/selesai/${booking_code}`,
+          error: `${FRONT_END_URL}/cancel/${booking_code}`,
+          pending: `${FRONT_END_URL}/pending/${booking_code}`,
         },
       };
 

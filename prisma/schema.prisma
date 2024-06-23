@@ -119,6 +119,8 @@ model Ticket {
     ticket_id    String    @id
     url_qrcode   String?
     isActive     Boolean   @default(false)
+    createdAt    DateTime  @default(now())
+    expiresAt    DateTime
     seat         Seat      @relation(fields: [seat_id], references: [seat_id])
     seat_id      Int       @unique
     passenger    Passenger @relation(fields: [passenger_id], references: [passenger_id])
