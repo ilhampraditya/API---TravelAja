@@ -251,8 +251,8 @@ module.exports = {
           booking_id: booking.booking_id,
         },
       });
-      console.log('listpassengers :>> ', listpassengers);
 
+      console.log('listpassengers :>> ', listpassengers);
       for (const mypassenger of listpassengers) {
         console.log('mypassenger :>> ', mypassenger);
         const ticket = await prisma.ticket.findUnique({ where: { passenger_id: mypassenger.passenger_id } })
