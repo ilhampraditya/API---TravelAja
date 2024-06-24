@@ -5,7 +5,7 @@ Content-Type: application/json
 {
   "name": "ilham",
   "email": "pradityailham25@gmail.com",
-  "no_telp": "0823046606729",
+  "no_telp": "0823046666729",
   "password": "password123"
 }
 
@@ -64,7 +64,7 @@ POST http://localhost:3000/api/v1/user/login
 Content-Type: application/json
 
 {
-  "emailOrNoTelp": "bvxtejm@mynanaimohomes.com",
+  "emailOrNoTelp": "pradityailham25@gmail.com",
   "password": "password123"
 }
 

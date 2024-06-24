@@ -226,9 +226,9 @@ module.exports = {
                     email: user.email,
                 },
                 callbacks: {
-                    finish: `${FRONT_END_URL}/booking-status?booking_code=${booking_code}`,
-                    error: `${FRONT_END_URL}/booking-status?booking_code=${booking_code}`,
-                    pending: `${FRONT_END_URL}/booking-status?booking_code=${booking_code}`,
+                    finish: `${FRONT_END_URL}/selesai/${booking_code}`,
+                    error: `${FRONT_END_URL}/cancel/${booking_code}`,
+                    pending: `${FRONT_END_URL}/pending/${booking_code}`,
                 },
             };
 
