@@ -971,6 +971,7 @@ paths:
                       endDate:
                         type: string
                         example: "2024-06-02T14:00:00.000Z"
+
     get:
       summary: mengambil data promosi
       tags:
@@ -1714,7 +1715,7 @@ paths:
                       promotion:
                         type: string
                         example: null
-                        
+
   /airlines:
     post:
       summary: Membuat data maskapai penerbangan
@@ -1795,7 +1796,7 @@ paths:
                   data:
                     type: object
                     example: null
-                    
+
   /flights/search:
     get:
       summary: Mengambil semua data penerbangan berdasarkan pencarian
@@ -2887,8 +2888,8 @@ paths:
   /flights/promotion:
     get:
       summary: Get all flights with promotions
-      tags :
-      - Promotion
+      tags:
+        - Promotion
       description: Retrieve a list of flights that have promotions.
       parameters:
         - name: page
@@ -2906,7 +2907,7 @@ paths:
             type: integer
             default: 4
       responses:
-        '200':
+        "200":
           description: Successfully retrieved list of flights with promotions
           content:
             application/json:
