@@ -25,7 +25,7 @@ module.exports = {
                         include: {
                             ticket: {
                                 include: {
-                                    seat: true 
+                                    seat: true
                                 }
                             }
                         }
@@ -72,13 +72,6 @@ module.exports = {
                 passengers: passengers
             };
 
-            if (!tickets) {
-                return res.status(404).json({
-                    status: true,
-                    message: "Data tiket tidak ditemukan!",
-                    data: tickets,
-                });
-            }
 
             return res.status(200).json({
                 status: true,
