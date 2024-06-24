@@ -46,4 +46,37 @@ module.exports = {
       next(error);
     }
   },
+
+  getPromotion: async (req, res, next) => {
+    try {
+      const { page = 1, limit = 1 } = req.query;
+
+      let whereQuery = { promotion_id: { not: null } };
+
+      const flights = await prisma.flights.findMany({
+        skip: (parseInt(page) - 1) * parseInt(limit),
+        take: parseInt(limit),
+        where: whereQuery,
+        include: {
+          airlines: true,
+          arrival_airport: true,
+          destination_airport: true,
+          promotion: true,
+          seatclass: true
+        },
+      });
+
+      let count = await prisma.flights.count({ where: whereQuery });
+      const pagination = getPagination(req, page, limit, count);
+
+      return res.status(200).json({
+        status: true,
+        message: "Data promo berhasil diambil",
+        data: flights,
+        pagination,
+      });
+    } catch (error) {
+      next(error);
+    }
+  },
 };
