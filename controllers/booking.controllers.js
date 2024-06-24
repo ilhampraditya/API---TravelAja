@@ -286,8 +286,8 @@ module.exports = {
         },
         callbacks: {
           finish: `${FRONT_END_URL}/selesai/${booking_code}`,
-          error: `${FRONT_END_URL}/cancel/${booking_code}`,
-          pending: `${FRONT_END_URL}/pending/${booking_code}`,
+          error: `https://example.com/cancel/${booking_code}`,
+          pending: `https://example.com/pending/${booking_code}`,
         },
       };
 

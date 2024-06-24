@@ -1,6 +1,7 @@
 const path = require("path");
 const { PrismaClient } = require("@prisma/client");
 const prisma = new PrismaClient();
+const getPagination = require('../libs/getPagination');
 
 module.exports = {
   createPromotion: async (req, res, next) => {
@@ -79,4 +80,5 @@ module.exports = {
       next(error);
     }
   },
+
 };
