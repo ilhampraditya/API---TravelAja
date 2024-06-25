@@ -5,7 +5,7 @@ Content-Type: application/json
 {
   "name": "ilham",
   "email": "pradityailham25@gmail.com",
-  "no_telp": "0823046666729",
+  "no_telp": "0823046606729",
   "password": "password123"
 }
 
@@ -15,7 +15,7 @@ Content-Type: application/json
 
 {
   "name": "ilham",
-  "email": "bvxtejm@mynanaimohomes.com",
+  "email": "rgrzcjt@nespressopixie.com",
   "no_telp": "08230466729",
   "password": "password123"
 }
@@ -40,11 +40,11 @@ Content-Type: application/json
 
 ### Verify OTP
 POST http://localhost:3000/api/v1/user/otp/verify
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjo2LCJlbWFpbCI6ImJ2eHRlam1AbXluYW5haW1vaG9tZXMuY29tIiwicm9sZSI6InVzZXIiLCJpYXQiOjE3MTg5MDQ3OTcsImV4cCI6MTcxODk5MTE5N30.U7y77mW3O-YcOm5W4t-jTOTDcMUNwawLZR09W1H_PCU
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoxLCJlbWFpbCI6InJncnpjanRAbmVzcHJlc3NvcGl4aWUuY29tIiwicm9sZSI6InVzZXIiLCJpYXQiOjE3MTkyMzMzMjQsImV4cCI6MTcxOTMxOTcyNH0.SrqANRoRzOMUBycI_BR5ssvKwuTOU4n9rnVZR04tVrc
 Content-Type: application/json
 
 {
-  "otp": 626879
+  "otp": 840375
 }
 
 ### get all user

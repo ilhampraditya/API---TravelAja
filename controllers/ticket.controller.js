@@ -72,6 +72,7 @@ module.exports = {
                 passengers: passengers
             };
 
+
             return res.status(200).json({
                 status: true,
                 message: "Data tiket berhasil diambil",

@@ -20,3 +20,7 @@ Content-Type: application/json
   "startDate": "2024-06-01T14:00:00.000Z",
   "endDate": "2024-06-02T14:00:00.000Z"
 }
+
+###
+### Get All Promotion
+GET http://localhost:3000/api/v1/promotion?page=1&limit=4

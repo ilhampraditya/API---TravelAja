@@ -52,3 +52,28 @@ Content-Type: application/json
     }
   ]
 }
+
+### booking proses
+POST http://localhost:3000/api/v1/booking/process
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoxLCJlbWFpbCI6InJncnpjanRAbmVzcHJlc3NvcGl4aWUuY29tIiwicm9sZSI6InVzZXIiLCJpYXQiOjE3MTkyMzMzMjQsImV4cCI6MTcxOTMxOTcyNH0.SrqANRoRzOMUBycI_BR5ssvKwuTOU4n9rnVZR04tVrc
+Content-Type: application/json
+
+{
+  "flight_id": "GAECO0001",
+  "passengers": [
+    {
+      "fullname": "TesArray1",
+      "passenger_type": "adult",
+      "born_date": "2003-05-15",
+      "identity_number": "A1234567893",
+      "seat_id": 12
+    },
+    {
+      "fullname": "TesArray2",
+      "passenger_type": "adult",
+      "born_date": "2003-05-15",
+      "identity_number": "A1234567893",
+      "seat_id": 13
+    }
+  ]
+}
