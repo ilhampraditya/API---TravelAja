@@ -8,6 +8,7 @@ const router = require("./routes/v1");
 require('./libs/node-cron');
 
 
+
 app.use(logger("dev"));
 app.use(cors());
 app.use(express.json());

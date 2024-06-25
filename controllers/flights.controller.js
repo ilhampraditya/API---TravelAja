@@ -1,6 +1,7 @@
 const { PrismaClient } = require("@prisma/client");
 const { search } = require("../routes/v1");
 const prisma = new PrismaClient();
+const getPagination = require('../libs/getPagination');
 
 module.exports = {
   getAllFlights: async (req, res, next) => {
