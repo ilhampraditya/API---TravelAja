@@ -273,8 +273,6 @@ module.exports = {
 
       const authString = btoa(`${MIDTRANS_SERVER_KEY}:`);
 
-      console.log('authString :>> ', authString);
-
       const payload = {
         transaction_details: {
           order_id: transaction_id,
