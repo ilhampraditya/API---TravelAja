@@ -25,7 +25,7 @@ module.exports = {
                         include: {
                             ticket: {
                                 include: {
-                                    seat: true 
+                                    seat: true
                                 }
                             }
                         }
