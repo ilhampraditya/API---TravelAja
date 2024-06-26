@@ -62,7 +62,7 @@ Content-Type: application/json
   "flight_id": "GAECO0001",
   "passengers": [
     {
-      "fullname": "TesArray1",
+      "fullname": "TesArray",
       "passenger_type": "adult",
       "born_date": "2003-05-15",
       "identity_number": "A1234567893",
