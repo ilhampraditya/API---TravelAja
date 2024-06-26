@@ -1,0 +1,22 @@
+{
+  "promotions": [
+    {
+      "promotion_id": 1,
+      "discount": 10,
+      "startDate": "2024-07-01T14:00:00.000Z",
+      "endDate": "2024-08-01T14:00:00.000Z"
+    },
+    {
+      "promotion_id": 2,
+      "discount": 15,
+      "startDate": "2024-07-01T14:00:00.000Z",
+      "endDate": "2024-08-01T14:00:00.000Z"
+    },
+    {
+      "promotion_id": 3,
+      "discount": 20,
+      "startDate": "2024-07-01T14:00:00.000Z",
+      "endDate": "2024-08-01T14:00:00.000Z"
+    }
+  ]
+}
