@@ -62,7 +62,7 @@ Content-Type: application/json
   "status_code": "200",
   "signature_key": "16d6f84b2fb0468e2a9cf99a8ac4e5d803d42180347aaa70cb2a7abb13b5c6130458ca9c71956a962c0827637cd3bc7d40b21a8ae9fab12c7c3efe351b18d00a",
   "payment_type": "credit_card",
-  "order_id": "TVLAJA-000001",
+  "order_id": "TESTVLAJA-000014",
   "merchant_id": "G141532850",
   "masked_card": "48111111-1114",
   "gross_amount": "10000.00",

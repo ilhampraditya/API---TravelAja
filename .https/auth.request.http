@@ -15,7 +15,7 @@ Content-Type: application/json
 
 {
   "name": "ilham",
-  "email": "rgrzcjt@nespressopixie.com",
+  "email": "tysrdaczviis@nespressopixie.com",
   "no_telp": "08230466729",
   "password": "password123"
 }
@@ -40,11 +40,11 @@ Content-Type: application/json
 
 ### Verify OTP
 POST http://localhost:3000/api/v1/user/otp/verify
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoxLCJlbWFpbCI6InJncnpjanRAbmVzcHJlc3NvcGl4aWUuY29tIiwicm9sZSI6InVzZXIiLCJpYXQiOjE3MTkyMzMzMjQsImV4cCI6MTcxOTMxOTcyNH0.SrqANRoRzOMUBycI_BR5ssvKwuTOU4n9rnVZR04tVrc
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoxLCJlbWFpbCI6InR5c3JkYWN6dmlpc0BuZXNwcmVzc29waXhpZS5jb20iLCJyb2xlIjoidXNlciIsImlhdCI6MTcxOTM5Nzc1OCwiZXhwIjoxNzE5NDg0MTU4fQ.pmxe69QPF-Fdq4WqntpMcAHivL-EnxzGJ31FpVNyQLI
 Content-Type: application/json
 
 {
-  "otp": 840375
+  "otp": 965591
 }
 
 ### get all user
@@ -64,7 +64,7 @@ POST http://localhost:3000/api/v1/user/login
 Content-Type: application/json
 
 {
-  "emailOrNoTelp": "pradityailham25@gmail.com",
+  "emailOrNoTelp": "tysrdaczviis@nespressopixie.com",
   "password": "password123"
 }
 

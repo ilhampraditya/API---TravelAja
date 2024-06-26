@@ -55,7 +55,7 @@ Content-Type: application/json
 
 ### booking proses
 POST http://localhost:3000/api/v1/booking/process
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoxLCJlbWFpbCI6InJncnpjanRAbmVzcHJlc3NvcGl4aWUuY29tIiwicm9sZSI6InVzZXIiLCJpYXQiOjE3MTkyMzMzMjQsImV4cCI6MTcxOTMxOTcyNH0.SrqANRoRzOMUBycI_BR5ssvKwuTOU4n9rnVZR04tVrc
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoxLCJlbWFpbCI6InR5c3JkYWN6dmlpc0BuZXNwcmVzc29waXhpZS5jb20iLCJyb2xlIjoidXNlciIsImlhdCI6MTcxOTM5NzgwNCwiZXhwIjoxNzE5NDg0MjA0fQ.-nG0fml_9g79q297XUaqPubImiPQjnPbwDuZ4VTXJHI
 Content-Type: application/json
 
 {
@@ -66,14 +66,14 @@ Content-Type: application/json
       "passenger_type": "adult",
       "born_date": "2003-05-15",
       "identity_number": "A1234567893",
-      "seat_id": 12
+      "seat_id": 3
     },
     {
       "fullname": "TesArray2",
       "passenger_type": "adult",
       "born_date": "2003-05-15",
       "identity_number": "A1234567893",
-      "seat_id": 13
+      "seat_id": 4
     }
   ]
 }
