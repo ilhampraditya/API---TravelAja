@@ -247,5 +247,4 @@ module.exports = {
       next(error);
     }
   },
-
 };
