@@ -1,0 +1,78 @@
+### CREATE PAYMENT EWALLET
+POST http://localhost:3000/api/v1/payment_wallet
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoyLCJlbWFpbCI6InRyaG1mdkBtYXhhbWJhLmNvbSIsImlhdCI6MTcxNzUwNzM5OSwiZXhwIjoxNzE3NTkzNzk5fQ.ef3sR8NhLW6Q6G7At30Eepdzdv7nrEdQRHPxtzrTln0
+Content-Type: application/json
+
+{
+    "payment_method": "Dana",
+    "no_telp": "089090909090",
+    "booking_code": "TVLAJA-000003"
+}
+
+
+### CREATE PAYMENT BANK
+POST http://localhost:3000/api/v1/payment_bank
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoxMSwiZW1haWwiOiJibGxrdHRnZUBtaXRlb24uY29tIiwiaWF0IjoxNzE3Njg3MTA4fQ._gAQmd7B1zXf6Yt922s1ztT0pk0ovcvcshsQGOx-xpw
+Content-Type: application/json
+
+{
+    "payment_method": "BRI",
+    "card_number": "82748274284287421",
+    "valid_until": "12/25",
+    "booking_code": "TVLAJA-000003"
+}
+
+###
+GET http://localhost:3000/api/v1/payment
+
+
+### CREATE PAYMENT MIDTRANS
+POST https://expressjs-develop.up.railway.app/api/v1/payment
+Content-Type: application/json
+
+{
+    "booking_code": "TVLAJA-000038"
+}
+
+### CREATE PAYMENT MIDTRANS
+POST http://localhost:3000/api/v1/payment
+Content-Type: application/json
+
+{
+    "booking_code": "TVLAJA-000001"
+}
+
+
+
+
+###
+POST https://expressjs-develop.up.railway.app/api/v1/webhook-midtrans
+Content-Type: application/json
+
+
+###
+POST http://localhost:3000/api/v1/payment/webhook
+Content-Type: application/json
+
+{
+  "transaction_time": "2020-01-09 18:27:19",
+  "transaction_status": "capture",
+  "transaction_id": "57d5293c-e65f-4a29-95e4-5959c3fa335b",
+  "status_message": "midtrans payment notification",
+  "status_code": "200",
+  "signature_key": "16d6f84b2fb0468e2a9cf99a8ac4e5d803d42180347aaa70cb2a7abb13b5c6130458ca9c71956a962c0827637cd3bc7d40b21a8ae9fab12c7c3efe351b18d00a",
+  "payment_type": "credit_card",
+  "order_id": "TESTVLAJA-000014",
+  "merchant_id": "G141532850",
+  "masked_card": "48111111-1114",
+  "gross_amount": "10000.00",
+  "fraud_status": "accept",
+  "eci": "05",
+  "currency": "IDR",
+  "channel_response_message": "Approved",
+  "channel_response_code": "00",
+  "card_type": "credit",
+  "bank": "bni",
+  "approval_code": "1578569243927"
+}
+

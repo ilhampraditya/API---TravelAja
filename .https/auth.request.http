@@ -1,0 +1,141 @@
+### Register User
+POST https://expressjs-develop.up.railway.app/api/v1/user/register
+Content-Type: application/json
+
+{
+  "name": "ilham",
+  "email": "pradityailham25@gmail.com",
+  "no_telp": "0823046606729",
+  "password": "password123"
+}
+
+### Register User
+POST http://localhost:3000/api/v1/user/register
+Content-Type: application/json
+
+{
+  "name": "ilham",
+  "email": "tysrdaczviis@nespressopixie.com",
+  "no_telp": "08230466729",
+  "password": "password123"
+}
+
+
+### Renew OTP
+POST http://localhost:3000/api/v1/renew-otp
+Content-Type: application/json
+
+{
+  "email": "weywstlmia@nespressopixie.com"
+}
+
+### Verify OTP
+POST https://expressjs-develop.up.railway.app/api/v1/user/otp/verify
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjozLCJlbWFpbCI6InByYWRpdHlhaWxoYW0yNUBnbWFpbC5jb20iLCJyb2xlIjoidXNlciIsImlhdCI6MTcxODk4MjU0MywiZXhwIjoxNzE5MDY4OTQzfQ.0e54wXre9eO5crdse4-nAoiJOF0H9E_d0FyCnmj_naQ
+Content-Type: application/json
+
+{
+  "otp": 352770
+}
+
+### Verify OTP
+POST http://localhost:3000/api/v1/user/otp/verify
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoxLCJlbWFpbCI6InR5c3JkYWN6dmlpc0BuZXNwcmVzc29waXhpZS5jb20iLCJyb2xlIjoidXNlciIsImlhdCI6MTcxOTM5Nzc1OCwiZXhwIjoxNzE5NDg0MTU4fQ.pmxe69QPF-Fdq4WqntpMcAHivL-EnxzGJ31FpVNyQLI
+Content-Type: application/json
+
+{
+  "otp": 965591
+}
+
+### get all user
+GET http://localhost:3000/api/v1/all-user
+
+### Login User with Email
+POST https://expressjs-develop.up.railway.app/api/v1/user/login
+Content-Type: application/json
+
+{
+  "emailOrNoTelp": "pradityailham25@gmail.com",
+  "password": "password123"
+}
+
+### Login User with Email
+POST http://localhost:3000/api/v1/user/login
+Content-Type: application/json
+
+{
+  "emailOrNoTelp": "tysrdaczviis@nespressopixie.com",
+  "password": "password123"
+}
+
+### auth / login dengan token 
+GET  http://localhost:3000/api/v1/auth
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoyLCJlbWFpbCI6ImtxZHl0bkBteW5hbmFpbW9ob21lcy5jb20iLCJpYXQiOjE3MTcwMTQxMjksImV4cCI6MTcxNzEwMDUyOX0.O9MwGPsiM31UNYTnZeIxp2Y5b4cuqidIzGonlivAUac
+
+### Login User with No. Telp
+POST http://localhost:3000/api/v1/login
+Content-Type: application/json
+
+{
+  "emailOrNoTelp": "08217216229",
+  "password": "newPassword1234"
+}
+
+###
+POST http://localhost:3000/api/v1/forgot-password
+Content-Type: application/json
+
+{
+    "email": "bllkttge@miteon.com"
+}
+
+###
+POST http://localhost:3000/api/v1/reset-password
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoxMSwiZW1haWwiOiJibGxrdHRnZUBtaXRlb24uY29tIiwiaWF0IjoxNzE3Njg3MTA4fQ._gAQmd7B1zXf6Yt922s1ztT0pk0ovcvcshsQGOx-xpw
+Content-Type: application/json
+
+{
+  "password": "newPassword123",
+  "confirmPassword": "newPassword123"
+}
+
+### GET PROFILE
+GET http://localhost:3000/api/v1/profile
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoxLCJlbWFpbCI6Ind5cG9mZ2ZiZ2huQG11YXRvYy5jb20iLCJpYXQiOjE3MTc2OTU2ODcsImV4cCI6MTcxNzc4MjA4N30.A9czIepcdWgrM2RbS0KSwiOKl5fqrFkNPy-108fECso
+
+
+### UPDATE USER BY ID
+POST http://localhost:3000/api/v1/updateprofile
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoyLCJlbWFpbCI6ImtxZHl0bkBteW5hbmFpbW9ob21lcy5jb20iLCJpYXQiOjE3MTcwMTQyODksImV4cCI6MTcxNzEwMDY4OX0.oT_JteCY2CrLpPShEPxndJoEEatGAa4T0Cg5Dg5jxiU
+Content-Type: application/json
+
+{
+  "name": "ilham praditya",
+  "no_telp": "0976273456700"
+}
+
+### UPDATE PASSWORD
+PUT http://localhost:3000/api/v1/change-password
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoxLCJlbWFpbCI6Ind5cG9mZ2ZiZ2huQG11YXRvYy5jb20iLCJpYXQiOjE3MTc2OTU2ODcsImV4cCI6MTcxNzc4MjA4N30.A9czIepcdWgrM2RbS0KSwiOKl5fqrFkNPy-108fECso
+Content-Type: application/json
+
+{
+    "oldPassword":"password123",
+    "newPassword":"password1234"
+}
+
+
+###
+GET http://localhost:3000/api/v1/google
+
+
+### GANTI PASSWORD
+
+PUT http://localhost:3000/api/v1/change-password
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjozLCJlbWFpbCI6InRydWdlY3Nicm5AbmVzcHJlc3NvcGl4aWUuY29tIiwiaWF0IjoxNzE3Njg1Mjg0LCJleHAiOjE3MTc3NzE2ODR9.gjZ3x0Yh2OgxNDC_cCSshoxu_-nveUJjdrKtxRJs4wI
+Content-Type: application/json
+
+{
+  "oldPassword": "password123",
+  "newPassword": "newpassword123"
+}

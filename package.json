@@ -2,9 +2,14 @@
   "name": "final-project-bejs",
   "version": "1.0.0",
   "main": "index.js",
+  "prisma": {
+    "seed": "node prisma/seed.js"
+  },
   "scripts": {
     "start": "node app.js",
-    "dev": "nodemon app.js"
+    "dev": "nodemon app.js",
+    "seed": "node prisma/seed.js",
+    "postinstall": "prisma generate"
   },
   "keywords": [],
   "author": "",
@@ -24,9 +29,17 @@
     "jsonwebtoken": "^9.0.2",
     "morgan": "^1.10.0",
     "multer": "^1.4.5-lts.1",
+    "node-cron": "^3.0.3",
     "nodemailer": "^6.9.13",
     "nodemon": "^3.1.0",
+    "passport": "^0.7.0",
+    "passport-google-oauth20": "^2.0.0",
+    "passport-local": "^1.0.0",
     "prisma": "^5.14.0",
-    "qr-image": "^3.2.0"
+    "qr-image": "^3.2.0",
+    "qrcode": "^1.5.3",
+    "sharp": "^0.33.4",
+    "swagger-ui-express": "^5.0.0",
+    "yaml": "^2.4.2"
   }
 }

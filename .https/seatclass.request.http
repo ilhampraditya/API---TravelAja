@@ -1,0 +1,33 @@
+GET http://localhost:3000/api/v1/seatclasses
+###
+GET https://expressjs-develop.up.railway.app/api/v1/seatclasses
+
+### GET Seat Class by ID
+
+GET http://localhost:3000/api/v1/seatclasses?search=Eco
+
+### CREATE New Seat Class
+POST http://localhost:3000/api/v1/seatclasses
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoxLCJlbWFpbCI6Imhja2ltZ2NxanV0cWdAbmVzcHJlc3NvcGl4aWUuY29tIiwicm9sZSI6ImFkbWluIiwiaWF0IjoxNzE5MzI0NjkxLCJleHAiOjE3MTk0MTEwOTF9.oN6bgMzPPErIg1HGQ-LdQmvfp1oDCKPEA94kYstRFUs
+Content-Type: application/json
+
+{
+  "seat_class_type": "Economy",
+  "seat_amount": 60,
+  "airlines_id": "QG"
+}
+###
+POST https://expressjs-develop.up.railway.app/api/v1/seatclasses
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoxLCJlbWFpbCI6Imhja2ltZ2NxanV0cWdAbmVzcHJlc3NvcGl4aWUuY29tIiwicm9sZSI6ImFkbWluIiwiaWF0IjoxNzE5MzI0NjkxLCJleHAiOjE3MTk0MTEwOTF9.oN6bgMzPPErIg1HGQ-LdQmvfp1oDCKPEA94kYstRFUs
+Content-Type: application/json
+
+{
+  "seat_class_type": "Economy",
+  "seat_amount": 60,
+  "airlines_id": "GA"
+}
+
+
+
+
+ 

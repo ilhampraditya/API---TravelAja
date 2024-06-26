@@ -1,0 +1,431 @@
+{
+  "airports": [
+    {
+      "id": "CGK",
+      "airport_name": "Soekarno-Hatta International Airport",
+      "continent": "Asia",
+      "country": "Indonesia",
+      "city": "Jakarta"
+    },
+    {
+      "id": "DPS",
+      "airport_name": "Ngurah Rai International Airport",
+      "continent": "Asia",
+      "country": "Indonesia",
+      "city": "Denpasar"
+    },
+    {
+      "id": "SUB",
+      "airport_name": "Juanda International Airport",
+      "continent": "Asia",
+      "country": "Indonesia",
+      "city": "Surabaya"
+    },
+    {
+      "id": "UPG",
+      "airport_name": "Sultan Hasanuddin International Airport",
+      "continent": "Asia",
+      "country": "Indonesia",
+      "city": "Makassar"
+    },
+    {
+      "id": "BDO",
+      "airport_name": "Husein Sastranegara International Airport",
+      "continent": "Asia",
+      "country": "Indonesia",
+      "city": "Bandung"
+    },
+    {
+      "id": "BPN",
+      "airport_name": "Sultan Aji Muhammad Sulaiman Sepinggan International Airport",
+      "continent": "Asia",
+      "country": "Indonesia",
+      "city": "Balikpapan"
+    },
+    {
+      "id": "YIA",
+      "airport_name": "Yogyakarta International Airport",
+      "continent": "Asia",
+      "country": "Indonesia",
+      "city": "Yogyakarta"
+    },
+    {
+      "id": "KNO",
+      "airport_name": "Kualanamu International Airport",
+      "continent": "Asia",
+      "country": "Indonesia",
+      "city": "Medan"
+    },
+    {
+      "id": "LOP",
+      "airport_name": "Lombok Praya International Airport",
+      "continent": "Asia",
+      "country": "Indonesia",
+      "city": "Lombok"
+    },
+    {
+      "id": "DJJ",
+      "airport_name": "Sentani",
+      "continent": "Asia",
+      "country": "Indonesia",
+      "city": "Jayapura"
+    },
+    {
+      "id": "BTH",
+      "airport_name": "Hang Nadim",
+      "continent": "Asia",
+      "country": "Indonesia",
+      "city": "Batam"
+    },
+    {
+      "id": "PLM",
+      "airport_name": "Sultan Mahmud Badaruddin II",
+      "continent": "Asia",
+      "country": "Indonesia",
+      "city": "Palembang"
+    },
+    {
+      "id": "PGK",
+      "airport_name": "Depati Amir",
+      "continent": "Asia",
+      "country": "Indonesia",
+      "city": "Bangka / Pangkal Pinang"
+    },
+    {
+      "id": "SRG",
+      "airport_name": "Achmad Yani",
+      "continent": "Asia",
+      "country": "Indonesia",
+      "city": "Semarang"
+    },
+    {
+      "id": "PNK",
+      "airport_name": "Supadio",
+      "continent": "Asia",
+      "country": "Indonesia",
+      "city": "Pontianak"
+    },
+    {
+      "id": "PDG",
+      "airport_name": "Minangkabau Intl",
+      "continent": "Asia",
+      "country": "Indonesia",
+      "city": "Padang"
+    },
+    {
+      "id": "BDJ",
+      "airport_name": "Syamsudin Noor",
+      "continent": "Asia",
+      "country": "Indonesia",
+      "city": "Banjarmasin"
+    },
+    {
+      "id": "MDC",
+      "airport_name": "Sam Ratulangi",
+      "continent": "Asia",
+      "country": "Indonesia",
+      "city": "Manado"
+    },
+    {
+      "id": "SOC",
+      "airport_name": "Adi Soemarmo",
+      "continent": "Asia",
+      "country": "Indonesia",
+      "city": "Solo"
+    },
+    {
+      "id": "DJB",
+      "airport_name": "Sultan Thaha",
+      "continent": "Asia",
+      "country": "Indonesia",
+      "city": "Jambi"
+    },
+    {
+      "id": "MLG",
+      "airport_name": "Abdul Rachman Saleh",
+      "continent": "Asia",
+      "country": "Indonesia",
+      "city": "Malang"
+    },
+    {
+      "id": "BTJ",
+      "airport_name": "Sultan Iskandarmuda",
+      "continent": "Asia",
+      "country": "Indonesia",
+      "city": "Banda Aceh"
+    },
+    {
+      "id": "TJQ",
+      "airport_name": "H.A.S Hanandjoeddin Airport",
+      "continent": "Asia",
+      "country": "Indonesia",
+      "city": "Belitung / Tanjung Pandan"
+    },
+    {
+      "id": "PKY",
+      "airport_name": "Tjilik Riwut",
+      "continent": "Asia",
+      "country": "Indonesia",
+      "city": "Palangkaraya"
+    },
+    {
+      "id": "HLP",
+      "airport_name": "Halim Perdanakusuma International Airport",
+      "continent": "Asia",
+      "country": "Indonesia",
+      "city": "Jakarta"
+    },
+    {
+      "id": "JOG",
+      "airport_name": "Adi Sutjipto",
+      "continent": "Asia",
+      "country": "Indonesia",
+      "city": "Yogyakarta"
+    },
+    {
+      "id": "KOE",
+      "airport_name": "El Tari",
+      "continent": "Asia",
+      "country": "Indonesia",
+      "city": "Kupang"
+    },
+    {
+      "id": "AAP",
+      "airport_name": "APT Pranoto Airport",
+      "continent": "Asia",
+      "country": "Indonesia",
+      "city": "Samarinda"
+    },
+    {
+      "id": "SMQ",
+      "airport_name": "H. Asan Airport",
+      "continent": "Asia",
+      "country": "Indonesia",
+      "city": "Sampit"
+    },
+    {
+      "id": "KBU",
+      "airport_name": "Gusti Sjamsir Alam",
+      "continent": "Asia",
+      "country": "Indonesia",
+      "city": "Kotabaru"
+    },
+    {
+      "id": "SOQ",
+      "airport_name": "Domine Eduard Osok",
+      "continent": "Asia",
+      "country": "Indonesia",
+      "city": "Sorong"
+    },
+    {
+      "id": "AMQ",
+      "airport_name": "Pattimura Airport",
+      "continent": "Asia",
+      "country": "Indonesia",
+      "city": "Ambon"
+    },
+    {
+      "id": "MKW",
+      "airport_name": "Rendani",
+      "continent": "Asia",
+      "country": "Indonesia",
+      "city": "Manokwari"
+    },
+    {
+      "id": "TIM",
+      "airport_name": "Mozes Kilangin",
+      "continent": "Asia",
+      "country": "Indonesia",
+      "city": "Timika"
+    },
+    {
+      "id": "KDI",
+      "airport_name": "Haluoleo",
+      "continent": "Asia",
+      "country": "Indonesia",
+      "city": "Kendari"
+    },
+    {
+      "id": "TTE",
+      "airport_name": "Sultan Babullah",
+      "continent": "Asia",
+      "country": "Indonesia",
+      "city": "Ternate"
+    },
+    {
+      "id": "PLW",
+      "airport_name": "Mutiara SIS Aljufri",
+      "continent": "Asia",
+      "country": "Indonesia",
+      "city": "Palu"
+    },
+    {
+      "id": "TRK",
+      "airport_name": "Juwata International Airport",
+      "continent": "Asia",
+      "country": "Indonesia",
+      "city": "Tarakan"
+    },
+    {
+      "id": "MKQ",
+      "airport_name": "Mopah",
+      "continent": "Asia",
+      "country": "Indonesia",
+      "city": "Merauke"
+    },
+    {
+      "id": "BIK",
+      "airport_name": "Frans Kaisiepo",
+      "continent": "Asia",
+      "country": "Indonesia",
+      "city": "Biak"
+    },
+    {
+      "id": "BUW",
+      "airport_name": "Betoambari",
+      "continent": "Asia",
+      "country": "Indonesia",
+      "city": "Bau-Bau, Buton"
+    },
+    {
+      "id": "GTO",
+      "airport_name": "Jalaluddin",
+      "continent": "Asia",
+      "country": "Indonesia",
+      "city": "Gorontalo"
+    },
+    {
+      "id": "PKU",
+      "airport_name": "Sultan Syarif Kasim II",
+      "continent": "Asia",
+      "country": "Indonesia",
+      "city": "Pekanbaru"
+    },
+    {
+      "id": "PKN",
+      "airport_name": "Iskandar",
+      "continent": "Asia",
+      "country": "Indonesia",
+      "city": "Pangkalan Bun"
+    },
+    {
+      "id": "KTG",
+      "airport_name": "Rahadi Usman",
+      "continent": "Asia",
+      "country": "Indonesia",
+      "city": "Ketapang"
+    },
+    {
+      "id": "TKG",
+      "airport_name": "Radin Inten II Airport",
+      "continent": "Asia",
+      "country": "Indonesia",
+      "city": "Bandar Lampung"
+    },
+    {
+      "id": "WMX",
+      "airport_name": "Wamena",
+      "continent": "Asia",
+      "country": "Indonesia",
+      "city": "Wamena"
+    },
+    {
+      "id": "LBJ",
+      "airport_name": "Komodo",
+      "continent": "Asia",
+      "country": "Indonesia",
+      "city": "Labuan Bajo"
+    },
+    {
+      "id": "ENE",
+      "airport_name": "H Hasan Aroeboesman",
+      "continent": "Asia",
+      "country": "Indonesia",
+      "city": "Ende"
+    },
+    {
+      "id": "BJW",
+      "airport_name": "Soa",
+      "continent": "Asia",
+      "country": "Indonesia",
+      "city": "Bajawa"
+    },
+    {
+      "id": "BEJ",
+      "airport_name": "Kalimarau",
+      "continent": "Asia",
+      "country": "Indonesia",
+      "city": "Berau"
+    },
+    {
+      "id": "NBX",
+      "airport_name": "Nabire",
+      "continent": "Asia",
+      "country": "Indonesia",
+      "city": "Nabire"
+    },
+    {
+      "id": "TNJ",
+      "airport_name": "Raja Haji Fisabilillah International Airport",
+      "continent": "Asia",
+      "country": "Indonesia",
+      "city": "Bintan / Tanjung Pinang"
+    },
+    {
+      "id": "KUL",
+      "airport_name": "Kuala Lumpur International Airport",
+      "continent": "Asia",
+      "country": "Malaysia",
+      "city": "Kuala Lumpur"
+    },
+    {
+      "id": "SIN",
+      "airport_name": "Changi Intl",
+      "continent": "Asia",
+      "country": "Singapore",
+      "city": "Singapore"
+    },
+    {
+      "id": "TMC",
+      "airport_name": "Tambolaka Airport",
+      "continent": "Asia",
+      "country": "Indonesia",
+      "city": "Waikabubak"
+    },
+    {
+      "id": "GNS",
+      "airport_name": "Binaka",
+      "continent": "Asia",
+      "country": "Indonesia",
+      "city": "Nias/Gunung Sitoli"
+    },
+    {
+      "id": "BMU",
+      "airport_name": "Muhammad Salahuddin",
+      "continent": "Asia",
+      "country": "Indonesia",
+      "city": "Bima"
+    },
+    {
+      "id": "PEN",
+      "airport_name": "Penang Intl",
+      "continent": "Asia",
+      "country": "Malaysia",
+      "city": "Penang"
+    },
+    {
+      "id": "BKS",
+      "airport_name": "Fatmawati Soekarno",
+      "continent": "Asia",
+      "country": "Indonesia",
+      "city": "Bengkulu"
+    },
+    {
+      "id": "MOF",
+      "airport_name": "Frans Seda/Wai Oti",
+      "continent": "Asia",
+      "country": "Indonesia",
+      "city": "Maumere"
+    }
+  ]
+}

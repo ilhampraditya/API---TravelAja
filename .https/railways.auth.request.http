@@ -1,0 +1,86 @@
+### Register User
+POST https://expressjs-develop.up.railway.app/api/v1/register
+Content-Type: application/json
+
+{
+  "name": "ilham",
+  "email": "bllkttge@miteon.com",
+  "no_telp": "08212162211119",
+  "password": "password123"
+}
+
+### Renew OTP
+POST expressjs-development-e2c9.up.railway.app/api/v1/renew-otp
+Content-Type: application/json
+
+{
+  "email": "xhdpdvzpptyfeu@miteon.com"
+}
+
+### Verify OTP
+POST https://expressjs-develop.up.railway.app/api/v1/verify-otp
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjo1LCJlbWFpbCI6ImJsbGt0dGdlQG1pdGVvbi5jb20iLCJpYXQiOjE3MTc3NzQ1MzUsImV4cCI6MTcxNzg2MDkzNX0.rPj7JR554_RvmriCraDi8y4yxlHf4etM_MPyRchPUkc
+Content-Type: application/json
+
+{
+  "otp": 196717
+}
+
+### get all user
+GET expressjs-development-e2c9.up.railway.app/api/v1/all-user
+
+### Login User with Email
+POST expressjs-development-e2c9.up.railway.app/api/v1/login
+Content-Type: application/json
+
+{
+  "emailOrNoTelp": "fhndkajxqhewe@mynanaimohomes.com",
+  "password": "newPassword1234"
+}
+
+### auth / login dengan token 
+GET  expressjs-development-e2c9.up.railway.app/api/v1/auth
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NCwiZW1haWwiOiJmaG5ka2FqeHFoZXdlQG15bmFuYWltb2hvbWVzLmNvbSIsImlhdCI6MTcxNjU0NzExOSwiZXhwIjoxNzE2NjMzNTE5fQ.HOcwmepGOGOZU_OJOBCbYUIIo1xbRw4S7oRrK7qY-g8
+
+### Login User with No. Telp
+POST expressjs-development-e2c9.up.railway.app/api/v1/login
+Content-Type: application/json
+
+{
+  "emailOrNoTelp": "08212162176767",
+  "password": "password123"
+}
+
+###
+POST expressjs-development-e2c9.up.railway.app/api/v1/forgot-password
+Content-Type: application/json
+
+{
+    "email": "fhndkajxqhewe@mynanaimohomes.com"
+}
+
+###
+POST expressjs-development-e2c9.up.railway.app/api/v1/reset-password
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImZobmRrYWp4cWhld2VAbXluYW5haW1vaG9tZXMuY29tIiwiaWF0IjoxNzE2NTQ3MjAyfQ.O8exyYT4JfdU8hK9_tjbqXKkvCOtMlS19PR-txLK62E
+Content-Type: application/json
+
+{
+  "password": "newPassword1234",
+  "confirmPassword": "newPassword1234"
+}
+
+### GET PROFILE
+GET expressjs-development-e2c9.up.railway.app/api/v1/profile
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NCwiZW1haWwiOiJmaG5ka2FqeHFoZXdlQG15bmFuYWltb2hvbWVzLmNvbSIsImlhdCI6MTcxNjU0NzY4MCwiZXhwIjoxNzE2NjM0MDgwfQ.HYGn2U68NHhClHf839339Eq7BLyhSnyVKKY9Rwc7SH8
+
+### UPDATE USER BY ID
+POST expressjs-development-e2c9.up.railway.app/api/v1/updateprofile
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NCwiZW1haWwiOiJmaG5ka2FqeHFoZXdlQG15bmFuYWltb2hvbWVzLmNvbSIsImlhdCI6MTcxNjU0NzY4MCwiZXhwIjoxNzE2NjM0MDgwfQ.HYGn2U68NHhClHf839339Eq7BLyhSnyVKKY9Rwc7SH8
+Content-Type: application/json
+
+{
+  "name": "tes123",
+  "no_telp": "0976273227372323",
+  "password": "password1234"
+}
+
