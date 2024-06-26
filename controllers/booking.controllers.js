@@ -1,4 +1,5 @@
 const { PrismaClient } = require("@prisma/client");
+const { search } = require("../routes/v1/booking.routes");
 const prisma = new PrismaClient();
 const { MIDTRANS_SERVER_KEY, FRONT_END_URL, MIDTRANS_APP_URL } = process.env
 
@@ -17,7 +18,7 @@ module.exports = {
         }
       });
 
-      const passengers = await prisma.passenger.findMany({ where: { booking_id: booking.booking_id }, include: { ticket: true } })
+      const passengers = await prisma.passenger.findMany({ where: { booking_id: booking.booking_id }, include: { ticket: { include: { seat: true } } } })
       const passengerCount = passengers.length;
 
       const bookingWithMoreDetails = {
