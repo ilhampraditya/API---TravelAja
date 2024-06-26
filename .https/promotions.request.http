@@ -3,6 +3,7 @@ GET http://localhost:3000/api/v1/promotion
 
 ###
 POST http://localhost:3000/api/v1/promotion
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoxLCJlbWFpbCI6Imhja2ltZ2NxanV0cWdAbmVzcHJlc3NvcGl4aWUuY29tIiwicm9sZSI6ImFkbWluIiwiaWF0IjoxNzE5MzI1MjkwLCJleHAiOjE3MTk0MTE2OTB9.fxlxb81PySenG6t7dFaopVt1UqV56H0Cg3zaduI6ct0
 Content-Type: application/json
 
 {
@@ -10,6 +11,7 @@ Content-Type: application/json
   "startDate": "2024-06-01T14:00:00.000Z",
   "endDate": "2024-06-02T14:00:00.000Z"
 }
+
 ###
 POST https://expressjs-develop.up.railway.app/api/v1/promotion
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoxLCJlbWFpbCI6InByYWRpdHlhaWxoYW0yNUBnbWFpbC5jb20iLCJyb2xlIjoiYWRtaW4iLCJpYXQiOjE3MTgzNjE2MjUsImV4cCI6MTcxODQ0ODAyNX0.C7BCxHGq6UUzq5QntEq-7CjYk4DvNtkJfeoWwBuw_fo

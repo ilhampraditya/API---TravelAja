@@ -106,6 +106,8 @@ CREATE TABLE "tickets" (
     "ticket_id" TEXT NOT NULL,
     "url_qrcode" TEXT,
     "isActive" BOOLEAN NOT NULL DEFAULT false,
+    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "expiresAt" TIMESTAMP(3) NOT NULL,
     "seat_id" INTEGER NOT NULL,
     "passenger_id" INTEGER NOT NULL,
 

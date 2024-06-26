@@ -37,7 +37,7 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjo2LCJlb
 
 ### booking proses
 POST https://expressjs-develop.up.railway.app/api/v1/booking/process
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjozLCJlbWFpbCI6InByYWRpdHlhaWxoYW0yNUBnbWFpbC5jb20iLCJyb2xlIjoidXNlciIsImlhdCI6MTcxODk4MjY0OCwiZXhwIjoxNzE5MDY5MDQ4fQ.K0Dv9YGPSQFiSaAdZXCVy90UEQYOjgWx7abI-HUfMds
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoxLCJlbWFpbCI6ImtldmlueW9oYW5lc3RlZW5AZ21haWwuY29tIiwicm9sZSI6InVzZXIiLCJpYXQiOjE3MTkzNzYxODMsImV4cCI6MTcxOTQ2MjU4M30.192fGsB3ncoxeof-yOagtPuE3YDZ5xzd59sT3AEqV50
 Content-Type: application/json
 
 {
@@ -48,7 +48,25 @@ Content-Type: application/json
       "passenger_type": "adult",
       "born_date": "2003-05-15",
       "identity_number": "A1234567893",
-      "seat_id": 10
+      "seat_id": 5
+    }
+  ]
+}
+
+### booking proses
+POST http://localhost:3000/api/v1/booking/process
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoxLCJlbWFpbCI6InVsemtsYnN3cEBtdWF0b2MuY29tIiwicm9sZSI6InVzZXIiLCJpYXQiOjE3MTkzOTUxMTEsImV4cCI6MTcxOTQ4MTUxMX0.eVcXNekpLhBu5jDmW4KmG7pmbyqvJpb3lzRFGuyS7Rw
+Content-Type: application/json
+
+{
+  "flight_id": "SJECO0003",
+  "passengers": [
+    {
+      "fullname": "TesArray1",
+      "passenger_type": "adult",
+      "born_date": "2003-05-15",
+      "identity_number": "A1234567893",
+      "seat_id": 5
     }
   ]
 }

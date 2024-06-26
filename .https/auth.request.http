@@ -15,7 +15,7 @@ Content-Type: application/json
 
 {
   "name": "ilham",
-  "email": "bvxtejm@mynanaimohomes.com",
+  "email": "ulzklbswp@muatoc.com",
   "no_telp": "08230466729",
   "password": "password123"
 }
@@ -40,11 +40,11 @@ Content-Type: application/json
 
 ### Verify OTP
 POST http://localhost:3000/api/v1/user/otp/verify
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjo2LCJlbWFpbCI6ImJ2eHRlam1AbXluYW5haW1vaG9tZXMuY29tIiwicm9sZSI6InVzZXIiLCJpYXQiOjE3MTg5MDQ3OTcsImV4cCI6MTcxODk5MTE5N30.U7y77mW3O-YcOm5W4t-jTOTDcMUNwawLZR09W1H_PCU
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoxLCJlbWFpbCI6InVsemtsYnN3cEBtdWF0b2MuY29tIiwicm9sZSI6InVzZXIiLCJpYXQiOjE3MTkzOTUwNTQsImV4cCI6MTcxOTQ4MTQ1NH0.yMpinww4TBRSObpZgmnI7By2OG4dO2OJfhveR12kO1g
 Content-Type: application/json
 
 {
-  "otp": 626879
+  "otp": 686346
 }
 
 ### get all user
@@ -55,8 +55,8 @@ POST https://expressjs-develop.up.railway.app/api/v1/user/login
 Content-Type: application/json
 
 {
-  "emailOrNoTelp": "pradityailham25@gmail.com",
-  "password": "password123"
+  "emailOrNoTelp": "hckimgcqjutqg@nespressopixie.com",
+  "password": "Ilham123"
 }
 
 ### Login User with Email
@@ -64,7 +64,7 @@ POST http://localhost:3000/api/v1/user/login
 Content-Type: application/json
 
 {
-  "emailOrNoTelp": "bvxtejm@mynanaimohomes.com",
+  "emailOrNoTelp": "ulzklbswp@muatoc.com",
   "password": "password123"
 }
 
