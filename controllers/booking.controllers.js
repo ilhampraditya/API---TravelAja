@@ -1,7 +1,7 @@
 const { PrismaClient } = require("@prisma/client");
+const { search } = require("../routes/v1/booking.routes");
 const prisma = new PrismaClient();
-const { MIDTRANS_SERVER_KEY, FRONT_END_URL, MIDTRANS_APP_URL } = process.env
-
+const { MIDTRANS_SERVER_KEY, FRONT_END_URL, MIDTRANS_APP_URL } = process.env;
 
 module.exports = {
   getBookingById: async (req, res, next) => {
@@ -13,11 +13,21 @@ module.exports = {
         include: {
           payment: true,
           flight: true,
-          flight: { include: { airlines: true, seatclass: true, arrival_airport: true, destination_airport: true } }
-        }
+          flight: {
+            include: {
+              airlines: true,
+              seatclass: true,
+              arrival_airport: true,
+              destination_airport: true,
+            },
+          },
+        },
       });
 
-      const passengers = await prisma.passenger.findMany({ where: { booking_id: booking.booking_id }, include: { ticket: true } })
+      const passengers = await prisma.passenger.findMany({
+        where: { booking_id: booking.booking_id },
+        include: { ticket: { include: { seat: true } } },
+      });
       const passengerCount = passengers.length;
 
       const bookingWithMoreDetails = {
@@ -43,13 +53,21 @@ module.exports = {
         include: {
           payment: true,
           flight: true,
-          flight: { include: { airlines: true, arrival_airport: true, destination_airport: true } },
-        }
+          flight: {
+            include: {
+              airlines: true,
+              arrival_airport: true,
+              destination_airport: true,
+            },
+          },
+        },
       });
 
       const bookingWithPassengers = await Promise.all(
-        bookings.map(async booking => {
-          const passengers = await prisma.passenger.findMany({ where: { booking_id: booking.booking_id } });
+        bookings.map(async (booking) => {
+          const passengers = await prisma.passenger.findMany({
+            where: { booking_id: booking.booking_id },
+          });
           const passengerCount = passengers.length;
 
           return {
@@ -73,7 +91,6 @@ module.exports = {
     const user = req.user;
     const { flight_id } = req.body;
     try {
-
       const lastBooking = await prisma.booking.findFirst({
         orderBy: {
           booking_date: "desc",
@@ -131,7 +148,6 @@ module.exports = {
     const { flight_id, passengers } = req.body;
 
     try {
-
       const lastBooking = await prisma.booking.findFirst({
         orderBy: {
           booking_date: "desc",
@@ -140,12 +156,12 @@ module.exports = {
 
       let booking_code;
       if (!lastBooking) {
-        booking_code = "DEVAJA-000001";
+        booking_code = "TVLCODE-000001";
       } else {
         const lastCode = lastBooking.booking_code;
         const numberPart = parseInt(lastCode.split("-")[1], 10);
         const newNumberPart = (numberPart + 1).toString().padStart(6, "0");
-        booking_code = `DEVAJA-${newNumberPart}`;
+        booking_code = `TVLCODE-${newNumberPart}`;
       }
       if (!flight_id) {
         return res.status(400).json({
@@ -163,10 +179,8 @@ module.exports = {
         },
       });
 
-
       await Promise.all(
         passengers.map(async (passenger, index) => {
-
           const newDate = new Date(passenger.born_date);
           newDate.setUTCHours(0, 0, 0, 0);
 
@@ -176,14 +190,13 @@ module.exports = {
               passenger_type: passenger.passenger_type,
               born_date: newDate,
               identity_number: passenger.identity_number,
-              booking_id: booking.booking_id
-            }
+              booking_id: booking.booking_id,
+            },
           });
 
-          let { seat_id } = passenger
-          console.log(seat_id)
+          let { seat_id } = passenger;
 
-          const seatExist = await prisma.seat.findFirst({ where: { seat_id } })
+          const seatExist = await prisma.seat.findFirst({ where: { seat_id } });
           if (!seatExist) {
             return res.status(400).json({
               status: false,
@@ -192,11 +205,15 @@ module.exports = {
             });
           }
 
-          const ticketExist = await prisma.ticket.findUnique({ where: { seat_id } })
-
+          const ticketExist = await prisma.ticket.findUnique({
+            where: { seat_id },
+          });
 
           if (ticketExist) {
-            if (seatExist.status == 'CHECK_AGAIN_LATER' || seatExist.status == 'BOOKED') {
+            if (
+              seatExist.status == "CHECK_AGAIN_LATER" ||
+              seatExist.status == "BOOKED"
+            ) {
               return res.status(400).json({
                 status: false,
                 message: "Kursi tidak bisa dipesan!",
@@ -207,19 +224,19 @@ module.exports = {
 
           const lastTicket = await prisma.ticket.findFirst({
             orderBy: {
-              ticket_id: 'desc',
+              ticket_id: "desc",
             },
           });
 
-          console.log('last ticket : ', lastTicket)
-
           let ticket_id;
           if (!lastTicket) {
-            ticket_id = 'TVLAJADOM000001';
+            ticket_id = "TVLAJADOM000001";
           } else {
             const lastCode = lastTicket.ticket_id;
             const numberPart = parseInt(lastCode.slice(-6), 10);
-            const newNumberPart = (numberPart + 1 + index).toString().padStart(6, '0');
+            const newNumberPart = (numberPart + 1 + index)
+              .toString()
+              .padStart(6, "0");
             ticket_id = `TVLAJADOM${newNumberPart}`;
           }
 
@@ -230,10 +247,9 @@ module.exports = {
               seat_id,
               passenger_id: createdPassenger.passenger_id,
               ticket_id,
-              expiresAt: expiresAt
-            }
-          })
-
+              expiresAt: expiresAt,
+            },
+          });
         })
       );
 
@@ -254,17 +270,18 @@ module.exports = {
           booking_id: booking.booking_id,
         },
       });
-      console.log('listpassengers :>> ', listpassengers);
 
       for (const mypassenger of listpassengers) {
-        console.log('mypassenger :>> ', mypassenger);
-        const ticket = await prisma.ticket.findUnique({ where: { passenger_id: mypassenger.passenger_id } })
-        console.log('ticket :>> ', ticket);
-        await prisma.seat.update({ where: { seat_id: ticket.seat_id }, data: { status: 'CHECK_AGAIN_LATER' } })
+        const ticket = await prisma.ticket.findUnique({
+          where: { passenger_id: mypassenger.passenger_id },
+        });
+        await prisma.seat.update({
+          where: { seat_id: ticket.seat_id },
+          data: { status: "CHECK_AGAIN_LATER" },
+        });
       }
 
       const passengerTotal = Number(listpassengers.length);
-      console.log(passengerTotal);
 
       total_price = pricePerTicket * passengerTotal;
 
@@ -289,8 +306,6 @@ module.exports = {
         },
       };
 
-      console.log(payload);
-
       const response = await fetch(
         `https://app.sandbox.midtrans.com/snap/v1/transactions`,
         {
@@ -306,7 +321,6 @@ module.exports = {
 
       const data = await response.json();
 
-      console.log(response);
       if (response.status !== 201) {
         return res.status(500).json({
           status: "error",
@@ -337,5 +351,5 @@ module.exports = {
     } catch (error) {
       next(error);
     }
-  }
+  },
 };
