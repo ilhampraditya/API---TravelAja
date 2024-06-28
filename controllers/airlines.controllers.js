@@ -1,4 +1,3 @@
-// airlines.controller.js
 const sharp = require("sharp");
 const path = require("path");
 const imagekit = require("../libs/imagekit");
@@ -20,11 +19,11 @@ module.exports = {
   },
 
   createAirline: async (req, res, next) => {
-    const { role } = req.user
+    const { role } = req.user;
     let { airline_id, airline_name, baggage, cabin_baggage } = req.body;
 
     try {
-      if (role !== 'admin') {
+      if (role !== "admin") {
         return res.status(400).json({
           status: true,
           message: "Anda bukan admin!",
@@ -73,21 +72,18 @@ module.exports = {
     }
   },
   updateAirline: async (req, res, next) => {
-    const { role } = req.user
+    const { role } = req.user;
     const { airline_id } = req.params;
     const { airline_name, baggage, cabin_baggage } = req.body;
 
     try {
-
-      if (role !== 'admin') {
+      if (role !== "admin") {
         return res.status(400).json({
           status: true,
           message: "Anda bukan admin!",
           data: null,
         });
       }
-
-
 
       if (req.file) {
         const resizedBuffer = await sharp(req.file.buffer)
@@ -114,10 +110,6 @@ module.exports = {
           data: updatedAirline,
         });
       }
-
-
-
-
     } catch (error) {
       next(error);
     }

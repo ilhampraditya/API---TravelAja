@@ -204,11 +204,8 @@ module.exports = {
 
       const seatClasses = await prisma.seatClass.findMany({ where: { seat_class_type: { contains: seat_class_type, mode: 'insensitive' } } })
 
-      // console.log(seatClasses)
-
       const newDate = new Date(date);
       newDate.setUTCHours(0, 0, 0, 0);
-
       const seatClassIds = seatClasses.map(seatClass => seatClass.seat_class_id);
 
 
