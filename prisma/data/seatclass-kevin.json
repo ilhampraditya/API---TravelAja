@@ -1,0 +1,136 @@
+{
+    "seatclass": [ 
+        {
+            "seat_class_id": 111,
+            "seat_class_type": "Economy",
+            "seat_amount": 60,
+            "airlines_id": "GA"
+          },
+          {
+            "seat_class_id": 112,
+            "seat_class_type": "Business",
+            "seat_amount": 30,
+            "airlines_id": "GA"
+          },
+          {
+            "seat_class_id": 113,
+            "seat_class_type": "First",
+            "seat_amount": 10,
+            "airlines_id": "GA"
+          },
+
+          {
+            "seat_class_id": 114,
+            "seat_class_type": "Economy",
+            "seat_amount": 60,
+            "airlines_id": "SJ"
+          },
+          {
+            "seat_class_id": 115,
+            "seat_class_type": "Business",
+            "seat_amount": 30,
+            "airlines_id": "SJ"
+          },
+          {
+            "seat_class_id": 116,
+            "seat_class_type": "First",
+            "seat_amount": 10,
+            "airlines_id": "SJ"
+          },
+
+          {
+            "seat_class_id": 117,
+            "seat_class_type": "Economy",
+            "seat_amount": 60,
+            "airlines_id": "JT"
+          },
+          {
+            "seat_class_id": 118,
+            "seat_class_type": "Business",
+            "seat_amount": 30,
+            "airlines_id": "JT"
+          },
+          {
+            "seat_class_id": 119,
+            "seat_class_type": "First",
+            "seat_amount": 10,
+            "airlines_id": "JT"
+          },
+
+          {
+            "seat_class_id": 120,
+            "seat_class_type": "Economy",
+            "seat_amount": 60,
+            "airlines_id": "ID"
+          },
+          {
+            "seat_class_id": 121,
+            "seat_class_type": "Business",
+            "seat_amount": 30,
+            "airlines_id": "ID"
+          },
+          {
+            "seat_class_id": 122,
+            "seat_class_type": "First",
+            "seat_amount": 10,
+            "airlines_id": "ID"
+          },
+
+          {
+            "seat_class_id": 123,
+            "seat_class_type": "Economy",
+            "seat_amount": 60,
+            "airlines_id": "QZ"
+          },
+          {
+            "seat_class_id": 124,
+            "seat_class_type": "Business",
+            "seat_amount": 30,
+            "airlines_id": "QZ"
+          },
+          {
+            "seat_class_id": 125,
+            "seat_class_type": "First",
+            "seat_amount": 10,
+            "airlines_id": "QZ"
+          },
+
+          {
+            "seat_class_id": 126,
+            "seat_class_type": "Economy",
+            "seat_amount": 60,
+            "airlines_id": "GA"
+          },
+          {
+            "seat_class_id": 127,
+            "seat_class_type": "Business",
+            "seat_amount": 30,
+            "airlines_id": "GA"
+          },
+          {
+            "seat_class_id": 128,
+            "seat_class_type": "First",
+            "seat_amount": 10,
+            "airlines_id": "GA"
+          },
+
+          {
+            "seat_class_id": 129,
+            "seat_class_type": "Economy",
+            "seat_amount": 60,
+            "airlines_id": "SJ"
+          },
+          {
+            "seat_class_id": 130,
+            "seat_class_type": "Business",
+            "seat_amount": 30,
+            "airlines_id": "SJ"
+          },
+          {
+            "seat_class_id": 131,
+            "seat_class_type": "First",
+            "seat_amount": 10,
+            "airlines_id": "SJ"
+          }
+    ]
+}

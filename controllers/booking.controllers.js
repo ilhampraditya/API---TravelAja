@@ -1,4 +1,5 @@
 const { PrismaClient } = require("@prisma/client");
+const { search } = require("../routes/v1/booking.routes");
 const prisma = new PrismaClient();
 const { MIDTRANS_SERVER_KEY, FRONT_END_URL, MIDTRANS_APP_URL } = process.env
 
@@ -17,7 +18,7 @@ module.exports = {
         }
       });
 
-      const passengers = await prisma.passenger.findMany({ where: { booking_id: booking.booking_id }, include: { ticket: true } })
+      const passengers = await prisma.passenger.findMany({ where: { booking_id: booking.booking_id }, include: { ticket: { include: { seat: true } } } })
       const passengerCount = passengers.length;
 
       const bookingWithMoreDetails = {
@@ -140,12 +141,12 @@ module.exports = {
 
       let booking_code;
       if (!lastBooking) {
-        booking_code = "TESTVLAJA-000001";
+        booking_code = "TVLCODE-000001";
       } else {
         const lastCode = lastBooking.booking_code;
         const numberPart = parseInt(lastCode.split("-")[1], 10);
         const newNumberPart = (numberPart + 1).toString().padStart(6, "0");
-        booking_code = `TESTVLAJA-${newNumberPart}`;
+        booking_code = `TVLCODE-${newNumberPart}`;
       }
       if (!flight_id) {
         return res.status(400).json({
@@ -284,8 +285,8 @@ module.exports = {
         },
         callbacks: {
           finish: `${FRONT_END_URL}/selesai/${booking_code}`,
-          error: `https://example.com/cancel/${booking_code}`,
-          pending: `https://example.com/pending/${booking_code}`,
+          error: `${FRONT_END_URL}/cancel/${booking_code}`,
+          pending: `${FRONT_END_URL}/pending/${booking_code}`,
         },
       };
 
