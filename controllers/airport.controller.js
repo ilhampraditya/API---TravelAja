@@ -5,17 +5,16 @@ const prisma = new PrismaClient();
 module.exports = {
   createAirport: async (req, res, next) => {
     try {
-      const { role } = req.user
+      const { role } = req.user;
       const { airport_id, airport_name, continent, country, city } = req.body;
 
-      if (role !== 'admin') {
+      if (role !== "admin") {
         return res.status(400).json({
           status: true,
           message: "Anda bukan admin!",
           data: null,
         });
       }
-
 
       if (!airport_id || !airport_name || !continent || !country || !city) {
         return res.status(400).json({
@@ -26,7 +25,6 @@ module.exports = {
         });
       }
 
-      // Periksa apakah airportId sudah ada
       const existingAirport = await prisma.airport.findUnique({
         where: {
           id: airport_id,
@@ -60,8 +58,8 @@ module.exports = {
             airport_name: newAirport.airport_name,
             continent: newAirport.continent,
             city: newAirport.city,
-            country: newAirport.country
-          }
+            country: newAirport.country,
+          },
         },
       });
     } catch (err) {
@@ -75,11 +73,11 @@ module.exports = {
 
       const searchConditions = search
         ? {
-          OR: [
-            { airport_name: { contains: search, mode: "insensitive" } },
-            { city: { contains: search, mode: "insensitive" } },
-          ],
-        }
+            OR: [
+              { airport_name: { contains: search, mode: "insensitive" } },
+              { city: { contains: search, mode: "insensitive" } },
+            ],
+          }
         : {};
 
       const airports = await prisma.airport.findMany({
@@ -124,11 +122,11 @@ module.exports = {
 
   editAirportById: async (req, res, next) => {
     try {
-      const { role } = req.user
+      const { role } = req.user;
       const { airportId } = req.params;
       const { airport_name, continent, country, city } = req.body;
 
-      if (role !== 'admin') {
+      if (role !== "admin") {
         return res.status(400).json({
           status: true,
           message: "Anda bukan admin!",
