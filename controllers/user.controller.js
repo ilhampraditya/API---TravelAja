@@ -333,9 +333,7 @@ module.exports = {
 
       const html = await nodemailer.getHTML("email-reset-password.ejs", {
         name: findUser.name,
-        url: `${req.protocol}://${req.get(
-          "host"
-        )}/api/v1/user/password/reset?token=${token}`,
+        url: `${FRONT_END_URL}/reset?token=${token}`,
       });
 
       try {

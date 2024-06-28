@@ -1,0 +1,139 @@
+{
+  "seatclass": [
+    {
+      "seat_class_id": 153,
+      "seat_class_type": "Economy",
+      "seat_amount": 60,
+      "airlines_id": "IW"
+    },
+    {
+      "seat_class_id": 154,
+      "seat_class_type": "Business",
+      "seat_amount": 30,
+      "airlines_id": "IW"
+    },
+    {
+      "seat_class_id": 155,
+      "seat_class_type": "First",
+      "seat_amount": 158,
+      "airlines_id": "IW"
+    },
+
+    {
+      "seat_class_id": 156,
+      "seat_class_type": "Economy",
+      "seat_amount": 60,
+      "airlines_id": "IL"
+    },
+    {
+      "seat_class_id": 157,
+      "seat_class_type": "Business",
+      "seat_amount": 30,
+      "airlines_id": "IL"
+    },
+    {
+      "seat_class_id": 158,
+      "seat_class_type": "First",
+      "seat_amount": 10,
+      "airlines_id": "IL"
+    },
+
+    {
+      "seat_class_id": 159,
+      "seat_class_type": "Economy",
+      "seat_amount": 60,
+      "airlines_id": "OD"
+    },
+    {
+      "seat_class_id": 160,
+      "seat_class_type": "Business",
+      "seat_amount": 30,
+      "airlines_id": "OD"
+    },
+    {
+      "seat_class_id": 161,
+      "seat_class_type": "First",
+      "seat_amount": 10,
+      "airlines_id": "OD"
+    },
+
+    {
+      "seat_class_id": 162,
+      "seat_class_type": "Economy",
+      "seat_amount": 60,
+      "airlines_id": "TZ"
+    },
+    {
+      "seat_class_id": 163,
+      "seat_class_type": "Business",
+      "seat_amount": 30,
+      "airlines_id": "TZ"
+    },
+    {
+      "seat_class_id": 164,
+      "seat_class_type": "First",
+      "seat_amount": 10,
+      "airlines_id": "TZ"
+    },
+
+    {
+      "seat_class_id": 165,
+      "seat_class_type": "Economy",
+      "seat_amount": 60,
+      "airlines_id": "FY"
+    },
+    {
+      "seat_class_id": 166,
+      "seat_class_type": "Business",
+      "seat_amount": 30,
+      "airlines_id": "FY"
+    },
+    {
+      "seat_class_id": 167,
+      "seat_class_type": "First",
+      "seat_amount": 10,
+      "airlines_id": "FY"
+    },
+
+    {
+      "seat_class_id": 168,
+      "seat_class_type": "Economy",
+      "seat_amount": 60,
+      "airlines_id": "IL"
+    },
+    {
+      "seat_class_id": 169,
+      "seat_class_type": "Business",
+      "seat_amount": 30,
+      "airlines_id": "IL"
+    },
+    {
+      "seat_class_id": 170,
+      "seat_class_type": "First",
+      "seat_amount": 10,
+      "airlines_id": "IL"
+    },
+
+    {
+      "seat_class_id": 171,
+      "seat_class_type": "Economy",
+      "seat_amount": 60,
+      "airlines_id": "IW"
+    },
+    {
+      "seat_class_id": 172,
+      "seat_class_type": "Business",
+      "seat_amount": 30,
+      "airlines_id": "IW"
+    },
+    {
+      "seat_class_id": 173,
+      "seat_class_type": "First",
+      "seat_amount": 10,
+      "airlines_id": "IW"
+    }
+
+
+
+]
+}

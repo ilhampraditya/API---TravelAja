@@ -1,0 +1,274 @@
+{
+  "flights": [
+    {
+      "flight_id": "IWECO0006",
+      "price": 1000000,
+      "total_price": 1000000,
+      "date": "2024-07-03T00:00:00.000Z",
+      "departure_time": "2024-07-03T14:00:00.000Z",
+      "arrival_time": "2024-07-03T18:00:00.000Z",
+      "airline_id": "IW",
+      "arrival_airport_id": "CGK",
+      "destination_airport_id": "DPS",
+      "seat_class_id": 153
+    },
+    {
+      "flight_id": "IWBUS0006",
+      "price": 1500000,
+      "total_price": 1500000,
+      "date": "2024-07-03T00:00:00.000Z",
+      "departure_time": "2024-07-03T09:00:00.000Z",
+      "arrival_time": "2024-07-03T11:00:00.000Z",
+      "airline_id": "IW",
+      "arrival_airport_id": "CGK",
+      "destination_airport_id": "DPS",
+      "seat_class_id": 154
+    },
+    {
+      "flight_id": "IWFIR0006",
+      "price": 2000000,
+      "total_price": 2000000,
+      "date": "2024-07-03T00:00:00.000Z",
+      "departure_time": "2024-07-03T15:00:00.000Z",
+      "arrival_time": "2024-07-03T17:00:00.000Z",
+      "airline_id": "IW",
+      "arrival_airport_id": "CGK",
+      "destination_airport_id": "DPS",
+      "seat_class_id": 155,
+      "promotion_id": 2
+    },
+
+    {
+      "flight_id": "ILECO0006",
+      "price": 1000000,
+      "total_price": 1000000,
+      "date": "2024-07-04T00:00:00.000Z",
+      "departure_time": "2024-07-04T14:00:00.000Z",
+      "arrival_time": "2024-07-04T18:00:00.000Z",
+      "airline_id": "IL",
+      "arrival_airport_id": "CGK",
+      "destination_airport_id": "DPS",
+      "seat_class_id": 156
+    },
+    {
+      "flight_id": "ILBUS0006",
+      "price": 1500000,
+      "total_price": 1500000,
+      "date": "2024-07-04T00:00:00.000Z",
+      "departure_time": "2024-07-04T14:00:00.000Z",
+      "arrival_time": "2024-07-04T18:00:00.000Z",
+      "airline_id": "IL",
+      "arrival_airport_id": "CGK",
+      "destination_airport_id": "DPS",
+      "seat_class_id": 157
+    },
+    {
+      "flight_id": "ILFIR0006",
+      "price": 2000000,
+      "total_price": 2000000,
+      "date": "2024-07-04T00:00:00.000Z",
+      "departure_time": "2024-07-04T14:00:00.000Z",
+      "arrival_time": "2024-07-04T18:00:00.000Z",
+      "airline_id": "IL",
+      "arrival_airport_id": "CGK",
+      "destination_airport_id": "DPS",
+      "seat_class_id": 158,
+      "promotion_id": 3
+    },
+
+    {
+      "flight_id": "ODECO0006",
+      "price": 1000000,
+      "total_price": 1000000,
+      "date": "2024-07-05T00:00:00.000Z",
+      "departure_time": "2024-07-05T14:00:00.000Z",
+      "arrival_time": "2024-07-05T18:00:00.000Z",
+      "airline_id": "OD",
+      "arrival_airport_id": "CGK",
+      "destination_airport_id": "DPS",
+      "seat_class_id": 159
+    },
+    {
+      "flight_id": "ODBUS0006",
+      "price": 1500000,
+      "total_price": 1500000,
+      "date": "2024-07-05T00:00:00.000Z",
+      "departure_time": "2024-07-05T14:00:00.000Z",
+      "arrival_time": "2024-07-05T18:00:00.000Z",
+      "airline_id": "OD",
+      "arrival_airport_id": "CGK",
+      "destination_airport_id": "DPS",
+      "seat_class_id": 160
+    },
+    {
+      "flight_id": "ODFIR0006",
+      "price": 2000000,
+      "total_price": 2000000,
+      "date": "2024-07-05T00:00:00.000Z",
+      "departure_time": "2024-07-05T14:00:00.000Z",
+      "arrival_time": "2024-07-05T18:00:00.000Z",
+      "airline_id": "OD",
+      "arrival_airport_id": "CGK",
+      "destination_airport_id": "DPS",
+      "seat_class_id": 161,
+      "promotion_id": 1
+    },
+
+    {
+      "flight_id": "TZECO0006",
+      "price": 1000000,
+      "total_price": 1000000,
+      "date": "2024-07-06T00:00:00.000Z",
+      "departure_time": "2024-07-06T14:00:00.000Z",
+      "arrival_time": "2024-07-06T18:00:00.000Z",
+      "airline_id": "TZ",
+      "arrival_airport_id": "CGK",
+      "destination_airport_id": "DPS",
+      "seat_class_id": 162
+    },
+    {
+      "flight_id": "TZBUS0006",
+      "price": 1500000,
+      "total_price": 1500000,
+      "date": "2024-07-06T00:00:00.000Z",
+      "departure_time": "2024-07-06T14:00:00.000Z",
+      "arrival_time": "2024-07-06T18:00:00.000Z",
+      "airline_id": "TZ",
+      "arrival_airport_id": "CGK",
+      "destination_airport_id": "DPS",
+      "seat_class_id": 163
+    },
+    {
+      "flight_id": "TZFIR0006",
+      "price": 2000000,
+      "total_price": 2000000,
+      "date": "2024-07-06T00:00:00.000Z",
+      "departure_time": "2024-07-06T14:00:00.000Z",
+      "arrival_time": "2024-07-06T18:00:00.000Z",
+      "airline_id": "TZ",
+      "arrival_airport_id": "CGK",
+      "destination_airport_id": "DPS",
+      "seat_class_id": 164,
+      "promotion_id": 2
+    },
+
+    {
+      "flight_id": "FYECO0006",
+      "price": 1000000,
+      "total_price": 1000000,
+      "date": "2024-07-07T00:00:00.000Z",
+      "departure_time": "2024-07-07T14:00:00.000Z",
+      "arrival_time": "2024-07-07T18:00:00.000Z",
+      "airline_id": "FY",
+      "arrival_airport_id": "CGK",
+      "destination_airport_id": "DPS",
+      "seat_class_id": 165
+    },
+    {
+      "flight_id": "FYBUS0006",
+      "price": 1500000,
+      "total_price": 1500000,
+      "date": "2024-07-07T00:00:00.000Z",
+      "departure_time": "2024-07-07T14:00:00.000Z",
+      "arrival_time": "2024-07-07T18:00:00.000Z",
+      "airline_id": "FY",
+      "arrival_airport_id": "CGK",
+      "destination_airport_id": "DPS",
+      "seat_class_id": 166
+    },
+    {
+      "flight_id": "FYFIR0006",
+      "price": 2000000,
+      "total_price": 2000000,
+      "date": "2024-07-07T00:00:00.000Z",
+      "departure_time": "2024-07-07T14:00:00.000Z",
+      "arrival_time": "2024-07-07T18:00:00.000Z",
+      "airline_id": "FY",
+      "arrival_airport_id": "CGK",
+      "destination_airport_id": "DPS",
+      "seat_class_id": 167,
+      "promotion_id": 2
+    },
+
+    {
+      "flight_id": "ILECO0007",
+      "price": 1000000,
+      "total_price": 1000000,
+      "date": "2024-07-08T00:00:00.000Z",
+      "departure_time": "2024-07-08T14:00:00.000Z",
+      "arrival_time": "2024-07-08T18:00:00.000Z",
+      "airline_id": "IL",
+      "arrival_airport_id": "CGK",
+      "destination_airport_id": "DPS",
+      "seat_class_id": 168
+    },
+    {
+      "flight_id": "ILBUS0007",
+      "price": 1500000,
+      "date": "2024-07-08T00:00:00.000Z",
+      "departure_time": "2024-07-08T14:00:00.000Z",
+      "arrival_time": "2024-07-08T18:00:00.000Z",
+      "airline_id": "IL",
+      "arrival_airport_id": "CGK",
+      "destination_airport_id": "DPS",
+      "seat_class_id": 169
+    },
+    {
+      "flight_id": "ILFIR0007",
+      "price": 2000000,
+      "total_price": 2000000,
+      "date": "2024-07-08T00:00:00.000Z",
+      "departure_time": "2024-07-08T14:00:00.000Z",
+      "arrival_time": "2024-07-08T18:00:00.000Z",
+      "airline_id": "IL",
+      "arrival_airport_id": "CGK",
+      "destination_airport_id": "DPS",
+      "seat_class_id": 170,
+      "promotion_id": 2
+    },
+
+    {
+      "flight_id": "IWECO0007",
+      "price": 1000000,
+      "total_price": 1000000,
+      "date": "2024-07-09T00:00:00.000Z",
+      "departure_time": "2024-07-09T14:00:00.000Z",
+      "arrival_time": "2024-07-09T18:00:00.000Z",
+      "airline_id": "IW",
+      "arrival_airport_id": "CGK",
+      "destination_airport_id": "DPS",
+      "seat_class_id": 171
+    },
+    {
+      "flight_id": "IWBUS0007",
+      "price": 1500000,
+      "total_price": 1500000,
+      "date": "2024-07-09T00:00:00.000Z",
+      "departure_time": "2024-07-09T14:00:00.000Z",
+      "arrival_time": "2024-07-09T18:00:00.000Z",
+      "airline_id": "IW",
+      "arrival_airport_id": "CGK",
+      "destination_airport_id": "DPS",
+      "seat_class_id": 172
+    },
+    {
+      "flight_id": "IWFIR0007",
+      "price": 2000000,
+      "total_price": 2000000,
+      "date": "2024-07-09T00:00:00.000Z",
+      "departure_time": "2024-07-09T14:00:00.000Z",
+      "arrival_time": "2024-07-09T18:00:00.000Z",
+      "airline_id": "IW",
+      "arrival_airport_id": "CGK",
+      "destination_airport_id": "DPS",
+      "seat_class_id": 173,
+      "promotion_id": 2
+    }
+
+  
+
+ 
+   
+    
+  ]
+}
