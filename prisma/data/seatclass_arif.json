@@ -1,0 +1,136 @@
+{
+  "seatclass": [
+    {
+      "seat_class_id": 132,
+      "seat_class_type": "Economy",
+      "seat_amount": 60,
+      "airlines_id": "QG"
+    },
+    {
+      "seat_class_id": 133,
+      "seat_class_type": "Business",
+      "seat_amount": 30,
+      "airlines_id": "QG"
+    },
+    {
+      "seat_class_id": 134,
+      "seat_class_type": "First",
+      "seat_amount": 158,
+      "airlines_id": "QG"
+    },
+
+    {
+      "seat_class_id": 135,
+      "seat_class_type": "Economy",
+      "seat_amount": 60,
+      "airlines_id": "IU"
+    },
+    {
+      "seat_class_id": 136,
+      "seat_class_type": "Business",
+      "seat_amount": 30,
+      "airlines_id": "IU"
+    },
+    {
+      "seat_class_id": 137,
+      "seat_class_type": "First",
+      "seat_amount": 10,
+      "airlines_id": "IU"
+    },
+
+    {
+      "seat_class_id": 138,
+      "seat_class_type": "Economy",
+      "seat_amount": 60,
+      "airlines_id": "NM"
+    },
+    {
+      "seat_class_id": 139,
+      "seat_class_type": "Business",
+      "seat_amount": 30,
+      "airlines_id": "NM"
+    },
+    {
+      "seat_class_id": 140,
+      "seat_class_type": "First",
+      "seat_amount": 10,
+      "airlines_id": "NM"
+    },
+
+    {
+      "seat_class_id": 141,
+      "seat_class_type": "Economy",
+      "seat_amount": 60,
+      "airlines_id": "IP"
+    },
+    {
+      "seat_class_id": 142,
+      "seat_class_type": "Business",
+      "seat_amount": 30,
+      "airlines_id": "IP"
+    },
+    {
+      "seat_class_id": 143,
+      "seat_class_type": "First",
+      "seat_amount": 10,
+      "airlines_id": "IP"
+    },
+
+    {
+      "seat_class_id": 144,
+      "seat_class_type": "Economy",
+      "seat_amount": 60,
+      "airlines_id": "8B"
+    },
+    {
+      "seat_class_id": 145,
+      "seat_class_type": "Business",
+      "seat_amount": 30,
+      "airlines_id": "8B"
+    },
+    {
+      "seat_class_id": 146,
+      "seat_class_type": "First",
+      "seat_amount": 10,
+      "airlines_id": "8B"
+    },
+
+    {
+      "seat_class_id": 147,
+      "seat_class_type": "Economy",
+      "seat_amount": 60,
+      "airlines_id": "QG"
+    },
+    {
+      "seat_class_id": 148,
+      "seat_class_type": "Business",
+      "seat_amount": 30,
+      "airlines_id": "QG"
+    },
+    {
+      "seat_class_id": 149,
+      "seat_class_type": "First",
+      "seat_amount": 10,
+      "airlines_id": "QG"
+    },
+
+    {
+      "seat_class_id": 150,
+      "seat_class_type": "Economy",
+      "seat_amount": 60,
+      "airlines_id": "IU"
+    },
+    {
+      "seat_class_id": 151,
+      "seat_class_type": "Business",
+      "seat_amount": 30,
+      "airlines_id": "IU"
+    },
+    {
+      "seat_class_id": 152,
+      "seat_class_type": "First",
+      "seat_amount": 10,
+      "airlines_id": "IU"
+    }
+  ]
+}
