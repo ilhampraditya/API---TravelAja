@@ -1,6 +1,0 @@
-GET https://expressjs-develop.up.railway.app/api/v1/airlines
-
-###
-GET http://localhost:3000/api/v1/airlines
-
-
