@@ -1,0 +1,54 @@
+### CREATE BOOKING
+POST https://expressjs-develop.up.railway.app/api/v1/booking
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjozLCJlbWFpbCI6InByYWRpdHlhaWxoYW0yNUBnbWFpbC5jb20iLCJyb2xlIjoidXNlciIsImlhdCI6MTcxODk4MjY0OCwiZXhwIjoxNzE5MDY5MDQ4fQ.K0Dv9YGPSQFiSaAdZXCVy90UEQYOjgWx7abI-HUfMds
+Content-Type: application/json
+
+{
+    "flight_id": "GAECO0001"
+}
+
+### CREATE BOOKING
+POST http://localhost:3000/api/v1/booking
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjo2LCJlbWFpbCI6ImJ2eHRlam1AbXluYW5haW1vaG9tZXMuY29tIiwicm9sZSI6ImFkbWluIiwiaWF0IjoxNzE4OTA1MjI4LCJleHAiOjE3MTg5OTE2Mjh9.NJ_Q5JsvDrDCfIz1m8xUfUoaMBlnEdYdocTktnG9fhg
+Content-Type: application/json
+
+{
+    "flight_id": "GAECO0000002"
+}
+### CREATE BOOKING
+POST http://localhost:3000/api/v1/booking
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjo2LCJlbWFpbCI6InVlZG5scXdha29jYXdlQG1heGFtYmEuY29tIiwiaWF0IjoxNzE4MDI5NTQ1LCJleHAiOjE3MTgxMTU5NDV9.HL33Ca4VpIfvrsugf1DIcxtDd_TYwYPsGWlApZtro30
+Content-Type: application/json
+
+{
+    "flight_id": "GA0000002"
+}
+
+### get booking by token
+GET http://localhost:3000/api/v1/mybooking
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoyLCJlbWFpbCI6Imd1ZGNocWhAbWl0ZW9uLmNvbSIsImlhdCI6MTcxODAzMTUzNywiZXhwIjoxNzE4MTE3OTM3fQ.8lelZ_tVNvDB5aqnB2Q0AaMOQXVpPKRuBlUgbnHHmBk
+
+### get all booking
+GET http://localhost:3000/api/v1/booking
+
+### get booking by id
+GET http://localhost:3000/api/v1/booking/id/TVLAJA-000002
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjo2LCJlbWFpbCI6ImJ2eHRlam1AbXluYW5haW1vaG9tZXMuY29tIiwicm9sZSI6ImFkbWluIiwiaWF0IjoxNzE4OTA1MjI4LCJleHAiOjE3MTg5OTE2Mjh9.NJ_Q5JsvDrDCfIz1m8xUfUoaMBlnEdYdocTktnG9fhg
+
+### booking proses
+POST https://expressjs-develop.up.railway.app/api/v1/booking/process
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjozLCJlbWFpbCI6InByYWRpdHlhaWxoYW0yNUBnbWFpbC5jb20iLCJyb2xlIjoidXNlciIsImlhdCI6MTcxODk4MjY0OCwiZXhwIjoxNzE5MDY5MDQ4fQ.K0Dv9YGPSQFiSaAdZXCVy90UEQYOjgWx7abI-HUfMds
+Content-Type: application/json
+
+{
+  "flight_id": "GAECO0001",
+  "passengers": [
+    {
+      "fullname": "TesArray1",
+      "passenger_type": "adult",
+      "born_date": "2003-05-15",
+      "identity_number": "A1234567893",
+      "seat_id": 10
+    }
+  ]
+}
