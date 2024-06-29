@@ -1,9 +1,9 @@
-name: Deploy to Railway Dev ENV
+name: Deploy to Railway Production ENV
 
 on:
   push:
     branches:
-      - "develop"
+      - "main"
 
 jobs:
   deploy:
@@ -26,7 +26,7 @@ jobs:
 
       - name: install Prisma
         run: npm install prisma
-        
+
       - name: Generate Prisma Client
         run: npx prisma generate
 
@@ -38,4 +38,4 @@ jobs:
       - name: Deploy to Railway
         run: railway up --service ${{ secrets.RAILWAY_SERVICE_ID }}
         env:
-          RAILWAY_TOKEN: ${{ secrets.RAILWAY_DEV_TOKEN }}
+          RAILWAY_TOKEN: ${{ secrets.RAILWAY_PROD_TOKEN }}
