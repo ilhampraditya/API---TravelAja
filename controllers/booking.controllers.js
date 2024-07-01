@@ -156,12 +156,12 @@ module.exports = {
 
       let booking_code;
       if (!lastBooking) {
-        booking_code = "TRAVELPROD-000001";
+        booking_code = "TRVL-000001";
       } else {
         const lastCode = lastBooking.booking_code;
         const numberPart = parseInt(lastCode.split("-")[1], 10);
         const newNumberPart = (numberPart + 1).toString().padStart(6, "0");
-        booking_code = `TRAVELPROD-${newNumberPart}`;
+        booking_code = `TRVL-${newNumberPart}`;
       }
       if (!flight_id) {
         return res.status(400).json({
